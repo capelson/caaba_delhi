@@ -13,7 +13,7 @@
 !        R. Sander, Max-Planck Institute for Chemistry, Mainz, Germany
 ! 
 ! File                 : messy_mecca_kpp_Rates.f90
-! Time                 : Fri Sep  8 17:11:17 2023
+! Time                 : Mon Sep 18 14:53:23 2023
 ! Working directory    : /home/taras/Work/EMAC/caaba/mecca
 ! Equation file        : messy_mecca_kpp.kpp
 ! Output root filename : messy_mecca_kpp
@@ -419,7 +419,7 @@ SUBROUTINE Update_RCONST ( )
   ! updated rate constant for the RCO3+HO2 reactions
   ! (GroC, PhD Thesis, ref3195)
   ! except CH3CO3+HO2 that is taken from GroC ref3156
-  KAPHO2  = 5.20E-13*EXP(980./temp)*1.865 ! at 298K k(hoch2co3 + ho2) = 2.6( - 0.4)E-11 scaled with IUPAC T-dependent expression
+  KAPHO2  = 5.20E-13*EXP(980./temp)*1.865 ! at 298K k(hoch2co3 + ho2) = 2.6(+-0.4)E-11 scaled with IUPAC T-dependent expression
   ! Rate constants for the permutation reaction formalism
   ! calculated as in the permutation reaction formalism of MCM
   ! k_RO2 = 2.*(KRO2self*k_CH3O2)^0.5

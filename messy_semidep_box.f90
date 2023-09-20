@@ -126,50 +126,50 @@ CONTAINS
       time_IST = MODULO(time_of_day+5.5,24.)
 !For Delhi:
 !   !qqq-
-      IF (ind_NO /= 0) c(ind_NO) = (212.3 * (SIN(3.14159*((time_IST-13)/24.)))**4. + 15.) * 1.E-9 * cair
-     IF (ind_NO2 /= 0) c(ind_NO2) = (time_IST * 0.8897 * (sin(7.173 *(time_IST-3.54)/24.))**2 + 32 ) * 1.E-9* cair
-     IF (ind_BENZENE/= 0) c(ind_BENZENE)= c(ind_BENZENE)+ 1.51E9 * fct
-     IF (ind_C2H4   /= 0) c(ind_C2H4)   = c(ind_C2H4)   + 4.55E10 * fct
-     IF (ind_C5H8   /= 0) c(ind_C5H8)   = c(ind_C5H8)   + 7.82E9 * fct
-     IF (ind_APINENE/= 0) c(ind_APINENE)= c(ind_APINENE)+ 1.57E9 * fct
-     IF (ind_C3H8   /= 0) c(ind_C3H8)   = c(ind_C3H8)   + 2.49E10* fct
-     IF (ind_TOLUENE/= 0) c(ind_TOLUENE)= c(ind_TOLUENE)+ 9.30E9 * fct
-     IF (ind_LXYL   /= 0) c(ind_LXYL)   = c(ind_LXYL)   + 2.0E10 * fct
-     IF (ind_CH3CHO /= 0) c(ind_CH3CHO) = c(ind_CH3CHO) + 4.57E9  * fct
-     IF (ind_CH3OH  /= 0) c(ind_CH3OH)  = c(ind_CH3OH)  + 2.81E10 * fct
-     IF (ind_C3H6   /= 0) c(ind_C3H6)   = c(ind_C3H6)   + 3.49E10 * fct
-     IF (ind_C2H5OH/= 0) c(ind_C2H5OH)= c(ind_C2H5OH)+ 2.0E9 * fct
-     IF (ind_HCl   /= 0) c(ind_HCl)   = c(ind_HCl)   + 1.91E10 * fct
-     IF (ind_Cl_a01  /= 0) c(ind_Cl_a01)   = c(ind_Cl_a01)   + 2.86E10 * fct
+    !   IF (ind_NO /= 0) c(ind_NO) = (212.3 * (SIN(3.14159*((time_IST-13)/24.)))**4. + 15.) * 1.E-9 * cair
+    !  IF (ind_NO2 /= 0) c(ind_NO2) = (time_IST * 0.8897 * (sin(7.173 *(time_IST-3.54)/24.))**2 + 32 ) * 1.E-9* cair
+    !  IF (ind_BENZENE/= 0) c(ind_BENZENE)= c(ind_BENZENE)+ 1.51E9 * fct
+    !  IF (ind_C2H4   /= 0) c(ind_C2H4)   = c(ind_C2H4)   + 4.55E10 * fct
+    !  IF (ind_C5H8   /= 0) c(ind_C5H8)   = c(ind_C5H8)   + 7.82E9 * fct
+    !  IF (ind_APINENE/= 0) c(ind_APINENE)= c(ind_APINENE)+ 1.57E9 * fct
+    !  IF (ind_C3H8   /= 0) c(ind_C3H8)   = c(ind_C3H8)   + 2.49E10* fct
+    !  IF (ind_TOLUENE/= 0) c(ind_TOLUENE)= c(ind_TOLUENE)+ 9.30E9 * fct
+    !  IF (ind_LXYL   /= 0) c(ind_LXYL)   = c(ind_LXYL)   + 2.0E10 * fct
+    !  IF (ind_CH3CHO /= 0) c(ind_CH3CHO) = c(ind_CH3CHO) + 4.57E9  * fct
+    !  IF (ind_CH3OH  /= 0) c(ind_CH3OH)  = c(ind_CH3OH)  + 2.81E10 * fct
+    !  IF (ind_C3H6   /= 0) c(ind_C3H6)   = c(ind_C3H6)   + 3.49E10 * fct
+    !  IF (ind_C2H5OH/= 0) c(ind_C2H5OH)= c(ind_C2H5OH)+ 2.0E9 * fct
+    !  IF (ind_HCl   /= 0) c(ind_HCl)   = c(ind_HCl)   + 1.91E10 * fct
+    !  IF (ind_Cl_a01  /= 0) c(ind_Cl_a01)   = c(ind_Cl_a01)   + 2.86E10 * fct
 
      !For Leicester:
-     !      time_of_day = MODULO(model_time/OneDay,1._DP) * 24.
-     ! IF (ind_NO /= 0) c(ind_NO) = (0.+(10.5*(exp((-(MODULO(time_of_day,24.)-9.)**2/5.)))) + &
-     !                               (6.5*(exp((-(MODULO(time_of_day,24.)-19.5)**2)/4.5))) + &
-     !                              (6.*(exp(-((MODULO(time_of_day,24.)-15)**2)/50))))  * 1.E-9 * cair
-!
-     ! IF (ind_NO2 /= 0) c(ind_NO2) = (13.118 * (SIN(6.472*((MODULO(time_of_day,24.)-13.893)/24.)))**2. + 11) * 1.E-9 * cair
-     ! IF (ind_HONO /= 0) c(ind_HONO) = (MODULO(time_of_day,24.)+67.1*(SIN(2.2*3.14159*((MODULO(time_of_day,24.)-100.2)/24.)))**2. &
-     !                                  + 65.) * 1.E-12 * cair
-     ! IF (ind_BENZENE/= 0) c(ind_BENZENE)= c(ind_BENZENE)+ 0.52E8 * fct
-     ! IF (ind_C2H4   /= 0) c(ind_C2H4)   = c(ind_C2H4)   + 2.15E9  * fct
-     ! IF (ind_C2H6   /= 0) c(ind_C2H6)   = c(ind_C2H6)   + 2.99E9 * fct
-     ! IF (ind_EBENZ  /= 0) c(ind_EBENZ)  = c(ind_EBENZ)  + 0.47E8 * fct
-     ! IF (ind_C2H2   /= 0) c(ind_C2H2)   = c(ind_C2H2)   + 2.92E8  * fct
-     ! IF (ind_C5H8   /= 0) c(ind_C5H8)   = c(ind_C5H8)   + 0.80E9 * fct
-     ! IF (ind_APINENE/= 0) c(ind_APINENE)= c(ind_APINENE)+ 0.13E9 * fct
-     ! IF (ind_C3H8   /= 0) c(ind_C3H8)   = c(ind_C3H8)   + 2.85E9* fct
-     ! IF (ind_TOLUENE/= 0) c(ind_TOLUENE)= c(ind_TOLUENE)+ 3.33E8 * fct
-     ! IF (ind_LXYL   /= 0) c(ind_LXYL)   = c(ind_LXYL)   + 7.30E8 * fct
-     ! IF (ind_C3H6   /= 0) c(ind_C3H6)   = c(ind_C3H6)   + 2.10E9 * fct
-     ! IF (ind_HCl   /= 0) c(ind_HCl)   = c(ind_HCl)   + 1.25E9 * fct
-     ! IF (ind_Cl_a01  /= 0) c(ind_Cl_a01)   = c(ind_Cl_a01)   + 1.55E9 * fct
-     ! IF (time_of_day >= 0. .AND. time_of_day <= 8.) THEN
-     !         IF (ind_O3/= 0) c(ind_O3)= c(ind_O3)+ 2.9535E12 * fct
-     ! ENDIF
-     ! IF (time_of_day >= 16 .AND. time_of_day <= 24.) THEN
-     !         IF (ind_O3/= 0) c(ind_O3)= c(ind_O3)+ 8.5335E12 * fct
-     ! ENDIF
+     time_of_day = MODULO(model_time/OneDay,1._DP) * 24.
+     IF (ind_NO /= 0) c(ind_NO) = (0.+(10.5*(exp((-(MODULO(time_of_day,24.)-9.)**2/5.)))) + &
+                                   (6.5*(exp((-(MODULO(time_of_day,24.)-19.5)**2)/4.5))) + &
+                                  (6.*(exp(-((MODULO(time_of_day,24.)-15)**2)/50))))  * 1.E-9 * cair
+
+     IF (ind_NO2 /= 0) c(ind_NO2) = (13.118 * (SIN(6.472*((MODULO(time_of_day,24.)-13.893)/24.)))**2. + 11) * 1.E-9 * cair
+     IF (ind_HONO /= 0) c(ind_HONO) = (MODULO(time_of_day,24.)+67.1*(SIN(2.2*3.14159*((MODULO(time_of_day,24.)-100.2)/24.)))**2. &
+                                      + 65.) * 1.E-12 * cair
+     IF (ind_BENZENE/= 0) c(ind_BENZENE)= c(ind_BENZENE)+ 0.52E8 * fct
+     IF (ind_C2H4   /= 0) c(ind_C2H4)   = c(ind_C2H4)   + 2.15E9  * fct
+     IF (ind_C2H6   /= 0) c(ind_C2H6)   = c(ind_C2H6)   + 2.99E9 * fct
+     IF (ind_EBENZ  /= 0) c(ind_EBENZ)  = c(ind_EBENZ)  + 0.47E8 * fct
+     IF (ind_C2H2   /= 0) c(ind_C2H2)   = c(ind_C2H2)   + 2.92E8  * fct
+     IF (ind_C5H8   /= 0) c(ind_C5H8)   = c(ind_C5H8)   + 0.80E9 * fct
+     IF (ind_APINENE/= 0) c(ind_APINENE)= c(ind_APINENE)+ 0.13E9 * fct
+     IF (ind_C3H8   /= 0) c(ind_C3H8)   = c(ind_C3H8)   + 2.85E9* fct
+     IF (ind_TOLUENE/= 0) c(ind_TOLUENE)= c(ind_TOLUENE)+ 3.33E8 * fct
+     IF (ind_LXYL   /= 0) c(ind_LXYL)   = c(ind_LXYL)   + 7.30E8 * fct
+     IF (ind_C3H6   /= 0) c(ind_C3H6)   = c(ind_C3H6)   + 2.10E9 * fct
+     IF (ind_HCl   /= 0) c(ind_HCl)   = c(ind_HCl)   + 1.25E9 * fct
+     IF (ind_Cl_a01  /= 0) c(ind_Cl_a01)   = c(ind_Cl_a01)   + 1.55E9 * fct
+     IF (time_of_day >= 0. .AND. time_of_day <= 8.) THEN
+             IF (ind_O3/= 0) c(ind_O3)= c(ind_O3)+ 2.9535E12 * fct
+     ENDIF
+     IF (time_of_day >= 16 .AND. time_of_day <= 24.) THEN
+             IF (ind_O3/= 0) c(ind_O3)= c(ind_O3)+ 8.5335E12 * fct
+     ENDIF
 
 
     END SUBROUTINE emission_default

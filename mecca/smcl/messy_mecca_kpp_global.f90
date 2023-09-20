@@ -13,7 +13,7 @@
 !        R. Sander, Max-Planck Institute for Chemistry, Mainz, Germany
 ! 
 ! File                 : messy_mecca_kpp_Global.f90
-! Time                 : Fri Sep  8 17:11:17 2023
+! Time                 : Mon Sep 18 14:53:23 2023
 ! Working directory    : /home/taras/Work/EMAC/caaba/mecca
 ! Equation file        : messy_mecca_kpp.kpp
 ! Output root filename : messy_mecca_kpp
@@ -40,7 +40,7 @@ MODULE messy_mecca_kpp_Global
   REAL(kind=dp) :: FIX(NFIX)
 ! VAR, FIX are chunks of array C
       EQUIVALENCE( C(1),VAR(1) )
-      EQUIVALENCE( C(4455),FIX(1) )
+      EQUIVALENCE( C(1130),FIX(1) )
 ! RCONST - Rate constants (global)
   REAL(kind=dp) :: RCONST(NREACT)
 ! TIME - Current integration time
@@ -70,8 +70,8 @@ MODULE messy_mecca_kpp_Global
 
   ! MECCA info from xmecca:
   CHARACTER(LEN=*), PUBLIC, PARAMETER :: &
-    timestamp            = 'xmecca was run on 2023-09-08 at 17:05:29 by user taras on machine taras', &
-    inifile              = 'delhi.ini', &
+    timestamp            = 'xmecca was run on 2023-09-18 at 14:53:05 by user taras on machine taras', &
+    inifile              = 'example.ini', &
     gas_spc_file         = '-rw-rw-r-- 1 taras taras 91611 Aug 10 10:42 gas.spc', &
     aqueous_spc_file     = '-rw-rw-r-- 1 taras taras 40714 Mar 24 11:20 aqueous.spc', &
     gas_eqn_file         = '-rw-rw-r-- 1 taras taras 327509 Mar 24 11:20 gas.eqn', &
@@ -83,7 +83,7 @@ MODULE messy_mecca_kpp_Global
     rplfile              = '', &
     wanted               = 'Tr and (G or (Aa or Mbl)) and not I and not Hg', &
     diagtracfile         = '', &
-    rxnrates             = 'y', &
+    rxnrates             = 'n', &
     tag                  = 'n'
   LOGICAL, PARAMETER :: REQ_MCFCT = .FALSE.
 
@@ -741,10 +741,10 @@ MODULE messy_mecca_kpp_Global
 
   ! KPP info from xmecca (via integr.kpp):
   CHARACTER(LEN=*), PUBLIC, PARAMETER :: &
-    mecca_spc_file     = '-rw-rw-r-- 1 taras taras 326191 Sep  8 17:05 mecca.spc', &
-    mecca_eqn_file     = '-rw-rw-r-- 1 taras taras 580822 Sep  8 17:05 mecca.eqn', &
-    mecca_spc_file_sum = '02119   319', &
-    mecca_eqn_file_sum = '24112   568', &
+    mecca_spc_file     = '-rw-rw-r-- 1 taras taras 140287 Sep 18 14:53 mecca.spc', &
+    mecca_eqn_file     = '-rw-rw-r-- 1 taras taras 537801 Sep 18 14:53 mecca.eqn', &
+    mecca_spc_file_sum = '51901   137', &
+    mecca_eqn_file_sum = '31141   526', &
     kppoption          = 'k', &
     KPP_HOME           = '/home/taras/Work/EMAC/caaba/mecca/kpp', &
     KPP_version        = '2.2.3_rs3', &

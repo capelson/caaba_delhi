@@ -5,31 +5,31 @@
 &CAABA
 
 !*** choose one or more MESSy submodels:
-!USE_JVAL    = T
+ USE_JVAL    = T
  USE_MECCA   = T
 !USE_READJ   = T
- USE_SAPPHO  = T
+!USE_SAPPHO  = T
  USE_SEMIDEP = T
 !USE_TRAJECT = T
 
 !*** see "list_of_scenarios" in caaba_module.f90 for possibilities:
-!init_scenario     = ''
+init_scenario     = ''
 !photo_scenario    = ''
 !emission_scenario = ''
-!drydep_scenario   = ''
+drydep_scenario   = 'MOM'
 !aqueous_scenario  = ''
 
 !*** temperature [K]
-!temp = 293.
+temp = 278.15
 
 !*** pressure [Pa]
-!press = 101325.
+press = 100366.
 
 !*** relative humidity [1]
-!relhum = 0.81
+relhum = 0.90
 
 !*** height of the boundary layer [m]
-!zmbl = 1000.
+zmbl = 1000.
 
 !*** fine-tuning of humidity:
 !*** initialize c(H2O) directly, don't convert relhum or spechum to c(H2O)
@@ -39,8 +39,8 @@
 !l_relhum_wmo    = T
 
 !*** location (affects only solar zenith angle and trajectories)
-!degree_lat = 25.
-!degree_lon = 0.
+degree_lat = 52.38
+degree_lon = 01.08
 
 !*** frost flower model run?
 !l_ff = T
@@ -48,23 +48,23 @@
 !*** day of model start
 !*** note that model_start_day=0. refers to the 1st of Jan at 0:00 in
 !*** the morning and therefore, e.g., model_start_day=14. refers to 15th Jan
-!model_start_day = 14.
+model_start_day = 47.
 
 !*** duration of the model run in days; default: 8
-!runtime_str = '40 days'
+runtime_str = '5 days'
 
 !*** time step length, default: 20 minutes
-!timesteplen_str = '15 minutes'
+timesteplen_str = '5 minutes'
 
 !*** output step frequency (output every xth timestep)
 !*** default: 1 (every timestep)
-!output_step_freq = 3
+output_step_freq = 1
 
 !*** output synchronization frequency (every xth output step (not timestep)), 
 !*** note: a high value has a positive effect on performance, however, 
 !***       in case of machine failure, buffered output steps are lost.
 !*** default: every output step
-!output_sync_freq = 1000
+output_sync_freq = 1000
 
 !*** the Ca precipitation factor changes the fraction of CaCO3 contained in
 !*** sea salt (only needed for frost flower model runs):
@@ -74,9 +74,9 @@
 !init_spec = 'input/example_init_spec.nc'
 
 !*** Choose a channel that contains J-values for photolysis reactions:
-!photrat_channel = 'jval'
+photrat_channel = 'jval'
 !photrat_channel = 'readj'
- photrat_channel = 'sappho'
+!photrat_channel = 'sappho'
 !*** input_readj = initialize J-values from netcdf file (only for READJ):
 !input_readj = 'input/example_input_readj.nc'
 !input_readj_index = 25

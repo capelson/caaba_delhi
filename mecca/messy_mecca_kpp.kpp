@@ -104,5 +104,5 @@ Pls; {plus  (positive charge as pseudo-atom for charge balance)}
 // show kpp-options in output
 #WRITE_OPT
 
-// fix NO, NO2
-#SETFIX NO, NO2
+// fix HONO, NO, NO2
+#SETFIX HONO, NO, NO2

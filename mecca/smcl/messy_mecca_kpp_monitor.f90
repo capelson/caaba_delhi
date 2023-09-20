@@ -13,7 +13,7 @@
 !        R. Sander, Max-Planck Institute for Chemistry, Mainz, Germany
 ! 
 ! File                 : messy_mecca_kpp_Monitor.f90
-! Time                 : Fri Sep  8 17:11:17 2023
+! Time                 : Mon Sep 18 14:53:23 2023
 ! Working directory    : /home/taras/Work/EMAC/caaba/mecca
 ! Equation file        : messy_mecca_kpp.kpp
 ! Output root filename : messy_mecca_kpp
@@ -26,4994 +26,3841 @@ MODULE messy_mecca_kpp_Monitor
 
 
   CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_0 = (/ &
-     'NO_a01                          ','CHOCO3_a01                      ','Nap_a01                         ', &
-     'N2O                             ','LNITROGEN                       ','LCARBON                         ', &
-     'ClO2                            ','LCHLORINE                       ','LSULFUR                         ', &
-     'HMF_a01                         ','HM2F_a01                        ','HGO1_a01                        ', &
-     'HGO2_a01                        ','HGO3_a01                        ','CH3COCOCH2OH_a01                ', &
-     'CH2OHCHOHCOCH3_a01              ','MGLYFA_a01                      ','MGLYFB_a01                      ', &
-     'HO2m_a01                        ','CH3SO3m_a01                     ','D1O_a01                         ', &
-     'RRG1000                         ','RRG1001                         ','RRG2100                         ', &
-     'RRG2104                         ','RRG2105                         ','RRG2107                         ', &
-     'RRG2109                         ','RRG2110                         ','RRG2111                         ', &
-     'RRG2112                         ','RRG2117                         ','RRG2118                         ', &
-     'RRG3101                         ','RRG3103                         ','RRG3106                         ', &
-     'RRG3108                         ','RRG3109                         ','RRG3110                         ', &
-     'RRG3200                         ','RRG3201                         ','RRG3202a                        ', &
-     'RRG3202b                        ','RRG3203                         ','RRG3204                         ', &
-     'RRG3205                         ','RRG3206                         ','RRG3207                         ', &
-     'RRG3208                         ','RRG3209                         ','RRG3210                         ', &
-     'RRG3211                         ','RRG3212                         ','RRG3213                         ', &
-     'RRG3214                         ','RRG3215                         ','RRG3216                         ', &
-     'RRG3217                         ','RRG3218                         ','RRG3219                         ', &
-     'RRG3220                         ','RRG3221                         ','RRG3222                         ', &
-     'RRG3223                         ','RRG3224                         ','RRG3227                         ', &
-     'RRG3228                         ','RRG4101                         ','RRG4102                         ', &
-     'RRG4103a                        ','RRG4103b                        ','RRG4104a                        ', &
-     'RRG4104b                        ','RRG4105                         ','RRG4106a                        ', &
-     'RRG4106b                        ','RRG4107                         ','RRG4108                         ', &
-     'RRG4109                         ','RRG4110                         ','RRG4111                         ', &
-     'RRG4114                         ','RRG4115                         ','RRG4116                         ', &
-     'RRG4117                         ','RRG4118                         ','RRG4119a                        ', &
-     'RRG4119b                        ','RRG4120a                        ','RRG4120b                        ' /)
+     'CHOCO3_a01                      ','Nap_a01                         ','N2O                             ', &
+     'LNITROGEN                       ','LCARBON                         ','ClO2                            ', &
+     'LCHLORINE                       ','LSULFUR                         ','HMF_a01                         ', &
+     'HM2F_a01                        ','HGO1_a01                        ','HGO2_a01                        ', &
+     'HGO3_a01                        ','CH3COCOCH2OH_a01                ','CH2OHCHOHCOCH3_a01              ', &
+     'MGLYFA_a01                      ','MGLYFB_a01                      ','HO2m_a01                        ', &
+     'CH3SO3m_a01                     ','D1O_a01                         ','ROO6R5O2                        ', &
+     'NO_a01                          ','HCO3_a01                        ','PAN_a01                         ', &
+     'C2H5NO3_a01                     ','CH3CN_a01                       ','CH2CO_a01                       ', &
+     'CH3CHOHOOH_a01                  ','HCOCO3H_a01                     ','HOOCH2CO3H_a01                  ', &
+     'ETHOHNO3_a01                    ','PHAN_a01                        ','ALCOCH2OOH_a01                  ', &
+     'C33CO_a01                       ','CH3CHCO_a01                     ','CH3COCO3H_a01                   ', &
+     'HCOCH2CHO_a01                   ','HCOCH2CO2H_a01                  ','HCOCH2CO3H_a01                  ', &
+     'HCOCOCH2OOH_a01                 ','HOC2H4CO2H_a01                  ','HOC2H4CO3H_a01                  ', &
+     'HOCH2COCH2OOH_a01               ','HOCH2COCHO_a01                  ','HYPROPO2H_a01                   ', &
+     'C32OH13CO_a01                   ','C3DIALOOH_a01                   ','HCOCOHCO3H_a01                  ', &
+     'METACETHO_a01                   ','C3PAN1_a01                      ','C3PAN2_a01                      ', &
+     'CH3COCH2O2NO2_a01               ','NOA_a01                         ','PR2O2HNO3_a01                   ', &
+     'PROPOLNO3_a01                   ','HCOCOHPAN_a01                   ','BIACETO2_a01                    ', &
+     'BIACETOH_a01                    ','BIACETOOH_a01                   ','BUT2OLO_a01                     ', &
+     'BUT2OLOOH_a01                   ','C312COCO3H_a01                  ','C413COOOH_a01                   ', &
+     'C44OOH_a01                      ','C4CODIAL_a01                    ','CH3COCHCO_a01                   ', &
+     'CH3COCOCO2H_a01                 ','CH3COOHCHCHO_a01                ','CHOC3COO2_a01                   ', &
+     'CO23C3CHO_a01                   ','CO2C3CHO_a01                    ','CO2H3CHO_a01                    ', &
+     'CO2H3CO2H_a01                   ','CO2H3CO3H_a01                   ','HCOCCH3CHOOH_a01                ', &
+     'HCOCCH3CO_a01                   ','HMAC_a01                        ','HO12CO3C4_a01                   ', &
+     'HVMK_a01                        ','IBUTALOH_a01                    ','IBUTDIAL_a01                    ', &
+     'IBUTOLBOOH_a01                  ','IPRHOCO2H_a01                   ','IPRHOCO3H_a01                   ', &
+     'MACO2H_a01                      ','MACO3H_a01                      ','MACROH_a01                      ', &
+     'MACROOH_a01                     ','BZFUCO_a01                      ','BZFUOOH_a01                     ' /)
   CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_1 = (/ &
-     'RRG4121                         ','RRG4122                         ','RRG4123                         ', &
-     'RRG4124                         ','RRG4125                         ','RRG4126                         ', &
-     'RRG4127                         ','RRG4129a                        ','RRG4129b                        ', &
-     'RRG4130a                        ','RRG4130b                        ','RRG4132                         ', &
-     'RRG4133                         ','RRG4134                         ','RRG4135                         ', &
-     'RRG4136                         ','RRG4137                         ','RRG4138                         ', &
-     'RRG4140                         ','RRG4141                         ','RRG4142                         ', &
-     'RRG4143                         ','RRG4144                         ','RRG4145                         ', &
-     'RRG4146                         ','RRG4147                         ','RRG4148                         ', &
-     'RRG4149                         ','RRG4150                         ','RRG4151                         ', &
-     'RRG4152                         ','RRG4153                         ','RRG4154                         ', &
-     'RRG4155                         ','RRG4156                         ','RRG4157                         ', &
-     'RRG4158                         ','RRG4159                         ','RRG4160a                        ', &
-     'RRG4160b                        ','RRG4160c                        ','RRG4161                         ', &
-     'RRG4162                         ','RRG4163                         ','RRG4164                         ', &
-     'RRG42000                        ','RRG42001                        ','RRG42002                        ', &
-     'RRG42003                        ','RRG42004a                       ','RRG42004b                       ', &
-     'RRG42005                        ','RRG42006                        ','RRG42007a                       ', &
-     'RRG42007b                       ','RRG42008a                       ','RRG42008b                       ', &
-     'RRG42009                        ','RRG42010                        ','RRG42011a                       ', &
-     'RRG42011b                       ','RRG42011c                       ','RRG42012                        ', &
-     'RRG42013                        ','RRG42014                        ','RRG42017a                       ', &
-     'RRG42017b                       ','RRG42018                        ','RRG42020                        ', &
-     'RRG42021                        ','RRG42022a                       ','RRG42022b                       ', &
-     'RRG42023a                       ','RRG42023b                       ','RRG42024a                       ', &
-     'RRG42024b                       ','RRG42025                        ','RRG42026                        ', &
-     'RRG42027a                       ','RRG42027b                       ','RRG42028a                       ', &
-     'RRG42028b                       ','RRG42028c                       ','RRG42029                        ', &
-     'RRG42030                        ','RRG42031                        ','RRG42032                        ', &
-     'RRG42033a                       ','RRG42033b                       ','RRG42034                        ' /)
+     'CO14O3CHO_a01                   ','CO14O3CO2H_a01                  ','CO2C4DIAL_a01                   ', &
+     'EPXC4DIAL_a01                   ','EPXDLCO2H_a01                   ','EPXDLCO3H_a01                   ', &
+     'HOCOC4DIAL_a01                  ','MALANHYOOH_a01                  ','MALDALCO2H_a01                  ', &
+     'MALDALCO3H_a01                  ','MALDIAL_a01                     ','MALDIALOOH_a01                  ', &
+     'MALNHYOHCO_a01                  ','MECOACEOOH_a01                  ','C312COPAN_a01                   ', &
+     'C4PAN5_a01                      ','MVKNO3_a01                      ','NBZFUOOH_a01                    ', &
+     'NC4DCO2H_a01                    ','LBUT1ENOOH_a01                  ','LHMVKABOOH_a01                  ', &
+     'LMEKOOH_a01                     ','C1ODC2O2C4OOH_a01               ','C1ODC2OOHC4OD_a01               ', &
+     'C1ODC3O2C4OOH_a01               ','C1OOHC2OOHC4OD_a01              ','C4MDIAL_a01                     ', &
+     'C511OOH_a01                     ','C512OOH_a01                     ','C513CO_a01                      ', &
+     'C513OOH_a01                     ','C514OOH_a01                     ','C59OOH_a01                      ', &
+     'CHOC3COOOH_a01                  ','CO13C4CHO_a01                   ','CO23C4CHO_a01                   ', &
+     'CO23C4CO3H_a01                  ','DB1OOH_a01                      ','DB2OOH_a01                      ', &
+     'ISOPAOH_a01                     ','ISOPBOH_a01                     ','ISOPBOOH_a01                    ', &
+     'ISOPDOH_a01                     ','ISOPDOOH_a01                    ','MBO_a01                         ', &
+     'MBOACO_a01                      ','MBOCOCO_a01                     ','ME3FURAN_a01                    ', &
+     'ACCOMECHO_a01                   ','ACCOMECO3H_a01                  ','C24O3CCO2H_a01                  ', &
+     'C4CO2DBCO3_a01                  ','C4CO2DCO3H_a01                  ','C5134CO2OH_a01                  ', &
+     'C54CO_a01                       ','C5CO14OH_a01                    ','C5CO14OOH_a01                   ', &
+     'C5DIALCO_a01                    ','C5DIALOOH_a01                   ','C5DICARB_a01                    ', &
+     'C5DICAROOH_a01                  ','MC3ODBCO2H_a01                  ','MMALNHYOOH_a01                  ', &
+     'TLFUOOH_a01                     ','C4MCONO3OH_a01                  ','C514NO3_a01                     ', &
+     'C5PAN9_a01                      ','CHOC3COPAN_a01                  ','DB1NO3_a01                      ', &
+     'ISOPBNO3_a01                    ','ISOPDNO3_a01                    ','NC4OHCO3H_a01                   ', &
+     'NC4OHCPAN_a01                   ','NISOPOOH_a01                    ','NMBOBCO_a01                     ', &
+     'C4CO2DBPAN_a01                  ','NC4MDCO2H_a01                   ','NTLFUOOH_a01                    ', &
+     'LC578OOH_a01                    ','LHC4ACCHO_a01                   ','LHC4ACCO2H_a01                  ', &
+     'LHC4ACCO3H_a01                  ','LIEPOX_a01                      ','LISOPACOOH_a01                  ', &
+     'LMBOABOOH_a01                   ','LZCO3HC23DBCOD_a01              ','LC5PAN1719_a01                  ', &
+     'LISOPACNO3_a01                  ','LMBOABNO3_a01                   ','LNMBOABOOH_a01                  ' /)
   CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_2 = (/ &
-     'RRG42035                        ','RRG42036                        ','RRG42037                        ', &
-     'RRG42038a                       ','RRG42037b                       ','RRG42037c                       ', &
-     'RRG42039a                       ','RRG42039b                       ','RRG42040                        ', &
-     'RRG42041                        ','RRG42042                        ','RRG42043                        ', &
-     'RRG42044                        ','RRG42045a                       ','RRG42045b                       ', &
-     'RRG42046                        ','RRG42047                        ','RRG42048                        ', &
-     'RRG42049a                       ','RRG42049b                       ','RRG42050                        ', &
-     'RRG42051a                       ','RRG42051b                       ','RRG42051c                       ', &
-     'RRG42052a                       ','RRG42052b                       ','RRG42053                        ', &
-     'RRG42054                        ','RRG42055a                       ','RRG42055b                       ', &
-     'RRG42056a                       ','RRG42056b                       ','RRG42057                        ', &
-     'RRG42058a                       ','RRG42058b                       ','RRG42058c                       ', &
-     'RRG42059                        ','RRG42060                        ','RRG42061                        ', &
-     'RRG42062a                       ','RRG42062b                       ','RRG42062c                       ', &
-     'RRG42063a                       ','RRG42063b                       ','RRG42064a                       ', &
-     'RRG42064b                       ','RRG42065                        ','RRG42066                        ', &
-     'RRG42067a                       ','RRG42067b                       ','RRG42068                        ', &
-     'RRG42069                        ','RRG42070                        ','RRG42071                        ', &
-     'RRG42072                        ','RRG42073                        ','RRG42074a                       ', &
-     'RRG42074b                       ','RRG42075                        ','RRG42076                        ', &
-     'RRG42077                        ','RRG42078                        ','RRG42079                        ', &
-     'RRG42080                        ','RRG42081                        ','RRG42082                        ', &
-     'RRG42083a                       ','RRG42083b                       ','RRG42084                        ', &
-     'RRG42085a                       ','RRG42085b                       ','RRG42086a                       ', &
-     'RRG42086b                       ','RRG42086c                       ','RRG42087                        ', &
-     'RRG42088                        ','RRG42089a                       ','RRG42089b                       ', &
-     'RRG42090                        ','RRG42091                        ','RRG42092                        ', &
-     'RRG42093a                       ','RRG42093b                       ','RRG42093c                       ', &
-     'RRG42093d                       ','RRG42094a                       ','RRG42094b                       ', &
-     'RRG42095a                       ','RRG42095b                       ','RRG42096a                       ' /)
+     'C614CO_a01                      ','C614OOH_a01                     ','CO235C5CHO_a01                  ', &
+     'CO235C6OOH_a01                  ','BZBIPEROOH_a01                  ','BZEMUCCO_a01                    ', &
+     'BZEMUCCO2H_a01                  ','BZEMUCCO3H_a01                  ','BZEMUCOOH_a01                   ', &
+     'BZEPOXMUC_a01                   ','BZOBIPEROH_a01                  ','C5CO2DCO3H_a01                  ', &
+     'C5COOHCO3H_a01                  ','C6125CO_a01                     ','C615CO2OOH_a01                  ', &
+     'C6CO4DB_a01                     ','C6H5O_a01                       ','C6H5OOH_a01                     ', &
+     'CATEC1O_a01                     ','CATEC1OOH_a01                   ','CATECHOL_a01                    ', &
+     'PBZQCO_a01                      ','PBZQOOH_a01                     ','PHENOOH_a01                     ', &
+     'C614NO3_a01                     ','BZBIPERNO3_a01                  ','BZEMUCNO3_a01                   ', &
+     'C5CO2DBPAN_a01                  ','C5CO2OHPAN_a01                  ','DNPHEN_a01                      ', &
+     'DNPHENOOH_a01                   ','NBZQOOH_a01                     ','NCATECHOL_a01                   ', &
+     'NCATECOOH_a01                   ','NDNPHENOOH_a01                  ','NNCATECOOH_a01                  ', &
+     'NPHENOOH_a01                    ','C235C6CO3H_a01                  ','C716OOH_a01                     ', &
+     'C721OOH_a01                     ','C722OOH_a01                     ','CO235C6CHO_a01                  ', &
+     'C6COOHCO3H_a01                  ','C6H5CH2OOH_a01                  ','C6H5CO3H_a01                    ', &
+     'C7CO4DB_a01                     ','CRESOL_a01                      ','CRESOOH_a01                     ', &
+     'MCATEC1O_a01                    ','MCATEC1OOH_a01                  ','MCATECHOL_a01                   ', &
+     'OXYL1OOH_a01                    ','PHCOOH_a01                      ','TLBIPEROOH_a01                  ', &
+     'TLEMUCCO_a01                    ','TLEMUCCO2H_a01                  ','TLEMUCCO3H_a01                  ', &
+     'TLEMUCOOH_a01                   ','TLOBIPEROH_a01                  ','TOL1O_a01                       ', &
+     'C7PAN3_a01                      ','C6CO2OHPAN_a01                  ','DNCRES_a01                      ', &
+     'DNCRESOOH_a01                   ','MNCATECH_a01                    ','MNCATECOOH_a01                  ', &
+     'MNNCATCOOH_a01                  ','NCRESOOH_a01                    ','NDNCRESOOH_a01                  ', &
+     'TLEMUCNO3_a01                   ','C721CHO_a01                     ','C721CO3H_a01                    ', &
+     'C810OOH_a01                     ','C812OOH_a01                     ','C813OOH_a01                     ', &
+     'C85OOH_a01                      ','C86OOH_a01                      ','C89OOH_a01                      ', &
+     'C8BC_a01                        ','C8BCCO_a01                      ','C8BCOOH_a01                     ', &
+     'NORPINIC_a01                    ','STYRENOOH_a01                   ','C721PAN_a01                     ', &
+     'C810NO3_a01                     ','C89NO3_a01                      ','C8BCNO3_a01                     ', &
+     'C811CO3H_a01                    ','C85CO3H_a01                     ','C89CO2H_a01                     ' /)
   CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_3 = (/ &
-     'RRG42096b                       ','RRG42097a                       ','RRG42097b                       ', &
-     'RRG42098a                       ','RRG42098b                       ','RRG42098c                       ', &
-     'RRG43000a                       ','RRG43000b                       ','RRG43001a                       ', &
-     'RRG43001b                       ','RRG43002                        ','RRG43003                        ', &
-     'RRG43004                        ','RRG43005a                       ','RRG43005b                       ', &
-     'RRG43006                        ','RRG43007a                       ','RRG43007b                       ', &
-     'RRG43008                        ','RRG43009a                       ','RRG43009b                       ', &
-     'RRG43010                        ','RRG43011                        ','RRG43012a                       ', &
-     'RRG43012b                       ','RRG43013a                       ','RRG43013b                       ', &
-     'RRG43014                        ','RRG43015a                       ','RRG43015b                       ', &
-     'RRG43016                        ','RRG43017                        ','RRG43020                        ', &
-     'RRG43021                        ','RRG43022                        ','RRG43023a                       ', &
-     'RRG43023b                       ','RRG43024a                       ','RRG43024b                       ', &
-     'RRG43025                        ','RRG43026a                       ','RRG43026b                       ', &
-     'RRG43027                        ','RRG43028                        ','RRG43029                        ', &
-     'RRG43030a                       ','RRG43030b                       ','RRG43031                        ', &
-     'RRG43032                        ','RRG43033                        ','RRG43034                        ', &
-     'RRG43035                        ','RRG43036                        ','RRG43037                        ', &
-     'RRG43038a                       ','RRG43038b                       ','RRG43039                        ', &
-     'RRG43040a                       ','RRG43040b                       ','RRG43040c                       ', &
-     'RRG43041                        ','RRG43042                        ','RRG43043a                       ', &
-     'RRG43043b                       ','RRG43044                        ','RRG43045a                       ', &
-     'RRG43045b                       ','RRG43045c                       ','RRG43046                        ', &
-     'RRG43047                        ','RRG43048                        ','RRG43049                        ', &
-     'RRG43050                        ','RRG43051a                       ','RRG43051b                       ', &
-     'RRG43051c                       ','RRG43052                        ','RRG43053                        ', &
-     'RRG43054a                       ','RRG43054b                       ','RRG43055a                       ', &
-     'RRG43055b                       ','RRG43055c                       ','RRG43056                        ', &
-     'RRG43057                        ','RRG43058                        ','RRG43059                        ', &
-     'RRG43060a                       ','RRG43060b                       ','RRG43061                        ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_4 = (/ &
-     'RRG43062                        ','RRG43063a                       ','RRG43063b                       ', &
-     'RRG43064                        ','RRG43065                        ','RRG43066                        ', &
-     'RRG43067                        ','RRG43068                        ','RRG43069                        ', &
-     'RRG43070a                       ','RRG43070b                       ','RRG43071a                       ', &
-     'RRG43072                        ','RRG43073                        ','RRG43074                        ', &
-     'RRG43075a                       ','RRG43075b                       ','RRG43202                        ', &
-     'RRG43203                        ','RRG43204a                       ','RRG43204b                       ', &
-     'RRG43205                        ','RRG43206                        ','RRG43207a                       ', &
-     'RRG43207b                       ','RRG43207c                       ','RRG43210                        ', &
-     'RRG43211                        ','RRG43212                        ','RRG43213a                       ', &
-     'RRG43213b                       ','RRG43214                        ','RRG43215a                       ', &
-     'RRG43215b                       ','RRG43215c                       ','RRG43218                        ', &
-     'RRG43219                        ','RRG43220                        ','RRG43221                        ', &
-     'RRG43222                        ','RRG43223                        ','RRG43415                        ', &
-     'RRG43418a                       ','RRG43418b                       ','RRG43419                        ', &
-     'RRG43420                        ','RRG43421                        ','RRG43422a                       ', &
-     'RRG43422b                       ','RRG43424                        ','RRG43425                        ', &
-     'RRG43426                        ','RRG43427                        ','RRG43428                        ', &
-     'RRG43442                        ','RRG43443                        ','RRG43444                        ', &
-     'RRG43446                        ','RRG44000                        ','RRG44001a                       ', &
-     'RRG44001b                       ','RRG44002                        ','RRG44003a                       ', &
-     'RRG44003b                       ','RRG44003c                       ','RRG44004a                       ', &
-     'RRG44004b                       ','RRG44005a                       ','RRG44005b                       ', &
-     'RRG44005c                       ','RRG44006a                       ','RRG44006b                       ', &
-     'RRG44007                        ','RRG44008                        ','RRG44009a                       ', &
-     'RRG44009b                       ','RRG44010a                       ','RRG44010b                       ', &
-     'RRG44011                        ','RRG44012                        ','RRG44013                        ', &
-     'RRG44014a                       ','RRG44014b                       ','RRG44015a                       ', &
-     'RRG44015b                       ','RRG44016                        ','RRG44017                        ', &
-     'RRG44018                        ','RRG44019                        ','RRG44020                        ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_5 = (/ &
-     'RRG44021a                       ','RRG44021b                       ','RRG44022a                       ', &
-     'RRG44022b                       ','RRG44023a                       ','RRG44023b                       ', &
-     'RRG44024                        ','RRG44025                        ','RRG44026                        ', &
-     'RRG44027                        ','RRG44028                        ','RRG44029                        ', &
-     'RRG44030a                       ','RRG44030b                       ','RRG44031a                       ', &
-     'RRG44031b                       ','RRG44031c                       ','RRG44032                        ', &
-     'RRG44033                        ','RRG44034                        ','RRG44035                        ', &
-     'RRG44036a                       ','RRG44036b                       ','RRG44037a                       ', &
-     'RRG44037b                       ','RRG44038                        ','RRG44039a                       ', &
-     'RRG44039b                       ','RRG44039c                       ','RRG44040                        ', &
-     'RRG44041                        ','RRG44042                        ','RRG44043a                       ', &
-     'RRG44043b                       ','RRG44044                        ','RRG44045a                       ', &
-     'RRG44045b                       ','RRG44046a                       ','RRG44046b                       ', &
-     'RRG44047                        ','RRG44048a                       ','RRG44048b                       ', &
-     'RRG44049a                       ','RRG44049b                       ','RRG44050                        ', &
-     'RRG44051                        ','RRG44052a                       ','RRG44052b                       ', &
-     'RRG44052c                       ','RRG44053                        ','RRG44054                        ', &
-     'RRG44055a                       ','RRG44055b                       ','RRG44056                        ', &
-     'RRG44057a                       ','RRG44057b                       ','RRG44058                        ', &
-     'RRG44059                        ','RRG44060                        ','RRG44061a                       ', &
-     'RRG44061b                       ','RRG44062a                       ','RRG44062b                       ', &
-     'RRG44063                        ','RRG44064                        ','RRG44065                        ', &
-     'RRG44066                        ','RRG44067                        ','RRG44068                        ', &
-     'RRG44069                        ','RRG44070                        ','RRG44071                        ', &
-     'RRG44072                        ','RRG44073                        ','RRG44074                        ', &
-     'RRG44075                        ','RRG44076                        ','RRG44077                        ', &
-     'RRG44078                        ','RRG44079                        ','RRG44080                        ', &
-     'RRG44081                        ','RRG44082                        ','RRG44083                        ', &
-     'RRG44084                        ','RRG44085                        ','RRG44086                        ', &
-     'RRG44087                        ','RRG44088a                       ','RRG44088b                       ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_6 = (/ &
-     'RRG44089                        ','RRG44090                        ','RRG44091a                       ', &
-     'RRG44091b                       ','RRG44092a                       ','RRG44092b                       ', &
-     'RRG44093                        ','RRG44094a                       ','RRG44094b                       ', &
-     'RRG44095                        ','RRG44096                        ','RRG44097a                       ', &
-     'RRG44097b                       ','RRG44098                        ','RRG44099                        ', &
-     'RRG44100a                       ','RRG44100b                       ','RRG44101a                       ', &
-     'RRG44101b                       ','RRG44102                        ','RRG44103a                       ', &
-     'RRG44103b                       ','RRG44104                        ','RRG44105                        ', &
-     'RRG44106                        ','RRG44107                        ','RRG44108                        ', &
-     'RRG44109                        ','RRG44110                        ','RRG44111                        ', &
-     'RRG44112a                       ','RRG44112b                       ','RRG44113a                       ', &
-     'RRG44113b                       ','RRG44114                        ','RRG44115a                       ', &
-     'RRG44115b                       ','RRG44115c                       ','RRG44116                        ', &
-     'RRG44117                        ','RRG44118                        ','RRG44119                        ', &
-     'RRG44120                        ','RRG44121a                       ','RRG44121b                       ', &
-     'RRG44122                        ','RRG44123                        ','RRG44124a                       ', &
-     'RRG44124b                       ','RRG44125                        ','RRG44126                        ', &
-     'RRG44127                        ','RRG44128                        ','RRG44129                        ', &
-     'RRG44130                        ','RRG44131                        ','RRG44132                        ', &
-     'RRG44133                        ','RRG44134                        ','RRG44135                        ', &
-     'RRG44136                        ','RRG44137                        ','RRG44138                        ', &
-     'RRG44139                        ','RRG44140                        ','RRG44141                        ', &
-     'RRG44142                        ','RRG44200                        ','RRG44201                        ', &
-     'RRG44202                        ','RRG44203a                       ','RRG44203b                       ', &
-     'RRG44204                        ','RRG44205                        ','RRG44206                        ', &
-     'RRG44207                        ','RRG44208                        ','RRG44209                        ', &
-     'RRG44210                        ','RRG44211                        ','RRG44212                        ', &
-     'RRG44213                        ','RRG44214                        ','RRG44215a                       ', &
-     'RRG44215b                       ','RRG44216                        ','RRG44217                        ', &
-     'RRG44218                        ','RRG44219                        ','RRG44220                        ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_7 = (/ &
-     'RRG44221                        ','RRG44222                        ','RRG44223                        ', &
-     'RRG44224a                       ','RRG44224b                       ','RRG44224c                       ', &
-     'RRG44225                        ','RRG44226                        ','RRG44227                        ', &
-     'RRG44228a                       ','RRG44228b                       ','RRG44229                        ', &
-     'RRG44230                        ','RRG44231                        ','RRG44232                        ', &
-     'RRG44233a                       ','RRG44233b                       ','RRG44234                        ', &
-     'RRG44235                        ','RRG44236                        ','RRG44400                        ', &
-     'RRG44401a                       ','RRG44401b                       ','RRG44402                        ', &
-     'RRG44403                        ','RRG44404                        ','RRG44405                        ', &
-     'RRG44406a                       ','RRG44406b                       ','RRG44406c                       ', &
-     'RRG44407                        ','RRG44408                        ','RRG44409                        ', &
-     'RRG44410                        ','RRG44411                        ','RRG44412                        ', &
-     'RRG44413                        ','RRG44414                        ','RRG44415                        ', &
-     'RRG44416                        ','RRG44417a                       ','RRG44417b                       ', &
-     'RRG44417c                       ','RRG44418                        ','RRG44419                        ', &
-     'RRG44420                        ','RRG44421                        ','RRG44422                        ', &
-     'RRG44423                        ','RRG44424                        ','RRG44425                        ', &
-     'RRG44426                        ','RRG44427                        ','RRG44428                        ', &
-     'RRG44429a                       ','RRG44429b                       ','RRG44430                        ', &
-     'RRG44431                        ','RRG44432                        ','RRG44433                        ', &
-     'RRG44434                        ','RRG44435a                       ','RRG44435b                       ', &
-     'RRG44436                        ','RRG44437                        ','RRG44438                        ', &
-     'RRG44439                        ','RRG44440                        ','RRG44441                        ', &
-     'RRG44442a                       ','RRG44442b                       ','RRG44443                        ', &
-     'RRG44444                        ','RRG44445                        ','RRG44446                        ', &
-     'RRG44447                        ','RRG44448                        ','RRG44449a                       ', &
-     'RRG44449b                       ','RRG44450                        ','RRG44451                        ', &
-     'RRG44452                        ','RRG44453                        ','RRG44456a                       ', &
-     'RRG44456b                       ','RRG44457                        ','RRG44458                        ', &
-     'RRG44459                        ','RRG44460                        ','RRG44461                        ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_8 = (/ &
-     'RRG44462                        ','RRG45000                        ','RRG45001                        ', &
-     'RRG45002                        ','RRG45003a                       ','RRG45003b                       ', &
-     'RRG45004a                       ','RRG45004b                       ','RRG45005                        ', &
-     'RRG45006                        ','RRG45007                        ','RRG45008                        ', &
-     'RRG45009a                       ','RRG45009b                       ','RRG45010a                       ', &
-     'RRG45010b                       ','RRG45011                        ','RRG45012                        ', &
-     'RRG45013a                       ','RRG45013b                       ','RRG45014                        ', &
-     'RRG45015                        ','RRG45016                        ','RRG45017a                       ', &
-     'RRG45017b                       ','RRG45018                        ','RRG45019a                       ', &
-     'RRG45019b                       ','RRG45019c                       ','RRG45019d                       ', &
-     'RRG45020                        ','RRG45021                        ','RRG45022                        ', &
-     'RRG45023a                       ','RRG45023b                       ','RRG45024a                       ', &
-     'RRG45024b                       ','RRG45025                        ','RRG45026a                       ', &
-     'RRG45026b                       ','RRG45026c                       ','RRG45027                        ', &
-     'RRG45028                        ','RRG45029                        ','RRG45030                        ', &
-     'RRG45031a                       ','RRG45031b                       ','RRG45032a                       ', &
-     'RRG45032b                       ','RRG45033                        ','RRG45034a                       ', &
-     'RRG45034b                       ','RRG45034c                       ','RRG45034d                       ', &
-     'RRG45035                        ','RRG45036                        ','RRG45037                        ', &
-     'RRG45038                        ','RRG45039                        ','RRG45040                        ', &
-     'RRG45041                        ','RRG45042                        ','RRG45043                        ', &
-     'RRG45044                        ','RRG45045                        ','RRG45046                        ', &
-     'RRG45047                        ','RRG45048                        ','RRG45049                        ', &
-     'RRG45050a                       ','RRG45050b                       ','RRG45050c                       ', &
-     'RRG45051                        ','RRG45052                        ','RRG45053                        ', &
-     'RRG45054a                       ','RRG45054b                       ','RRG45055                        ', &
-     'RRG45056                        ','RRG45057                        ','RRG45058a                       ', &
-     'RRG45058b                       ','RRG45059a                       ','RRG45059b                       ', &
-     'RRG45060a                       ','RRG45060b                       ','RRG45060c                       ', &
-     'RRG45061                        ','RRG45062                        ','RRG45063                        ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_9 = (/ &
-     'RRG45064a                       ','RRG45064b                       ','RRG45065                        ', &
-     'RRG45066                        ','RRG45067                        ','RRG45068                        ', &
-     'RRG45069                        ','RRG45070a                       ','RRG45070b                       ', &
-     'RRG45071                        ','RRG45072                        ','RRG45073                        ', &
-     'RRG45074                        ','RRG45075                        ','RRG45076                        ', &
-     'RRG45077a                       ','RRG45077b                       ','RRG45077c                       ', &
-     'RRG45077d                       ','RRG45078                        ','RRG45079                        ', &
-     'RRG45080                        ','RRG45081a                       ','RRG45081b                       ', &
-     'RRG45082                        ','RRG45083                        ','RRG45084a                       ', &
-     'RRG45084b                       ','RRG45084c                       ','RRG45085                        ', &
-     'RRG45086                        ','RRG45087                        ','RRG45088                        ', &
-     'RRG45089                        ','RRG45090                        ','RRG45091                        ', &
-     'RRG45092a                       ','RRG45092b                       ','RRG45093                        ', &
-     'RRG45094a                       ','RRG45094b                       ','RRG45095                        ', &
-     'RRG45096                        ','RRG45097a                       ','RRG45097b                       ', &
-     'RRG45098                        ','RRG45099                        ','RRG45100                        ', &
-     'RRG45101                        ','RRG45102                        ','RRG45103                        ', &
-     'RRG45104a                       ','RRG45104b                       ','RRG45105a                       ', &
-     'RRG45105b                       ','RRG45106                        ','RRG45107                        ', &
-     'RRG45108a                       ','RRG45108b                       ','RRG45109                        ', &
-     'RRG45110a                       ','RRG45110b                       ','RRG45111                        ', &
-     'RRG45112                        ','RRG45113                        ','RRG45114a                       ', &
-     'RRG45114b                       ','RRG45115                        ','RRG45116                        ', &
-     'RRG45117                        ','RRG45118                        ','RRG45119a                       ', &
-     'RRG45119b                       ','RRG45120                        ','RRG45121a                       ', &
-     'RRG45121b                       ','RRG45122a                       ','RRG45122b                       ', &
-     'RRG45123                        ','RRG45124                        ','RRG45125                        ', &
-     'RRG45126a                       ','RRG45126b                       ','RRG45127a                       ', &
-     'RRG45127b                       ','RRG45128                        ','RRG45129                        ', &
-     'RRG45130                        ','RRG45131                        ','RRG45132                        ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_10 = (/ &
-     'RRG45133                        ','RRG45134a                       ','RRG45134b                       ', &
-     'RRG45135                        ','RRG45136                        ','RRG45137                        ', &
-     'RRG45138                        ','RRG45139                        ','RRG45200                        ', &
-     'RRG45201                        ','RRG45202a                       ','RRG45202b                       ', &
-     'RRG45203                        ','RRG45204                        ','RRG45205                        ', &
-     'RRG45206                        ','RRG45207                        ','RRG45208                        ', &
-     'RRG45209a                       ','RRG45209b                       ','RRG45210                        ', &
-     'RRG45211                        ','RRG45212                        ','RRG45213                        ', &
-     'RRG45214                        ','RRG45215                        ','RRG45216                        ', &
-     'RRG45217                        ','RRG45218a                       ','RRG45218b                       ', &
-     'RRG45219                        ','RRG45220                        ','RRG45221                        ', &
-     'RRG45222                        ','RRG45223                        ','RRG45224                        ', &
-     'RRG45225                        ','RRG45226                        ','RRG45227                        ', &
-     'RRG45228a                       ','RRG45228b                       ','RRG45229                        ', &
-     'RRG45230                        ','RRG45231                        ','RRG45232                        ', &
-     'RRG45233                        ','RRG45234                        ','RRG45235                        ', &
-     'RRG45236                        ','RRG45237a                       ','RRG45237b                       ', &
-     'RRG45238                        ','RRG45239                        ','RRG45240a                       ', &
-     'RRG45240b                       ','RRG45240c                       ','RRG45241a                       ', &
-     'RRG45241b                       ','RRG45242a                       ','RRG45242b                       ', &
-     'RRG45243                        ','RRG45244                        ','RRG45245                        ', &
-     'RRG45246                        ','RRG45247                        ','RRG45248                        ', &
-     'RRG45249                        ','RRG45250a                       ','RRG45250b                       ', &
-     'RRG45251                        ','RRG45252a                       ','RRG45252b                       ', &
-     'RRG45253                        ','RRG45254                        ','RRG45255                        ', &
-     'RRG45256                        ','RRG45257                        ','RRG45258                        ', &
-     'RRG45259                        ','RRG45260                        ','RRG45400                        ', &
-     'RRG45401                        ','RRG45402                        ','RRG45403a                       ', &
-     'RRG45403b                       ','RRG45404                        ','RRG45405                        ', &
-     'RRG45406                        ','RRG45407                        ','RRG45408                        ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_11 = (/ &
-     'RRG45409                        ','RRG45410                        ','RRG45411a                       ', &
-     'RRG45411b                       ','RRG45412                        ','RRG45413                        ', &
-     'RRG45414                        ','RRG45415                        ','RRG45416                        ', &
-     'RRG45421a                       ','RRG45421b                       ','RRG45422                        ', &
-     'RRG45423                        ','RRG45424                        ','RRG45428                        ', &
-     'RRG45429                        ','RRG45430a                       ','RRG45430b                       ', &
-     'RRG45430c                       ','RRG45431                        ','RRG45432                        ', &
-     'RRG45433                        ','RRG45434                        ','RRG45436                        ', &
-     'RRG45441                        ','RRG45442                        ','RRG45443                        ', &
-     'RRG45444                        ','RRG45451                        ','RRG45452                        ', &
-     'RRG45453                        ','RRG45454a                       ','RRG45454b                       ', &
-     'RRG45455                        ','RRG45456                        ','RRG45457                        ', &
-     'RRG45458                        ','RRG45459                        ','RRG45464                        ', &
-     'RRG45465                        ','RRG45466                        ','RRG45467a                       ', &
-     'RRG45467b                       ','RRG45468                        ','RRG45469                        ', &
-     'RRG45470                        ','RRG45471                        ','RRG45476a                       ', &
-     'RRG45476b                       ','RRG45477                        ','RRG45478                        ', &
-     'RRG45479                        ','RRG45480                        ','RRG45483                        ', &
-     'RRG45485                        ','RRG45486a                       ','RRG45486b                       ', &
-     'RRG45487                        ','RRG45488                        ','RRG45489                        ', &
-     'RRG45490a                       ','RRG45491b                       ','RRG45492                        ', &
-     'RRG45493                        ','RRG45494                        ','RRG46200a                       ', &
-     'RRG46200b                       ','RRG46201                        ','RRG46202                        ', &
-     'RRG46203                        ','RRG46204                        ','RRG46205a                       ', &
-     'RRG46205b                       ','RRG46206a                       ','RRG46206b                       ', &
-     'RRG46207                        ','RRG46208                        ','RRG46209                        ', &
-     'RRG46210                        ','RRG46211                        ','RRG46400                        ', &
-     'RRG46401                        ','RRG46402                        ','RRG46403                        ', &
-     'RRG46404a                       ','RRG46404b                       ','RRG46405                        ', &
-     'RRG46406                        ','RRG46407                        ','RRG46408                        ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_12 = (/ &
-     'RRG46409                        ','RRG46410                        ','RRG46411                        ', &
-     'RRG46412                        ','RRG46413a                       ','RRG46413b                       ', &
-     'RRG46414                        ','RRG46415                        ','RRG46416                        ', &
-     'RRG46417                        ','RRG46418                        ','RRG46419                        ', &
-     'RRG46420                        ','RRG46421                        ','RRG46422                        ', &
-     'RRG46423                        ','RRG46424a                       ','RRG46424b                       ', &
-     'RRG46425                        ','RRG46426                        ','RRG46427                        ', &
-     'RRG46428                        ','RRG46429                        ','RRG46430                        ', &
-     'RRG46431                        ','RRG46432a                       ','RRG46432b                       ', &
-     'RRG46433                        ','RRG46434                        ','RRG46435                        ', &
-     'RRG46436                        ','RRG46437a                       ','RRG46437b                       ', &
-     'RRG46438                        ','RRG46439                        ','RRG46440                        ', &
-     'RRG46441                        ','RRG46442                        ','RRG46443                        ', &
-     'RRG46444                        ','RRG46445                        ','RRG46446                        ', &
-     'RRG46447a                       ','RRG46447b                       ','RRG46448                        ', &
-     'RRG46449                        ','RRG46450                        ','RRG46451                        ', &
-     'RRG46452                        ','RRG46453                        ','RRG46454                        ', &
-     'RRG46455                        ','RRG46456                        ','RRG46457                        ', &
-     'RRG46458                        ','RRG46459                        ','RRG46460                        ', &
-     'RRG46461a                       ','RRG46461b                       ','RRG46462                        ', &
-     'RRG46463                        ','RRG46464                        ','RRG46465                        ', &
-     'RRG46466a                       ','RRG46466b                       ','RRG46467                        ', &
-     'RRG46468                        ','RRG46469                        ','RRG46470                        ', &
-     'RRG46471                        ','RRG46472a                       ','RRG46472b                       ', &
-     'RRG46473                        ','RRG46474                        ','RRG46475                        ', &
-     'RRG46476                        ','RRG46477                        ','RRG46478                        ', &
-     'RRG46479                        ','RRG46480a                       ','RRG46480b                       ', &
-     'RRG46481                        ','RRG46482                        ','RRG46483                        ', &
-     'RRG46484                        ','RRG46485a                       ','RRG46485b                       ', &
-     'RRG46486                        ','RRG46487                        ','RRG46488                        ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_13 = (/ &
-     'RRG46489                        ','RRG46490a                       ','RRG46490b                       ', &
-     'RRG46491a                       ','RRG46491b                       ','RRG46492                        ', &
-     'RRG46493                        ','RRG46494                        ','RRG46495                        ', &
-     'RRG46496                        ','RRG46497                        ','RRG46498                        ', &
-     'RRG46499a                       ','RRG46499b                       ','RRG46500                        ', &
-     'RRG46501                        ','RRG46502                        ','RRG46503                        ', &
-     'RRG46504                        ','RRG46505a                       ','RRG46505b                       ', &
-     'RRG46506                        ','RRG46507                        ','RRG46508                        ', &
-     'RRG46509                        ','RRG46510                        ','RRG46511a                       ', &
-     'RRG46511b                       ','RRG46511c                       ','RRG46512                        ', &
-     'RRG46513                        ','RRG46514                        ','RRG46515                        ', &
-     'RRG46516                        ','RRG46517                        ','RRG46518                        ', &
-     'RRG46519                        ','RRG46520                        ','RRG46521                        ', &
-     'RRG46522a                       ','RRG46522b                       ','RRG46523a                       ', &
-     'RRG46523b                       ','RRG46524                        ','RRG46525                        ', &
-     'RRG47200                        ','RRG47201                        ','RRG47202a                       ', &
-     'RRG47202b                       ','RRG47203                        ','RRG47204                        ', &
-     'RRG47205                        ','RRG47206                        ','RRG47207                        ', &
-     'RRG47208                        ','RRG47209a                       ','RRG47209b                       ', &
-     'RRG47210                        ','RRG47211                        ','RRG47212                        ', &
-     'RRG47213                        ','RRG47214                        ','RRG47215                        ', &
-     'RRG47216                        ','RRG47217                        ','RRG47218                        ', &
-     'RRG47219                        ','RRG47220                        ','RRG47221                        ', &
-     'RRG47222                        ','RRG47223                        ','RRG47224                        ', &
-     'RRG47225                        ','RRG47226                        ','RRG47400                        ', &
-     'RRG47401                        ','RRG47402a                       ','RRG47402b                       ', &
-     'RRG47403                        ','RRG47404                        ','RRG47405                        ', &
-     'RRG47406                        ','RRG47407a                       ','RRG47407b                       ', &
-     'RRG47408a                       ','RRG47408b                       ','RRG47409                        ', &
-     'RRG47410                        ','RRG47411                        ','RRG47412                        ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_14 = (/ &
-     'RRG47413                        ','RRG47414                        ','RRG47415                        ', &
-     'RRG47416                        ','RRG47417                        ','RRG47418a                       ', &
-     'RRG47418b                       ','RRG47419                        ','RRG47420                        ', &
-     'RRG47421                        ','RRG47422a                       ','RRG47422b                       ', &
-     'RRG47423                        ','RRG47424                        ','RRG47425                        ', &
-     'RRG47426                        ','RRG47427                        ','RRG47428                        ', &
-     'RRG47429                        ','RRG47430                        ','RRG47431                        ', &
-     'RRG47432                        ','RRG47433                        ','RRG47434a                       ', &
-     'RRG47434b                       ','RRG47434c                       ','RRG47435                        ', &
-     'RRG47436                        ','RRG47437                        ','RRG47438                        ', &
-     'RRG47439a                       ','RRG47439b                       ','RRG47440a                       ', &
-     'RRG47440b                       ','RRG47441                        ','RRG47442                        ', &
-     'RRG47443a                       ','RRG47443b                       ','RRG47443c                       ', &
-     'RRG47444                        ','RRG47445                        ','RRG47446                        ', &
-     'RRG47447                        ','RRG47448                        ','RRG47449                        ', &
-     'RRG47450                        ','RRG47451                        ','RRG47452                        ', &
-     'RRG47453                        ','RRG47454                        ','RRG47455                        ', &
-     'RRG47456                        ','RRG47457                        ','RRG47458                        ', &
-     'RRG47459                        ','RRG47460                        ','RRG47461                        ', &
-     'RRG47462                        ','RRG47463                        ','RRG47464                        ', &
-     'RRG47465                        ','RRG47466                        ','RRG47467                        ', &
-     'RRG47468                        ','RRG47469                        ','RRG47470                        ', &
-     'RRG47471                        ','RRG47472                        ','RRG47473                        ', &
-     'RRG47474                        ','RRG47475                        ','RRG47476                        ', &
-     'RRG47477                        ','RRG47478                        ','RRG47479                        ', &
-     'RRG47480                        ','RRG47481                        ','RRG47482a                       ', &
-     'RRG47482b                       ','RRG47483                        ','RRG47484                        ', &
-     'RRG47485                        ','RRG47486a                       ','RRG47486b                       ', &
-     'RRG47487                        ','RRG47488                        ','RRG47489                        ', &
-     'RRG47490                        ','RRG47491                        ','RRG47492                        ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_15 = (/ &
-     'RRG47493                        ','RRG47494                        ','RRG47495                        ', &
-     'RRG47496                        ','RRG47497a                       ','RRG47497b                       ', &
-     'RRG47498                        ','RRG47499                        ','RRG47500                        ', &
-     'RRG47501a                       ','RRG47501b                       ','RRG47502                        ', &
-     'RRG47503                        ','RRG47504                        ','RRG47505                        ', &
-     'RRG47506                        ','RRG47507                        ','RRG47508                        ', &
-     'RRG47509a                       ','RRG47509b                       ','RRG47510                        ', &
-     'RRG47511                        ','RRG47512                        ','RRG47513a                       ', &
-     'RRG47513b                       ','RRG47514                        ','RRG47515                        ', &
-     'RRG47516                        ','RRG47517                        ','RRG47518                        ', &
-     'RRG47519                        ','RRG47520                        ','RRG47521a                       ', &
-     'RRG47521b                       ','RRG47522                        ','RRG47523                        ', &
-     'RRG47524                        ','RRG47525                        ','RRG47526                        ', &
-     'RRG47527                        ','RRG47528                        ','RRG47529                        ', &
-     'RRG47530                        ','RRG48200                        ','RRG48201                        ', &
-     'RRG48202                        ','RRG48203                        ','RRG48204                        ', &
-     'RRG48205                        ','RRG48206                        ','RRG48207                        ', &
-     'RRG48208                        ','RRG48209                        ','RRG48210                        ', &
-     'RRG48211                        ','RRG48212                        ','RRG48213                        ', &
-     'RRG48214                        ','RRG48215                        ','RRG48216                        ', &
-     'RRG48217                        ','RRG48218                        ','RRG48219                        ', &
-     'RRG48220                        ','RRG48221a                       ','RRG48221b                       ', &
-     'RRG48221c                       ','RRG48222                        ','RRG48223                        ', &
-     'RRG48224                        ','RRG48225                        ','RRG48226                        ', &
-     'RRG48227                        ','RRG48228                        ','RRG48229                        ', &
-     'RRG48230                        ','RRG48231                        ','RRG48232                        ', &
-     'RRG48233a                       ','RRG48233b                       ','RRG48234                        ', &
-     'RRG48235                        ','RRG48236                        ','RRG48237                        ', &
-     'RRG48238                        ','RRG48239a                       ','RRG48239b                       ', &
-     'RRG48240                        ','RRG48241                        ','RRG48242                        ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_16 = (/ &
-     'RRG48243                        ','RRG48244                        ','RRG48245a                       ', &
-     'RRG48245b                       ','RRG48246                        ','RRG48247                        ', &
-     'RRG48248                        ','RRG48249                        ','RRG48400a                       ', &
-     'RRG48400b                       ','RRG48400c                       ','RRG48400d                       ', &
-     'RRG48401                        ','RRG48402                        ','RRG48403                        ', &
-     'RRG48404                        ','RRG48405                        ','RRG48406                        ', &
-     'RRG48407                        ','RRG48408                        ','RRG48409                        ', &
-     'RRG48410                        ','RRG48411                        ','RRG48412a                       ', &
-     'RRG48412b                       ','RRG48413                        ','RRG48414                        ', &
-     'RRG48415                        ','RRG48416                        ','RRG49200                        ', &
-     'RRG49201                        ','RRG49202a                       ','RRG49202b                       ', &
-     'RRG49203                        ','RRG49204a                       ','RRG49205b                       ', &
-     'RRG49206                        ','RRG49207                        ','RRG49208a                       ', &
-     'RRG49208b                       ','RRG49209                        ','RRG49210                        ', &
-     'RRG49211a                       ','RRG49211b                       ','RRG49212                        ', &
-     'RRG49213                        ','RRG49214                        ','RRG49215                        ', &
-     'RRG49216                        ','RRG49217                        ','RRG49218                        ', &
-     'RRG49219a                       ','RRG49219b                       ','RRG49220                        ', &
-     'RRG49221                        ','RRG49222                        ','RRG49223a                       ', &
-     'RRG49223b                       ','RRG49224a                       ','RRG49224b                       ', &
-     'RRG49224c                       ','RRG49225                        ','RRG49226                        ', &
-     'RRG49227                        ','RRG49228                        ','RRG49229                        ', &
-     'RRG49230                        ','RRG49231a                       ','RRG49231b                       ', &
-     'RRG49232a                       ','RRG49232b                       ','RRG49232c                       ', &
-     'RRG49233                        ','RRG49234                        ','RRG49235                        ', &
-     'RRG49236                        ','RRG49237a                       ','RRG49237b                       ', &
-     'RRG49238                        ','RRG49239                        ','RRG49240                        ', &
-     'RRG49241                        ','RRG49242                        ','RRG49243                        ', &
-     'RRG49244                        ','RRG49245                        ','RRG49246                        ', &
-     'RRG49247                        ','RRG49248                        ','RRG49249                        ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_17 = (/ &
-     'RRG49250                        ','RRG49251                        ','RRG49400a                       ', &
-     'RRG49400b                       ','RRG49400c                       ','RRG49400d                       ', &
-     'RRG49401                        ','RRG40200                        ','RRG40201a                       ', &
-     'RRG40201b                       ','RRG40202a                       ','RRG40202b                       ', &
-     'RRG40203                        ','RRG40204                        ','RRG40205                        ', &
-     'RRG40206                        ','RRG40207                        ','RRG40208                        ', &
-     'RRG40209                        ','RRG40210                        ','RRG40211                        ', &
-     'RRG40212                        ','RRG40213a                       ','RRG40213b                       ', &
-     'RRG40214a                       ','RRG40214b                       ','RRG40214c                       ', &
-     'RRG40215                        ','RRG40216                        ','RRG40217                        ', &
-     'RRG40218                        ','RRG40219                        ','RRG40220                        ', &
-     'RRG40221                        ','RRG40222                        ','RRG40223a                       ', &
-     'RRG40223b                       ','RRG40224                        ','RRG40225                        ', &
-     'RRG40226                        ','RRG40227                        ','RRG40228a                       ', &
-     'RRG40228b                       ','RRG40229                        ','RRG40230                        ', &
-     'RRG40231                        ','RRG40232                        ','RRG40233                        ', &
-     'RRG40234                        ','RRG40235                        ','RRG40236                        ', &
-     'RRG40237a                       ','RRG40237b                       ','RRG40238                        ', &
-     'RRG40239                        ','RRG40240                        ','RRG40241                        ', &
-     'RRG40242                        ','RRG40243a                       ','RRG40243b                       ', &
-     'RRG40244                        ','RRG40245                        ','RRG40246                        ', &
-     'RRG40247                        ','RRG40248                        ','RRG40249                        ', &
-     'RRG40250                        ','RRG40251                        ','RRG40252a                       ', &
-     'RRG40252b                       ','RRG40253a                       ','RRG40253b                       ', &
-     'RRG40254a                       ','RRG40254b                       ','RRG40255                        ', &
-     'RRG40256                        ','RRG40257                        ','RRG40258a                       ', &
-     'RRG40258b                       ','RRG40259                        ','RRG40260                        ', &
-     'RRG40261a                       ','RRG40261b                       ','RRG40262                        ', &
-     'RRG40263                        ','RRG40264a                       ','RRG40264b                       ', &
-     'RRG40265                        ','RRG40266                        ','RRG40267a                       ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_18 = (/ &
-     'RRG40267b                       ','RRG40267c                       ','RRG40267d                       ', &
-     'RRG40268                        ','RRG40269                        ','RRG40270                        ', &
-     'RRG40271                        ','RRG40272a                       ','RRG40272b                       ', &
-     'RRG40273                        ','RRG40274                        ','RRG40275                        ', &
-     'RRG40276                        ','RRG40277                        ','RRG40278                        ', &
-     'RRG40279a                       ','RRG40279b                       ','RRG40279c                       ', &
-     'RRG40280a                       ','RRG40280b                       ','RRG40280c                       ', &
-     'RRG40280d                       ','RRG40280e                       ','RRG40281                        ', &
-     'RRG40282a                       ','RRG40282b                       ','RRG40283a                       ', &
-     'RRG40283b                       ','RRG40283c                       ','RRG40283d                       ', &
-     'RRG40284                        ','RRG40285a                       ','RRG40285b                       ', &
-     'RRG40286a                       ','RRG40286b                       ','RRG40286c                       ', &
-     'RRG40286d                       ','RRG40287                        ','RRG40400                        ', &
-     'RRG40401                        ','RRG6100                         ','RRG6102a                        ', &
-     'RRG6102b                        ','RRG6102c                        ','RRG6102d                        ', &
-     'RRG6103                         ','RRG69MS                         ','RRG699MS                        ', &
-     'RRG6202                         ','RRG6204                         ','RRG6205                         ', &
-     'RRG67MS                         ','RRG6300                         ','RRG6301                         ', &
-     'RRG6302                         ','RRG6304                         ','RRG63MS                         ', &
-     'RRG64MS                         ','RRG65MS                         ','RRG66MS                         ', &
-     'RRG68MS                         ','RRG688MS                        ','RRG6400                         ', &
-     'RRG6400MS                       ','RRG6401MS                       ','RRG6402MS                       ', &
-     'RRG6403MS                       ','RRG6404MS                       ','RRG6401                         ', &
-     'RRG6402                         ','RRG6403                         ','RRG6408                         ', &
-     'RRG6409                         ','RRG6410                         ','RRG6411                         ', &
-     'RRG6412                         ','RRG6413                         ','RRG6414                         ', &
-     'RRG6415                         ','RRG6416                         ','RRG641MS                        ', &
-     'RRG642MS                        ','RRG692MS                        ','RRG643DT                        ', &
-     'RRG644DT                        ','RRG645DT                        ','RRG646DT                        ', &
-     'RRG647DT                        ','RRG648DT                        ','RRG649DT                        ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_19 = (/ &
-     'RRG650DT                        ','RRG651DT                        ','RRG652DT                        ', &
-     'RRG653DT                        ','RRG654DT                        ','RRG655MS                        ', &
-     'RRG7100                         ','RRG7102a                        ','RRG7102b                        ', &
-     'RRG7200                         ','RRG7201                         ','RRG7202                         ', &
-     'RRG7204                         ','RRG7300                         ','RRG7301                         ', &
-     'RRG7302                         ','RRG7303                         ','RRG7400                         ', &
-     'RRG7401                         ','RRG7402                         ','RRG7403                         ', &
-     'RRG7404                         ','RRG7405                         ','RRG7406                         ', &
-     'RRG7407                         ','RRG7408                         ','RRG7600                         ', &
-     'RRG7601                         ','RRG7602                         ','RRG7603a                        ', &
-     'RRG7603b                        ','RRG7603c                        ','RRG7604                         ', &
-     'RRG7605                         ','RRG7606                         ','RRG7607                         ', &
-     'RRG9200                         ','RRG9400a                        ','RRG9400b                        ', &
-     'RRG9401                         ','RRG9402                         ','RRG9403                         ', &
-     'RRG9404                         ','RRG9405                         ','RRG9408                         ', &
-     'RRG9409                         ','RRG9410                         ','RRG9411                         ', &
-     'RRG9412                         ','RRG9600                         ','RRG9700                         ', &
-     'RRG9701                         ','RRJ1000a                        ','RRJ1001a                        ', &
-     'RRJ1001b                        ','RRJ2101                         ','RRJ3101                         ', &
-     'RRJ3103a                        ','RRJ3103b                        ','RRJ3104                         ', &
-     'RRJ3200                         ','RRJ3201                         ','RRJ3202                         ', &
-     'RRJ41000                        ','RRJ41001a                       ','RRJ41001b                       ', &
-     'RRJ41004                        ','RRJ41005                        ','RRJ41006                        ', &
-     'RRJ41007                        ','RRJ41008                        ','RRJ41009                        ', &
-     'RRJ41010                        ','RRJ42000                        ','RRJ42001a                       ', &
-     'RRJ42001b                       ','RRJ42002                        ','RRJ42004                        ', &
-     'RRJ42005a                       ','RRJ42005b                       ','RRJ42005c                       ', &
-     'RRJ42006                        ','RRJ42007                        ','RRJ42008                        ', &
-     'RRJ42009                        ','RRJ42010                        ','RRJ42011                        ', &
-     'RRJ42012                        ','RRJ42013                        ','RRJ42014                        ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_20 = (/ &
-     'RRJ42015                        ','RRJ42016                        ','RRJ42017                        ', &
-     'RRJ42018                        ','RRJ42019                        ','RRJ42020                        ', &
-     'RRJ42021                        ','RRJ42022                        ','RRJ43000                        ', &
-     'RRJ43001                        ','RRJ43002                        ','RRJ43003                        ', &
-     'RRJ43004                        ','RRJ43005                        ','RRJ43006                        ', &
-     'RRJ43007                        ','RRJ43009                        ','RRJ43010                        ', &
-     'RRJ43011                        ','RRJ43012                        ','RRJ43013                        ', &
-     'RRJ43014                        ','RRJ43015                        ','RRJ43016                        ', &
-     'RRJ43017                        ','RRJ43018                        ','RRJ43019                        ', &
-     'RRJ43020                        ','RRJ43021                        ','RRJ43022                        ', &
-     'RRJ43023                        ','RRJ43024                        ','RRJ43025a                       ', &
-     'RRJ43025b                       ','RRJ43026                        ','RRJ43027                        ', &
-     'RRJ43028a                       ','RRJ43028b                       ','RRJ43200                        ', &
-     'RRJ43400                        ','RRJ43401                        ','RRJ43402                        ', &
-     'RRJ44000a                       ','RRJ44000b                       ','RRJ44001                        ', &
-     'RRJ44002                        ','RRJ44003                        ','RRJ44004                        ', &
-     'RRJ44005a                       ','RRJ44005b                       ','RRJ44006                        ', &
-     'RRJ44007a                       ','RRJ44007b                       ','RRJ44008                        ', &
-     'RRJ44009                        ','RRJ44010                        ','RRJ44011                        ', &
-     'RRJ44012                        ','RRJ44013                        ','RRJ44014                        ', &
-     'RRJ44015                        ','RRJ44016                        ','RRJ44017a                       ', &
-     'RRJ44017b                       ','RRJ44018a                       ','RRJ44018b                       ', &
-     'RRJ44019                        ','RRJ44020a                       ','RRJ44020b                       ', &
-     'RRJ44021                        ','RRJ44022                        ','RRJ44023a                       ', &
-     'RRJ44023b                       ','RRJ44024                        ','RRJ44025                        ', &
-     'RRJ44026                        ','RRJ44027                        ','RRJ44028                        ', &
-     'RRJ44029                        ','RRJ44030                        ','RRJ44031                        ', &
-     'RRJ44032                        ','RRJ44033                        ','RRJ44034                        ', &
-     'RRJ44035                        ','RRJ44036                        ','RRJ44037a                       ', &
-     'RRJ44037b                       ','RRJ44038                        ','RRJ44039                        ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_21 = (/ &
-     'RRJ44040                        ','RRJ44041                        ','RRJ44042                        ', &
-     'RRJ44043                        ','RRJ44044                        ','RRJ44045a                       ', &
-     'RRJ44045b                       ','RRJ44046a                       ','RRJ44046b                       ', &
-     'RRJ44200                        ','RRJ44201                        ','RRJ44400a                       ', &
-     'RRJ44400b                       ','RRJ44401                        ','RRJ44402                        ', &
-     'RRJ44403                        ','RRJ44404a                       ','RRJ44404b                       ', &
-     'RRJ44405                        ','RRJ44406                        ','RRJ44407                        ', &
-     'RRJ44408                        ','RRJ44409                        ','RRJ44410                        ', &
-     'RRJ44411                        ','RRJ44412                        ','RRJ44414                        ', &
-     'RRJ45002                        ','RRJ45003                        ','RRJ45004                        ', &
-     'RRJ45005                        ','RRJ45006                        ','RRJ45007                        ', &
-     'RRJ45008                        ','RRJ45009                        ','RRJ45010                        ', &
-     'RRJ45011                        ','RRJ45012                        ','RRJ45013                        ', &
-     'RRJ45014                        ','RRJ45015                        ','RRJ45016                        ', &
-     'RRJ45017                        ','RRJ45018a                       ','RRJ45018b                       ', &
-     'RRJ45019                        ','RRJ45020                        ','RRJ45021                        ', &
-     'RRJ45022                        ','RRJ45023                        ','RRJ45024                        ', &
-     'RRJ45025                        ','RRJ45026a                       ','RRJ45026b                       ', &
-     'RRJ45026c                       ','RRJ45026d                       ','RRJ45027                        ', &
-     'RRJ45028a                       ','RRJ45028b                       ','RRJ45029                        ', &
-     'RRJ45030                        ','RRJ45031a                       ','RRJ45031b                       ', &
-     'RRJ45032                        ','RRJ45033                        ','RRJ45034                        ', &
-     'RRJ45200a                       ','RRJ45200b                       ','RRJ45201                        ', &
-     'RRJ45202                        ','RRJ45203a                       ','RRJ45203b                       ', &
-     'RRJ45204                        ','RRJ45400                        ','RRJ45401                        ', &
-     'RRJ45402                        ','RRJ45406                        ','RRJ45407                        ', &
-     'RRJ45408                        ','RRJ45409                        ','RRJ45410                        ', &
-     'RRJ45411                        ','RRJ45412                        ','RRJ45414                        ', &
-     'RRJ45415                        ','RRJ45417                        ','RRJ45418                        ', &
-     'RRJ46200                        ','RRJ46201                        ','RRJ46202                        ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_22 = (/ &
-     'RRJ46203                        ','RRJ46400                        ','RRJ46401                        ', &
-     'RRJ46402                        ','RRJ46403                        ','RRJ46404                        ', &
-     'RRJ46405                        ','RRJ46406                        ','RRJ46407                        ', &
-     'RRJ46408                        ','RRJ46409                        ','RRJ46410                        ', &
-     'RRJ46411                        ','RRJ46412                        ','RRJ46413                        ', &
-     'RRJ46414                        ','RRJ46415                        ','RRJ46416                        ', &
-     'RRJ46417                        ','RRJ46418                        ','RRJ46419                        ', &
-     'RRJ46420                        ','RRJ46421                        ','RRJ46422                        ', &
-     'RRJ46423                        ','RRJ46424                        ','RRJ46425                        ', &
-     'RRJ46427                        ','RRJ46428                        ','RRJ46429                        ', &
-     'RRJ47200                        ','RRJ47201                        ','RRJ47202                        ', &
-     'RRJ47203                        ','RRJ47204                        ','RRJ47400                        ', &
-     'RRJ47401                        ','RRJ47402                        ','RRJ47403                        ', &
-     'RRJ47404                        ','RRJ47405                        ','RRJ47406                        ', &
-     'RRJ47407                        ','RRJ47408a                       ','RRJ47408b                       ', &
-     'RRJ47409                        ','RRJ47410                        ','RRJ47411                        ', &
-     'RRJ47412                        ','RRJ47413                        ','RRJ47414                        ', &
-     'RRJ47415                        ','RRJ47416                        ','RRJ47417                        ', &
-     'RRJ47418                        ','RRJ47419                        ','RRJ47420                        ', &
-     'RRJ47421                        ','RRJ47422                        ','RRJ47423                        ', &
-     'RRJ47424                        ','RRJ47425                        ','RRJ47426                        ', &
-     'RRJ47427                        ','RRJ47428                        ','RRJ47429                        ', &
-     'RRJ47430                        ','RRJ48200                        ','RRJ48201                        ', &
-     'RRJ48202                        ','RRJ48203                        ','RRJ48204                        ', &
-     'RRJ48205                        ','RRJ48206                        ','RRJ48207                        ', &
-     'RRJ48208                        ','RRJ48209                        ','RRJ48210                        ', &
-     'RRJ48211                        ','RRJ48400                        ','RRJ49200                        ', &
-     'RRJ49201                        ','RRJ49202                        ','RRJ49203a                       ', &
-     'RRJ49203b                       ','RRJ49204                        ','RRJ49205                        ', &
-     'RRJ49206                        ','RRJ49207                        ','RRJ49208                        ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_23 = (/ &
-     'RRJ40200                        ','RRJ40201                        ','RRJ40202                        ', &
-     'RRJ40203a                       ','RRJ40203b                       ','RRJ40204                        ', &
-     'RRJ40205                        ','RRJ40206                        ','RRJ40207                        ', &
-     'RRJ40208                        ','RRJ40209                        ','RRJ40210                        ', &
-     'RRJ40211                        ','RRJ40212                        ','RRJ40213                        ', &
-     'RRJ40214                        ','RRJ40215                        ','RRJ6000                         ', &
-     'RRJ6100                         ','RRJ6101                         ','RRJ61MS                         ', &
-     'RRJ62MS                         ','RRJ63MS                         ','RRJ6201                         ', &
-     'RRJ6300                         ','RRJ6301a                        ','RRJ6301b                        ', &
-     'RRJ64MS                         ','RRJ65MS                         ','RRJ7000                         ', &
-     'RRJ7100                         ','RRJ7200                         ','RRJ7300                         ', &
-     'RRJ7301                         ','RRJ7401                         ','RRJ7402                         ', &
-     'RRJ7600                         ','RRJ7602                         ','RRJ7603                         ', &
-     'RRJ7604                         ','RRA10000_a01                    ','RRA21000_a01                    ', &
-     'RRA21001_a01                    ','RRA21002_a01                    ','RRA21003_a01                    ', &
-     'RRA21004_a01                    ','RRA21005_a01                    ','RRA21006_a01                    ', &
-     'RRA21007_a01                    ','RRA21008_a01                    ','RRA21009_a01                    ', &
-     'RRA21010_a01                    ','RRA21011_a01                    ','RRA31000_a01                    ', &
-     'RRA31001_a01                    ','RRA31002_a01                    ','RRA310MS_a01                    ', &
-     'RRA311MS_a01                    ','RRA32000_a01                    ','RRA32001_a01                    ', &
-     'RRA32002_a01                    ','RRA32003_a01                    ','RRA32004_a01                    ', &
-     'RRA320MS_a01                    ','RRA321MS_a01                    ','RRA41000_a01                    ', &
-     'RRA41001_a01                    ','RRA41002_a01                    ','RRA41003_a01                    ', &
-     'RRA41004_a01                    ','RRA41005_a01                    ','RRA41006_a01                    ', &
-     'RRA41007_a01                    ','RRA41008_a01                    ','RRA41009_a01                    ', &
-     'RRA41010_a01                    ','RRA41011_a01                    ','RRA41012a_a01                   ', &
-     'RRA41012b_a01                   ','RRA41013a_a01                   ','RRA41013b_a01                   ', &
-     'RRA41014_a01                    ','RRA41015_a01                    ','RRA41016a_a01                   ', &
-     'RRA41016b_a01                   ','RRA41017a_a01                   ','RRA41017b_a01                   ', &
-     'RRA41018a_a01                   ','RRA41018b_a01                   ','RRA41019a_a01                   ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_24 = (/ &
-     'RRA41019b_a01                   ','RRA41020a_a01                   ','RRA41020b_a01                   ', &
-     'RRA41021_a01                    ','RRA41022_a01                    ','RRA41023_a01                    ', &
-     'RRA41024_a01                    ','RRA41025_a01                    ','RRA41026a_a01                   ', &
-     'RRA41026b_a01                   ','RRA41027_a01                    ','RRA41028_a01                    ', &
-     'RRA41029_a01                    ','RRA41030_a01                    ','RRA41030DT_a01                  ', &
-     'RRA41030MS_a01                  ','RRA42000a_a01                   ','RRA42000b_a01                   ', &
-     'RRA42001a_a01                   ','RRA42001b_a01                   ','RRA42002a_a01                   ', &
-     'RRA42002b_a01                   ','RRA42002c_a01                   ','RRA42003_a01                    ', &
-     'RRA42004_a01                    ','RRA42005_a01                    ','RRA42006_a01                    ', &
-     'RRA42007_a01                    ','RRA42008_a01                    ','RRA42009_a01                    ', &
-     'RRA42010_a01                    ','RRA42011_a01                    ','RRA42012_a01                    ', &
-     'RRA42013_a01                    ','RRA42014_a01                    ','RRA42015a_a01                   ', &
-     'RRA42015b_a01                   ','RRA42016a_a01                   ','RRA42016b_a01                   ', &
-     'RRA42017_a01                    ','RRA42018_a01                    ','RRA42019_a01                    ', &
-     'RRA42020_a01                    ','RRA42021a_a01                   ','RRA42021b_a01                   ', &
-     'RRA42021c_a01                   ','RRA42022a_a01                   ','RRA42022b_a01                   ', &
-     'RRA42022c_a01                   ','RRA42023a_a01                   ','RRA42023b_a01                   ', &
-     'RRA42024a_a01                   ','RRA42024b_a01                   ','RRA42025_a01                    ', &
-     'RRA42026_a01                    ','RRA42027_a01                    ','RRA42028_a01                    ', &
-     'RRA42029_a01                    ','RRA42030DT_a01                  ','RRA42030a_a01                   ', &
-     'RRA42030b_a01                   ','RRA42031a_a01                   ','RRA42031b_a01                   ', &
-     'RRA42032_a01                    ','RRA42033_a01                    ','RRA42034_a01                    ', &
-     'RRA42035_a01                    ','RRA42036a_a01                   ','RRA42036b_a01                   ', &
-     'RRA42036c_a01                   ','RRA42036d_a01                   ','RRA42037_a01                    ', &
-     'RRA42038_a01                    ','RRA42039a_a01                   ','RRA42039b_a01                   ', &
-     'RRA42039c_a01                   ','RRA42039d_a01                   ','RRA42040_a01                    ', &
-     'RRA42141_a01                    ','RRA42142_a01                    ','RRA42143_a01                    ', &
-     'RRA42144a_a01                   ','RRA42144b_a01                   ','RRA42145a_a01                   ', &
-     'RRA42145b_a01                   ','RRA42146a_a01                   ','RRA42146b_a01                   ', &
-     'RRA42147a_a01                   ','RRA42147b_a01                   ','RRA42148_a01                    ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_25 = (/ &
-     'RRA42149_a01                    ','RRA42150a_a01                   ','RRA42150b_a01                   ', &
-     'RRA42151a_a01                   ','RRA42151b_a01                   ','RRA42152_a01                    ', &
-     'RRA42153a_a01                   ','RRA42153b_a01                   ','RRA42153c_a01                   ', &
-     'RRA42154a_a01                   ','RRA42154b_a01                   ','RRA42155_a01                    ', &
-     'RRA42156a_a01                   ','RRA42156b_a01                   ','RRA42157a_a01                   ', &
-     'RRA42157b_a01                   ','RRA42158a_a01                   ','RRA42158b_a01                   ', &
-     'RRA42159a_a01                   ','RRA42159b_a01                   ','RRA42160_a01                    ', &
-     'RRA42161_a01                    ','RRA42162_a01                    ','RRA42163a_a01                   ', &
-     'RRA42163b_a01                   ','RRA42164a_a01                   ','RRA42164b_a01                   ', &
-     'RRA42165a_a01                   ','RRA42165b_a01                   ','RRA42165c_a01                   ', &
-     'RRA42166a_a01                   ','RRA42166b_a01                   ','RRA42166c_a01                   ', &
-     'RRA42167_a01                    ','RRA42168_a01                    ','RRA42169_a01                    ', &
-     'RRA42470_a01                    ','RRA42471_a01                    ','RRA42472_a01                    ', &
-     'RRA42473_a01                    ','RRA43000a_a01                   ','RRA43000b_a01                   ', &
-     'RRA43001_a01                    ','RRA43002_a01                    ','RRA43003_a01                    ', &
-     'RRA43004_a01                    ','RRA43005_a01                    ','RRA43006_a01                    ', &
-     'RRA43007_a01                    ','RRA43008a_a01                   ','RRA43008b_a01                   ', &
-     'RRA43009c_a01                   ','RRA43009d_a01                   ','RRA43010a_a01                   ', &
-     'RRA43010b_a01                   ','RRA43011_a01                    ','RRA43012_a01                    ', &
-     'RRA43013_a01                    ','RRA43014_a01                    ','RRA43015a_a01                   ', &
-     'RRA43015b_a01                   ','RRA43016_a01                    ','RRA43017_a01                    ', &
-     'RRA43018_a01                    ','RRA43019a_a01                   ','RRA43019b_a01                   ', &
-     'RRA43020_a01                    ','RRA43021_a01                    ','RRA43022_a01                    ', &
-     'RRA43023_a01                    ','RRA43024_a01                    ','RRA43025_a01                    ', &
-     'RRA44000_a01                    ','RRA44001_a01                    ','RRA44002_a01                    ', &
-     'RRA44003_a01                    ','RRA44004_a01                    ','RRA44005_a01                    ', &
-     'RRA44006_a01                    ','RRA44007_a01                    ','RRA44008_a01                    ', &
-     'RRA44009_a01                    ','RRA44010_a01                    ','RRA44011_a01                    ', &
-     'RRA44012_a01                    ','RRA46000_a01                    ','RRA46001_a01                    ', &
-     'RRA46002_a01                    ','RRA46003_a01                    ','RRA46004_a01                    ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_26 = (/ &
-     'RRA46005_a01                    ','RRA460MS_a01                    ','RRA60000_a01                    ', &
-     'RRA60001_a01                    ','RRA61000_a01                    ','RRA61001_a01                    ', &
-     'RRA61002_a01                    ','RRA62000_a01                    ','RRA62001_a01                    ', &
-     'RRA62002_a01                    ','RRA62003_a01                    ','RRA62004_a01                    ', &
-     'RRA62005_a01                    ','RRA62006_a01                    ','RRA62007_a01                    ', &
-     'RRA62008_a01                    ','RRA62009_a01                    ','RRA62010_a01                    ', &
-     'RRA620MS_a01                    ','RRA621MS_a01                    ','RRA622MS_a01                    ', &
-     'RRA63000_a01                    ','RRA63001_a01                    ','RRA63002_a01                    ', &
-     'RRA630MS_a01                    ','RRA631MS_a01                    ','RRA632MS_a01                    ', &
-     'RRA64000_a01                    ','RRA70000_a01                    ','RRA71000_a01                    ', &
-     'RRA71001_a01                    ','RRA71002_a01                    ','RRA72000_a01                    ', &
-     'RRA72001_a01                    ','RRA72002_a01                    ','RRA72003_a01                    ', &
-     'RRA72004_a01                    ','RRA72005_a01                    ','RRA72006_a01                    ', &
-     'RRA72007_a01                    ','RRA72008_a01                    ','RRA72009a_a01                   ', &
-     'RRA72009b_a01                   ','RRA72010_a01                    ','RRA73000_a01                    ', &
-     'RRA73001_a01                    ','RRA74000_a01                    ','RRA76001_a01                    ', &
-     'RRA76002_a01                    ','RRA76003_a01                    ','RRA76004_a01                    ', &
-     'RRA91000_a01                    ','RRA91001_a01                    ','RRA91002_a01                    ', &
-     'RRA91003_a01                    ','RRA91004_a01                    ','RRA91005_a01                    ', &
-     'RRA91006_a01                    ','RRA92000_a01                    ','RRA92001_a01                    ', &
-     'RRA92002_a01                    ','RRA92003_a01                    ','RRA92004_a01                    ', &
-     'RRA92005_a01                    ','RRA92006_a01                    ','RRA92007_a01                    ', &
-     'RRA92008_a01                    ','RRA92009_a01                    ','RRA92010_a01                    ', &
-     'RRA92011_a01                    ','RRA92012_a01                    ','RRA93001_a01                    ', &
-     'RRA93002_a01                    ','RRA93004_a01                    ','RRA93005_a01                    ', &
-     'RRA930MS_a01                    ','RRA94100_a01                    ','RRA94101_a01                    ', &
-     'RRA94102_a01                    ','RRA94103_a01                    ','RRA94104_a01                    ', &
-     'RRA94105_a01                    ','RRA94106_a01                    ','RRA94107_a01                    ', &
-     'RRA94108a_a01                   ','RRA94108b_a01                   ','RRA94109_a01                    ', &
-     'RRA94110_a01                    ','RRA94111_a01                    ','RRA94200_a01                    ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_27 = (/ &
-     'RRA94201_a01                    ','RRA94202a_a01                   ','RRA94202b_a01                   ', &
-     'RRA94203a_a01                   ','RRA94203b_a01                   ','RRA94204_a01                    ', &
-     'RRA94205_a01                    ','RRA94206_a01                    ','RRA96000_a01                    ', &
-     'RRA96001_a01                    ','RRA96002_a01                    ','RRA96003_a01                    ', &
-     'RRA96004_a01                    ','RRA96005_a01                    ','RRA96006_a01                    ', &
-     'RRA97000_a01                    ','RRA97001_a01                    ','RRA97002_a01                    ', &
-     'RRA97003_a01                    ','RRA97004_a01                    ','RRA97005_a01                    ', &
-     'RRA97006_a01                    ','RRA111001_a01                   ','RRA111002_a01                   ', &
-     'RRA111003_a01                   ','RRA112001a_a01                  ','RRA112001b_a01                  ', &
-     'RRA112002a_a01                  ','RRA112002b_a01                  ','RRA112003_a01                   ', &
-     'RRA112004_a01                   ','RRA112006_a01                   ','RRA112008a_a01                  ', &
-     'RRA112008b_a01                  ','RRA112009_a01                   ','RRA112010_a01                   ', &
-     'RRA112011_a01                   ','RRA112012_a01                   ','RRA112013_a01                   ', &
-     'RRA112014_a01                   ','RRA112015_a01                   ','RRA112016_a01                   ', &
-     'RRA112017_a01                   ','RRA112018_a01                   ','RRA113001_a01                   ', &
-     'RRA113002_a01                   ','RRA116001_a01                   ','RRA116002a_a01                  ', &
-     'RRA116002b_a01                  ','RRA116003a_a01                  ','RRA116003b_a01                  ', &
-     'RRA116004a_a01                  ','RRA116004b_a01                  ','RRA116004c_a01                  ', &
-     'RRA116004d_a01                  ','RRA116005_a01                   ','RRA117001_a01                   ', &
-     'RRA119001_a01                   ','RRA119002_a01                   ','RRA119003_a01                   ', &
-     'RRA119004_a01                   ','RRA119005_a01                   ','RRA119006_a01                   ', &
-     'RRA119007_a01                   ','RRA119008_a01                   ','RRH10000f_a01                   ', &
-     'RRH10000b_a01                   ','RRH10001f_a01                   ','RRH10001b_a01                   ', &
-     'RRH21000f_a01                   ','RRH21000b_a01                   ','RRH21001f_a01                   ', &
-     'RRH21001b_a01                   ','RRH21002f_a01                   ','RRH21002b_a01                   ', &
-     'RRH31000f_a01                   ','RRH31000b_a01                   ','RRH31001f_a01                   ', &
-     'RRH31001b_a01                   ','RRH31002f_a01                   ','RRH31002b_a01                   ', &
-     'RRH32000f_a01                   ','RRH32000b_a01                   ','RRH32002f_a01                   ', &
-     'RRH32002b_a01                   ','RRH32003f_a01                   ','RRH32003b_a01                   ', &
-     'RRH32004f_a01                   ','RRH32004b_a01                   ','RRH320MSf_a01                   ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_28 = (/ &
-     'RRH320MSb_a01                   ','RRH41000f_a01                   ','RRH41000b_a01                   ', &
-     'RRH41001f_a01                   ','RRH41001b_a01                   ','RRH41002f_a01                   ', &
-     'RRH41002b_a01                   ','RRH41003f_a01                   ','RRH41003b_a01                   ', &
-     'RRH41004f_a01                   ','RRH41004b_a01                   ','RRH41005f_a01                   ', &
-     'RRH41005b_a01                   ','RRH41006f_a01                   ','RRH41006b_a01                   ', &
-     'RRH41007f_a01                   ','RRH41007b_a01                   ','RRH41008f_a01                   ', &
-     'RRH41008b_a01                   ','RRH41009MSf_a01                 ','RRH41010MSb_a01                 ', &
-     'RRH42000f_a01                   ','RRH42000b_a01                   ','RRH42001f_a01                   ', &
-     'RRH42001b_a01                   ','RRH42002f_a01                   ','RRH42002b_a01                   ', &
-     'RRH42003f_a01                   ','RRH42003b_a01                   ','RRH42004f_a01                   ', &
-     'RRH42004b_a01                   ','RRH42006f_a01                   ','RRH42006b_a01                   ', &
-     'RRH42007f_a01                   ','RRH42007b_a01                   ','RRH42008f_a01                   ', &
-     'RRH42008b_a01                   ','RRH42009f_a01                   ','RRH42009b_a01                   ', &
-     'RRH42010f_a01                   ','RRH42010b_a01                   ','RRH42011f_a01                   ', &
-     'RRH42011b_a01                   ','RRH42012f_a01                   ','RRH42012b_a01                   ', &
-     'RRH42013f_a01                   ','RRH42013b_a01                   ','RRH42014f_a01                   ', &
-     'RRH42014b_a01                   ','RRH42015f_a01                   ','RRH42015b_a01                   ', &
-     'RRH42017f_a01                   ','RRH42017b_a01                   ','RRH42018f_a01                   ', &
-     'RRH42018b_a01                   ','RRH42019f_a01                   ','RRH42019b_a01                   ', &
-     'RRH42020f_a01                   ','RRH42020b_a01                   ','RRH42021f_a01                   ', &
-     'RRH42021b_a01                   ','RRH42022f_a01                   ','RRH42022b_a01                   ', &
-     'RRH42023f_a01                   ','RRH42023b_a01                   ','RRH42024f_a01                   ', &
-     'RRH42024b_a01                   ','RRH42025f_a01                   ','RRH42025b_a01                   ', &
-     'RRH42026f_a01                   ','RRH42026b_a01                   ','RRH42027f_a01                   ', &
-     'RRH42027b_a01                   ','RRH42028f_a01                   ','RRH42028b_a01                   ', &
-     'RRH42029f_a01                   ','RRH42029b_a01                   ','RRH42030f_a01                   ', &
-     'RRH42030b_a01                   ','RRH42031f_a01                   ','RRH42031b_a01                   ', &
-     'RRH42032f_a01                   ','RRH42032b_a01                   ','RRH43000f_a01                   ', &
-     'RRH43000b_a01                   ','RRH43001f_a01                   ','RRH43001b_a01                   ', &
-     'RRH43002f_a01                   ','RRH43002b_a01                   ','RRH43003f_a01                   ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_29 = (/ &
-     'RRH43003b_a01                   ','RRH43005f_a01                   ','RRH43005b_a01                   ', &
-     'RRH43006f_a01                   ','RRH43006b_a01                   ','RRH43007f_a01                   ', &
-     'RRH43007b_a01                   ','RRH43008f_a01                   ','RRH43008b_a01                   ', &
-     'RRH43009f_a01                   ','RRH43009b_a01                   ','RRH43010f_a01                   ', &
-     'RRH43010b_a01                   ','RRH43011f_a01                   ','RRH43011b_a01                   ', &
-     'RRH43012f_a01                   ','RRH43012b_a01                   ','RRH43013f_a01                   ', &
-     'RRH43013b_a01                   ','RRH43014f_a01                   ','RRH43014b_a01                   ', &
-     'RRH43015f_a01                   ','RRH43015b_a01                   ','RRH43016f_a01                   ', &
-     'RRH43016b_a01                   ','RRH43017f_a01                   ','RRH43017b_a01                   ', &
-     'RRH43018f_a01                   ','RRH43018b_a01                   ','RRH43019f_a01                   ', &
-     'RRH43019b_a01                   ','RRH43020f_a01                   ','RRH43020b_a01                   ', &
-     'RRH43021f_a01                   ','RRH43021b_a01                   ','RRH43022f_a01                   ', &
-     'RRH43022b_a01                   ','RRH43023f_a01                   ','RRH43023b_a01                   ', &
-     'RRH43024f_a01                   ','RRH43024b_a01                   ','RRH43025f_a01                   ', &
-     'RRH43025b_a01                   ','RRH43026f_a01                   ','RRH43026b_a01                   ', &
-     'RRH43027f_a01                   ','RRH43027b_a01                   ','RRH43028f_a01                   ', &
-     'RRH43028b_a01                   ','RRH43029f_a01                   ','RRH43029b_a01                   ', &
-     'RRH43030f_a01                   ','RRH43030b_a01                   ','RRH43031f_a01                   ', &
-     'RRH43031b_a01                   ','RRH43032f_a01                   ','RRH43032b_a01                   ', &
-     'RRH44000f_a01                   ','RRH44000b_a01                   ','RRH44001f_a01                   ', &
-     'RRH44001b_a01                   ','RRH44002f_a01                   ','RRH44002b_a01                   ', &
-     'RRH44003f_a01                   ','RRH44003b_a01                   ','RRH44004f_a01                   ', &
-     'RRH44004b_a01                   ','RRH44005f_a01                   ','RRH44005b_a01                   ', &
-     'RRH44006f_a01                   ','RRH44006b_a01                   ','RRH44007f_a01                   ', &
-     'RRH44007b_a01                   ','RRH44008f_a01                   ','RRH44008b_a01                   ', &
-     'RRH44009f_a01                   ','RRH44009b_a01                   ','RRH44010f_a01                   ', &
-     'RRH44010b_a01                   ','RRH44011f_a01                   ','RRH44011b_a01                   ', &
-     'RRH44012f_a01                   ','RRH44012b_a01                   ','RRH44013f_a01                   ', &
-     'RRH44013b_a01                   ','RRH44014f_a01                   ','RRH44014b_a01                   ', &
-     'RRH44015f_a01                   ','RRH44015b_a01                   ','RRH44016f_a01                   ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_30 = (/ &
-     'RRH44016b_a01                   ','RRH44017f_a01                   ','RRH44017b_a01                   ', &
-     'RRH44018f_a01                   ','RRH44018b_a01                   ','RRH44019f_a01                   ', &
-     'RRH44019b_a01                   ','RRH44020f_a01                   ','RRH44020b_a01                   ', &
-     'RRH44021f_a01                   ','RRH44021b_a01                   ','RRH44022f_a01                   ', &
-     'RRH44022b_a01                   ','RRH44023f_a01                   ','RRH44023b_a01                   ', &
-     'RRH44024f_a01                   ','RRH44024b_a01                   ','RRH44025f_a01                   ', &
-     'RRH44025b_a01                   ','RRH44026f_a01                   ','RRH44026b_a01                   ', &
-     'RRH44027f_a01                   ','RRH44027b_a01                   ','RRH44028f_a01                   ', &
-     'RRH44028b_a01                   ','RRH44029f_a01                   ','RRH44029b_a01                   ', &
-     'RRH44030f_a01                   ','RRH44030b_a01                   ','RRH44031f_a01                   ', &
-     'RRH44031b_a01                   ','RRH44032f_a01                   ','RRH44032b_a01                   ', &
-     'RRH44033f_a01                   ','RRH44033b_a01                   ','RRH44034f_a01                   ', &
-     'RRH44034b_a01                   ','RRH44035f_a01                   ','RRH44035b_a01                   ', &
-     'RRH44036f_a01                   ','RRH44036b_a01                   ','RRH44037f_a01                   ', &
-     'RRH44037b_a01                   ','RRH44038f_a01                   ','RRH44038b_a01                   ', &
-     'RRH44039f_a01                   ','RRH44039b_a01                   ','RRH44040f_a01                   ', &
-     'RRH44040b_a01                   ','RRH44041f_a01                   ','RRH44041b_a01                   ', &
-     'RRH44042f_a01                   ','RRH44042b_a01                   ','RRH44043f_a01                   ', &
-     'RRH44043b_a01                   ','RRH44044f_a01                   ','RRH44044b_a01                   ', &
-     'RRH44045f_a01                   ','RRH44045b_a01                   ','RRH44046f_a01                   ', &
-     'RRH44046b_a01                   ','RRH44047f_a01                   ','RRH44047b_a01                   ', &
-     'RRH44048f_a01                   ','RRH44048b_a01                   ','RRH44049f_a01                   ', &
-     'RRH44049b_a01                   ','RRH44050f_a01                   ','RRH44050b_a01                   ', &
-     'RRH44051f_a01                   ','RRH44051b_a01                   ','RRH44052f_a01                   ', &
-     'RRH44052b_a01                   ','RRH44053f_a01                   ','RRH44053b_a01                   ', &
-     'RRH44054f_a01                   ','RRH44054b_a01                   ','RRH44055f_a01                   ', &
-     'RRH44055b_a01                   ','RRH44056f_a01                   ','RRH44056b_a01                   ', &
-     'RRH44057f_a01                   ','RRH44057b_a01                   ','RRH45000f_a01                   ', &
-     'RRH45000b_a01                   ','RRH45001f_a01                   ','RRH45001b_a01                   ', &
-     'RRH45002f_a01                   ','RRH45002b_a01                   ','RRH45003f_a01                   ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_31 = (/ &
-     'RRH45003b_a01                   ','RRH45004f_a01                   ','RRH45004b_a01                   ', &
-     'RRH45005f_a01                   ','RRH45005b_a01                   ','RRH45006f_a01                   ', &
-     'RRH45006b_a01                   ','RRH45007f_a01                   ','RRH45007b_a01                   ', &
-     'RRH45008f_a01                   ','RRH45008b_a01                   ','RRH45009f_a01                   ', &
-     'RRH45009b_a01                   ','RRH45010f_a01                   ','RRH45010b_a01                   ', &
-     'RRH45011f_a01                   ','RRH45011b_a01                   ','RRH45012f_a01                   ', &
-     'RRH45012b_a01                   ','RRH45013f_a01                   ','RRH45013b_a01                   ', &
-     'RRH45014f_a01                   ','RRH45014b_a01                   ','RRH45015f_a01                   ', &
-     'RRH45015b_a01                   ','RRH45016f_a01                   ','RRH45016b_a01                   ', &
-     'RRH45017f_a01                   ','RRH45017b_a01                   ','RRH45018f_a01                   ', &
-     'RRH45018b_a01                   ','RRH45019f_a01                   ','RRH45019b_a01                   ', &
-     'RRH45020f_a01                   ','RRH45020b_a01                   ','RRH45021f_a01                   ', &
-     'RRH45021b_a01                   ','RRH45022f_a01                   ','RRH45022b_a01                   ', &
-     'RRH45023f_a01                   ','RRH45023b_a01                   ','RRH45024f_a01                   ', &
-     'RRH45024b_a01                   ','RRH45025f_a01                   ','RRH45025b_a01                   ', &
-     'RRH45026f_a01                   ','RRH45026b_a01                   ','RRH45027f_a01                   ', &
-     'RRH45027b_a01                   ','RRH45028f_a01                   ','RRH45028b_a01                   ', &
-     'RRH45029f_a01                   ','RRH45029b_a01                   ','RRH45030f_a01                   ', &
-     'RRH45030b_a01                   ','RRH45031f_a01                   ','RRH45031b_a01                   ', &
-     'RRH45032f_a01                   ','RRH45032b_a01                   ','RRH45033f_a01                   ', &
-     'RRH45033b_a01                   ','RRH45034f_a01                   ','RRH45034b_a01                   ', &
-     'RRH45035f_a01                   ','RRH45035b_a01                   ','RRH45036f_a01                   ', &
-     'RRH45036b_a01                   ','RRH45037f_a01                   ','RRH45037b_a01                   ', &
-     'RRH45038f_a01                   ','RRH45038b_a01                   ','RRH45039f_a01                   ', &
-     'RRH45039b_a01                   ','RRH45040f_a01                   ','RRH45040b_a01                   ', &
-     'RRH45041f_a01                   ','RRH45041b_a01                   ','RRH45042f_a01                   ', &
-     'RRH45042b_a01                   ','RRH45043f_a01                   ','RRH45043b_a01                   ', &
-     'RRH45044f_a01                   ','RRH45044b_a01                   ','RRH45045f_a01                   ', &
-     'RRH45045b_a01                   ','RRH45046f_a01                   ','RRH45046b_a01                   ', &
-     'RRH45047f_a01                   ','RRH45047b_a01                   ','RRH45048f_a01                   ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_32 = (/ &
-     'RRH45048b_a01                   ','RRH45049f_a01                   ','RRH45049b_a01                   ', &
-     'RRH45050f_a01                   ','RRH45050b_a01                   ','RRH45051f_a01                   ', &
-     'RRH45051b_a01                   ','RRH45052f_a01                   ','RRH45052b_a01                   ', &
-     'RRH45053f_a01                   ','RRH45053b_a01                   ','RRH45054f_a01                   ', &
-     'RRH45054b_a01                   ','RRH45055f_a01                   ','RRH45055b_a01                   ', &
-     'RRH45056f_a01                   ','RRH45056b_a01                   ','RRH45057f_a01                   ', &
-     'RRH45057b_a01                   ','RRH45058f_a01                   ','RRH45058b_a01                   ', &
-     'RRH45059f_a01                   ','RRH45059b_a01                   ','RRH45060f_a01                   ', &
-     'RRH45060b_a01                   ','RRH45061f_a01                   ','RRH45061b_a01                   ', &
-     'RRH45062f_a01                   ','RRH45062b_a01                   ','RRH45063f_a01                   ', &
-     'RRH45063b_a01                   ','RRH45064f_a01                   ','RRH45064b_a01                   ', &
-     'RRH45065f_a01                   ','RRH45065b_a01                   ','RRH45066f_a01                   ', &
-     'RRH45066b_a01                   ','RRH45067f_a01                   ','RRH45067b_a01                   ', &
-     'RRH46000f_a01                   ','RRH46000b_a01                   ','RRH46001f_a01                   ', &
-     'RRH46001b_a01                   ','RRH46002f_a01                   ','RRH46002b_a01                   ', &
-     'RRH46003f_a01                   ','RRH46003b_a01                   ','RRH46004f_a01                   ', &
-     'RRH46004b_a01                   ','RRH46005f_a01                   ','RRH46005b_a01                   ', &
-     'RRH46006f_a01                   ','RRH46006b_a01                   ','RRH46007f_a01                   ', &
-     'RRH46007b_a01                   ','RRH46008f_a01                   ','RRH46008b_a01                   ', &
-     'RRH46009f_a01                   ','RRH46009b_a01                   ','RRH46010f_a01                   ', &
-     'RRH46010b_a01                   ','RRH46011f_a01                   ','RRH46011b_a01                   ', &
-     'RRH46012f_a01                   ','RRH46012b_a01                   ','RRH46013f_a01                   ', &
-     'RRH46013b_a01                   ','RRH46014f_a01                   ','RRH46014b_a01                   ', &
-     'RRH46015f_a01                   ','RRH46015b_a01                   ','RRH46016f_a01                   ', &
-     'RRH46016b_a01                   ','RRH46017f_a01                   ','RRH46017b_a01                   ', &
-     'RRH46018f_a01                   ','RRH46018b_a01                   ','RRH46019f_a01                   ', &
-     'RRH46019b_a01                   ','RRH46020f_a01                   ','RRH46020b_a01                   ', &
-     'RRH46021f_a01                   ','RRH46021b_a01                   ','RRH46022f_a01                   ', &
-     'RRH46022b_a01                   ','RRH46023f_a01                   ','RRH46023b_a01                   ', &
-     'RRH46024f_a01                   ','RRH46024b_a01                   ','RRH46025f_a01                   ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_33 = (/ &
-     'RRH46025b_a01                   ','RRH46026f_a01                   ','RRH46026b_a01                   ', &
-     'RRH46027f_a01                   ','RRH46027b_a01                   ','RRH46028f_a01                   ', &
-     'RRH46028b_a01                   ','RRH46029f_a01                   ','RRH46029b_a01                   ', &
-     'RRH46030f_a01                   ','RRH46030b_a01                   ','RRH46031f_a01                   ', &
-     'RRH46031b_a01                   ','RRH46032f_a01                   ','RRH46032b_a01                   ', &
-     'RRH46033f_a01                   ','RRH46033b_a01                   ','RRH46034f_a01                   ', &
-     'RRH46034b_a01                   ','RRH46035f_a01                   ','RRH46035b_a01                   ', &
-     'RRH46036f_a01                   ','RRH46036b_a01                   ','RRH46037f_a01                   ', &
-     'RRH46037b_a01                   ','RRH460MSf_a01                   ','RRH461MSb_a01                   ', &
-     'RRH47000f_a01                   ','RRH47000b_a01                   ','RRH47001f_a01                   ', &
-     'RRH47001b_a01                   ','RRH47002f_a01                   ','RRH47002b_a01                   ', &
-     'RRH47003f_a01                   ','RRH47003b_a01                   ','RRH47004f_a01                   ', &
-     'RRH47004b_a01                   ','RRH47005f_a01                   ','RRH47005b_a01                   ', &
-     'RRH47006f_a01                   ','RRH47006b_a01                   ','RRH47007f_a01                   ', &
-     'RRH47007b_a01                   ','RRH47008f_a01                   ','RRH47008b_a01                   ', &
-     'RRH47009f_a01                   ','RRH47009b_a01                   ','RRH47010f_a01                   ', &
-     'RRH47010b_a01                   ','RRH47011f_a01                   ','RRH47011b_a01                   ', &
-     'RRH47012f_a01                   ','RRH47012b_a01                   ','RRH47013f_a01                   ', &
-     'RRH47013b_a01                   ','RRH47014f_a01                   ','RRH47014b_a01                   ', &
-     'RRH47015f_a01                   ','RRH47015b_a01                   ','RRH47016f_a01                   ', &
-     'RRH47016b_a01                   ','RRH47017f_a01                   ','RRH47017b_a01                   ', &
-     'RRH47018f_a01                   ','RRH47018b_a01                   ','RRH47019f_a01                   ', &
-     'RRH47019b_a01                   ','RRH47020f_a01                   ','RRH47020b_a01                   ', &
-     'RRH47021f_a01                   ','RRH47021b_a01                   ','RRH47022f_a01                   ', &
-     'RRH47022b_a01                   ','RRH47023f_a01                   ','RRH47023b_a01                   ', &
-     'RRH47024f_a01                   ','RRH47024b_a01                   ','RRH47025f_a01                   ', &
-     'RRH47025b_a01                   ','RRH47026f_a01                   ','RRH47026b_a01                   ', &
-     'RRH47027f_a01                   ','RRH47027b_a01                   ','RRH47028f_a01                   ', &
-     'RRH47028b_a01                   ','RRH47029f_a01                   ','RRH47029b_a01                   ', &
-     'RRH47030f_a01                   ','RRH47030b_a01                   ','RRH47031f_a01                   ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_34 = (/ &
-     'RRH47031b_a01                   ','RRH47032f_a01                   ','RRH47032b_a01                   ', &
-     'RRH48000f_a01                   ','RRH48000b_a01                   ','RRH48001f_a01                   ', &
-     'RRH48001b_a01                   ','RRH48002f_a01                   ','RRH48002b_a01                   ', &
-     'RRH48003f_a01                   ','RRH48003b_a01                   ','RRH48004f_a01                   ', &
-     'RRH48004b_a01                   ','RRH48005f_a01                   ','RRH48005b_a01                   ', &
-     'RRH48006f_a01                   ','RRH48006b_a01                   ','RRH48007f_a01                   ', &
-     'RRH48007b_a01                   ','RRH48008f_a01                   ','RRH48008b_a01                   ', &
-     'RRH48009f_a01                   ','RRH48009b_a01                   ','RRH48010f_a01                   ', &
-     'RRH48010b_a01                   ','RRH48011f_a01                   ','RRH48011b_a01                   ', &
-     'RRH48012f_a01                   ','RRH48012b_a01                   ','RRH48013f_a01                   ', &
-     'RRH48013b_a01                   ','RRH48014f_a01                   ','RRH48014b_a01                   ', &
-     'RRH48015f_a01                   ','RRH48015b_a01                   ','RRH48016f_a01                   ', &
-     'RRH48016b_a01                   ','RRH49000f_a01                   ','RRH49000b_a01                   ', &
-     'RRH49001f_a01                   ','RRH49001b_a01                   ','RRH49002f_a01                   ', &
-     'RRH49002b_a01                   ','RRH49003f_a01                   ','RRH49003b_a01                   ', &
-     'RRH49004f_a01                   ','RRH49004b_a01                   ','RRH49005f_a01                   ', &
-     'RRH49005b_a01                   ','RRH49006f_a01                   ','RRH49006b_a01                   ', &
-     'RRH49007f_a01                   ','RRH49007b_a01                   ','RRH49008f_a01                   ', &
-     'RRH49008b_a01                   ','RRH49009f_a01                   ','RRH49009b_a01                   ', &
-     'RRH49010f_a01                   ','RRH49010b_a01                   ','RRH49011f_a01                   ', &
-     'RRH49011b_a01                   ','RRH49012f_a01                   ','RRH49012b_a01                   ', &
-     'RRH49013f_a01                   ','RRH49013b_a01                   ','RRH49014f_a01                   ', &
-     'RRH49014b_a01                   ','RRH49015f_a01                   ','RRH49015b_a01                   ', &
-     'RRH49016f_a01                   ','RRH49016b_a01                   ','RRH49017f_a01                   ', &
-     'RRH49017b_a01                   ','RRH410000f_a01                  ','RRH410000b_a01                  ', &
-     'RRH410001f_a01                  ','RRH410001b_a01                  ','RRH410002f_a01                  ', &
-     'RRH410002b_a01                  ','RRH410003f_a01                  ','RRH410003b_a01                  ', &
-     'RRH410004f_a01                  ','RRH410004b_a01                  ','RRH410005f_a01                  ', &
-     'RRH410005b_a01                  ','RRH410006f_a01                  ','RRH410006b_a01                  ', &
-     'RRH410007f_a01                  ','RRH410007b_a01                  ','RRH410008f_a01                  ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_35 = (/ &
-     'RRH410008b_a01                  ','RRH410009f_a01                  ','RRH410009b_a01                  ', &
-     'RRH410010f_a01                  ','RRH410010b_a01                  ','RRH410011f_a01                  ', &
-     'RRH410011b_a01                  ','RRH410012f_a01                  ','RRH410012b_a01                  ', &
-     'RRH410013f_a01                  ','RRH410013b_a01                  ','RRH410014f_a01                  ', &
-     'RRH410014b_a01                  ','RRH410015f_a01                  ','RRH410015b_a01                  ', &
-     'RRH410016f_a01                  ','RRH410016b_a01                  ','RRH410017f_a01                  ', &
-     'RRH410017b_a01                  ','RRH410018f_a01                  ','RRH410018b_a01                  ', &
-     'RRH410019f_a01                  ','RRH410019b_a01                  ','RRH410020f_a01                  ', &
-     'RRH410020b_a01                  ','RRH60000f_a01                   ','RRH60000b_a01                   ', &
-     'RRH62000f_a01                   ','RRH62000b_a01                   ','RRH62001f_a01                   ', &
-     'RRH62001b_a01                   ','RRH63001_a01                    ','RRH63002_a01                    ', &
-     'RRH631MS_a01                    ','RRH632MS_a01                    ','RRH633MS_a01                    ', &
-     'RRH634MS_a01                    ','RRH70000f_a01                   ','RRH70000b_a01                   ', &
-     'RRH72000f_a01                   ','RRH72000b_a01                   ','RRH72001f_a01                   ', &
-     'RRH72001b_a01                   ','RRH73000_a01                    ','RRH73001_a01                    ', &
-     'RRH73002_a01                    ','RRH76000f_a01                   ','RRH76000b_a01                   ', &
-     'RRH76001_a01                    ','RRH76002_a01                    ','RRH91000f_a01                   ', &
-     'RRH91000b_a01                   ','RRH92000_a01                    ','RRH94000f_a01                   ', &
-     'RRH94000b_a01                   ','RRH94001_a01                    ','RRH94002f_a01                   ', &
-     'RRH94002b_a01                   ','RREQ2100f_a01                   ','RREQ2100b_a01                   ', &
-     'RREQ2101f_a01                   ','RREQ2101b_a01                   ','RREQ2102f_a01                   ', &
-     'RREQ2102b_a01                   ','RREQ3200f_a01                   ','RREQ3200b_a01                   ', &
-     'RREQ3201f_a01                   ','RREQ3201b_a01                   ','RREQ3202f_a01                   ', &
-     'RREQ3202b_a01                   ','RREQ3203f_a01                   ','RREQ3203b_a01                   ', &
-     'RREQ4100f_a01                   ','RREQ4100b_a01                   ','RREQ4101f_a01                   ', &
-     'RREQ4101b_a01                   ','RREQ4150f_a01                   ','RREQ4150b_a01                   ', &
-     'RREQ4151f_a01                   ','RREQ4151b_a01                   ','RREQ4201f_a01                   ', &
-     'RREQ4201b_a01                   ','RREQ4202f_a01                   ','RREQ4202b_a01                   ', &
-     'RREQ4203f_a01                   ','RREQ4203b_a01                   ','RREQ4204f_a01                   ', &
-     'RREQ4204b_a01                   ','RREQ4205f_a01                   ','RREQ4205b_a01                   ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_36 = (/ &
-     'RREQ4206f_a01                   ','RREQ4206b_a01                   ','RREQ4207f_a01                   ', &
-     'RREQ4207b_a01                   ','RREQ4208f_a01                   ','RREQ4208b_a01                   ', &
-     'RREQ4209f_a01                   ','RREQ4209b_a01                   ','RREQ4210f_a01                   ', &
-     'RREQ4210b_a01                   ','RREQ4211f_a01                   ','RREQ4211b_a01                   ', &
-     'RREQ4250f_a01                   ','RREQ4250b_a01                   ','RREQ4251f_a01                   ', &
-     'RREQ4251b_a01                   ','RREQ4252f_a01                   ','RREQ4252b_a01                   ', &
-     'RREQ4253f_a01                   ','RREQ4253b_a01                   ','RREQ4254f_a01                   ', &
-     'RREQ4254b_a01                   ','RREQ4255f_a01                   ','RREQ4255b_a01                   ', &
-     'RREQ4256f_a01                   ','RREQ4256b_a01                   ','RREQ4257f_a01                   ', &
-     'RREQ4257b_a01                   ','RREQ4258f_a01                   ','RREQ4258b_a01                   ', &
-     'RREQ4300f_a01                   ','RREQ4300b_a01                   ','RREQ4350f_a01                   ', &
-     'RREQ4350b_a01                   ','RREQ6000f_a01                   ','RREQ6000b_a01                   ', &
-     'RREQ6200f_a01                   ','RREQ6200b_a01                   ','RREQ6201f_a01                   ', &
-     'RREQ6201b_a01                   ','RREQ7000f_a01                   ','RREQ7000b_a01                   ', &
-     'RREQ7200f_a01                   ','RREQ7200b_a01                   ','RREQ7201f_a01                   ', &
-     'RREQ7201b_a01                   ','RREQ7600f_a01                   ','RREQ7600b_a01                   ', &
-     'RREQ7601f_a01                   ','RREQ7601b_a01                   ','RREQ7602f_a01                   ', &
-     'RREQ7602b_a01                   ','RREQ7603f_a01                   ','RREQ7603b_a01                   ', &
-     'RREQ9200f_a01                   ','RREQ9200b_a01                   ','RREQ9201f_a01                   ', &
-     'RREQ9201b_a01                   ','RREQ9202f_a01                   ','RREQ9202b_a01                   ', &
-     'RREQ9203f_a01                   ','RREQ9203b_a01                   ','RREQ11200f_a01                  ', &
-     'RREQ11200b_a01                  ','RREQ11201f_a01                  ','RREQ11201b_a01                  ', &
-     'RREQ11202f_a01                  ','RREQ11202b_a01                  ','RREQ11203f_a01                  ', &
-     'RREQ11203b_a01                  ','RREQ11600f_a01                  ','RREQ11600b_a01                  ', &
-     'RREQ11601f_a01                  ','RREQ11601b_a01                  ','RREQ11800f_a01                  ', &
-     'RREQ11800b_a01                  ','RREQ11801f_a01                  ','RREQ11801b_a01                  ', &
-     'RREQ11802f_a01                  ','RREQ11802b_a01                  ','RRPH2100_a01                    ', &
-     'RRPH3200_a01                    ','RRPH4100_a01                    ','RRPH4101_a01                    ', &
-     'RRPH4200_a01                    ','RRPH4201_a01                    ','RRPH4202_a01                    ', &
-     'RRPH4203_a01                    ','RRPH4204_a01                    ','RRPH4205_a01                    ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_37 = (/ &
-     'RRPH4206_a01                    ','RRPH4207a_a01                   ','RRPH4207b_a01                   ', &
-     'RRPH4207c_a01                   ','RRPH4208_a01                    ','RRPH4209_a01                    ', &
-     'RRPH4210a_a01                   ','RRPH4210b_a01                   ','RRPH4211_a01                    ', &
-     'RRPH4300_a01                    ','RRPH4301_a01                    ','RRPH4302_a01                    ', &
-     'RRPH4303_a01                    ','RRPH11200_a01                   ','RRPH11201_a01                   ', &
-     'RRPH11800_a01                   ','RRD05_a01                       ','ROO6R3O                         ', &
-     'ROO6R5O2                        ','ClONO                           ','HCO3_a01                        ', &
-     'PAN_a01                         ','C2H5NO3_a01                     ','CH3CN_a01                       ', &
-     'CH2CO_a01                       ','CH3CHOHOOH_a01                  ','HCOCO3H_a01                     ', &
-     'HOOCH2CO3H_a01                  ','ETHOHNO3_a01                    ','PHAN_a01                        ', &
-     'ALCOCH2OOH_a01                  ','C33CO_a01                       ','CH3CHCO_a01                     ', &
-     'CH3COCO3H_a01                   ','HCOCH2CHO_a01                   ','HCOCH2CO2H_a01                  ', &
-     'HCOCH2CO3H_a01                  ','HCOCOCH2OOH_a01                 ','HOC2H4CO2H_a01                  ', &
-     'HOC2H4CO3H_a01                  ','HOCH2COCH2OOH_a01               ','HOCH2COCHO_a01                  ', &
-     'HYPROPO2H_a01                   ','C32OH13CO_a01                   ','C3DIALOOH_a01                   ', &
-     'HCOCOHCO3H_a01                  ','METACETHO_a01                   ','C3PAN1_a01                      ', &
-     'C3PAN2_a01                      ','CH3COCH2O2NO2_a01               ','NOA_a01                         ', &
-     'PR2O2HNO3_a01                   ','PROPOLNO3_a01                   ','HCOCOHPAN_a01                   ', &
-     'BIACETO2_a01                    ','BIACETOH_a01                    ','BIACETOOH_a01                   ', &
-     'BUT2OLO_a01                     ','BUT2OLOOH_a01                   ','C312COCO3H_a01                  ', &
-     'C413COOOH_a01                   ','C44OOH_a01                      ','C4CODIAL_a01                    ', &
-     'CH3COCHCO_a01                   ','CH3COCOCO2H_a01                 ','CH3COOHCHCHO_a01                ', &
-     'CHOC3COO2_a01                   ','CO23C3CHO_a01                   ','CO2C3CHO_a01                    ', &
-     'CO2H3CHO_a01                    ','CO2H3CO2H_a01                   ','CO2H3CO3H_a01                   ', &
-     'HCOCCH3CHOOH_a01                ','HCOCCH3CO_a01                   ','HMAC_a01                        ', &
-     'HO12CO3C4_a01                   ','HVMK_a01                        ','IBUTALOH_a01                    ', &
-     'IBUTDIAL_a01                    ','IBUTOLBOOH_a01                  ','IPRHOCO2H_a01                   ', &
-     'IPRHOCO3H_a01                   ','MACO2H_a01                      ','MACO3H_a01                      ', &
-     'MACROH_a01                      ','MACROOH_a01                     ','BZFUCO_a01                      ', &
-     'BZFUOOH_a01                     ','CO14O3CHO_a01                   ','CO14O3CO2H_a01                  ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_38 = (/ &
-     'CO2C4DIAL_a01                   ','EPXC4DIAL_a01                   ','EPXDLCO2H_a01                   ', &
-     'EPXDLCO3H_a01                   ','HOCOC4DIAL_a01                  ','MALANHYOOH_a01                  ', &
-     'MALDALCO2H_a01                  ','MALDALCO3H_a01                  ','MALDIAL_a01                     ', &
-     'MALDIALOOH_a01                  ','MALNHYOHCO_a01                  ','MECOACEOOH_a01                  ', &
-     'C312COPAN_a01                   ','C4PAN5_a01                      ','MVKNO3_a01                      ', &
-     'NBZFUOOH_a01                    ','NC4DCO2H_a01                    ','LBUT1ENOOH_a01                  ', &
-     'LHMVKABOOH_a01                  ','LMEKOOH_a01                     ','C1ODC2O2C4OOH_a01               ', &
-     'C1ODC2OOHC4OD_a01               ','C1ODC3O2C4OOH_a01               ','C1OOHC2OOHC4OD_a01              ', &
-     'C4MDIAL_a01                     ','C511OOH_a01                     ','C512OOH_a01                     ', &
-     'C513CO_a01                      ','C513OOH_a01                     ','C514OOH_a01                     ', &
-     'C59OOH_a01                      ','CHOC3COOOH_a01                  ','CO13C4CHO_a01                   ', &
-     'CO23C4CHO_a01                   ','CO23C4CO3H_a01                  ','DB1OOH_a01                      ', &
-     'DB2OOH_a01                      ','ISOPAOH_a01                     ','ISOPBOH_a01                     ', &
-     'ISOPBOOH_a01                    ','ISOPDOH_a01                     ','ISOPDOOH_a01                    ', &
-     'MBO_a01                         ','MBOACO_a01                      ','MBOCOCO_a01                     ', &
-     'ME3FURAN_a01                    ','ACCOMECHO_a01                   ','ACCOMECO3H_a01                  ', &
-     'C24O3CCO2H_a01                  ','C4CO2DBCO3_a01                  ','C4CO2DCO3H_a01                  ', &
-     'C5134CO2OH_a01                  ','C54CO_a01                       ','C5CO14OH_a01                    ', &
-     'C5CO14OOH_a01                   ','C5DIALCO_a01                    ','C5DIALOOH_a01                   ', &
-     'C5DICARB_a01                    ','C5DICAROOH_a01                  ','MC3ODBCO2H_a01                  ', &
-     'MMALNHYOOH_a01                  ','TLFUOOH_a01                     ','C4MCONO3OH_a01                  ', &
-     'C514NO3_a01                     ','C5PAN9_a01                      ','CHOC3COPAN_a01                  ', &
-     'DB1NO3_a01                      ','ISOPBNO3_a01                    ','ISOPDNO3_a01                    ', &
-     'NC4OHCO3H_a01                   ','NC4OHCPAN_a01                   ','NISOPOOH_a01                    ', &
-     'NMBOBCO_a01                     ','C4CO2DBPAN_a01                  ','NC4MDCO2H_a01                   ', &
-     'NTLFUOOH_a01                    ','LC578OOH_a01                    ','LHC4ACCHO_a01                   ', &
-     'LHC4ACCO2H_a01                  ','LHC4ACCO3H_a01                  ','LIEPOX_a01                      ', &
-     'LISOPACOOH_a01                  ','LMBOABOOH_a01                   ','LZCO3HC23DBCOD_a01              ', &
-     'LC5PAN1719_a01                  ','LISOPACNO3_a01                  ','LMBOABNO3_a01                   ', &
-     'LNMBOABOOH_a01                  ','C614CO_a01                      ','C614OOH_a01                     ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_39 = (/ &
-     'CO235C5CHO_a01                  ','CO235C6OOH_a01                  ','BZBIPEROOH_a01                  ', &
-     'BZEMUCCO_a01                    ','BZEMUCCO2H_a01                  ','BZEMUCCO3H_a01                  ', &
-     'BZEMUCOOH_a01                   ','BZEPOXMUC_a01                   ','BZOBIPEROH_a01                  ', &
-     'C5CO2DCO3H_a01                  ','C5COOHCO3H_a01                  ','C6125CO_a01                     ', &
-     'C615CO2OOH_a01                  ','C6CO4DB_a01                     ','C6H5O_a01                       ', &
-     'C6H5OOH_a01                     ','CATEC1O_a01                     ','CATEC1OOH_a01                   ', &
-     'CATECHOL_a01                    ','PBZQCO_a01                      ','PBZQOOH_a01                     ', &
-     'PHENOOH_a01                     ','C614NO3_a01                     ','BZBIPERNO3_a01                  ', &
-     'BZEMUCNO3_a01                   ','C5CO2DBPAN_a01                  ','C5CO2OHPAN_a01                  ', &
-     'DNPHEN_a01                      ','DNPHENOOH_a01                   ','NBZQOOH_a01                     ', &
-     'NCATECHOL_a01                   ','NCATECOOH_a01                   ','NDNPHENOOH_a01                  ', &
-     'NNCATECOOH_a01                  ','NPHENOOH_a01                    ','C235C6CO3H_a01                  ', &
-     'C716OOH_a01                     ','C721OOH_a01                     ','C722OOH_a01                     ', &
-     'CO235C6CHO_a01                  ','C6COOHCO3H_a01                  ','C6H5CH2OOH_a01                  ', &
-     'C6H5CO3H_a01                    ','C7CO4DB_a01                     ','CRESOL_a01                      ', &
-     'CRESOOH_a01                     ','MCATEC1O_a01                    ','MCATEC1OOH_a01                  ', &
-     'MCATECHOL_a01                   ','OXYL1OOH_a01                    ','PHCOOH_a01                      ', &
-     'TLBIPEROOH_a01                  ','TLEMUCCO_a01                    ','TLEMUCCO2H_a01                  ', &
-     'TLEMUCCO3H_a01                  ','TLEMUCOOH_a01                   ','TLOBIPEROH_a01                  ', &
-     'TOL1O_a01                       ','C7PAN3_a01                      ','C6CO2OHPAN_a01                  ', &
-     'DNCRES_a01                      ','DNCRESOOH_a01                   ','MNCATECH_a01                    ', &
-     'MNCATECOOH_a01                  ','MNNCATCOOH_a01                  ','NCRESOOH_a01                    ', &
-     'NDNCRESOOH_a01                  ','TLEMUCNO3_a01                   ','C721CHO_a01                     ', &
-     'C721CO3H_a01                    ','C810OOH_a01                     ','C812OOH_a01                     ', &
-     'C813OOH_a01                     ','C85OOH_a01                      ','C86OOH_a01                      ', &
-     'C89OOH_a01                      ','C8BC_a01                        ','C8BCCO_a01                      ', &
-     'C8BCOOH_a01                     ','NORPINIC_a01                    ','STYRENOOH_a01                   ', &
-     'C721PAN_a01                     ','C810NO3_a01                     ','C89NO3_a01                      ', &
-     'C8BCNO3_a01                     ','C811CO3H_a01                    ','C85CO3H_a01                     ', &
-     'C89CO2H_a01                     ','C89CO3H_a01                     ','C96OOH_a01                      ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_40 = (/ &
-     'C97OOH_a01                      ','C98OOH_a01                      ','NOPINDCO_a01                    ', &
-     'NOPINDOOH_a01                   ','NOPINONE_a01                    ','NOPINOO_a01                     ', &
-     'NORPINAL_a01                    ','NORPINENOL_a01                  ','PINIC_a01                       ', &
-     'C811PAN_a01                     ','C89PAN_a01                      ','C96NO3_a01                      ', &
-     'C9PAN2_a01                      ','BPINAOOH_a01                    ','C106OOH_a01                     ', &
-     'C109CO_a01                      ','C109OOH_a01                     ','MENTHEN6ONE_a01                 ', &
-     'OH2MENTHEN6ONE_a01              ','PERPINONIC_a01                  ','PINAL_a01                       ', &
-     'PINALOOH_a01                    ','PINENOL_a01                     ','PINONIC_a01                     ', &
-     'BPINANO3_a01                    ','C106NO3_a01                     ','C10PAN2_a01                     ', &
-     'PINALNO3_a01                    ','RO6R1NO3_a01                    ','ROO6R1NO3_a01                   ', &
-     'LAPINABNO3_a01                  ','LAPINABOOH_a01                  ','LNAPINABOOH_a01                 ', &
-     'LNBPINABOOH_a01                 ','ClNO_a01                        ','ClNO                            ', &
-     'DMS_a01                         ','DMSO_a01                        ','Cl2O2                           ', &
-     'Cl2O3                           ','BrNO2                           ','NC3H7NO3                        ', &
-     'OH2MENTHEN6ONE                  ','CH3CCl3                         ','Cl2O                            ', &
-     'CH2Br2                          ','CH3Br                           ','CHBr3                           ', &
-     'CH3NO3_a01                      ','BIACET                          ','HOC6H4NO2_a01                   ', &
-     'HOONO                           ','NMBOBCO                         ','LMBOABNO3                       ', &
+     'C89CO3H_a01                     ','C96OOH_a01                      ','C97OOH_a01                      ', &
+     'C98OOH_a01                      ','NOPINDCO_a01                    ','NOPINDOOH_a01                   ', &
+     'NOPINONE_a01                    ','NOPINOO_a01                     ','NORPINAL_a01                    ', &
+     'NORPINENOL_a01                  ','PINIC_a01                       ','C811PAN_a01                     ', &
+     'C89PAN_a01                      ','C96NO3_a01                      ','C9PAN2_a01                      ', &
+     'BPINAOOH_a01                    ','C106OOH_a01                     ','C109CO_a01                      ', &
+     'C109OOH_a01                     ','MENTHEN6ONE_a01                 ','OH2MENTHEN6ONE_a01              ', &
+     'PERPINONIC_a01                  ','PINAL_a01                       ','PINALOOH_a01                    ', &
+     'PINENOL_a01                     ','PINONIC_a01                     ','BPINANO3_a01                    ', &
+     'C106NO3_a01                     ','C10PAN2_a01                     ','PINALNO3_a01                    ', &
+     'RO6R1NO3_a01                    ','ROO6R1NO3_a01                   ','LAPINABNO3_a01                  ', &
+     'LAPINABOOH_a01                  ','LNAPINABOOH_a01                 ','LNBPINABOOH_a01                 ', &
+     'ClNO_a01                        ','DMS_a01                         ','DMSO_a01                        ', &
+     'ROO6R3O                         ','Cl2O2                           ','Cl2O3                           ', &
+     'CH3CCl3                         ','Cl2O                            ','CH2Br2                          ', &
+     'CH3Br                           ','CHBr3                           ','CH3NO3_a01                      ', &
+     'BIACET                          ','HOC6H4NO2_a01                   ','NMBOBCO                         ', &
      'CPDKETENE                       ','PBZQCO                          ','NCPDKETENE                      ', &
      'PTLQCO                          ','MNCPDKETENE                     ','NOPINDCO                        ', &
-     'NOPINDOOH                       ','C96NO3                          ','RO6R3O2                         ', &
-     'OClO                            ','CH2ClBr                         ','CHCl2Br                         ', &
-     'CHClBr2                         ','CH3SO3H                         ','NO3CH2PAN                       ', &
+     'NOPINDOOH                       ','OH2MENTHEN6ONE                  ','ClNO                            ', &
+     'ClONO                           ','BrNO2                           ','CH2ClBr                         ', &
+     'CHCl2Br                         ','CHClBr2                         ','CH3SO3H                         ', &
      'CH3COOHCHCHO                    ','HCOCCH3CHOOH                    ','NH4p_a01                        ', &
-     'NH3_a01                         ','NCO                             ','PBZQOOH                         ', &
-     'PTLQOOH                         ','C6H5CH2NO3                      ','C8BCCO                          ', &
-     'C8BCNO3                         ','C8BCOOH                         ','NSTYRENOOH                      ', &
-     'C514NO3                         ','OHMENTHEN6ONEO2                 ','RO6R1O2                         ', &
-     'ROO6R1NO3                       ','ROO6R3O2                        ','LAPINABNO3                      ', &
-     'C4CO2DCO3H                      ','C5DIALCO                        ','CH3SO3                          ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_41 = (/ &
-     'MMALANHY                        ','CH3COHOHO2_a01                  ','HOCH2COHOHO2_a01                ', &
-     'COOHCOHOHO2_a01                 ','CH3COCHOHO2_a01                 ','GOLIG2_a01                      ', &
-     'MACR_a01                        ','MVK_a01                         ','METACETHO                       ', &
-     'IC3H7NO3                        ','MGLYOXDB_a01                    ','BZFUCO                          ', &
-     'CO2C4DIAL                       ','IC4H9NO3                        ','C1ODC2O2C4OOH                   ', &
-     'CO23C4CO3H                      ','ISOPDOH                         ','H2SO4_a01                       ', &
-     'NO4m_a01                        ','H2OH2O                          ','C6125CO                         ', &
-     'C5CO2OHPAN                      ','MCPDKETENE                      ','C5COO2NO2                       ', &
-     'C7PAN3                          ','C6CO2OHPAN                      ','C4MCONO3OH                      ', &
-     'PBZN                            ','C721PAN                         ','C810NO3                         ', &
-     'C89NO3                          ','LDISOPACO                       ','C5PAN9                          ', &
-     'C811PAN                         ','CHOC3COPAN                      ','C9PAN2                          ', &
-     'C109CO                          ','DB1NO3                          ','C106NO3                         ', &
-     'C10PAN2                         ','PINALNO3                        ','CHOHOHCOHOHO2_a01               ', &
-     'COOHCO3_a01                     ','CH2OHCO2CH3CHO_a01              ','LME3FURANO2                     ', &
-     'C2H5NO3                         ','C3PAN1                          ','C3PAN2                          ', &
-     'HCOCOHPAN                       ','BUT2OLO                         ','CH3COCOCO2H                     ', &
-     'NC4OHCPAN                       ','PHENOL_a01                      ','MALNHYOHCO                      ', &
-     'BUT2OLNO3                       ','C312COPAN                       ','C4PAN5                          ', &
-     'IBUTOLBNO3                      ','EPXDLPAN                        ','MALDIALPAN                      ', &
-     'C513CO                          ','MBOCOCO                         ','CH3CO3m_a01                     ', &
-     'HOCH2CO3m_a01                   ','CO2CO3m_a01                     ','FeOHp_a01                       ', &
-     'NH3                             ','NBZQOOH                         ','NPHEN1OOH                       ', &
-     'C6H5CH2OOH                      ','MCATEC1OOH                      ','OXYL1OOH                        ', &
-     'NCRES1OOH                       ','NPTLQOOH                        ','C812OOH                         ', &
-     'C812O2                          ','C89OOH                          ','C8BCO2                          ', &
-     'NORPINIC                        ','NTLFUOOH                        ','C97OOH                          ', &
-     'NORPINENOL                      ','PINIC                           ','PINALOOH                        ', &
-     'PINENOL                         ','BPINANO3                        ','RO6R1NO3                        ', &
-     'MENTHEN6ONE                     ','LHC4ACCO2H                      ','LNAPINABOOH                     ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_42 = (/ &
-     'N2O5_a01                        ','C614CO                          ','CN                              ', &
-     'HOCH2CH2O                       ','HOC2H4CO2H                      ','PROPENOL                        ', &
-     'BUTENOL                         ','CATEC1OOH                       ','MPROPENOL                       ', &
-     'CO14O3CO2H                      ','C512O2                          ','C514OOH                         ', &
+     'NH3_a01                         ','PBZQOOH                         ','PTLQOOH                         ', &
+     'C5DIALCO                        ','C8BCCO                          ','C8BCOOH                         ', &
+     'NSTYRENOOH                      ','MMALANHY                        ','CH3SO3                          ', &
+     'CH3COHOHO2_a01                  ','HOCH2COHOHO2_a01                ','COOHCOHOHO2_a01                 ', &
+     'CH3COCHOHO2_a01                 ','GOLIG2_a01                      ','MACR_a01                        ', &
+     'MVK_a01                         ','METACETHO                       ','NC3H7NO3                        ', &
+     'MGLYOXDB_a01                    ','C4CO2DCO3H                      ','BZFUCO                          ' /)
+  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_4 = (/ &
+     'CO2C4DIAL                       ','C1ODC2O2C4OOH                   ','CO23C4CO3H                      ', &
+     'H2SO4_a01                       ','ISOPDOH                         ','NO4m_a01                        ', &
+     'H2OH2O                          ','C6125CO                         ','MCPDKETENE                      ', &
+     'C109CO                          ','MBOCOCO                         ','CHOHOHCOHOHO2_a01               ', &
+     'COOHCO3_a01                     ','CH2OHCO2CH3CHO_a01              ','BUT2OLO                         ', &
+     'CH3COCOCO2H                     ','PHENOL_a01                      ','MALNHYOHCO                      ', &
+     'C513CO                          ','CH3CO3m_a01                     ','HOCH2CO3m_a01                   ', &
+     'CO2CO3m_a01                     ','FeOHp_a01                       ','NH3                             ', &
+     'HOONO                           ','C614CO                          ','CATEC1OOH                       ', &
+     'NPHEN1OOH                       ','C6H5CH2OOH                      ','MCATEC1OOH                      ', &
+     'OXYL1OOH                        ','NCRES1OOH                       ','C812OOH                         ', &
+     'C89OOH                          ','NORPINIC                        ','C8BCNO3                         ', &
+     'C97OOH                          ','NORPINENOL                      ','PINIC                           ', &
+     'C96NO3                          ','MENTHEN6ONE                     ','PINALOOH                        ', &
+     'PINENOL                         ','N2O5_a01                        ','C24O3CCO2H                      ', &
+     'NH2OH                           ','NISOPOOH                        ','HOC2H4CO2H                      ', &
+     'PROPENOL                        ','BUTENOL                         ','MPROPENOL                       ', &
+     'CO14O3CO2H                      ','C512OOH                         ','C514OOH                         ', &
      'ISOPAOH                         ','HCl_a01                         ','HBr_a01                         ', &
-     'C24O3CCO2H                      ','NISOPOOH                        ','FeOH2Fepppp_a01                 ', &
-     'NH2O                            ','NH2OH                           ','TLEMUCPAN                       ', &
-     'C89PAN                          ','LISOPAB                         ','ISOPBNO3                        ', &
-     'LISOPCD                         ','ACCOMEPAN                       ','C2H6                            ', &
-     'CH3COCHO2CH2OH_a01              ','NPROPOL                         ','PROPOLNO3                       ', &
-     'NC4H10                          ','C4CO2DBPAN                      ','TC4H9NO3                        ', &
-     'LBUT1ENNO3                      ','LC4H9NO3                        ','C614NO3                         ', &
-     'ISOPBOH                         ','BZBIPERNO3                      ','O3m_a01                         ', &
-     'BZEMUCNO3                       ','BZEMUCPAN                       ','C5CO2DBPAN                      ', &
-     'FeClp_a01                       ','LZCPANC23DBCOD                  ','H                               ', &
-     'DNCRESOOH                       ','MNNCATCOOH                      ','NCATECHOL                       ', &
-     'TLEMUCNO3                       ','C721CO3H                        ','C810OOH                         ', &
-     'C811O2                          ','C85OOH                          ','C86OOH                          ', &
-     'BZEMUCCO2H                      ','NNCATECOOH                      ','C85CO3H                         ', &
-     'C85O2                           ','C96OOH                          ','C97O2                           ', &
-     'C98OOH                          ','C98O2                           ','BZEMUCCO3H                      ', &
-     'DNPHENOOH                       ','C106OOH                         ','BZOBIPEROH                      ', &
-     'C716OOH                         ','PERPINONIC                      ','NPHENOOH                        ', &
-     'C235C6CO3H                      ','C721OOH                         ','LNBPINABOOH                     ', &
-     'LIEPOX                          ','ClNO2                           ','CO_a01                          ', &
-     'MG2_a01                         ','MG3_a01                         ','CHOHO2CHO_a01                   ', &
-     'CHOHO2CHOHOH_a01                ','C722OOH                         ','LISOPEFO                        ', &
-     'CH3O2NO2                        ','HOCH2O2NO2                      ','TLFUOOH                         ', &
-     'CHOHOHCHOHOH                    ','GOLIG1_a01                      ','GOLIG3_a01                      ', &
-     'C2H5O2NO2                       ','ETHOHNO3                        ','NC4OHCO3H                       ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_43 = (/ &
+     'LHC4ACCO2H                      ','FeOH2Fepppp_a01                 ','LMBOABNO3                       ', &
+     'LISOPAB                         ','C8BC                            ','LISOPCD                         ', &
+     'NCO                             ','C2H6                            ','CH3COCHO2CH2OH_a01              ', &
+     'NO3CH2PAN                       ','NPROPOL                         ','NC4H10                          ', &
+     'ISOPBOH                         ','O3m_a01                         ','C4MCONO3OH                      ', &
+     'FeClp_a01                       ','H                               ','NBZQOOH                         ', &
+     'C235C6CO3H                      ','C716OOH                         ','C721OOH                         ', &
+     'C722OOH                         ','NHOH                            ','C6H5CO3H                        ', &
+     'TLEMUCCO2H                      ','TLEMUCCO3H                      ','TLOBIPEROH                      ', &
+     'C6H5CH2NO3                      ','NPTLQOOH                        ','C721CO3H                        ', &
+     'C810OOH                         ','C813OOH                         ','C85OOH                          ' /)
+  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_5 = (/ &
+     'C86OOH                          ','CO235C6OOH                      ','C811CO3H                        ', &
+     'C85CO3H                         ','C96OOH                          ','C98OOH                          ', &
+     'C106OOH                         ','BZEMUCCO2H                      ','PERPINONIC                      ', &
+     'BZEMUCCO3H                      ','RO6R3O2                         ','RO6R1NO3                        ', &
+     'ROO6R1NO3                       ','LAPINABNO3                      ','LNAPINABOOH                     ', &
+     'OClO                            ','ACCOMECO3H                      ','MMALNHYOOH                      ', &
+     'C514NO3                         ','CO_a01                          ','MG2_a01                         ', &
+     'MG3_a01                         ','CHOHO2CHO_a01                   ','CHOHO2CHOHOH_a01                ', &
+     'BZOBIPEROH                      ','CN                              ','GOLIG1_a01                      ', &
+     'GOLIG3_a01                      ','CHOHOHCHOHOH                    ','HOCH2CH2O                       ', &
      'C3H8                            ','CH3COCHOHOH                     ','HCOCH2CO2H                      ', &
      'HCOCH2CO3H                      ','HOC2H4CO3H                      ','PROPACID                        ', &
-     'C6H5OOH                         ','PR2O2HNO3                       ','C312COCO3H                      ', &
-     'C413COOOH                       ','MGLYOXDA_a01                    ','IC4H10                          ', &
-     'MACROH                          ','MMALNHYOOH                      ','BZFUOOH                         ', &
-     'EPXDLCO2H                       ','EPXDLCO3H                       ','MPAN                            ', &
-     'PIPN                            ','TLEMUCCO2H                      ','C511OOH                         ', &
-     'C511O2                          ','C512OOH                         ','TLEMUCCO3H                      ', &
-     'C59OOH                          ','CHOC3COOOH                      ','C6H5CO3H                        ', &
-     'ACCOMECO3H                      ','TLOBIPEROH                      ','CH2OHSO3m_a01                   ', &
-     'H2                              ','CO235C6OOH                      ','CO235C6O2                       ', &
+     'IC3H7NO3                        ','PR2O2HNO3                       ','C312COCO3H                      ', &
+     'C413COOOH                       ','MGLYOXDA_a01                    ','TLFUOOH                         ', &
+     'IC4H10                          ','NTLFUOOH                        ','MACROH                          ', &
+     'BZFUOOH                         ','LIEPOX                          ','EPXDLCO2H                       ', &
+     'EPXDLCO3H                       ','IC4H9NO3                        ','LDISOPACO                       ', &
+     'C511OOH                         ','C59OOH                          ','CHOC3COOOH                      ', &
+     'C6H5OOH                         ','CH2OHSO3m_a01                   ','H2                              ', &
      'H2SO4                           ','CHOHOHO2_a01                    ','CH3CHOHOH                       ', &
-     'CH3COCH2O2NO2                   ','PPN                             ','BPINAOOH                        ', &
-     'C106O2                          ','C109OOH                         ','PINALO2                         ', &
-     'C5CO2DCO3H                      ','C716O2                          ','C721O2                          ', &
-     'LHC4ACCO3H                      ','LAPINABOOH                      ','MNCATECOOH                      ', &
-     'C5DIALOOH                       ','ISOPDNO3                        ','HO4_a01                         ', &
-     'NCATECOOH                       ','HYETHO2H_a01                    ','HOCH2OH                         ', &
-     'PHCOOH                          ','C8BC                            ','NDNPHENOOH                      ', &
-     'C615CO2OOH                      ','ETHGLY                          ','NCCH2O2                         ', &
-     'NO3CH2CO3                       ','STYRENOOH                       ','BZBIPEROOH                      ', &
-     'C614OOH                         ','BZEMUCCO                        ','IPROPOL                         ', &
-     'NC3H7OOH                        ','C3DIALOOH                       ','HCOCOHCO3H                      ', &
-     'C44OOH                          ','C44O2                           ','CO2H3CO2H                       ', &
-     'NISOPO2                         ','HCOCO2CH3CHO                    ','IBUTOLBOOH                      ', &
-     'C811CO3H                        ','IC4H9OOH                        ','IC4H9O2                         ', &
-     'IPRHOCO3H                       ','MACO3H                          ','C89CO2H                         ', &
-     'C89CO3H                         ','MALANHYOOH                      ','MECOACEOOH                      ', &
-     'TLEMUCCO                        ','NBZFUONE                        ','NBZFUOOH                        ', &
-     'C1ODC2O2C4OD                    ','NDNCRESOOH                      ','C513OOH                         ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_44 = (/ &
-     'MBOACO                          ','CHOCO2m_a01                     ','C2O4m_a01                       ', &
-     'BrOHm_a01                       ','C614O2                          ','FeHO2pp_a01                     ', &
-     'HNO4                            ','NHOH                            ','LISOPACO                        ', &
-     'LTMB                            ','NTLFUO2                         ','PTLQO2                          ', &
-     'HOOCH2CHOHOH                    ','EBENZ                           ','PRONO3BO2                       ', &
-     'BIACETOH                        ','LAPINABO2                       ','CHOC3COO2                       ', &
-     'LHAROM                          ','BZFUO2                          ','TLFUO2                          ', &
-     'PBZQO2                          ','NBZFUO2                         ','NC4DCO2H                        ', &
-     'NPTLQO2                         ','C514O2                          ','TOLUENE                         ', &
+     'MNCATECOOH                      ','DB1NO3                          ','MNNCATCOOH                      ', &
+     'C614OOH                         ','NNCATECOOH                      ','STYRENOOH                       ', &
+     'C810NO3                         ','C89NO3                          ','C89CO2H                         ', &
+     'C89CO3H                         ','NPHENOOH                        ','C5CO2OHPAN                      ', &
+     'C5DIALOOH                       ','BZBIPEROOH                      ','C811PAN                         ', &
+     'BZEMUCCO                        ','BPINAOOH                        ','C109OOH                         ', &
+     'C106NO3                         ','C10PAN2                         ','PINALNO3                        ', &
+     'DNPHENOOH                       ','LAPINABOOH                      ','LNBPINABOOH                     ', &
+     'DNCRESOOH                       ','HO4_a01                         ','HYETHO2H_a01                    ', &
+     'NC4OHCO3H                       ','NC4OHCPAN                       ','HOCH2OH                         ' /)
+  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_6 = (/ &
+     'ETHGLY                          ','C2H5NO3                         ','C5PAN9                          ', &
+     'IPROPOL                         ','NC3H7OOH                        ','PHCOOH                          ', &
+     'C5CO2DCO3H                      ','C3DIALOOH                       ','HCOCOHCO3H                      ', &
+     'C5COO2NO2                       ','C3PAN1                          ','C3PAN2                          ', &
+     'HCOCOHPAN                       ','CHOC3COPAN                      ','C44OOH                          ', &
+     'CO2H3CO2H                       ','IBUTOLBOOH                      ','TLEMUCCO                        ', &
+     'IC4H9OOH                        ','IPRHOCO3H                       ','MACO3H                          ', &
+     'MALANHYOOH                      ','MECOACEOOH                      ','BUT2OLNO3                       ', &
+     'C312COPAN                       ','C4PAN5                          ','IBUTOLBNO3                      ', &
+     'EPXDLPAN                        ','MALDIALPAN                      ','C513OOH                         ', &
+     'C615CO2OOH                      ','C7PAN3                          ','C6CO2OHPAN                      ', &
+     'ClNO2_a01                       ','NCATECOOH                       ','CHOCO2m_a01                     ', &
+     'C2O4m_a01                       ','BrOHm_a01                       ','FeHO2pp_a01                     ', &
+     'LHC4ACCO3H                      ','LTMB                            ','BPINANO3                        ', &
+     'C811O2                          ','LHAROM                          ','ROO6R3O2                        ', &
+     'LISOPEFO                        ','HOOCH2CHOHOH                    ','EBENZ                           ', &
+     'BIACETOH                        ','NCATECHOL                       ','TOLUENE                         ', &
      'CO2COHOHO2m_a01                 ','BrCl2m_a01                      ','Br2Clm_a01                      ', &
-     'NBZQO2                          ','FeSO4p_a01                      ','NC4MDCO2H                       ', &
-     'CHOOOH_a01                      ','C813OOH                         ','C813O2                          ', &
-     'C513O2                          ','CH3ONO                          ','HOCH2CHOHOH                     ', &
-     'HOOCH2CO3H                      ','PAN                             ','PHAN                            ', &
-     'HYPROPO2H                       ','C5COOHCO3H                      ','PERPROACID                      ', &
-     'NCRES1O                         ','HOBr                            ','C5DICAROOH                      ', &
-     'PERIBUACID                      ','TC4H9OOH                        ','TC4H9O2                         ', &
-     'DMSO                            ','LISOPACNO3O2                    ','NCRESOOH                        ', &
-     'PHENOOH                         ','LBUT1ENOOH                      ','C1OOHC3O2C4OD                   ', &
-     'NPHEN1O                         ','C6COOHCO3H                      ','Br_a01                          ', &
-     'TOL1O                           ','FeOHHO2p_a01                    ','CRESOOH                         ', &
-     'MCATEC1O                        ','DNPHENO2                        ','DNCRESO2                        ', &
-     'CH3CO3H_a01                     ','CHOOHOOCOOH_a01                 ','MNNCATECO2                      ', &
-     'NPHENO2                         ','C6CO4DB                         ','NNCATECO2                       ', &
-     'STYRENO2                        ','CH3COCO3H                       ','BPINAO2                         ', &
-     'TLBIPERNO3                      ','NSTYRENO2                       ','CATEC1O2                        ', &
-     'C109O2                          ','LNAPINABO2                      ','MNCATECO2                       ', &
-     'IBUTOLBO2                       ','C810O2                          ','IPRHOCO2H                       ', &
-     'MACO2H                          ','MACRO                           ','C85CO3                          ', &
-     'LC5PAN1719                      ','HOCOC4DIAL                      ','C6H5CH2O2                       ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_45 = (/ &
-     'C59O2                           ','NCATECO2                        ','CHOOHOOCO2m_a01                 ', &
-     'N2O5                            ','NH2                             ','HNO                             ', &
-     'CHOHOHCOOH                      ','C721CHO                         ','PINONIC                         ', &
-     'C6H5O                           ','CH3CHCO                         ','ROO6R1O2                        ', &
-     'HOC2H4CO3                       ','HOCH2COCH2OOH                   ','C54CO                           ', &
-     'BIACETOOH                       ','BUT2OLOOH                       ','MALDIALOOH                      ', &
-     'MACRNO3                         ','C1ODC3O2C4OOH                   ','HOCl                            ', &
-     'NOPINDO2                        ','DB2OOH                          ','LNISOOH                         ', &
-     'FeOH2p_a01                      ','C2H5OOH                         ','NDNPHENO2                       ', &
-     'MALANHY                         ','NCRESO2                         ','HOCH2COCH2O2                    ', &
-     'IC3H7OOH                        ','C5CO2OHCO3                      ','NC3H7O2                         ', &
-     'HOCH2CO3H_a01                   ','C5DICARBO2                      ','C312COCO3                       ', &
-     'LC578OOH                        ','C2H5O2_a01                      ','NC4OHCO3                        ', &
-     'CO2H3CO3H                       ','HO12CO3C4                       ','CHOHOOCOOH_a01                  ', &
-     'MACO2                           ','MEPROPENE                       ','C5CO14OOH                       ', &
-     'C6CO2OHCO3                      ','C4CO2DBCO3                      ','MALDALCO3H                      ', &
-     'BZEMUCOOH                       ','PHENO2                          ','LC4H9OOH                        ', &
-     'NDNCRESO2                       ','CO235C6CHO                      ','TLEMUCOOH                       ', &
-     'ME3FURAN                        ','C7CO4DB                         ','CRESO2                          ', &
-     'FeSO3p_a01                      ','BZBIPERO2                       ','MC3ODBCO2H                      ', &
-     'C32OH13CO                       ','MALDIALO2                       ','NCRES1O2                        ', &
-     'OXYL1O2                         ','HMAC                            ','HVMK                            ', &
-     'C86O2                           ','C722O2                          ','IC3H7O2_a01                     ', &
-     'MCATEC1O2                       ','ClOm_a01                        ','BrOm_a01                        ', &
-     'NPHEN1O2                        ','C4CODIAL                        ','LMBOABOOH                       ', &
-     'LMBOABO2                        ','LMEKNO3                         ','C1OOHC2OOHC4OD                  ', &
-     'HOCHCHO                         ','C1OOHC2O2C4OD                   ','CH3COCO3                        ', &
-     'CH3CHOHO2                       ','LZCO3C23DBCOD                   ','BIACETO2                        ', &
-     'CHOCHOHOH                       ','IPRCO3                          ','HOOCCOOH                        ', &
-     'ACCOMECO3                       ','PBZQONE                         ','LBUT1ENO2                       ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_46 = (/ &
-     'C5CO2DBCO3                      ','LNISO3                          ','DB1OOH                          ', &
-     'ClNO2_a01                       ','FeCl2p_a01                      ','CO235C6CO3                      ', &
-     'HCOCOCH2OOH                     ','CH2CHOH                         ','CO235C5CHO                      ', &
-     'CATEC1O                         ','C5DIALO2                        ','CH3SO2                          ', &
-     'LXYL                            ','CH3COCHO2CHO                    ','EZCHOCCH3CHO2                   ', &
-     'LNBPINABO2                      ','C615CO2O2                       ','CH4                             ', &
-     'CH3COCH3_a01                    ','TLBIPEROOH                      ','HO3_a01                         ', &
-     'NOPINONE                        ','HCOCO3                          ','LNMBOABOOH                      ', &
-     'CRESOL                          ','CH2OOA                          ','NOA                             ', &
-     'C721CO3                         ','CATECHOL                        ','LC578O2                         ', &
-     'C2H5OH                          ','MVKNO3                          ','LC4H9O2                         ', &
-     'MEK                             ','LMEKOOH                         ','TLEMUCCO3                       ', &
-     'BZEMUCCO3                       ','CH3COOm_a01                     ','CHOHOOCO2m_a01                  ', &
-     'NO2_a01                         ','CH3COCHCO                       ','C2H2                            ', &
-     'HONO                            ','GLYOX_a01                       ','CO14O3CHO                       ', &
-     'MMALANHYO2                      ','BrCl                            ','SABINENE                        ', &
-     'C89O2                           ','BUT1ENE                         ','PTLQONE                         ', &
-     'BPINENE                         ','CAMPHENE                        ','CH3CN                           ', &
-     'HCN                             ','STYRENE                         ','LHMVKABOOH                      ', &
-     'TLEMUCO2                        ','LNMBOABO2                       ','IC3H7O2                         ', &
-     'CO2CO2mm_a01                    ','HSO4m_a01                       ','BZEMUCO2                        ', &
-     'CH3NO3                          ','C811CO3                         ','APINAOO                         ', &
-     'IBUTALOH                        ','MBO                             ','EPXDLCO3                        ', &
-     'C3DIALO2                        ','C6H5CO3                         ','ACCOMECHO                       ', &
-     'MECOACETO2                      ','HCO3m_a01                       ','C6H5O2                          ', &
-     'C5134CO2OH                      ','CH2CO                           ','CH3CO2H                         ', &
-     'HOCH2CO3_a01                    ','HCOCH2CHO                       ','MACROOH                         ', &
-     'MALDALCO2H                      ','HOCH2COCHO                      ','HCOCOHCO3                       ', &
-     'HYPROPO2                        ','SO2_a01                         ','ClOHm_a01                       ', &
-     'FeClpp_a01                      ','MACO3                           ','TLBIPERO2                       ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_47 = (/ &
-     'HOOCH2CHO_a01                   ','ClNO3                           ','ALCOCH2OOH                      ', &
-     'CO23C4CHO                       ','CO23C4CO3                       ','ISOPBDNO3O2                     ', &
-     'CH3COCO2m_a01                   ','BrNO3                           ','C5CO14OH                        ', &
-     'C2H5CO3                         ','C96CO3                          ','C33CO                           ', &
-     'BENZENE                         ','CO13C4CHO                       ','HOCH2OOH                        ', &
-     'HYPERACET                       ','HCOCO3H                         ','HOCH2CO2H                       ', &
-     'DNCRES                          ','BENZAL                          ','APINBOO                         ', &
-     'CARENE                          ','APINENE                         ','CO2C3CHO                        ', &
-     'ETHGLY_a01                      ','MNCATECH                        ','NOPINOO                         ', &
-     'DNPHEN                          ','HCOC5                           ','CH3CHOHOH_a01                   ', &
-     'BZFUONE                         ','EPXC4DIAL                       ','MALANHYO2                       ', &
-     'MGLYOX_a01                      ','CH3CO3H                         ','IBUTDIAL                        ', &
-     'LMEKO2                          ','IPRCHO                          ','HBr                             ', &
-     'CO23C3CHO                       ','CH3CHOHOOH                      ','BZEPOXMUC                       ', &
-     'MALDIALCO3                      ','IPRHOCO3                        ','CBUT2ENE                        ', &
-     'TBUT2ENE                        ','BUT2OLO2                        ','HOOCH2CO2H                      ', &
-     'MBOOO                           ','CHOC3COCO3                      ','CH3COCO2H_a01                   ', &
-     'O1D                             ','HOCH2CO3                        ','TOL1OHNO2                       ', &
-     'MCATECHOL                       ','CO2H3CO3                        ','C1ODC2OOHC4OD                   ', &
-     'HYETHO2H                        ','NO3CH2CHO                       ','HCOCCH3CO                       ', &
-     'PHENOL                          ','HOCH2CO2m_a01                   ','C3H7CHO                         ', &
-     'EZCH3CO2CHCHO                   ','C5CO14O2                        ','TLFUONE                         ', &
-     'CO2                             ','DB2O2                           ','LHC4ACCO3                       ', &
-     'Br2                             ','HOOCH2CO3                       ','HCOCO2H_a01                     ', &
-     'HNO3_a01                        ','HCOCH2CO3                       ','C2H5OOH_a01                     ', &
-     'HOC6H4NO2                       ','TLEPOXMUC                       ','HOOCCO2m_a01                    ', &
-     'DMS                             ','HOOCH2CHOHOH_a01                ','MALDIAL                         ', &
-     'C2H5CHO                         ','ACETOL_a01                      ','ISOPBOOH                        ', &
-     'IPROPOL_a01                     ','HOCH2CHOHOH_a01                 ','CHOCHOHOH_a01                   ', &
-     'Cl2                             ','LDISOPACO2                      ','ISOPDOOH                        ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_48 = (/ &
-     'C5DICARB                        ','HCOCO                           ','NORPINAL                        ', &
-     'O2_a01                          ','LHMVKABO2                       ','CHOCOCH2O2                      ', &
-     'C2H5OH_a01                      ','MACRO2                          ','CH3OOH                          ', &
-     'C89CO3                          ','HOCH2O2                         ','C96O2                           ', &
-     'LISOPACO2                       ','NC4CHO                          ','HNO4_a01                        ', &
-     'HSO5m_a01                       ','LISOPEFO2                       ','H2O2                            ', &
-     'PINAL                           ','C3H6                            ','CHOHOHCHOHOH_a01                ', &
-     'CH3COCH2O2                      ','BrCl_a01                        ','CH3CO                           ', &
-     'CH2OOCOOH_a01                   ','CO3m_a01                        ','IC3H7OOH_a01                    ', &
-     'HCOCH2O2                        ','C2H4                            ','CH3CO3_a01                      ', &
-     'HOCH2CH2O2_a01                  ','ClO                             ','CH2OOHCO2m_a01                  ', &
-     'CH3OH                           ','ISOPDO2                         ','DB1O2                           ', &
-     'C5H8                            ','ISOPBO2                         ','LISOPACNO3                      ', &
+     'FeSO4p_a01                      ','NDNPHENOOH                      ','C89PAN                          ', &
+     'TLEMUCNO3                       ','C5DICAROOH                      ','HOCl                            ', &
+     'C9PAN2                          ','HOBr                            ','DMSO                            ', &
+     'CHOOOH_a01                      ','C6COOHCO3H                      ','ACCOMEPAN                       ', &
+     'PBZN                            ','C4CO2DBPAN                      ','CRESOOH                         ', &
+     'HOCH2CHOHOH                     ','HOOCH2CO3H                      ','LZCPANC23DBCOD                  ', &
+     'HYPROPO2H                       ','PERPROACID                      ','ISOPBNO3                        ', &
+     'PROPOLNO3                       ','C721PAN                         ','C5CO2DBPAN                      ', &
+     'C5COOHCO3H                      ','PERIBUACID                      ','TC4H9OOH                        ', &
+     'TC4H9NO3                        ','NDNCRESOOH                      ','NBZFUOOH                        ', &
+     'LBUT1ENOOH                      ','LBUT1ENNO3                      ','LC4H9NO3                        ', &
+     'C1OOHC3O2C4OD                   ','TLEMUCPAN                       ','PHENOOH                         ' /)
+  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_7 = (/ &
+     'Br_a01                          ','C614NO3                         ','BZBIPERNO3                      ', &
+     'FeOHHO2p_a01                    ','BZEMUCPAN                       ','OHMENTHEN6ONEO2                 ', &
+     'C812O2                          ','CH3CO3H_a01                     ','CHOOHOOCOOH_a01                 ', &
+     'PBZQONE                         ','CH3COCO3H                       ','IPRHOCO2H                       ', &
+     'MACO2H                          ','LME3FURANO2                     ','NBZFUONE                        ', &
+     'C97O2                           ','MBOACO                          ','CHOOHOOCO2m_a01                 ', &
+     'LISOPACO                        ','C54CO                           ','CH3O2NO2                        ', &
+     'HOCH2O2NO2                      ','PINONIC                         ','CHOHOHCOOH                      ', &
+     'C2H5O2NO2                       ','ETHOHNO3                        ','CH3CHCO                         ', &
+     'HOCH2COCH2OOH                   ','BIACETOOH                       ','BUT2OLOOH                       ', &
+     'MALDIALOOH                      ','NCRESOOH                        ','MPAN                            ', &
+     'PIPN                            ','LNISOOH                         ','DB2OOH                          ', &
+     'FeOH2p_a01                      ','MALANHY                         ','NH2O                            ', &
+     'BZEMUCOOH                       ','C813O2                          ','HOCH2CO3H_a01                   ', &
+     'C2H5O2_a01                      ','CHOHOOCOOH_a01                  ','C2H5OOH                         ', &
+     'IC3H7OOH                        ','CO235C6O2                       ','CH3COCH2O2NO2                   ', &
+     'C5CO14OOH                       ','PPN                             ','PTLQONE                         ', &
+     'C44O2                           ','CO2H3CO3H                       ','IC4H9O2                         ', &
+     'ISOPDNO3                        ','LC578OOH                        ','TLEMUCOOH                       ', &
+     'MALDALCO3H                      ','MC3ODBCO2H                      ','LC4H9OOH                        ', &
+     'C511O2                          ','C512O2                          ','C98O2                           ', &
+     'BZEMUCNO3                       ','FeSO3p_a01                      ','HNO4                            ', &
+     'CH2OOA                          ','IC3H7O2_a01                     ','RO6R1O2                         ', &
+     'HMAC                            ','HVMK                            ','MACRO                           ', &
+     'C6CO4DB                         ','ClOm_a01                        ','BrOm_a01                        ', &
+     'NC4MDCO2H                       ','LMBOABOOH                       ','NC4DCO2H                        ', &
+     'C1OOHC2OOHC4OD                  ','NISOPO2                         ','CH3ONO                          ', &
+     'PINALO2                         ','CHOCHOHOH                       ','HOCHCHO                         ', &
+     'HOOCCOOH                        ','C721CHO                         ','C614O2                          ', &
+     'HCOCO2CH3CHO                    ','HOCOC4DIAL                      ','C1ODC2O2C4OD                    ' /)
+  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_8 = (/ &
+     'C513O2                          ','DB1OOH                          ','NOPINONE                        ', &
+     'C106O2                          ','C716O2                          ','FeCl2p_a01                      ', &
+     'CH4                             ','CH3COCH3_a01                    ','C7CO4DB                         ', &
+     'PBZQO2                          ','CH2CHOH                         ','CH3SO2                          ', &
+     'NCCH2O2                         ','PAN                             ','PHAN                            ', &
+     'HCOCOCH2OOH                     ','TLFUO2                          ','C32OH13CO                       ', &
+     'PRONO3BO2                       ','CHOC3COO2                       ','NTLFUO2                         ', &
+     'TLBIPEROOH                      ','HO12CO3C4                       ','LXYL                            ', &
+     'CRESOL                          ','C6H5CH2O2                       ','C85O2                           ', &
+     'CO235C6CHO                      ','LAPINABO2                       ','BZFUO2                          ', &
+     'NBZFUO2                         ','HO3_a01                         ','C514O2                          ', &
+     'LNMBOABOOH                      ','N2O5                            ','C2H5OH                          ', &
+     'MCATEC1O                        ','NPHEN1O                         ','CATECHOL                        ', &
+     'C4CODIAL                        ','TC4H9O2                         ','MACRNO3                         ', &
+     'LMEKOOH                         ','TOL1OHNO2                       ','BENZENE                         ', &
+     'CH3COOm_a01                     ','CHOHOOCO2m_a01                  ','NCRES1O                         ', &
+     'TLBIPERNO3                      ','CH3COCHCO                       ','C2H2                            ', &
+     'MNCATECO2                       ','DNPHENO2                        ','CH3CHOHOOH                      ', &
+     'NO3CH2CO3                       ','HOCH2COCHO                      ','C8BCO2                          ', &
+     'STYRENO2                        ','IBUTOLBO2                       ','NSTYRENO2                       ', &
+     'C810O2                          ','C721O2                          ','BrCl                            ', &
+     'NPHENO2                         ','C109O2                          ','GLYOX_a01                       ', &
+     'C59O2                           ','MNNCATECO2                      ','DNCRESO2                        ', &
+     'HNO                             ','HNO3_a01                        ','PTLQO2                          ', &
+     'MACO2                           ','MEPROPENE                       ','BPINAO2                         ', &
+     'LNAPINABO2                      ','LHMVKABOOH                      ','C1ODC3O2C4OOH                   ', &
+     'C6H5O                           ','MBO                             ','CO2CO2mm_a01                    ', &
+     'HSO4m_a01                       ','NH2                             ','BUT1ENE                         ', &
+     'ROO6R1O2                        ','NBZQO2                          ','NC3H7O2                         ', &
+     'IPROPOL_a01                     ','NDNPHENO2                       ','CH2CO                           ' /)
+  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_9 = (/ &
+     'MALDIALO2                       ','NDNCRESO2                       ','LMEKNO3                         ', &
+     'C1OOHC2O2C4OD                   ','HCO3m_a01                       ','HOCH2CO3_a01                    ', &
+     'C5DICARBO2                      ','ClNO2                           ','HCOCH2CHO                       ', &
+     'OXYL1O2                         ','CO235C5CHO                      ','NNCATECO2                       ', &
+     'MACROOH                         ','MEK                             ','HCOCO3H                         ', &
+     'CO14O3CHO                       ','C85CO3                          ','NCATECO2                        ', &
+     'CH3CN                           ','CH3CO2H_a01                     ','ME3FURAN                        ', &
+     'SO2_a01                         ','ACCOMECHO                       ','LC5PAN1719                      ', &
+     'ClOHm_a01                       ','FeClpp_a01                      ','LISOPACNO3O2                    ', &
+     'CATEC1O2                        ','HOOCH2CHO_a01                   ','ALCOCH2OOH                      ', &
+     'CH3COCO2m_a01                   ','HOC2H4CO3                       ','LNISO3                          ', &
+     'SABINENE                        ','NOA                             ','BIACETO2                        ', &
+     'NCRESO2                         ','CRESO2                          ','MVKNO3                          ', &
+     'LBUT1ENO2                       ','NPTLQO2                         ','CAMPHENE                        ', &
+     'LNBPINABO2                      ','BPINENE                         ','C89O2                           ', &
+     'NOPINDO2                        ','C6CO2OHCO3                      ','C4CO2DBCO3                      ', &
+     'C5CO2OHCO3                      ','C312COCO3                       ','HCN                             ', &
+     'NC4OHCO3                        ','C615CO2O2                       ','C5DIALO2                        ', &
+     'HOCH2OOH                        ','NCRES1O2                        ','CH3COCHO2CHO                    ', &
+     'NPHEN1O2                        ','MCATEC1O2                       ','HOCH2CO2H                       ', &
+     'LMBOABO2                        ','CO2C3CHO                        ','IBUTALOH                        ', &
+     'LC578O2                         ','ETHGLY_a01                      ','APINENE                         ', &
+     'CARENE                          ','CH3CHOHOH_a01                   ','C33CO                           ', &
+     'C721CO3                         ','STYRENE                         ','BZBIPERO2                       ', &
+     'MGLYOX_a01                      ','IPRCO3                          ','BENZAL                          ', &
+     'CH3CO3H                         ','LZCO3C23DBCOD                   ','C5CO14OH                        ', &
+     'CH3COCO3                        ','HOCH2COCH2O2                    ','IBUTDIAL                        ', &
+     'TLEMUCO2                        ','LNMBOABO2                       ','PHENO2                          ', &
+     'MALDALCO2H                      ','BZEMUCO2                        ','EPXC4DIAL                       ', &
+     'HBr                             ','EZCHOCCH3CHO2                   ','HYPERACET                       ' /)
+  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_10 = (/ &
+     'MMALANHYO2                      ','CH3NO3                          ','CATEC1O                         ', &
+     'C5134CO2OH                      ','BZEMUCCO3                       ','TLEMUCCO3                       ', &
+     'CO235C6CO3                      ','C5CO2DBCO3                      ','HCOC5                           ', &
+     'MCATECHOL                       ','Br2                             ','TBUT2ENE                        ', &
+     'HYETHO2H                        ','MECOACETO2                      ','CBUT2ENE                        ', &
+     'CH3CHOHO2                       ','HOOCH2CO2H                      ','HYPROPO2                        ', &
+     'C6H5O2                          ','C6H5CO3                         ','C3DIALO2                        ', &
+     'ISOPBDNO3O2                     ','LC4H9O2                         ','CO23C4CHO                       ', &
+     'TLBIPERO2                       ','HOCH2CO2m_a01                   ','CH3COCO2H_a01                   ', &
+     'C722O2                          ','HONO_a01                        ','CO23C3CHO                       ', &
+     'ClNO3                           ','DNPHEN                          ','MNCATECH                        ', &
+     'C96CO3                          ','C1ODC2OOHC4OD                   ','HCOCO2H_a01                     ', &
+     'DNCRES                          ','ACCOMECO3                       ','APINAOO                         ', &
+     'HNO4_a01                        ','IPRCHO                          ','BZEPOXMUC                       ', &
+     'HOOCCO2m_a01                    ','DMS                             ','HOOCH2CHOHOH_a01                ', &
+     'BZFUONE                         ','CO23C4CO3                       ','C86O2                           ', &
+     'MACO3                           ','LMEKO2                          ','C2H5CO3                         ', &
+     'EPXDLCO3                        ','TLEPOXMUC                       ','HOCH2CHOHOH_a01                 ', &
+     'CHOCHOHOH_a01                   ','C811CO3                         ','BrNO3                           ', &
+     'CO13C4CHO                       ','BUT2OLO2                        ','ISOPBOOH                        ', &
+     'HCOCOHCO3                       ','CO2                             ','PHENOL                          ', &
+     'HOCH2CO                         ','HCOCCH3CO                       ','ACETOL_a01                      ', &
+     'APINBOO                         ','TOL1O                           ','O1D                             ', &
+     'NOPINOO                         ','HCOCO3                          ','MALANHYO2                       ', &
+     'MALDIALCO3                      ','Cl2                             ','IPRHOCO3                        ', &
+     'C3H7CHO                         ','NO3CH2CHO                       ','TLFUONE                         ', &
+     'O2_a01                          ','HOC6H4NO2                       ','CHOC3COCO3                      ', &
+     'C2H5OOH_a01                     ','HOOCH2CO3                       ','CO2H3CO3                        ', &
+     'C2H5OH_a01                      ','MBOOO                           ','CH3OOH                          ', &
+     'DB2O2                           ','IC3H7O2                         ','C5CO14O2                        ' /)
+  CHARACTER(LEN=32), PARAMETER, DIMENSION(90) :: SPC_NAMES_11 = (/ &
+     'EZCH3CO2CHCHO                   ','HOCH2OH_a01                     ','ISOPDOOH                        ', &
+     'C2H5CHO                         ','C5H8                            ','NC4CHO                          ', &
+     'HCOCH2CO3                       ','HSO5m_a01                       ','CH3OH                           ', &
+     'LDISOPACO2                      ','MALDIAL                         ','CHOHOHCHOHOH_a01                ', &
+     'H2O2                            ','NORPINAL                        ','LISOPACO2                       ', &
+     'HCOCO                           ','LHC4ACCO3                       ','C3H6                            ', &
+     'BrCl_a01                        ','CHOCOCH2O2                      ','MACRO2                          ', &
+     'HOCH2CH2O2_a01                  ','CH2OOHCO2m_a01                  ','C89CO3                          ', &
+     'CH3CO                           ','C5DICARB                        ','C96O2                           ', &
+     'CH3CHO_a01                      ','LISOPEFO2                       ','LHMVKABO2                       ', &
+     'HOCH2CO3H                       ','C2H4                            ','CH3CO2H                         ', &
+     'PINAL                           ','HCOCH2O2                        ','ISOPDO2                         ', &
+     'CH3COCH2O2                      ','NO2_a01                         ','HOCH2O2_a01                     ', &
+     'IC3H7OOH_a01                    ','DB1O2                           ','Br2_a01                         ', &
+     'CH3COCHOHOH_a01                 ','Cl_a01                          ','HCOOm_a01                       ', &
+     'HCl                             ','CO2_a01                         ','HOOCCOOH_a01                    ', &
+     'ClO                             ','ISOPBO2                         ','LISOPACNO3                      ', &
      'LHC4ACCHO                       ','CO2H3CHO                        ','C4MDIAL                         ', &
-     'LZCO3HC23DBCOD                  ','HCl                             ','HOCH2CO                         ', &
-     'CH3CHO_a01                      ','O3P                             ','MACR                            ', &
-     'DB1O                            ','HNO3                            ','LISOPACOOH                      ', &
-     'LZCODC23DBCOOH                  ','Cl_a01                          ','FeOHpp_a01                      ', &
-     'Br2_a01                         ','CH3COCH3                        ','HOOCCOOH_a01                    ', &
-     'CH3COCO2H                       ','HOCH2CO3H                       ','HOCH2O2_a01                     ', &
-     'HOCH2CH2O2                      ','BrO                             ','CH3O                            ', &
-     'HCOCO2H                         ','NO2m_a01                        ','MGLYOX                          ', &
-     'MVK                             ','HCHO_a01                        ','Cl2_a01                         ', &
-     'CH2OO                           ','Feppp_a01                       ','HYPERACET_a01                   ', &
-     'C2H5O2                          ','CH3                             ','CH3CHO                          ', &
-     'CH3COCH2O2_a01                  ','ACETOL                          ','HCOOH_a01                       ', &
-     'HOOCH2CO2H_a01                  ','CH3COCHOHOH_a01                 ','GLYOX                           ', &
-     'CHOHOHCOOH_a01                  ','CHOHOHCO2m_a01                  ','HOCH2CO2H_a01                   ', &
-     'CH2OOCO2m_a01                   ','HOCH2CHO_a01                    ','HOBr_a01                        ', &
-     'CH3CO2H_a01                     ','HOOCH2CHO                       ','HOCH2CHO                        ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(49) :: SPC_NAMES_49 = (/ &
-     'CH3O2_a01                       ','SO3m_a01                        ','H2O                             ', &
-     'HOCl_a01                        ','SO5m_a01                        ','Fepp_a01                        ', &
-     'SO4mm_a01                       ','CH3OOH_a01                      ','OHm_a01                         ', &
-     'FeOpp_a01                       ','NO3m_a01                        ','O3_a01                          ', &
-     'HONO_a01                        ','OH_a01                          ','NO2p_a01                        ', &
-     'HOCH2OH_a01                     ','Hp_a01                          ','CO                              ', &
-     'HCOOm_a01                       ','HCHO                            ','O3                              ', &
-     'NO3_a01                         ','CH3OH_a01                       ','OH                              ', &
-     'HO2                             ','HSO3m_a01                       ','CH3CO3                          ', &
-     'Br                              ','Clm_a01                         ','NO3                             ', &
-     'HOCH2OOH_a01                    ','Cl2m_a01                        ','SO4m_a01                        ', &
-     'O2m_a01                         ','SO3mm_a01                       ','Br2m_a01                        ', &
-     'CO2_a01                         ','SO2                             ','H2O2_a01                        ', &
-     'HO2_a01                         ','Brm_a01                         ','CH3O2                           ', &
-     'Cl                              ','HCOOH                           ','O2                              ', &
-     'N2                              ','NO                              ','NO2                             ', &
-     'H2O_a01                         ' /)
-  CHARACTER(LEN=32), PARAMETER, DIMENSION(4459) :: SPC_NAMES = (/&
+     'LZCO3HC23DBCOD                  ','CH3O                            ','DB1O                            ', &
+     'HNO3                            ','CH3CO3_a01                      ','LISOPACOOH                      ', &
+     'LZCODC23DBCOOH                  ','FeOHpp_a01                      ','CH3COCH3                        ', &
+     'BrO                             ','MACR                            ','HOCH2CO3                        ', &
+     'HOCH2CH2O2                      ','HCOCO2H                         ','O3P                             ', &
+     'CH3COCO2H                       ','NO2m_a01                        ','HOCH2O2                         ', &
+     'MVK                             ','Cl2_a01                         ','SO3mm_a01                       ', &
+     'CH3O2_a01                       ','HOCH2CO2H_a01                   ','HOOCH2CO2H_a01                  ', &
+     'C2H5O2                          ','CH3                             ','CH2OO                           ', &
+     'CHOHOHCOOH_a01                  ','HOCH2CHO_a01                    ','GLYOX                           ', &
+     'Feppp_a01                       ','HOOCH2CHO                       ','HYPERACET_a01                   ', &
+     'CH3COCH2O2_a01                  ','ACETOL                          ','MGLYOX                          ' /)
+  CHARACTER(LEN=32), PARAMETER, DIMENSION(53) :: SPC_NAMES_12 = (/ &
+     'CH2OOCOOH_a01                   ','CH2OOCO2m_a01                   ','CH3CHO                          ', &
+     'SO3m_a01                        ','CHOHOHCO2m_a01                  ','HOCH2CHO                        ', &
+     'HCOOH_a01                       ','CH3CO3                          ','HOCH2OOH_a01                    ', &
+     'SO4mm_a01                       ','Fepp_a01                        ','O3                              ', &
+     'CO                              ','HOCl_a01                        ','HOBr_a01                        ', &
+     'OHm_a01                         ','SO5m_a01                        ','HCHO_a01                        ', &
+     'FeOpp_a01                       ','NO3m_a01                        ','NO2p_a01                        ', &
+     'Cl2m_a01                        ','O2m_a01                         ','Br                              ', &
+     'Cl                              ','Clm_a01                         ','Hp_a01                          ', &
+     'NO3_a01                         ','Br2m_a01                        ','CH3O2                           ', &
+     'CO3m_a01                        ','SO4m_a01                        ','Brm_a01                         ', &
+     'H2O2_a01                        ','OH                              ','HO2                             ', &
+     'H2O                             ','HO2_a01                         ','SO2                             ', &
+     'O3_a01                          ','NO                              ','NO2                             ', &
+     'NO3                             ','OH_a01                          ','CH3OOH_a01                      ', &
+     'HSO3m_a01                       ','HCHO                            ','HCOOH                           ', &
+     'CH3OH_a01                       ','O2                              ','N2                              ', &
+     'HONO                            ','H2O_a01                         ' /)
+  CHARACTER(LEN=32), PARAMETER, DIMENSION(1133) :: SPC_NAMES = (/&
     SPC_NAMES_0, SPC_NAMES_1, SPC_NAMES_2, SPC_NAMES_3, SPC_NAMES_4, &
     SPC_NAMES_5, SPC_NAMES_6, SPC_NAMES_7, SPC_NAMES_8, SPC_NAMES_9, &
-    SPC_NAMES_10, SPC_NAMES_11, SPC_NAMES_12, SPC_NAMES_13, SPC_NAMES_14, &
-    SPC_NAMES_15, SPC_NAMES_16, SPC_NAMES_17, SPC_NAMES_18, SPC_NAMES_19, &
-    SPC_NAMES_20, SPC_NAMES_21, SPC_NAMES_22, SPC_NAMES_23, SPC_NAMES_24, &
-    SPC_NAMES_25, SPC_NAMES_26, SPC_NAMES_27, SPC_NAMES_28, SPC_NAMES_29, &
-    SPC_NAMES_30, SPC_NAMES_31, SPC_NAMES_32, SPC_NAMES_33, SPC_NAMES_34, &
-    SPC_NAMES_35, SPC_NAMES_36, SPC_NAMES_37, SPC_NAMES_38, SPC_NAMES_39, &
-    SPC_NAMES_40, SPC_NAMES_41, SPC_NAMES_42, SPC_NAMES_43, SPC_NAMES_44, &
-    SPC_NAMES_45, SPC_NAMES_46, SPC_NAMES_47, SPC_NAMES_48, SPC_NAMES_49 /)
+    SPC_NAMES_10, SPC_NAMES_11, SPC_NAMES_12 /)
 
   INTEGER, DIMENSION(1) :: LOOKAT
   INTEGER, DIMENSION(1) :: MONITOR
   CHARACTER(LEN=32), DIMENSION(1) :: SMASS
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_0 = (/ &
-     '                        O1D + O2 --> RRG1000 + O3P + O2                                             ', &
-     '                        O3P + O2 --> RRG1001 + O3                                                   ', &
-     '                          H + O2 --> RRG2100 + HO2                                                  ', &
-     '                         O3 + OH --> RRG2104 + HO2 + O2                                             ', &
-     '                         H2 + OH --> RRG2105 + H + H2O                                              ', &
-     '                        O3 + HO2 --> RRG2107 + OH + 2 O2                                            ', &
-     '                        OH + HO2 --> RRG2109 + H2O + O2                                             ', &
-     '                           2 HO2 --> RRG2110 + H2O2 + O2                                            ', &
-     '                       O1D + H2O --> RRG2111 + 2 OH                                                 ', &
-     '                       H2O2 + OH --> RRG2112 + H2O + HO2                                            ', &
-     '                           2 H2O --> RRG2117 + H2OH2O                                               ', &
-     '                          H2OH2O --> RRG2118 + 2 H2O                                                ', &
-     '                        O1D + N2 --> RRG3101 + O3P + N2                                             ', &
-     '                         O3 + NO --> RRG3103 + O2 + NO2                                             ', &
-     '                        O3 + NO2 --> RRG3106 + NO3 + O2                                             ', &
-     '                        NO3 + NO --> RRG3108 + 2 NO2                                                ', &
-     '                       NO3 + NO2 --> RRG3109 + N2O5                                                 ', &
-     '                            N2O5 --> RRG3110 + NO3 + NO2                                            ', &
-     '                         OH + NO --> RRG3200 + HONO                                                 ', &
-     '                        HO2 + NO --> RRG3201 + OH + NO2                                             ', &
-     '                        OH + NO2 --> RRG3202a + HNO3                                                ', &
-     '                        OH + NO2 --> RRG3202b + HOONO                                               ', &
-     '                       HO2 + NO2 --> RRG3203 + HNO4                                                 ', &
-     '                       HO2 + NO3 --> RRG3204 + OH + O2 + NO2                                        ', &
-     '                       HONO + OH --> RRG3205 + H2O + NO2                                            ', &
-     '                       HNO3 + OH --> RRG3206 + H2O + NO3                                            ', &
-     '                            HNO4 --> RRG3207 + HO2 + NO2                                            ', &
-     '                       HNO4 + OH --> RRG3208 + H2O + NO2                                            ', &
-     '                        NH3 + OH --> RRG3209 + NH2 + H2O                                            ', &
-     '                        NH2 + O3 --> RRG3210 + NH2O + O2                                            ' /)
+     '                        O1D + O2 --> O3P + O2                                                       ', &
+     '                        O3P + O2 --> O3                                                             ', &
+     '                          H + O2 --> HO2                                                            ', &
+     '                         O3 + OH --> HO2 + O2                                                       ', &
+     '                         H2 + OH --> H + H2O                                                        ', &
+     '                        O3 + HO2 --> OH + 2 O2                                                      ', &
+     '                        OH + HO2 --> H2O + O2                                                       ', &
+     '                           2 HO2 --> H2O2 + O2                                                      ', &
+     '                       O1D + H2O --> 2 OH                                                           ', &
+     '                       H2O2 + OH --> HO2 + H2O                                                      ', &
+     '                           2 H2O --> H2OH2O                                                         ', &
+     '                          H2OH2O --> 2 H2O                                                          ', &
+     '                        O1D + N2 --> O3P + N2                                                       ', &
+     '                         O3 + NO --> NO2 + O2                                                       ', &
+     '                        O3 + NO2 --> NO3 + O2                                                       ', &
+     '                        NO + NO3 --> 2 NO2                                                          ', &
+     '                       NO2 + NO3 --> N2O5                                                           ', &
+     '                            N2O5 --> NO2 + NO3                                                      ', &
+     '                         OH + NO --> HONO                                                           ', &
+     '                        HO2 + NO --> OH + NO2                                                       ', &
+     '                        OH + NO2 --> HNO3                                                           ', &
+     '                        OH + NO2 --> HOONO                                                          ', &
+     '                       HO2 + NO2 --> HNO4                                                           ', &
+     '                       HO2 + NO3 --> OH + NO2 + O2                                                  ', &
+     '                       OH + HONO --> H2O + NO2                                                      ', &
+     '                       HNO3 + OH --> H2O + NO3                                                      ', &
+     '                            HNO4 --> HO2 + NO2                                                      ', &
+     '                       HNO4 + OH --> H2O + NO2                                                      ', &
+     '                        NH3 + OH --> NH2 + H2O                                                      ', &
+     '                        NH2 + O3 --> NH2O + O2                                                      ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_1 = (/ &
-     '                       NH2 + HO2 --> RRG3211 + NH2O + OH                                            ', &
-     '                       NH2 + HO2 --> RRG3212 + HNO + H2O                                            ', &
-     '                        NH2 + NO --> RRG3213 + OH + HO2 + N2                                        ', &
-     '                        NH2 + NO --> RRG3214 + H2O + N2                                             ', &
-     '                       NH2 + NO2 --> N2O + RRG3215 + H2O                                            ', &
-     '                       NH2 + NO2 --> RRG3216 + NH2O + NO                                            ', &
-     '                       NH2O + O3 --> RRG3217 + NH2 + O2                                             ', &
-     '                            NH2O --> RRG3218 + NHOH                                                 ', &
-     '                        HNO + OH --> RRG3219 + H2O + NO                                             ', &
-     '                      NHOH + HNO --> RRG3220 + NH2OH + NO                                           ', &
-     '                       HNO + NO2 --> RRG3221 + HONO + NO                                            ', &
-     '                       NHOH + OH --> RRG3222 + HNO + H2O                                            ', &
-     '                      NH2OH + OH --> RRG3223 + NHOH + H2O                                           ', &
-     '                        HNO + O2 --> RRG3224 + HO2 + NO                                             ', &
-     '                           HOONO --> RRG3227 + OH + NO2                                             ', &
-     '                      HOONO + OH --> RRG3228 + H2O + NO3                                            ', &
-     '                        CH4 + OH --> RRG4101 + CH3 + H2O                                            ', &
-     '                      CH3OH + OH --> RRG4102 + 0.15 CH3O + H2O + 0.85 HCHO + 0.85 HO2               ', &
-     '                     HO2 + CH3O2 --> RRG4103a + CH3OOH + O2                                         ', &
-     '                     HO2 + CH3O2 --> RRG4103b + H2O + HCHO + O2                                     ', &
-     '                      CH3O2 + NO --> RRG4104a + CH3O + NO2                                          ', &
-     '                      CH3O2 + NO --> RRG4104b + CH3NO3                                              ', &
-     '                     NO3 + CH3O2 --> RRG4105 + CH3O + O2 + NO2                                      ', &
-     '                           CH3O2 --> RRG4106a + CH3O + 0.5 O2                                       ', &
-     '                           CH3O2 --> RRG4106b + 0.5 CH3OH + 0.5 HCHO + 0.5 O2                       ', &
-     '                     CH3OOH + OH --> RRG4107 + H2O + 0.4 HCHO + 0.4 OH + 0.6 CH3O2                  ', &
-     '                       HCHO + OH --> RRG4108 + H2O + CO + HO2                                       ', &
-     '                      HCHO + NO3 --> RRG4109 + HNO3 + CO + HO2                                      ', &
-     '                         CO + OH --> RRG4110 + H + CO2                                              ', &
-     '                      OH + HCOOH --> RRG4111 + CO2 + H2O + HO2                                      ' /)
+     '                       NH2 + HO2 --> NH2O + OH                                                      ', &
+     '                       NH2 + HO2 --> HNO + H2O                                                      ', &
+     '                        NH2 + NO --> OH + HO2 + N2                                                  ', &
+     '                        NH2 + NO --> H2O + N2                                                       ', &
+     '                       NH2 + NO2 --> N2O + H2O                                                      ', &
+     '                       NH2 + NO2 --> NH2O + NO                                                      ', &
+     '                       NH2O + O3 --> NH2 + O2                                                       ', &
+     '                            NH2O --> NHOH                                                           ', &
+     '                        HNO + OH --> H2O + NO                                                       ', &
+     '                      NHOH + HNO --> NH2OH + NO                                                     ', &
+     '                       HNO + NO2 --> NO + HONO                                                      ', &
+     '                       NHOH + OH --> HNO + H2O                                                      ', &
+     '                      NH2OH + OH --> NHOH + H2O                                                     ', &
+     '                        HNO + O2 --> HO2 + NO                                                       ', &
+     '                           HOONO --> OH + NO2                                                       ', &
+     '                      HOONO + OH --> H2O + NO3                                                      ', &
+     '                        CH4 + OH --> CH3 + H2O                                                      ', &
+     '                      CH3OH + OH --> 0.15 CH3O + 0.85 HO2 + H2O + 0.85 HCHO                         ', &
+     '                     CH3O2 + HO2 --> CH3OOH + O2                                                    ', &
+     '                     CH3O2 + HO2 --> H2O + HCHO + O2                                                ', &
+     '                      CH3O2 + NO --> CH3O + NO2                                                     ', &
+     '                      CH3O2 + NO --> CH3NO3                                                         ', &
+     '                     CH3O2 + NO3 --> CH3O + NO2 + O2                                                ', &
+     '                           CH3O2 --> CH3O + 0.5 O2                                                  ', &
+     '                           CH3O2 --> 0.5 CH3OH + 0.5 HCHO + 0.5 O2                                  ', &
+     '                     CH3OOH + OH --> 0.6 CH3O2 + 0.4 OH + H2O + 0.4 HCHO                            ', &
+     '                       OH + HCHO --> CO + HO2 + H2O                                                 ', &
+     '                      NO3 + HCHO --> HNO3 + CO + HO2                                                ', &
+     '                         CO + OH --> H + CO2                                                        ', &
+     '                      OH + HCOOH --> CO2 + HO2 + H2O                                                ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_2 = (/ &
-     '                     CH3O2 + NO2 --> RRG4114 + CH3O2NO2                                             ', &
-     '                        CH3O2NO2 --> RRG4115 + CH3O2 + NO2                                          ', &
-     '                   CH3O2NO2 + OH --> RRG4116 + H2O + HCHO + NO3                                     ', &
-     '                     CH3NO3 + OH --> RRG4117 + H2O + HCHO + NO2                                     ', &
-     '                            CH3O --> RRG4118 + HCHO + HO2                                           ', &
-     '                      CH3O + NO2 --> RRG4119a + CH3NO3                                              ', &
-     '                      CH3O + NO2 --> RRG4119b + HONO + HCHO                                         ', &
-     '                       CH3O + NO --> RRG4120a + CH3ONO                                              ', &
-     '                       CH3O + NO --> RRG4120b + HNO + HCHO                                          ', &
-     '                      O3 + CH3O2 --> RRG4121 + CH3O + 2 O2                                          ', &
-     '                     CH3ONO + OH --> RRG4122 + H2O + HCHO + NO                                      ', &
-     '                      HCHO + HO2 --> RRG4123 + HOCH2O2                                              ', &
-     '                         HOCH2O2 --> RRG4124 + HCHO + HO2                                           ', &
-     '                   HOCH2O2 + HO2 --> RRG4125 + 0.5 HOCH2OOH + 0.3 H2O + 0.2 OH + 0.2 HO2 ... etc.   ', &
-     '                    HOCH2O2 + NO --> RRG4126 + HO2 + HCOOH + NO2                                    ', &
-     '                   HOCH2O2 + NO3 --> RRG4127 + HO2 + HCOOH + NO2                                    ', &
-     '                         HOCH2O2 --> RRG4129a + HO2 + HCOOH                                         ', &
-     '                         HOCH2O2 --> RRG4129b + 0.5 HOCH2OH + 0.5 HCOOH + 0.5 O2                    ', &
-     '                   HOCH2OOH + OH --> RRG4130a + HOCH2O2 + H2O                                       ', &
-     '                   HOCH2OOH + OH --> RRG4130b + H2O + OH + HCOOH                                    ', &
-     '                    HOCH2OH + OH --> RRG4132 + H2O + HO2 + HCOOH                                    ', &
-     '                      OH + CH3O2 --> RRG4133 + CH3O + HO2                                           ', &
-     '                           CH2OO --> RRG4134 + CO + OH + HO2                                        ', &
-     '                     CH2OO + H2O --> RRG4135 + HOCH2OOH                                             ', &
-     '                  H2OH2O + CH2OO --> RRG4136 + HOCH2OOH + H2O                                       ', &
-     '                      CH2OO + NO --> RRG4137 + HCHO + NO2                                           ', &
-     '                     CH2OO + NO2 --> RRG4138 + HCHO + NO3                                           ', &
-     '                      CH2OO + CO --> RRG4140 + CO2 + HCHO                                           ', &
-     '                   CH2OO + HCOOH --> RRG4141 + 2 HCOOH                                              ', &
-     '                    CH2OO + HCHO --> 2 LCARBON + RRG4142                                            ' /)
+     '                     CH3O2 + NO2 --> CH3O2NO2                                                       ', &
+     '                        CH3O2NO2 --> CH3O2 + NO2                                                    ', &
+     '                   CH3O2NO2 + OH --> H2O + NO3 + HCHO                                               ', &
+     '                     CH3NO3 + OH --> H2O + NO2 + HCHO                                               ', &
+     '                            CH3O --> HO2 + HCHO                                                     ', &
+     '                      CH3O + NO2 --> CH3NO3                                                         ', &
+     '                      CH3O + NO2 --> HCHO + HONO                                                    ', &
+     '                       CH3O + NO --> CH3ONO                                                         ', &
+     '                       CH3O + NO --> HNO + HCHO                                                     ', &
+     '                      O3 + CH3O2 --> CH3O + 2 O2                                                    ', &
+     '                     CH3ONO + OH --> H2O + NO + HCHO                                                ', &
+     '                      HO2 + HCHO --> HOCH2O2                                                        ', &
+     '                         HOCH2O2 --> HO2 + HCHO                                                     ', &
+     '                   HOCH2O2 + HO2 --> 0.5 HOCH2OOH + 0.2 OH + 0.2 HO2 + 0.3 H2O + 0.5 HCOOH ... etc. ', &
+     '                    HOCH2O2 + NO --> HO2 + NO2 + HCOOH                                              ', &
+     '                   HOCH2O2 + NO3 --> HO2 + NO2 + HCOOH                                              ', &
+     '                         HOCH2O2 --> HO2 + HCOOH                                                    ', &
+     '                         HOCH2O2 --> 0.5 HOCH2OH + 0.5 HCOOH + 0.5 O2                               ', &
+     '                   HOCH2OOH + OH --> HOCH2O2 + H2O                                                  ', &
+     '                   HOCH2OOH + OH --> OH + H2O + HCOOH                                               ', &
+     '                    HOCH2OH + OH --> HO2 + H2O + HCOOH                                              ', &
+     '                      CH3O2 + OH --> CH3O + HO2                                                     ', &
+     '                           CH2OO --> CO + OH + HO2                                                  ', &
+     '                     CH2OO + H2O --> HOCH2OOH                                                       ', &
+     '                  H2OH2O + CH2OO --> HOCH2OOH + H2O                                                 ', &
+     '                      CH2OO + NO --> NO2 + HCHO                                                     ', &
+     '                     CH2OO + NO2 --> NO3 + HCHO                                                     ', &
+     '                      CH2OO + CO --> CO2 + HCHO                                                     ', &
+     '                   CH2OO + HCOOH --> 2 HCOOH                                                        ', &
+     '                    CH2OO + HCHO --> 2 LCARBON                                                      ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_3 = (/ &
-     '                   CH3OH + CH2OO --> 2 LCARBON + RRG4143                                            ', &
-     '                   CH2OO + CH3O2 --> 2 LCARBON + RRG4144                                            ', &
-     '                     CH2OO + HO2 --> LCARBON + RRG4145                                              ', &
-     '                      CH2OO + O3 --> RRG4146 + HCHO + 2 O2                                          ', &
-     '                         2 CH2OO --> RRG4147 + 2 HCHO + O2                                          ', &
-     '                   HOCH2O2 + NO2 --> RRG4148 + HOCH2O2NO2                                           ', &
-     '                      HOCH2O2NO2 --> RRG4149 + HOCH2O2 + NO2                                        ', &
-     '                 HOCH2O2NO2 + OH --> RRG4150 + H2O + NO3 + HCOOH                                    ', &
-     '                        CH3 + O2 --> RRG4151 + CH3O2                                                ', &
-     '                        CH3 + O3 --> RRG4152 + 0.956 H + 0.044 CH3O + 0.956 HCHO + O2               ', &
-     '                       O3P + CH3 --> RRG4153 + H + 0.17 H2 + 0.17 CO + 0.83 HCHO                    ', &
-     '                       CH3O + O3 --> RRG4154 + CH3O2 + O2                                           ', &
-     '                      O3P + CH3O --> RRG4155 + 0.75 CH3 + 0.25 HCHO + 0.25 OH + 0.75 O2             ', &
-     '                     O3P + CH3O2 --> RRG4156 + CH3O + O2                                            ', &
-     '                      O3P + HCHO --> RRG4157 + 0.3 H + 0.3 CO2 + 0.7 CO + 0.7 OH + HO2              ', &
-     '                          CH2OOA --> RRG4158 + 0.37 CH2OO + 0.47 H2O + 0.63 CO + 0.16 OH ... etc.   ', &
-     '                        HCN + OH --> RRG4159 + CN + H2O                                             ', &
-     '                       HCN + O1D --> RRG4160a + HCN + O3P                                           ', &
-     '                       HCN + O1D --> RRG4160b + NCO + H                                             ', &
-     '                       HCN + O1D --> RRG4160c + CN + OH                                             ', &
-     '                       HCN + O3P --> RRG4161 + NCO + H                                              ', &
-     '                         CN + O2 --> RRG4162 + NCO + O3P                                            ', &
-     '                         CN + O2 --> RRG4163 + CO + NO                                              ', &
-     '                        NCO + O2 --> RRG4164 + CO2 + NO                                             ', &
-     '                       C2H6 + OH --> RRG42000 + C2H5O2 + H2O                                        ', &
-     '                       C2H4 + O3 --> RRG42001 + CH2OOA + HCHO                                       ', &
-     '                       C2H4 + OH --> RRG42002 + HOCH2CH2O2                                          ', &
-     '                    C2H5O2 + HO2 --> RRG42003 + C2H5OOH                                             ', &
-     '                     C2H5O2 + NO --> RRG42004a + CH3CHO + HO2 + NO2                                 ', &
-     '                     C2H5O2 + NO --> RRG42004b + C2H5NO3                                            ' /)
+     '                   CH3OH + CH2OO --> 2 LCARBON                                                      ', &
+     '                   CH2OO + CH3O2 --> 2 LCARBON                                                      ', &
+     '                     CH2OO + HO2 --> LCARBON                                                        ', &
+     '                      CH2OO + O3 --> HCHO + 2 O2                                                    ', &
+     '                         2 CH2OO --> 2 HCHO + O2                                                    ', &
+     '                   HOCH2O2 + NO2 --> HOCH2O2NO2                                                     ', &
+     '                      HOCH2O2NO2 --> HOCH2O2 + NO2                                                  ', &
+     '                 HOCH2O2NO2 + OH --> H2O + NO3 + HCOOH                                              ', &
+     '                        CH3 + O2 --> CH3O2                                                          ', &
+     '                        CH3 + O3 --> 0.956 H + 0.044 CH3O + 0.956 HCHO + O2                         ', &
+     '                       O3P + CH3 --> H + 0.17 H2 + 0.17 CO + 0.83 HCHO                              ', &
+     '                       CH3O + O3 --> CH3O2 + O2                                                     ', &
+     '                      CH3O + O3P --> 0.75 CH3 + 0.25 OH + 0.25 HCHO + 0.75 O2                       ', &
+     '                     O3P + CH3O2 --> CH3O + O2                                                      ', &
+     '                      O3P + HCHO --> 0.3 H + 0.3 CO2 + 0.7 CO + 0.7 OH + HO2                        ', &
+     '                          CH2OOA --> 0.37 CH2OO + 0.63 CO + 0.16 OH + 0.16 HO2 + 0.47 H2O ... etc.  ', &
+     '                        HCN + OH --> CN + H2O                                                       ', &
+     '                       HCN + O1D --> HCN + O3P                                                      ', &
+     '                       HCN + O1D --> NCO + H                                                        ', &
+     '                       HCN + O1D --> CN + OH                                                        ', &
+     '                       HCN + O3P --> NCO + H                                                        ', &
+     '                         CN + O2 --> NCO + O3P                                                      ', &
+     '                         CN + O2 --> CO + NO                                                        ', &
+     '                        NCO + O2 --> CO2 + NO                                                       ', &
+     '                       C2H6 + OH --> C2H5O2 + H2O                                                   ', &
+     '                       C2H4 + O3 --> CH2OOA + HCHO                                                  ', &
+     '                       C2H4 + OH --> HOCH2CH2O2                                                     ', &
+     '                    C2H5O2 + HO2 --> C2H5OOH                                                        ', &
+     '                     C2H5O2 + NO --> CH3CHO + HO2 + NO2                                             ', &
+     '                     C2H5O2 + NO --> C2H5NO3                                                        ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_4 = (/ &
-     '                    C2H5O2 + NO3 --> RRG42005 + CH3CHO + HO2 + NO2                                  ', &
-     '                          C2H5O2 --> RRG42006 + 0.2 C2H5OH + 0.8 CH3CHO + 0.6 HO2                   ', &
-     '                    C2H5OOH + OH --> RRG42007a + C2H5O2 + H2O                                       ', &
-     '                    C2H5OOH + OH --> RRG42007b + CH3CHO + OH                                        ', &
-     '                     CH3CHO + OH --> RRG42008a + CH3CO + H2O                                        ', &
-     '                     CH3CHO + OH --> RRG42008b + HCOCH2O2 + H2O                                     ', &
-     '                    CH3CHO + NO3 --> RRG42009 + CH3CO + HNO3                                        ', &
-     '                    CH3CO2H + OH --> RRG42010 + CO2 + CH3 + H2O                                     ', &
-     '                    HO2 + CH3CO3 --> RRG42011a + CO2 + CH3 + OH                                     ', &
-     '                    HO2 + CH3CO3 --> RRG42011b + CH3CO3H                                            ', &
-     '                    HO2 + CH3CO3 --> RRG42011c + CH3CO2H + O3                                       ', &
-     '                     CH3CO3 + NO --> RRG42012 + CO2 + CH3 + NO2                                     ', &
-     '                    CH3CO3 + NO2 --> RRG42013 + PAN                                                 ', &
-     '                    CH3CO3 + NO3 --> RRG42014 + CO2 + CH3 + NO2                                     ', &
-     '                          CH3CO3 --> RRG42017a + CO2 + CH3                                          ', &
-     '                          CH3CO3 --> RRG42017b + CH3CO2H                                            ', &
-     '                    CH3CO3H + OH --> RRG42018 + H2O + CH3CO3                                        ', &
-     '                        PAN + OH --> RRG42020 + H2O + CO + HCHO + NO2                               ', &
-     '                             PAN --> RRG42021 + CH3CO3 + NO2                                        ', &
-     '                       C2H2 + OH --> RRG42022a + GLYOX + OH                                         ', &
-     '                       C2H2 + OH --> RRG42022b + CO + HO2 + HCOOH                                   ', &
-     '                   HOCH2CHO + OH --> RRG42023a + HOCH2CO + H2O                                      ', &
-     '                   HOCH2CHO + OH --> RRG42023b + HOCHCHO + H2O                                      ', &
-     '                    HOCH2CO + O2 --> RRG42024a + HOCH2CO3                                           ', &
-     '                    HOCH2CO + O2 --> RRG42024b + CO2 + HCHO + OH                                    ', &
-     '                         HOCHCHO --> RRG42025 + GLYOX + HO2                                         ', &
-     '                  HOCH2CHO + NO3 --> RRG42026 + HOCH2CO + HNO3                                      ', &
-     '                        HOCH2CO3 --> RRG42027a + CO2 + HCHO + HO2                                   ', &
-     '                        HOCH2CO3 --> RRG42027b + HOCH2CO2H                                          ', &
-     '                  HOCH2CO3 + HO2 --> RRG42028a + CO2 + HCHO + OH + HO2                              ' /)
+     '                    C2H5O2 + NO3 --> CH3CHO + HO2 + NO2                                             ', &
+     '                          C2H5O2 --> 0.2 C2H5OH + 0.8 CH3CHO + 0.6 HO2                              ', &
+     '                    C2H5OOH + OH --> C2H5O2 + H2O                                                   ', &
+     '                    C2H5OOH + OH --> CH3CHO + OH                                                    ', &
+     '                     CH3CHO + OH --> CH3CO + H2O                                                    ', &
+     '                     CH3CHO + OH --> HCOCH2O2 + H2O                                                 ', &
+     '                    CH3CHO + NO3 --> CH3CO + HNO3                                                   ', &
+     '                    CH3CO2H + OH --> CO2 + CH3 + H2O                                                ', &
+     '                    CH3CO3 + HO2 --> CO2 + CH3 + OH                                                 ', &
+     '                    CH3CO3 + HO2 --> CH3CO3H                                                        ', &
+     '                    CH3CO3 + HO2 --> CH3CO2H + O3                                                   ', &
+     '                     CH3CO3 + NO --> CO2 + CH3 + NO2                                                ', &
+     '                    CH3CO3 + NO2 --> PAN                                                            ', &
+     '                    CH3CO3 + NO3 --> CO2 + CH3 + NO2                                                ', &
+     '                          CH3CO3 --> CO2 + CH3                                                      ', &
+     '                          CH3CO3 --> CH3CO2H                                                        ', &
+     '                    CH3CO3H + OH --> CH3CO3 + H2O                                                   ', &
+     '                        PAN + OH --> CO + H2O + NO2 + HCHO                                          ', &
+     '                             PAN --> CH3CO3 + NO2                                                   ', &
+     '                       C2H2 + OH --> GLYOX + OH                                                     ', &
+     '                       C2H2 + OH --> CO + HO2 + HCOOH                                               ', &
+     '                   HOCH2CHO + OH --> HOCH2CO + H2O                                                  ', &
+     '                   HOCH2CHO + OH --> HOCHCHO + H2O                                                  ', &
+     '                    HOCH2CO + O2 --> HOCH2CO3                                                       ', &
+     '                    HOCH2CO + O2 --> CO2 + OH + HCHO                                                ', &
+     '                         HOCHCHO --> GLYOX + HO2                                                    ', &
+     '                  HOCH2CHO + NO3 --> HOCH2CO + HNO3                                                 ', &
+     '                        HOCH2CO3 --> CO2 + HO2 + HCHO                                               ', &
+     '                        HOCH2CO3 --> HOCH2CO2H                                                      ', &
+     '                  HOCH2CO3 + HO2 --> CO2 + OH + HO2 + HCHO                                          ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_5 = (/ &
-     '                  HOCH2CO3 + HO2 --> RRG42028b + HOCH2CO3H                                          ', &
-     '                  HOCH2CO3 + HO2 --> RRG42028c + HOCH2CO2H + O3                                     ', &
-     '                   HOCH2CO3 + NO --> RRG42029 + CO2 + HCHO + HO2 + NO2                              ', &
-     '                  HOCH2CO3 + NO2 --> RRG42030 + PHAN                                                ', &
-     '                  HOCH2CO3 + NO3 --> RRG42031 + CO2 + HCHO + HO2 + NO2                              ', &
-     '                  HOCH2CO2H + OH --> RRG42032 + 0.09 CO2 + 0.91 HCOCO2H + H2O + 0.09 HCHO ... etc.  ', &
-     '                  HOCH2CO3H + OH --> RRG42033a + HOCH2CO3 + H2O                                     ', &
-     '                  HOCH2CO3H + OH --> RRG42033b + HCOCO3H + HO2                                      ', &
-     '                            PHAN --> RRG42034 + HOCH2CO3 + NO2                                      ', &
-     '                       PHAN + OH --> RRG42035 + H2O + CO + HCHO + NO2                               ', &
-     '                      GLYOX + OH --> RRG42036 + HCOCO + H2O                                         ', &
-     '                     GLYOX + NO3 --> RRG42037 + HCOCO + HNO3                                        ', &
-     '                           HCOCO --> RRG42038a + 2 CO + HO2                                         ', &
-     '                           HCOCO --> RRG42037b + HCOCO3                                             ', &
-     '                           HCOCO --> RRG42037c + CO2 + CO + OH                                      ', &
-     '                          HCOCO3 --> RRG42039a + CO2 + CO + HO2                                     ', &
-     '                          HCOCO3 --> RRG42039b + HCOCO2H                                            ', &
-     '                    HCOCO3 + HO2 --> RRG42040 + CO2 + CO + OH + HO2                                 ', &
-     '                     HCOCO3 + NO --> RRG42041 + CO2 + CO + HO2 + NO2                                ', &
-     '                    HCOCO3 + NO3 --> RRG42042 + CO2 + CO + HO2 + NO2                                ', &
-     '                    HCOCO3 + NO2 --> RRG42043 + CO2 + CO + HO2 + NO3                                ', &
-     '                    HCOCO2H + OH --> RRG42044 + CO2 + H2O + CO + HO2                                ', &
-     '                    HCOCO3H + OH --> RRG42045a + HCOCO3 + H2O                                       ', &
-     '                    HCOCO3H + OH --> RRG42045b + CO2 + H2O + CO + OH                                ', &
-     '                      HOCH2CH2O2 --> RRG42046 + 0.6 HOCH2CH2O + 0.2 ETHGLY + 0.2 HOCH2CHO ... etc.  ', &
-     '                 HOCH2CH2O2 + NO --> RRG42047 + 0.75 HOCH2CH2O + 0.5 HCHO + 0.25 HO2 + NO2 ... etc. ', &
-     '                 HOCH2CH2O2 + NO --> RRG42048 + ETHOHNO3                                            ', &
-     '                HOCH2CH2O2 + HO2 --> RRG42049a + HYETHO2H                                           ', &
-     '                HOCH2CH2O2 + HO2 --> RRG42049b + HOCH2CH2O + OH                                     ', &
-     '                   ETHOHNO3 + OH --> RRG42050 + 0.93 NO3CH2CHO + 0.07 HOCH2CHO + H2O + 0.93 HO2 ... ' /)
+     '                  HOCH2CO3 + HO2 --> HOCH2CO3H                                                      ', &
+     '                  HOCH2CO3 + HO2 --> HOCH2CO2H + O3                                                 ', &
+     '                   HOCH2CO3 + NO --> CO2 + HO2 + NO2 + HCHO                                         ', &
+     '                  HOCH2CO3 + NO2 --> PHAN                                                           ', &
+     '                  HOCH2CO3 + NO3 --> CO2 + HO2 + NO2 + HCHO                                         ', &
+     '                  HOCH2CO2H + OH --> 0.09 CO2 + 0.91 HCOCO2H + HO2 + H2O + 0.09 HCHO                ', &
+     '                  HOCH2CO3H + OH --> HOCH2CO3 + H2O                                                 ', &
+     '                  HOCH2CO3H + OH --> HCOCO3H + HO2                                                  ', &
+     '                            PHAN --> HOCH2CO3 + NO2                                                 ', &
+     '                       PHAN + OH --> CO + H2O + NO2 + HCHO                                          ', &
+     '                      GLYOX + OH --> HCOCO + H2O                                                    ', &
+     '                     GLYOX + NO3 --> HCOCO + HNO3                                                   ', &
+     '                           HCOCO --> 2 CO + HO2                                                     ', &
+     '                           HCOCO --> HCOCO3                                                         ', &
+     '                           HCOCO --> CO2 + CO + OH                                                  ', &
+     '                          HCOCO3 --> CO2 + CO + HO2                                                 ', &
+     '                          HCOCO3 --> HCOCO2H                                                        ', &
+     '                    HCOCO3 + HO2 --> CO2 + CO + OH + HO2                                            ', &
+     '                     HCOCO3 + NO --> CO2 + CO + HO2 + NO2                                           ', &
+     '                    HCOCO3 + NO3 --> CO2 + CO + HO2 + NO2                                           ', &
+     '                    HCOCO3 + NO2 --> CO2 + CO + HO2 + NO3                                           ', &
+     '                    HCOCO2H + OH --> CO2 + CO + HO2 + H2O                                           ', &
+     '                    HCOCO3H + OH --> HCOCO3 + H2O                                                   ', &
+     '                    HCOCO3H + OH --> CO2 + CO + OH + H2O                                            ', &
+     '                      HOCH2CH2O2 --> 0.6 HOCH2CH2O + 0.2 ETHGLY + 0.2 HOCH2CHO                      ', &
+     '                 HOCH2CH2O2 + NO --> 0.75 HOCH2CH2O + 0.25 HO2 + NO2 + 0.5 HCHO                     ', &
+     '                 HOCH2CH2O2 + NO --> ETHOHNO3                                                       ', &
+     '                HOCH2CH2O2 + HO2 --> HYETHO2H                                                       ', &
+     '                HOCH2CH2O2 + HO2 --> HOCH2CH2O + OH                                                 ', &
+     '                   ETHOHNO3 + OH --> 0.93 NO3CH2CHO + 0.07 HOCH2CHO + 0.93 HO2 + H2O + 0.07 NO2 ... ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_6 = (/ &
-     '                   HYETHO2H + OH --> RRG42051a + HOCH2CH2O2 + H2O                                   ', &
-     '                   HYETHO2H + OH --> RRG42051b + HOCH2CHO + H2O + OH                                ', &
-     '                   HYETHO2H + OH --> RRG42051c + HOOCH2CHO + H2O + HO2                              ', &
-     '                       HOCH2CH2O --> RRG42052a + HOCH2CHO + HO2                                     ', &
-     '                       HOCH2CH2O --> RRG42052b + 2 HCHO + HO2                                       ', &
-     '                     ETHGLY + OH --> RRG42053 + HOCH2CHO + H2O + HO2                                ', &
-     '                        HCOCH2O2 --> RRG42054 + 0.2 GLYOX + 0.2 HOCH2CHO + 0.6 CO + 0.6 HCHO ... etc', &
-     '                  HCOCH2O2 + HO2 --> RRG42055a + HOOCH2CHO                                          ', &
-     '                  HCOCH2O2 + HO2 --> RRG42055b + CO + HCHO + OH + HO2                               ', &
-     '                   HCOCH2O2 + NO --> RRG42056a + CO + HCHO + HO2 + NO2                              ', &
-     '                   HCOCH2O2 + NO --> RRG42056b + NO3CH2CHO                                          ', &
-     '                  HCOCH2O2 + NO3 --> RRG42057 + CO + HCHO + HO2 + NO2                               ', &
-     '                  HOOCH2CHO + OH --> RRG42058a + HCOCH2O2                                           ', &
-     '                  HOOCH2CHO + OH --> RRG42058b + CO + HCHO + OH                                     ', &
-     '                  HOOCH2CHO + OH --> RRG42058c + GLYOX + OH                                         ', &
-     '                 HOOCH2CHO + NO3 --> RRG42059 + HNO3 + CO + HCHO + OH                               ', &
-     '                  HOOCH2CO3 + NO --> RRG42060 + CO2 + HCHO + OH + NO2                               ', &
-     '                 HOOCH2CO3 + NO3 --> RRG42061 + CO2 + HCHO + OH + NO2                               ', &
-     '                 HOOCH2CO3 + HO2 --> RRG42062a + CO2 + HCHO + 2 OH                                  ', &
-     '                 HOOCH2CO3 + HO2 --> RRG42062b + HOOCH2CO3H                                         ', &
-     '                 HOOCH2CO3 + HO2 --> RRG42062c + HOOCH2CO2H + O3                                    ', &
-     '                       HOOCH2CO3 --> RRG42063a + CO2 + HCHO + OH                                    ', &
-     '                       HOOCH2CO3 --> RRG42063b + HOOCH2CO2H                                         ', &
-     '                 HOOCH2CO3H + OH --> RRG42064a + HOOCH2CO3 + H2O                                    ', &
-     '                 HOOCH2CO3H + OH --> RRG42064b + HCOCO3H + H2O + OH                                 ', &
-     '                 HOOCH2CO2H + OH --> RRG42065 + HCOCO2H + H2O + OH                                  ', &
-     '                      CH2CO + OH --> RRG42066 + 0.4 HOOCH2CO2H + 0.6 CO + 0.6 HCHO + 0.6 HO2 ... etc', &
-     '                 CH3CHOHOOH + OH --> RRG42067a + CH3CO2H + OH                                       ', &
-     '                 CH3CHOHOOH + OH --> RRG42067b + CH3CHOHO2                                          ', &
-     '                       CH3CHOHO2 --> RRG42068 + CH3CHO + HO2                                        ' /)
+     '                   HYETHO2H + OH --> HOCH2CH2O2 + H2O                                               ', &
+     '                   HYETHO2H + OH --> HOCH2CHO + OH + H2O                                            ', &
+     '                   HYETHO2H + OH --> HOOCH2CHO + HO2 + H2O                                          ', &
+     '                       HOCH2CH2O --> HOCH2CHO + HO2                                                 ', &
+     '                       HOCH2CH2O --> HO2 + 2 HCHO                                                   ', &
+     '                     ETHGLY + OH --> HOCH2CHO + HO2 + H2O                                           ', &
+     '                        HCOCH2O2 --> 0.2 GLYOX + 0.2 HOCH2CHO + 0.6 CO + 0.6 HO2 + 0.6 HCHO ... etc.', &
+     '                  HCOCH2O2 + HO2 --> HOOCH2CHO                                                      ', &
+     '                  HCOCH2O2 + HO2 --> CO + OH + HO2 + HCHO                                           ', &
+     '                   HCOCH2O2 + NO --> CO + HO2 + NO2 + HCHO                                          ', &
+     '                   HCOCH2O2 + NO --> NO3CH2CHO                                                      ', &
+     '                  HCOCH2O2 + NO3 --> CO + HO2 + NO2 + HCHO                                          ', &
+     '                  HOOCH2CHO + OH --> HCOCH2O2                                                       ', &
+     '                  HOOCH2CHO + OH --> CO + OH + HCHO                                                 ', &
+     '                  HOOCH2CHO + OH --> GLYOX + OH                                                     ', &
+     '                 HOOCH2CHO + NO3 --> HNO3 + CO + OH + HCHO                                          ', &
+     '                  HOOCH2CO3 + NO --> CO2 + OH + NO2 + HCHO                                          ', &
+     '                 HOOCH2CO3 + NO3 --> CO2 + OH + NO2 + HCHO                                          ', &
+     '                 HOOCH2CO3 + HO2 --> CO2 + 2 OH + HCHO                                              ', &
+     '                 HOOCH2CO3 + HO2 --> HOOCH2CO3H                                                     ', &
+     '                 HOOCH2CO3 + HO2 --> HOOCH2CO2H + O3                                                ', &
+     '                       HOOCH2CO3 --> CO2 + OH + HCHO                                                ', &
+     '                       HOOCH2CO3 --> HOOCH2CO2H                                                     ', &
+     '                 HOOCH2CO3H + OH --> HOOCH2CO3 + H2O                                                ', &
+     '                 HOOCH2CO3H + OH --> HCOCO3H + OH + H2O                                             ', &
+     '                 HOOCH2CO2H + OH --> HCOCO2H + OH + H2O                                             ', &
+     '                      CH2CO + OH --> 0.4 HOOCH2CO2H + 0.6 CO + 0.6 HO2 + 0.6 HCHO                   ', &
+     '                 CH3CHOHOOH + OH --> CH3CO2H + OH                                                   ', &
+     '                 CH3CHOHOOH + OH --> CH3CHOHO2                                                      ', &
+     '                       CH3CHOHO2 --> CH3CHO + HO2                                                   ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_7 = (/ &
-     '                    CH3CHO + HO2 --> RRG42069 + CH3CHOHO2                                           ', &
-     '                 CH3CHOHO2 + HO2 --> RRG42070 + 0.3 CH3CO2H + 0.5 CH3CHOHOOH + 0.2 CH3 + 0.2 OH ... ', &
-     '                       CH3CHOHO2 --> RRG42071 + CH3 + OH + HCOOH                                    ', &
-     '                  CH3CHOHO2 + NO --> RRG42072 + CH3 + OH + HCOOH + NO2                              ', &
-     '                    C2H5NO3 + OH --> RRG42073 + CH3CHO + H2O + NO2                                  ', &
-     '                  NO3CH2CHO + OH --> RRG42074a + GLYOX + H2O + NO2                                  ', &
-     '                  NO3CH2CHO + OH --> RRG42074b + NO3CH2CO3 + H2O                                    ', &
-     '                 NO3CH2CO3 + HO2 --> RRG42075 + CO2 + HCHO + OH + NO2                               ', &
-     '                  NO3CH2CO3 + NO --> RRG42076 + CO2 + HCHO + 2 NO2                                  ', &
-     '                 NO3CH2CO3 + NO2 --> RRG42077 + NO3CH2PAN                                           ', &
-     '                       NO3CH2CO3 --> RRG42078 + CO2 + HCHO + NO2                                    ', &
-     '                       NO3CH2PAN --> RRG42079 + NO3CH2CO3 + NO2                                     ', &
-     '                    C2H5O2 + NO2 --> RRG42080 + C2H5O2NO2                                           ', &
-     '                       C2H5O2NO2 --> RRG42081 + C2H5O2 + NO2                                        ', &
-     '                  C2H5O2NO2 + OH --> RRG42082 + CH3CHO + H2O + NO3                                  ', &
-     '                      CH3CO + O2 --> RRG42083a + CH3CO3                                             ', &
-     '                      CH3CO + O2 --> RRG42083b + CO + HCHO + OH                                     ', &
-     '                     C2H5OH + OH --> RRG42084 + 0.05 HOCH2CH2O2 + 0.95 C2H5O2 + H2O + 0.95 HO2 ... e', &
-     '                      CH3CN + OH --> RRG42085a + NCCH2O2 + H2O                                      ', &
-     '                      CH3CN + OH --> RRG42085b + CH3CO + OH + NO                                    ', &
-     '                     CH3CN + O1D --> RRG42086a + CH3CN + O3P                                        ', &
-     '                     CH3CN + O1D --> RRG42086b + 2 H + HCN + CO                                     ', &
-     '                     CH3CN + O1D --> RRG42086c + 0.5 NCO + 0.5 NCCH2O2 + 0.5 CH3 + 0.5 OH ... etc.  ', &
-     '                    NCCH2O2 + NO --> RRG42087 + HCN + CO2 + HO2 + NO2                               ', &
-     '                   NCCH2O2 + HO2 --> RRG42088 + HCN + CO2 + HO2                                     ', &
-     '                    CH2CHOH + OH --> RRG42089a + HCHO + OH + HCOOH                                  ', &
-     '                    CH2CHOH + OH --> RRG42089b + HOCH2CHO + HO2                                     ', &
-     '                 CH2CHOH + HCOOH --> RRG42090 + CH3CHO + HCOOH                                      ', &
-     '                  CH3CHO + HCOOH --> RRG42091 + CH2CHOH + HCOOH                                     ', &
-     '                   HOOCCOOH + OH --> RRG42092 + 2 CO2 + H2O + HO2                                   ' /)
+     '                    CH3CHO + HO2 --> CH3CHOHO2                                                      ', &
+     '                 CH3CHOHO2 + HO2 --> 0.5 CH3CHOHOOH + 0.3 CH3CO2H + 0.2 CH3 + 0.2 OH + 0.2 HCOOH ...', &
+     '                       CH3CHOHO2 --> CH3 + OH + HCOOH                                               ', &
+     '                  CH3CHOHO2 + NO --> CH3 + OH + NO2 + HCOOH                                         ', &
+     '                    C2H5NO3 + OH --> CH3CHO + H2O + NO2                                             ', &
+     '                  NO3CH2CHO + OH --> GLYOX + H2O + NO2                                              ', &
+     '                  NO3CH2CHO + OH --> NO3CH2CO3 + H2O                                                ', &
+     '                 NO3CH2CO3 + HO2 --> CO2 + OH + NO2 + HCHO                                          ', &
+     '                  NO3CH2CO3 + NO --> CO2 + 2 NO2 + HCHO                                             ', &
+     '                 NO3CH2CO3 + NO2 --> NO3CH2PAN                                                      ', &
+     '                       NO3CH2CO3 --> CO2 + NO2 + HCHO                                               ', &
+     '                       NO3CH2PAN --> NO3CH2CO3 + NO2                                                ', &
+     '                    C2H5O2 + NO2 --> C2H5O2NO2                                                      ', &
+     '                       C2H5O2NO2 --> C2H5O2 + NO2                                                   ', &
+     '                  C2H5O2NO2 + OH --> CH3CHO + H2O + NO3                                             ', &
+     '                      CH3CO + O2 --> CH3CO3                                                         ', &
+     '                      CH3CO + O2 --> CO + OH + HCHO                                                 ', &
+     '                     C2H5OH + OH --> 0.05 HOCH2CH2O2 + 0.95 C2H5O2 + 0.95 HO2 + H2O                 ', &
+     '                      CH3CN + OH --> NCCH2O2 + H2O                                                  ', &
+     '                      CH3CN + OH --> CH3CO + OH + NO                                                ', &
+     '                     CH3CN + O1D --> CH3CN + O3P                                                    ', &
+     '                     CH3CN + O1D --> 2 H + HCN + CO                                                 ', &
+     '                     CH3CN + O1D --> 0.5 NCO + 0.5 NCCH2O2 + 0.5 CH3 + 0.5 OH                       ', &
+     '                    NCCH2O2 + NO --> HCN + CO2 + HO2 + NO2                                          ', &
+     '                   NCCH2O2 + HO2 --> HCN + CO2 + HO2                                                ', &
+     '                    CH2CHOH + OH --> OH + HCHO + HCOOH                                              ', &
+     '                    CH2CHOH + OH --> HOCH2CHO + HO2                                                 ', &
+     '                 CH2CHOH + HCOOH --> CH3CHO + HCOOH                                                 ', &
+     '                  CH3CHO + HCOOH --> CH2CHOH + HCOOH                                                ', &
+     '                   HOOCCOOH + OH --> 2 CO2 + HO2 + H2O                                              ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_8 = (/ &
-     '                HOCH2CHOHOH + OH --> RRG42093a + HOCH2CO2H + H2O + HO2                              ', &
-     '                HOCH2CHOHOH + OH --> RRG42093b + CHOCHOHOH + H2O + HO2                              ', &
-     '                HOCH2CHOHOH + OH --> RRG42093c + HOCH2O2 + H2O + HCOOH                              ', &
-     '                HOCH2CHOHOH + OH --> RRG42093d + H2O + HCHO + HO2 + HCOOH                           ', &
-     '                  CH3CHOHOH + OH --> RRG42094a + CH3CO2H + H2O + HO2                                ', &
-     '                  CH3CHOHOH + OH --> RRG42094b + CH3 + H2O + HCOOH                                  ', &
-     '                 CHOHOHCOOH + OH --> RRG42095a + HOOCCOOH + H2O + HO2                               ', &
-     '                 CHOHOHCOOH + OH --> RRG42095b + CO2 + H2O + HO2 + HCOOH                            ', &
-     '               CHOHOHCHOHOH + OH --> RRG42096a + H2O + HO2 + 2 HCOOH                                ', &
-     '               CHOHOHCHOHOH + OH --> RRG42096b + CHOHOHCOOH + H2O + HO2                             ', &
-     '                  CHOCHOHOH + OH --> RRG42097a + H2O + CO + HO2 + HCOOH                             ', &
-     '                  CHOCHOHOH + OH --> RRG42097b + HCOCO2H + H2O + HO2                                ', &
-     '               HOOCH2CHOHOH + OH --> RRG42098a + HOOCH2CO2H + H2O + HO2                             ', &
-     '               HOOCH2CHOHOH + OH --> RRG42098b + H2O + HCHO + OH + HCOOH                            ', &
-     '               HOOCH2CHOHOH + OH --> RRG42098c + CHOCHOHOH + H2O + OH                               ', &
-     '                       C3H8 + OH --> RRG43000a + IC3H7O2 + H2O                                      ', &
-     '                       C3H8 + OH --> RRG43000b + NC3H7O2 + H2O                                      ', &
-     '                       C3H6 + O3 --> RRG43001a + 0.2 CH4 + 0.05 CH2CO + 0.16 CH3CHOHOOH + 0.2 CO2 ..', &
-     '                       C3H6 + O3 --> RRG43001b + CH2OOA + CH3CHO                                    ', &
-     '                       C3H6 + OH --> RRG43002 + HYPROPO2                                            ', &
-     '                      C3H6 + NO3 --> RRG43003 + PRONO3BO2                                           ', &
-     '                   IC3H7O2 + HO2 --> RRG43004 + IC3H7OOH                                            ', &
-     '                    IC3H7O2 + NO --> RRG43005a + CH3COCH3 + HO2 + NO2                               ', &
-     '                    IC3H7O2 + NO --> RRG43005b + IC3H7NO3                                           ', &
-     '                         IC3H7O2 --> RRG43006 + 0.2 IPROPOL + 0.8 CH3COCH3 + 0.6 HO2                ', &
-     '                   IC3H7OOH + OH --> RRG43007a + IC3H7O2 + H2O                                      ', &
-     '                   IC3H7OOH + OH --> RRG43007b + CH3COCH3 + H2O + OH                                ', &
-     '                   NC3H7O2 + HO2 --> RRG43008 + NC3H7OOH                                            ', &
-     '                    NC3H7O2 + NO --> RRG43009a + C2H5CHO + HO2 + NO2                                ', &
-     '                    NC3H7O2 + NO --> RRG43009b + NC3H7NO3                                           ' /)
+     '                HOCH2CHOHOH + OH --> HOCH2CO2H + HO2 + H2O                                          ', &
+     '                HOCH2CHOHOH + OH --> CHOCHOHOH + HO2 + H2O                                          ', &
+     '                HOCH2CHOHOH + OH --> HOCH2O2 + H2O + HCOOH                                          ', &
+     '                HOCH2CHOHOH + OH --> HO2 + H2O + HCHO + HCOOH                                       ', &
+     '                  CH3CHOHOH + OH --> CH3CO2H + HO2 + H2O                                            ', &
+     '                  CH3CHOHOH + OH --> CH3 + H2O + HCOOH                                              ', &
+     '                 CHOHOHCOOH + OH --> HOOCCOOH + HO2 + H2O                                           ', &
+     '                 CHOHOHCOOH + OH --> CO2 + HO2 + H2O + HCOOH                                        ', &
+     '               CHOHOHCHOHOH + OH --> HO2 + H2O + 2 HCOOH                                            ', &
+     '               CHOHOHCHOHOH + OH --> CHOHOHCOOH + HO2 + H2O                                         ', &
+     '                  CHOCHOHOH + OH --> CO + HO2 + H2O + HCOOH                                         ', &
+     '                  CHOCHOHOH + OH --> HCOCO2H + HO2 + H2O                                            ', &
+     '               HOOCH2CHOHOH + OH --> HOOCH2CO2H + HO2 + H2O                                         ', &
+     '               HOOCH2CHOHOH + OH --> OH + H2O + HCHO + HCOOH                                        ', &
+     '               HOOCH2CHOHOH + OH --> CHOCHOHOH + OH + H2O                                           ', &
+     '                       C3H8 + OH --> IC3H7O2 + H2O                                                  ', &
+     '                       C3H8 + OH --> NC3H7O2 + H2O                                                  ', &
+     '                       C3H6 + O3 --> 0.2 CH4 + 0.16 CH3CHOHOOH + 0.05 CH2CO + 0.2 CO2 + 0.09 CH3OH .', &
+     '                       C3H6 + O3 --> CH2OOA + CH3CHO                                                ', &
+     '                       C3H6 + OH --> HYPROPO2                                                       ', &
+     '                      C3H6 + NO3 --> PRONO3BO2                                                      ', &
+     '                   IC3H7O2 + HO2 --> IC3H7OOH                                                       ', &
+     '                    IC3H7O2 + NO --> CH3COCH3 + HO2 + NO2                                           ', &
+     '                    IC3H7O2 + NO --> IC3H7NO3                                                       ', &
+     '                         IC3H7O2 --> 0.2 IPROPOL + 0.8 CH3COCH3 + 0.6 HO2                           ', &
+     '                   IC3H7OOH + OH --> IC3H7O2 + H2O                                                  ', &
+     '                   IC3H7OOH + OH --> CH3COCH3 + OH + H2O                                            ', &
+     '                   NC3H7O2 + HO2 --> NC3H7OOH                                                       ', &
+     '                    NC3H7O2 + NO --> C2H5CHO + HO2 + NO2                                            ', &
+     '                    NC3H7O2 + NO --> NC3H7NO3                                                       ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_9 = (/ &
-     '                         NC3H7O2 --> RRG43010 + 0.2 NPROPOL + 0.8 CH3COCH3 + 0.6 HO2                ', &
-     '                   CH3COCH3 + OH --> RRG43011 + CH3COCH2O2 + H2O                                    ', &
-     '                CH3COCH2O2 + HO2 --> RRG43012a + HYPERACET                                          ', &
-     '                CH3COCH2O2 + HO2 --> RRG43012b + CH3CO + HCHO + OH                                  ', &
-     '                 CH3COCH2O2 + NO --> RRG43013a + CH3CO + HCHO + NO2                                 ', &
-     '                 CH3COCH2O2 + NO --> RRG43013b + NOA                                                ', &
-     '                      CH3COCH2O2 --> RRG43014 + 0.3 CH3CO + 0.5 MGLYOX + 0.2 ACETOL + 0.3 HCHO ... e', &
-     '                  HYPERACET + OH --> RRG43015a + CH3COCH2O2 + H2O                                   ', &
-     '                  HYPERACET + OH --> RRG43015b + MGLYOX + H2O + OH                                  ', &
-     '                     ACETOL + OH --> RRG43016 + MGLYOX + H2O + HO2                                  ', &
-     '                     MGLYOX + OH --> RRG43017 + 0.6 CH3CO + 0.4 CH3 + H2O + 1.4 CO                  ', &
-     '                   IC3H7NO3 + OH --> RRG43020 + CH3COCH3 + NO2                                      ', &
-     '                CH3COCH2O2 + NO3 --> RRG43021 + CH3CO + HCHO + NO2                                  ', &
-     '                        HYPROPO2 --> RRG43022 + CH3CHO + HCHO + HO2                                 ', &
-     '                  HYPROPO2 + HO2 --> RRG43023a + HYPROPO2H                                          ', &
-     '                  HYPROPO2 + HO2 --> RRG43023b + CH3CHO + HCHO + OH + HO2                           ', &
-     '                   HYPROPO2 + NO --> RRG43024a + CH3CHO + HCHO + HO2 + NO2                          ', &
-     '                   HYPROPO2 + NO --> RRG43024b + PROPOLNO3                                          ', &
-     '                  HYPROPO2 + NO3 --> RRG43025 + CH3CHO + HCHO + HO2 + NO2                           ', &
-     '                  HYPROPO2H + OH --> RRG43026a + HYPROPO2                                           ', &
-     '                  HYPROPO2H + OH --> RRG43026b + ACETOL + OH                                        ', &
-     '                 PRONO3BO2 + HO2 --> RRG43027 + PR2O2HNO3                                           ', &
-     '                  PRONO3BO2 + NO --> RRG43028 + NOA + HO2 + NO2                                     ', &
-     '                 PRONO3BO2 + NO3 --> RRG43029 + NOA + HO2 + NO2                                     ', &
-     '                  PR2O2HNO3 + OH --> RRG43030a + PRONO3BO2                                          ', &
-     '                  PR2O2HNO3 + OH --> RRG43030b + NOA + OH                                           ', &
-     '                    MGLYOX + NO3 --> RRG43031 + CH3CO + HNO3 + CO                                   ', &
-     '                        NOA + OH --> RRG43032 + MGLYOX + NO2                                        ', &
-     '                 HOCH2COCHO + OH --> RRG43033 + 0.1391 C33CO + 0.8609 HOCH2CO + 0.8609 CO ... etc.  ', &
-     '                HOCH2COCHO + NO3 --> RRG43034 + HOCH2CO + HNO3 + CO                                 ' /)
+     '                         NC3H7O2 --> 0.2 NPROPOL + 0.8 CH3COCH3 + 0.6 HO2                           ', &
+     '                   CH3COCH3 + OH --> CH3COCH2O2 + H2O                                               ', &
+     '                CH3COCH2O2 + HO2 --> HYPERACET                                                      ', &
+     '                CH3COCH2O2 + HO2 --> CH3CO + OH + HCHO                                              ', &
+     '                 CH3COCH2O2 + NO --> CH3CO + NO2 + HCHO                                             ', &
+     '                 CH3COCH2O2 + NO --> NOA                                                            ', &
+     '                      CH3COCH2O2 --> 0.3 CH3CO + 0.2 ACETOL + 0.5 MGLYOX + 0.3 HCHO                 ', &
+     '                  HYPERACET + OH --> CH3COCH2O2 + H2O                                               ', &
+     '                  HYPERACET + OH --> MGLYOX + OH + H2O                                              ', &
+     '                     ACETOL + OH --> MGLYOX + HO2 + H2O                                             ', &
+     '                     MGLYOX + OH --> 0.6 CH3CO + 0.4 CH3 + 1.4 CO + H2O                             ', &
+     '                   IC3H7NO3 + OH --> CH3COCH3 + NO2                                                 ', &
+     '                CH3COCH2O2 + NO3 --> CH3CO + NO2 + HCHO                                             ', &
+     '                        HYPROPO2 --> CH3CHO + HO2 + HCHO                                            ', &
+     '                  HYPROPO2 + HO2 --> HYPROPO2H                                                      ', &
+     '                  HYPROPO2 + HO2 --> CH3CHO + OH + HO2 + HCHO                                       ', &
+     '                   HYPROPO2 + NO --> CH3CHO + HO2 + NO2 + HCHO                                      ', &
+     '                   HYPROPO2 + NO --> PROPOLNO3                                                      ', &
+     '                  HYPROPO2 + NO3 --> CH3CHO + HO2 + NO2 + HCHO                                      ', &
+     '                  HYPROPO2H + OH --> HYPROPO2                                                       ', &
+     '                  HYPROPO2H + OH --> ACETOL + OH                                                    ', &
+     '                 PRONO3BO2 + HO2 --> PR2O2HNO3                                                      ', &
+     '                  PRONO3BO2 + NO --> NOA + HO2 + NO2                                                ', &
+     '                 PRONO3BO2 + NO3 --> NOA + HO2 + NO2                                                ', &
+     '                  PR2O2HNO3 + OH --> PRONO3BO2                                                      ', &
+     '                  PR2O2HNO3 + OH --> NOA + OH                                                       ', &
+     '                    MGLYOX + NO3 --> CH3CO + HNO3 + CO                                              ', &
+     '                        NOA + OH --> MGLYOX + NO2                                                   ', &
+     '                 HOCH2COCHO + OH --> 0.1391 C33CO + 0.8609 HOCH2CO + 0.8609 CO + 0.1391 HO2 ... etc.', &
+     '                HOCH2COCHO + NO3 --> HOCH2CO + HNO3 + CO                                            ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_10 = (/ &
-     '                  CH3COCO2H + OH --> RRG43035 + CO2 + CH3CO + H2O                                   ', &
-     '                      CHOCOCH2O2 --> RRG43036 + 0.2 HOCH2COCHO + 0.2 C33CO + 0.6 HCOCO + 0.6 HCHO ..', &
-     '                 CHOCOCH2O2 + NO --> RRG43037 + HCOCO + HCHO + NO2                                  ', &
-     '                CHOCOCH2O2 + HO2 --> RRG43038a + ALCOCH2OOH                                         ', &
-     '                CHOCOCH2O2 + HO2 --> RRG43038b + HCOCO + HCHO + OH                                  ', &
-     '                CHOCOCH2O2 + NO3 --> RRG43039 + HCOCO + HCHO + NO2                                  ', &
-     '                 ALCOCH2OOH + OH --> RRG43040a + HOOCH2CO3 + H2O + CO                               ', &
-     '                 ALCOCH2OOH + OH --> RRG43040b + C33CO + H2O + OH                                   ', &
-     '                 ALCOCH2OOH + OH --> RRG43040c + CHOCOCH2O2 + H2O                                   ', &
-     '                ALCOCH2OOH + NO3 --> RRG43041 + HOOCH2CO3 + HNO3 + CO                               ', &
-     '                    HOCH2COCH2O2 --> RRG43042 + HOCH2CO + HCHO                                      ', &
-     '              HOCH2COCH2O2 + HO2 --> RRG43043a + HOCH2COCH2OOH                                      ', &
-     '              HOCH2COCH2O2 + HO2 --> RRG43043b + HOCH2CO + HCHO + OH                                ', &
-     '               HOCH2COCH2O2 + NO --> RRG43044 + HOCH2CO + HCHO + NO2                                ', &
-     '              HOCH2COCH2OOH + OH --> RRG43045a + HOCH2COCHO + OH                                    ', &
-     '              HOCH2COCH2OOH + OH --> RRG43045b + HOCH2COCH2O2                                       ', &
-     '              HOCH2COCH2OOH + OH --> RRG43045c + HCOCOCH2OOH + HO2                                  ', &
-     '                    CH3CHCO + OH --> RRG43046 + 0.07 CO2 + 0.21 CH3COCO2H + 0.79 CH3CHO + 0.72 CO ..', &
-     '                  PROPOLNO3 + OH --> RRG43047 + ACETOL + NO2                                        ', &
-     '                CH3COCH2O2 + NO2 --> RRG43048 + CH3COCH2O2NO2                                       ', &
-     '                   CH3COCH2O2NO2 --> RRG43049 + CH3COCH2O2 + NO2                                    ', &
-     '              CH3COCH2O2NO2 + OH --> RRG43050 + MGLYOX + H2O + NO3                                  ', &
-     '                   NC3H7OOH + OH --> RRG43051a + NC3H7O2 + H2O                                      ', &
-     '                   NC3H7OOH + OH --> RRG43051b + C2H5CHO + H2O + OH                                 ', &
-     '                   NC3H7OOH + OH --> RRG43051c + C2H5CHO + H2O + HO2                                ', &
-     '                    C2H5CHO + OH --> RRG43052 + C2H5CO3 + H2O                                       ', &
-     '                   C2H5CHO + NO3 --> RRG43053 + C2H5CO3 + HNO3                                      ', &
-     '                         C2H5CO3 --> RRG43054a + CO2 + C2H5O2                                       ', &
-     '                         C2H5CO3 --> RRG43054b + PROPACID                                           ', &
-     '                   C2H5CO3 + HO2 --> RRG43055a + CO2 + C2H5O2 + OH                                  ' /)
+     '                  CH3COCO2H + OH --> CO2 + CH3CO + H2O                                              ', &
+     '                      CHOCOCH2O2 --> 0.2 HOCH2COCHO + 0.2 C33CO + 0.6 HCOCO + 0.6 HCHO              ', &
+     '                 CHOCOCH2O2 + NO --> HCOCO + NO2 + HCHO                                             ', &
+     '                CHOCOCH2O2 + HO2 --> ALCOCH2OOH                                                     ', &
+     '                CHOCOCH2O2 + HO2 --> HCOCO + OH + HCHO                                              ', &
+     '                CHOCOCH2O2 + NO3 --> HCOCO + NO2 + HCHO                                             ', &
+     '                 ALCOCH2OOH + OH --> HOOCH2CO3 + CO + H2O                                           ', &
+     '                 ALCOCH2OOH + OH --> C33CO + OH + H2O                                               ', &
+     '                 ALCOCH2OOH + OH --> CHOCOCH2O2 + H2O                                               ', &
+     '                ALCOCH2OOH + NO3 --> HOOCH2CO3 + HNO3 + CO                                          ', &
+     '                    HOCH2COCH2O2 --> HOCH2CO + HCHO                                                 ', &
+     '              HOCH2COCH2O2 + HO2 --> HOCH2COCH2OOH                                                  ', &
+     '              HOCH2COCH2O2 + HO2 --> HOCH2CO + OH + HCHO                                            ', &
+     '               HOCH2COCH2O2 + NO --> HOCH2CO + NO2 + HCHO                                           ', &
+     '              HOCH2COCH2OOH + OH --> HOCH2COCHO + OH                                                ', &
+     '              HOCH2COCH2OOH + OH --> HOCH2COCH2O2                                                   ', &
+     '              HOCH2COCH2OOH + OH --> HCOCOCH2OOH + HO2                                              ', &
+     '                    CH3CHCO + OH --> 0.07 CO2 + 0.21 CH3COCO2H + 0.79 CH3CHO + 0.72 CO + 0.79 HO2 ..', &
+     '                  PROPOLNO3 + OH --> ACETOL + NO2                                                   ', &
+     '                CH3COCH2O2 + NO2 --> CH3COCH2O2NO2                                                  ', &
+     '                   CH3COCH2O2NO2 --> CH3COCH2O2 + NO2                                               ', &
+     '              CH3COCH2O2NO2 + OH --> MGLYOX + H2O + NO3                                             ', &
+     '                   NC3H7OOH + OH --> NC3H7O2 + H2O                                                  ', &
+     '                   NC3H7OOH + OH --> C2H5CHO + OH + H2O                                             ', &
+     '                   NC3H7OOH + OH --> C2H5CHO + HO2 + H2O                                            ', &
+     '                    C2H5CHO + OH --> C2H5CO3 + H2O                                                  ', &
+     '                   C2H5CHO + NO3 --> C2H5CO3 + HNO3                                                 ', &
+     '                         C2H5CO3 --> CO2 + C2H5O2                                                   ', &
+     '                         C2H5CO3 --> PROPACID                                                       ', &
+     '                   C2H5CO3 + HO2 --> CO2 + C2H5O2 + OH                                              ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_11 = (/ &
-     '                   C2H5CO3 + HO2 --> RRG43055b + PERPROACID                                         ', &
-     '                   C2H5CO3 + HO2 --> RRG43055c + PROPACID + O3                                      ', &
-     '                    C2H5CO3 + NO --> RRG43056 + CO2 + C2H5O2 + NO2                                  ', &
-     '                   C2H5CO3 + NO2 --> RRG43057 + PPN                                                 ', &
-     '                             PPN --> RRG43058 + C2H5CO3 + NO2                                       ', &
-     '                   PROPACID + OH --> RRG43059 + CO2 + CH3CHO + H2O                                  ', &
-     '                 PERPROACID + OH --> RRG43060a + C2H5CO3 + H2O                                      ', &
-     '                 PERPROACID + OH --> RRG43060b + CO2 + CH3CHO + H2O                                 ', &
-     '                        PPN + OH --> RRG43061 + CO2 + CH3CHO + H2O + NO2                            ', &
-     '                  CH3COCO3H + OH --> RRG43062 + CH3COCO3 + H2O                                      ', &
-     '                  CH3COCO3 + HO2 --> RRG43063a + CO2 + CH3CO + OH                                   ', &
-     '                  CH3COCO3 + HO2 --> RRG43063b + CH3COCO3H                                          ', &
-     '                   CH3COCO3 + NO --> RRG43064 + CO2 + CH3CO + NO2                                   ', &
-     '                  CH3COCO3 + NO2 --> RRG43065 + CO2 + CH3CO + NO3                                   ', &
-     '                  CH3COCO3 + NO3 --> RRG43066 + CO2 + CH3CO3 + NO2                                  ', &
-     '                        CH3COCO3 --> RRG43067 + CO2 + CH3CO3                                        ', &
-     '                      C33CO + OH --> RRG43068 + 3 CO + HO2                                          ', &
-     '                    IPROPOL + OH --> RRG43069 + CH3COCH3 + H2O + HO2                                ', &
-     '                    NPROPOL + OH --> RRG43070a + C2H5CHO + H2O + HO2                                ', &
-     '                    NPROPOL + OH --> RRG43070b + HYPROPO2 + H2O                                     ', &
-     '                   PROPENOL + OH --> RRG43071a + CH3CHO + OH + HCOOH                                ', &
-     '                PROPENOL + HCOOH --> RRG43072 + C2H5CHO + HCOOH                                     ', &
-     '                 C2H5CHO + HCOOH --> RRG43073 + PROPENOL + HCOOH                                    ', &
-     '                HCOCOCH2OOH + OH --> RRG43074 + HCOCO + CO + OH + HO2                               ', &
-     '                CH3COCHOHOH + OH --> RRG43075a + CH3CO + H2O + HCOOH                                ', &
-     '                CH3COCHOHOH + OH --> RRG43075b + CH3COCO2H + H2O                                    ', &
-     '                  HCOCH2CHO + OH --> RRG43202 + HCOCH2CO3                                           ', &
-     '                 HCOCH2CHO + NO3 --> RRG43203 + HCOCH2CO3 + HNO3                                    ', &
-     '                       HCOCH2CO3 --> RRG43204a + CO2 + HCOCH2O2                                     ', &
-     '                       HCOCH2CO3 --> RRG43204b + HCOCH2CO2H                                         ' /)
+     '                   C2H5CO3 + HO2 --> PERPROACID                                                     ', &
+     '                   C2H5CO3 + HO2 --> PROPACID + O3                                                  ', &
+     '                    C2H5CO3 + NO --> CO2 + C2H5O2 + NO2                                             ', &
+     '                   C2H5CO3 + NO2 --> PPN                                                            ', &
+     '                             PPN --> C2H5CO3 + NO2                                                  ', &
+     '                   PROPACID + OH --> CO2 + CH3CHO + H2O                                             ', &
+     '                 PERPROACID + OH --> C2H5CO3 + H2O                                                  ', &
+     '                 PERPROACID + OH --> CO2 + CH3CHO + H2O                                             ', &
+     '                        PPN + OH --> CO2 + CH3CHO + H2O + NO2                                       ', &
+     '                  CH3COCO3H + OH --> CH3COCO3 + H2O                                                 ', &
+     '                  CH3COCO3 + HO2 --> CO2 + CH3CO + OH                                               ', &
+     '                  CH3COCO3 + HO2 --> CH3COCO3H                                                      ', &
+     '                   CH3COCO3 + NO --> CO2 + CH3CO + NO2                                              ', &
+     '                  CH3COCO3 + NO2 --> CO2 + CH3CO + NO3                                              ', &
+     '                  CH3COCO3 + NO3 --> CO2 + CH3CO3 + NO2                                             ', &
+     '                        CH3COCO3 --> CO2 + CH3CO3                                                   ', &
+     '                      C33CO + OH --> 3 CO + HO2                                                     ', &
+     '                    IPROPOL + OH --> CH3COCH3 + HO2 + H2O                                           ', &
+     '                    NPROPOL + OH --> C2H5CHO + HO2 + H2O                                            ', &
+     '                    NPROPOL + OH --> HYPROPO2 + H2O                                                 ', &
+     '                   PROPENOL + OH --> CH3CHO + OH + HCOOH                                            ', &
+     '                PROPENOL + HCOOH --> C2H5CHO + HCOOH                                                ', &
+     '                 C2H5CHO + HCOOH --> PROPENOL + HCOOH                                               ', &
+     '                HCOCOCH2OOH + OH --> HCOCO + CO + OH + HO2                                          ', &
+     '                CH3COCHOHOH + OH --> CH3CO + H2O + HCOOH                                            ', &
+     '                CH3COCHOHOH + OH --> CH3COCO2H + H2O                                                ', &
+     '                  HCOCH2CHO + OH --> HCOCH2CO3                                                      ', &
+     '                 HCOCH2CHO + NO3 --> HCOCH2CO3 + HNO3                                               ', &
+     '                       HCOCH2CO3 --> CO2 + HCOCH2O2                                                 ', &
+     '                       HCOCH2CO3 --> HCOCH2CO2H                                                     ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_12 = (/ &
-     '                  HCOCH2CO3 + NO --> RRG43205 + CO2 + HCOCH2O2 + NO2                                ', &
-     '                 HCOCH2CO3 + NO2 --> RRG43206 + C3PAN2                                              ', &
-     '                 HCOCH2CO3 + HO2 --> RRG43207a + HCOCH2CO3H                                         ', &
-     '                 HCOCH2CO3 + HO2 --> RRG43207b + HCOCH2CO2H + O3                                    ', &
-     '                 HCOCH2CO3 + HO2 --> RRG43207c + CO2 + HCOCH2O2 + OH                                ', &
-     '                          C3PAN2 --> RRG43210 + HCOCH2CO3 + NO2                                     ', &
-     '                     C3PAN2 + OH --> RRG43211 + GLYOX + CO + NO2                                    ', &
-     '                 HCOCH2CO2H + OH --> RRG43212 + CO2 + HCOCH2O2                                      ', &
-     '                       HOC2H4CO3 --> RRG43213a + CO2 + HOCH2CH2O2                                   ', &
-     '                       HOC2H4CO3 --> RRG43213b + HOC2H4CO2H                                         ', &
-     '                  HOC2H4CO3 + NO --> RRG43214 + CO2 + HOCH2CH2O2 + NO2                              ', &
-     '                 HOC2H4CO3 + HO2 --> RRG43215a + HOC2H4CO3H                                         ', &
-     '                 HOC2H4CO3 + HO2 --> RRG43215b + CO2 + HOCH2CH2O2 + OH                              ', &
-     '                 HOC2H4CO3 + HO2 --> RRG43215c + HOC2H4CO2H + O3                                    ', &
-     '                 HOC2H4CO3 + NO2 --> RRG43218 + C3PAN1                                              ', &
-     '                 HOC2H4CO2H + OH --> RRG43219 + CO2 + HOCH2CH2O2                                    ', &
-     '                 HOC2H4CO3H + OH --> RRG43220 + HOC2H4CO3                                           ', &
-     '                          C3PAN1 --> RRG43221 + HOC2H4CO3 + NO2                                     ', &
-     '                     C3PAN1 + OH --> RRG43222 + HOCH2CHO + CO + NO2                                 ', &
-     '                 HCOCH2CO3H + OH --> RRG43223 + CO2 + HCOCH2O2 + H2O                                ', &
-     '                  C3DIALOOH + OH --> RRG43415 + C33CO + OH                                          ', &
-     '                  C3DIALO2 + HO2 --> RRG43418a + C3DIALOOH                                          ', &
-     '                  C3DIALO2 + HO2 --> RRG43418b + GLYOX + CO + OH + HO2                              ', &
-     '                   C3DIALO2 + NO --> RRG43419 + GLYOX + CO + HO2 + NO2                              ', &
-     '                  C3DIALO2 + NO3 --> RRG43420 + GLYOX + CO + HO2 + NO2                              ', &
-     '                        C3DIALO2 --> RRG43421 + GLYOX + CO + HO2                                    ', &
-     '                 HCOCOHCO3 + HO2 --> RRG43422a + CO2 + GLYOX + OH + HO2                             ', &
-     '                 HCOCOHCO3 + HO2 --> RRG43422b + HCOCOHCO3H                                         ', &
-     '                  HCOCOHCO3 + NO --> RRG43424 + CO2 + GLYOX + HO2 + NO2                             ', &
-     '                 HCOCOHCO3 + NO2 --> RRG43425 + HCOCOHPAN                                           ' /)
+     '                  HCOCH2CO3 + NO --> CO2 + HCOCH2O2 + NO2                                           ', &
+     '                 HCOCH2CO3 + NO2 --> C3PAN2                                                         ', &
+     '                 HCOCH2CO3 + HO2 --> HCOCH2CO3H                                                     ', &
+     '                 HCOCH2CO3 + HO2 --> HCOCH2CO2H + O3                                                ', &
+     '                 HCOCH2CO3 + HO2 --> CO2 + HCOCH2O2 + OH                                            ', &
+     '                          C3PAN2 --> HCOCH2CO3 + NO2                                                ', &
+     '                     C3PAN2 + OH --> GLYOX + CO + NO2                                               ', &
+     '                 HCOCH2CO2H + OH --> CO2 + HCOCH2O2                                                 ', &
+     '                       HOC2H4CO3 --> CO2 + HOCH2CH2O2                                               ', &
+     '                       HOC2H4CO3 --> HOC2H4CO2H                                                     ', &
+     '                  HOC2H4CO3 + NO --> CO2 + HOCH2CH2O2 + NO2                                         ', &
+     '                 HOC2H4CO3 + HO2 --> HOC2H4CO3H                                                     ', &
+     '                 HOC2H4CO3 + HO2 --> CO2 + HOCH2CH2O2 + OH                                          ', &
+     '                 HOC2H4CO3 + HO2 --> HOC2H4CO2H + O3                                                ', &
+     '                 HOC2H4CO3 + NO2 --> C3PAN1                                                         ', &
+     '                 HOC2H4CO2H + OH --> CO2 + HOCH2CH2O2                                               ', &
+     '                 HOC2H4CO3H + OH --> HOC2H4CO3                                                      ', &
+     '                          C3PAN1 --> HOC2H4CO3 + NO2                                                ', &
+     '                     C3PAN1 + OH --> HOCH2CHO + CO + NO2                                            ', &
+     '                 HCOCH2CO3H + OH --> CO2 + HCOCH2O2 + H2O                                           ', &
+     '                  C3DIALOOH + OH --> C33CO + OH                                                     ', &
+     '                  C3DIALO2 + HO2 --> C3DIALOOH                                                      ', &
+     '                  C3DIALO2 + HO2 --> GLYOX + CO + OH + HO2                                          ', &
+     '                   C3DIALO2 + NO --> GLYOX + CO + HO2 + NO2                                         ', &
+     '                  C3DIALO2 + NO3 --> GLYOX + CO + HO2 + NO2                                         ', &
+     '                        C3DIALO2 --> GLYOX + CO + HO2                                               ', &
+     '                 HCOCOHCO3 + HO2 --> CO2 + GLYOX + OH + HO2                                         ', &
+     '                 HCOCOHCO3 + HO2 --> HCOCOHCO3H                                                     ', &
+     '                  HCOCOHCO3 + NO --> CO2 + GLYOX + HO2 + NO2                                        ', &
+     '                 HCOCOHCO3 + NO2 --> HCOCOHPAN                                                      ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_13 = (/ &
-     '                 HCOCOHCO3 + NO3 --> RRG43426 + CO2 + GLYOX + HO2 + NO2                             ', &
-     '                       HCOCOHCO3 --> RRG43427 + CO2 + GLYOX + HO2                                   ', &
-     '                  METACETHO + OH --> RRG43428 + CO2 + CH3CO                                         ', &
-     '                  HCOCOHPAN + OH --> RRG43442 + GLYOX + CO + NO2                                    ', &
-     '                       HCOCOHPAN --> RRG43443 + HCOCOHCO3 + NO2                                     ', &
-     '                  C32OH13CO + OH --> RRG43444 + HCOCOHCO3                                           ', &
-     '                 HCOCOHCO3H + OH --> RRG43446 + HCOCOHCO3                                           ', &
-     '                     NC4H10 + OH --> RRG44000 + LC4H9O2 + H2O                                       ', &
-     '                         LC4H9O2 --> RRG44001a + C3H7CHO + HO2                                      ', &
-     '                         LC4H9O2 --> RRG44001b + 0.636 MEK + 0.364 C2H5O2 + 0.364 CH3CHO ... etc.   ', &
-     '                   LC4H9O2 + HO2 --> RRG44002 + LC4H9OOH                                            ', &
-     '                    LC4H9O2 + NO --> RRG44003a + C3H7CHO + HO2 + NO2                                ', &
-     '                    LC4H9O2 + NO --> RRG44003b + 0.636 MEK + 0.364 C2H5O2 + 0.364 CH3CHO ... etc.   ', &
-     '                    LC4H9O2 + NO --> RRG44003c + LC4H9NO3                                           ', &
-     '                   LC4H9O2 + NO3 --> RRG44004a + C3H7CHO + HO2 + NO2                                ', &
-     '                   LC4H9O2 + NO3 --> RRG44004b + 0.636 MEK + 0.364 C2H5O2 + 0.364 CH3CHO ... etc.   ', &
-     '                   LC4H9OOH + OH --> RRG44005a + LC4H9O2 + H2O                                      ', &
-     '                   LC4H9OOH + OH --> RRG44005b + C3H7CHO + H2O + OH                                 ', &
-     '                   LC4H9OOH + OH --> RRG44005c + MEK + H2O + OH                                     ', &
-     '                     IC4H10 + OH --> RRG44006a + TC4H9O2 + H2O                                      ', &
-     '                     IC4H10 + OH --> RRG44006b + IC4H9O2 + H2O                                      ', &
-     '                         TC4H9O2 --> RRG44007 + CH3COCH3 + CH3                                      ', &
-     '                   TC4H9O2 + HO2 --> RRG44008 + TC4H9OOH                                            ', &
-     '                    TC4H9O2 + NO --> RRG44009a + CH3COCH3 + CH3 + NO2                               ', &
-     '                    TC4H9O2 + NO --> RRG44009b + TC4H9NO3                                           ', &
-     '                   TC4H9OOH + OH --> RRG44010a + TC4H9O2 + H2O                                      ', &
-     '                   TC4H9OOH + OH --> RRG44010b + CH3COCH3 + H2O + HCHO + OH                         ', &
-     '                   TC4H9NO3 + OH --> RRG44011 + CH3COCH3 + H2O + HCHO + NO2                         ', &
-     '                         IC4H9O2 --> RRG44012 + IPRCHO                                              ', &
-     '                   IC4H9O2 + HO2 --> RRG44013 + IC4H9OOH                                            ' /)
+     '                 HCOCOHCO3 + NO3 --> CO2 + GLYOX + HO2 + NO2                                        ', &
+     '                       HCOCOHCO3 --> CO2 + GLYOX + HO2                                              ', &
+     '                  METACETHO + OH --> CO2 + CH3CO                                                    ', &
+     '                  HCOCOHPAN + OH --> GLYOX + CO + NO2                                               ', &
+     '                       HCOCOHPAN --> HCOCOHCO3 + NO2                                                ', &
+     '                  C32OH13CO + OH --> HCOCOHCO3                                                      ', &
+     '                 HCOCOHCO3H + OH --> HCOCOHCO3                                                      ', &
+     '                     NC4H10 + OH --> LC4H9O2 + H2O                                                  ', &
+     '                         LC4H9O2 --> C3H7CHO + HO2                                                  ', &
+     '                         LC4H9O2 --> 0.636 MEK + 0.364 C2H5O2 + 0.364 CH3CHO + 0.636 HO2 ... etc.   ', &
+     '                   LC4H9O2 + HO2 --> LC4H9OOH                                                       ', &
+     '                    LC4H9O2 + NO --> C3H7CHO + HO2 + NO2                                            ', &
+     '                    LC4H9O2 + NO --> 0.636 MEK + 0.364 C2H5O2 + 0.364 CH3CHO + 0.636 HO2 ... etc.   ', &
+     '                    LC4H9O2 + NO --> LC4H9NO3                                                       ', &
+     '                   LC4H9O2 + NO3 --> C3H7CHO + HO2 + NO2                                            ', &
+     '                   LC4H9O2 + NO3 --> 0.636 MEK + 0.364 C2H5O2 + 0.364 CH3CHO + 0.636 HO2 ... etc.   ', &
+     '                   LC4H9OOH + OH --> LC4H9O2 + H2O                                                  ', &
+     '                   LC4H9OOH + OH --> C3H7CHO + OH + H2O                                             ', &
+     '                   LC4H9OOH + OH --> MEK + OH + H2O                                                 ', &
+     '                     IC4H10 + OH --> TC4H9O2 + H2O                                                  ', &
+     '                     IC4H10 + OH --> IC4H9O2 + H2O                                                  ', &
+     '                         TC4H9O2 --> CH3COCH3 + CH3                                                 ', &
+     '                   TC4H9O2 + HO2 --> TC4H9OOH                                                       ', &
+     '                    TC4H9O2 + NO --> CH3COCH3 + CH3 + NO2                                           ', &
+     '                    TC4H9O2 + NO --> TC4H9NO3                                                       ', &
+     '                   TC4H9OOH + OH --> TC4H9O2 + H2O                                                  ', &
+     '                   TC4H9OOH + OH --> CH3COCH3 + OH + H2O + HCHO                                     ', &
+     '                   TC4H9NO3 + OH --> CH3COCH3 + H2O + NO2 + HCHO                                    ', &
+     '                         IC4H9O2 --> IPRCHO                                                         ', &
+     '                   IC4H9O2 + HO2 --> IC4H9OOH                                                       ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_14 = (/ &
-     '                    IC4H9O2 + NO --> RRG44014a + IPRCHO + NO2                                       ', &
-     '                    IC4H9O2 + NO --> RRG44014b + IC4H9NO3                                           ', &
-     '                   IC4H9OOH + OH --> RRG44015a + IC4H9O2 + H2O                                      ', &
-     '                   IC4H9OOH + OH --> RRG44015b + IPRCHO + H2O + OH                                  ', &
-     '                   IC4H9NO3 + OH --> RRG44016 + IPRCHO + H2O + NO2                                  ', &
-     '                        MVK + O3 --> RRG44017 + 0.026 CO2 + 0.02402 H2O2 + 0.0728 CH3CO + 0.00718 CH', &
-     '                        MVK + OH --> RRG44018 + LHMVKABO2                                           ', &
-     '                        MEK + OH --> RRG44019 + LMEKO2 + H2O                                        ', &
-     '                    LMEKO2 + HO2 --> RRG44020 + LMEKOOH                                             ', &
-     '                     LMEKO2 + NO --> RRG44021a + 0.38 CO2 + 0.62 CH3CO + 0.38 HOCH2CH2O2 ... etc.   ', &
-     '                     LMEKO2 + NO --> RRG44021b + LMEKNO3                                            ', &
-     '                    LMEKOOH + OH --> RRG44022a + LMEKO2 + H2O                                       ', &
-     '                    LMEKOOH + OH --> RRG44022b + 0.62 BIACET + 0.38 CO2 + 0.38 HOCH2CH2O2 ... etc.  ', &
-     '                   LC4H9NO3 + OH --> RRG44023a + MEK + H2O + NO2                                    ', &
-     '                   LC4H9NO3 + OH --> RRG44023b + C3H7CHO + H2O + NO2                                ', &
-     '                       MPAN + OH --> RRG44024 + ACETOL + CO + NO2                                   ', &
-     '                            MPAN --> RRG44025 + MACO3 + NO2                                         ', &
-     '                          LMEKO2 --> RRG44026 + 0.538 CO2 + 0.462 CH3CO + 0.459 HOCH2CH2O2 ... etc. ', &
-     '                       MACR + OH --> RRG44027 + 0.45 MACO3 + 0.55 MACRO2                            ', &
-     '                       MACR + O3 --> RRG44028 + 0.065 CHOCOCH2O2 + 0.065 CH3CO + 0.87 MGLYOX ... etc', &
-     '                      MACR + NO3 --> RRG44029 + MACO3 + HNO3                                        ', &
-     '                           MACO3 --> RRG44030a + CO2 + CH3CO + HCHO                                 ', &
-     '                           MACO3 --> RRG44030b + MACO2H                                             ', &
-     '                     MACO3 + HO2 --> RRG44031a + MACO2 + OH                                         ', &
-     '                     MACO3 + HO2 --> RRG44031b + MACO3H                                             ', &
-     '                     MACO3 + HO2 --> RRG44031c + MACO2H + O3                                        ', &
-     '                      MACO3 + NO --> RRG44032 + MACO2 + NO2                                         ', &
-     '                     MACO3 + NO2 --> RRG44033 + MPAN                                                ', &
-     '                     MACO3 + NO3 --> RRG44034 + MACO2 + NO2                                         ', &
-     '                          MACRO2 --> RRG44035 + 0.3 MACROH + 0.7 ACETOL + 0.7 HCHO + 0.7 HO2 ... etc' /)
+     '                    IC4H9O2 + NO --> IPRCHO + NO2                                                   ', &
+     '                    IC4H9O2 + NO --> IC4H9NO3                                                       ', &
+     '                   IC4H9OOH + OH --> IC4H9O2 + H2O                                                  ', &
+     '                   IC4H9OOH + OH --> IPRCHO + OH + H2O                                              ', &
+     '                   IC4H9NO3 + OH --> IPRCHO + H2O + NO2                                             ', &
+     '                        MVK + O3 --> 0.026 CO2 + 0.02402 H2O2 + 0.0728 CH3CO + 0.00718 CH3COCO2H ...', &
+     '                        MVK + OH --> LHMVKABO2                                                      ', &
+     '                        MEK + OH --> LMEKO2 + H2O                                                   ', &
+     '                    LMEKO2 + HO2 --> LMEKOOH                                                        ', &
+     '                     LMEKO2 + NO --> 0.38 CO2 + 0.62 CH3CO + 0.38 HOCH2CH2O2 + 0.62 CH3CHO ... etc. ', &
+     '                     LMEKO2 + NO --> LMEKNO3                                                        ', &
+     '                    LMEKOOH + OH --> LMEKO2 + H2O                                                   ', &
+     '                    LMEKOOH + OH --> 0.62 BIACET + 0.38 CO2 + 0.38 HOCH2CH2O2 + OH + H2O ... etc.   ', &
+     '                   LC4H9NO3 + OH --> MEK + H2O + NO2                                                ', &
+     '                   LC4H9NO3 + OH --> C3H7CHO + H2O + NO2                                            ', &
+     '                       MPAN + OH --> ACETOL + CO + NO2                                              ', &
+     '                            MPAN --> MACO3 + NO2                                                    ', &
+     '                          LMEKO2 --> 0.538 CO2 + 0.462 CH3CO + 0.459 HOCH2CH2O2 + 0.079 C2H5O2 ... e', &
+     '                       MACR + OH --> 0.45 MACO3 + 0.55 MACRO2                                       ', &
+     '                       MACR + O3 --> 0.065 CHOCOCH2O2 + 0.065 CH3CO + 0.3219 CH2OO + 0.87 MGLYOX ...', &
+     '                      MACR + NO3 --> MACO3 + HNO3                                                   ', &
+     '                           MACO3 --> CO2 + CH3CO + HCHO                                             ', &
+     '                           MACO3 --> MACO2H                                                         ', &
+     '                     MACO3 + HO2 --> MACO2 + OH                                                     ', &
+     '                     MACO3 + HO2 --> MACO3H                                                         ', &
+     '                     MACO3 + HO2 --> MACO2H + O3                                                    ', &
+     '                      MACO3 + NO --> MACO2 + NO2                                                    ', &
+     '                     MACO3 + NO2 --> MPAN                                                           ', &
+     '                     MACO3 + NO3 --> MACO2 + NO2                                                    ', &
+     '                          MACRO2 --> 0.3 MACROH + 0.7 ACETOL + 0.7 HO2 + 0.7 HCHO                   ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_15 = (/ &
-     '                    MACRO2 + HO2 --> RRG44036a + MACRO + OH                                         ', &
-     '                    MACRO2 + HO2 --> RRG44036b + MACROOH                                            ', &
-     '                     MACRO2 + NO --> RRG44037a + MACRO + NO2                                        ', &
-     '                     MACRO2 + NO --> RRG44037b + MACRNO3                                            ', &
-     '                    MACRO2 + NO3 --> RRG44038 + MACRO + NO2                                         ', &
-     '                    MACROOH + OH --> RRG44039a + MACRO2                                             ', &
-     '                    MACROOH + OH --> RRG44039b + ACETOL + CO + OH                                   ', &
-     '                    MACROOH + OH --> RRG44039c + MGLYOX + CO + HO2                                  ', &
-     '                     MACROH + OH --> RRG44040 + ACETOL + CO + HO2                                   ', &
-     '                           MACRO --> RRG44041 + 0.115 MGLYOX + 0.885 ACETOL + 0.885 CO + 0.115 HCHO ', &
-     '                     MACO2H + OH --> RRG44042 + CO2 + ACETOL + HO2                                  ', &
-     '                     MACO3H + OH --> RRG44043a + CO2 + ACETOL + OH                                  ', &
-     '                     MACO3H + OH --> RRG44043b + MACO3                                              ', &
-     '                       LHMVKABO2 --> RRG44044 + 0.176 BIACETOH + 0.2 HO12CO3C4 + 0.528 CH3CO ... etc', &
-     '                 LHMVKABO2 + HO2 --> RRG44045a + CH3CO + HOCH2CHO + OH                              ', &
-     '                 LHMVKABO2 + HO2 --> RRG44045b + LHMVKABOOH                                         ', &
-     '                  LHMVKABO2 + NO --> RRG44046a + 0.88 CH3CO + 0.12 MGLYOX + 0.88 HOCH2CHO ... etc.  ', &
-     '                  LHMVKABO2 + NO --> RRG44046b + MVKNO3                                             ', &
-     '                 LHMVKABO2 + NO3 --> RRG44047 + 0.88 CH3CO + 0.12 MGLYOX + 0.88 HOCH2CHO ... etc.   ', &
-     '                 LHMVKABOOH + OH --> RRG44048a + LHMVKABO2                                          ', &
-     '                 LHMVKABOOH + OH --> RRG44048b + 0.88 BIACETOH + 0.12 CO2H3CHO + OH                 ', &
-     '                   CO2H3CHO + OH --> RRG44049a + CO2H3CO3                                           ', &
-     '                   CO2H3CHO + OH --> RRG44049b + CO23C3CHO + H2O + HO2                              ', &
-     '                  CO2H3CHO + NO3 --> RRG44050 + CO2H3CO3 + HNO3                                     ', &
-     '                        CO2H3CO3 --> RRG44051 + CO2 + MGLYOX + HO2                                  ', &
-     '                  CO2H3CO3 + HO2 --> RRG44052a + CO2 + MGLYOX + OH + HO2                            ', &
-     '                  CO2H3CO3 + HO2 --> RRG44052b + CO2H3CO2H + O3                                     ', &
-     '                  CO2H3CO3 + HO2 --> RRG44052c + CO2H3CO3H                                          ', &
-     '                   CO2H3CO3 + NO --> RRG44053 + CO2 + MGLYOX + HO2 + NO2                            ', &
-     '                  CO2H3CO3 + NO3 --> RRG44054 + CO2 + MGLYOX + HO2 + NO2                            ' /)
+     '                    MACRO2 + HO2 --> MACRO + OH                                                     ', &
+     '                    MACRO2 + HO2 --> MACROOH                                                        ', &
+     '                     MACRO2 + NO --> MACRO + NO2                                                    ', &
+     '                     MACRO2 + NO --> MACRNO3                                                        ', &
+     '                    MACRO2 + NO3 --> MACRO + NO2                                                    ', &
+     '                    MACROOH + OH --> MACRO2                                                         ', &
+     '                    MACROOH + OH --> ACETOL + CO + OH                                               ', &
+     '                    MACROOH + OH --> MGLYOX + CO + HO2                                              ', &
+     '                     MACROH + OH --> ACETOL + CO + HO2                                              ', &
+     '                           MACRO --> 0.885 ACETOL + 0.115 MGLYOX + 0.885 CO + HO2 + 0.115 HCHO ... e', &
+     '                     MACO2H + OH --> CO2 + ACETOL + HO2                                             ', &
+     '                     MACO3H + OH --> CO2 + ACETOL + OH                                              ', &
+     '                     MACO3H + OH --> MACO3                                                          ', &
+     '                       LHMVKABO2 --> 0.176 BIACETOH + 0.2 HO12CO3C4 + 0.528 CH3CO + 0.024 CO2H3CHO .', &
+     '                 LHMVKABO2 + HO2 --> CH3CO + HOCH2CHO + OH                                          ', &
+     '                 LHMVKABO2 + HO2 --> LHMVKABOOH                                                     ', &
+     '                  LHMVKABO2 + NO --> 0.88 CH3CO + 0.12 MGLYOX + 0.88 HOCH2CHO + 0.12 HO2 ... etc.   ', &
+     '                  LHMVKABO2 + NO --> MVKNO3                                                         ', &
+     '                 LHMVKABO2 + NO3 --> 0.88 CH3CO + 0.12 MGLYOX + 0.88 HOCH2CHO + 0.24 HO2 ... etc.   ', &
+     '                 LHMVKABOOH + OH --> LHMVKABO2                                                      ', &
+     '                 LHMVKABOOH + OH --> 0.88 BIACETOH + 0.12 CO2H3CHO + OH                             ', &
+     '                   CO2H3CHO + OH --> CO2H3CO3                                                       ', &
+     '                   CO2H3CHO + OH --> CO23C3CHO + HO2 + H2O                                          ', &
+     '                  CO2H3CHO + NO3 --> CO2H3CO3 + HNO3                                                ', &
+     '                        CO2H3CO3 --> CO2 + MGLYOX + HO2                                             ', &
+     '                  CO2H3CO3 + HO2 --> CO2 + MGLYOX + OH + HO2                                        ', &
+     '                  CO2H3CO3 + HO2 --> CO2H3CO2H + O3                                                 ', &
+     '                  CO2H3CO3 + HO2 --> CO2H3CO3H                                                      ', &
+     '                   CO2H3CO3 + NO --> CO2 + MGLYOX + HO2 + NO2                                       ', &
+     '                  CO2H3CO3 + NO3 --> CO2 + MGLYOX + HO2 + NO2                                       ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_16 = (/ &
-     '                  CO2H3CO3H + OH --> RRG44055a + CO2H3CO3                                           ', &
-     '                  CO2H3CO3H + OH --> RRG44055b + CO2 + CH3CO + CO + OH                              ', &
-     '                  CO2H3CO2H + OH --> RRG44056 + CH3COCOCO2H + HO2                                   ', &
-     '                  HO12CO3C4 + OH --> RRG44057a + BIACETOH + HO2                                     ', &
-     '                  HO12CO3C4 + OH --> RRG44057b + CO2H3CHO + HO2                                     ', &
-     '                           MACO2 --> RRG44058 + CO2 + 0.35 CH3COCH2O2 + 0.65 CH3 + 0.65 CO ... etc. ', &
-     '                       LHMVKABO2 --> RRG44059 + 0.12 CH3CO + 0.88 MGLYOX + 0.12 HOOCH2CHO ... etc.  ', &
-     '                          MACRO2 --> RRG44060 + MGLYOX + HCHO + OH                                  ', &
-     '                     MVKNO3 + OH --> RRG44061a + CO2 + MGLYOX + H2O + HO2 + NO2                     ', &
-     '                     MVKNO3 + OH --> RRG44061b + BIACETOH + H2O + NO2                               ', &
-     '                    MACRNO3 + OH --> RRG44062a + CO2 + ACETOL + H2O + NO2                           ', &
-     '                    MACRNO3 + OH --> RRG44062b + MGLYOX + H2O + CO + NO2                            ', &
-     '                          MACRO2 --> RRG44063 + ACETOL + CO + OH                                    ', &
-     '                   EZCH3CO2CHCHO --> RRG44064 + 0.9 CH3COCHCO + 0.1 CH3CO + 0.01 GLYOX + 0.18 CO ...', &
-     '             EZCH3CO2CHCHO + HO2 --> RRG44065 + CH3COOHCHCHO                                        ', &
-     '              EZCH3CO2CHCHO + NO --> RRG44066 + CH3COCHO2CHO + NO2                                  ', &
-     '             EZCH3CO2CHCHO + NO3 --> RRG44067 + CH3COCHO2CHO + NO2                                  ', &
-     '                   EZCH3CO2CHCHO --> RRG44068 + CH3COCHO2CHO                                        ', &
-     '                   EZCHOCCH3CHO2 --> RRG44069 + HCOCCH3CO + OH                                      ', &
-     '              EZCHOCCH3CHO2 + NO --> RRG44070 + HCOCO2CH3CHO + NO2                                  ', &
-     '             EZCHOCCH3CHO2 + HO2 --> RRG44071 + HCOCCH3CHOOH                                        ', &
-     '             EZCHOCCH3CHO2 + NO3 --> RRG44072 + HCOCO2CH3CHO + NO2                                  ', &
-     '                   EZCHOCCH3CHO2 --> RRG44073 + HCOCO2CH3CHO                                        ', &
-     '                    CH3COOHCHCHO --> RRG44074 + CH3COCHO2CHO + OH                                   ', &
-     '                    HCOCCH3CHOOH --> RRG44075 + HCOCO2CH3CHO + OH                                   ', &
-     '               CH3COCHO2CHO + NO --> RRG44076 + CH3CO + GLYOX + NO2                                 ', &
-     '              CH3COCHO2CHO + NO3 --> RRG44077 + CH3CO + GLYOX + NO2                                 ', &
-     '              CH3COCHO2CHO + HO2 --> RRG44078 + CH3CO + GLYOX + OH                                  ', &
-     '                    CH3COCHO2CHO --> RRG44079 + CH3CO + GLYOX                                       ', &
-     '                    HCOCO2CH3CHO --> RRG44080 + MGLYOX + CO + HO2                                   ' /)
+     '                  CO2H3CO3H + OH --> CO2H3CO3                                                       ', &
+     '                  CO2H3CO3H + OH --> CO2 + CH3CO + CO + OH                                          ', &
+     '                  CO2H3CO2H + OH --> CH3COCOCO2H + HO2                                              ', &
+     '                  HO12CO3C4 + OH --> BIACETOH + HO2                                                 ', &
+     '                  HO12CO3C4 + OH --> CO2H3CHO + HO2                                                 ', &
+     '                           MACO2 --> CO2 + 0.35 CH3COCH2O2 + 0.65 CH3 + 0.65 CO + 0.35 OH ... etc.  ', &
+     '                       LHMVKABO2 --> 0.12 CH3CO + 0.12 HOOCH2CHO + 0.88 MGLYOX + OH + 0.88 HCHO ... ', &
+     '                          MACRO2 --> MGLYOX + OH + HCHO                                             ', &
+     '                     MVKNO3 + OH --> CO2 + MGLYOX + HO2 + H2O + NO2                                 ', &
+     '                     MVKNO3 + OH --> BIACETOH + H2O + NO2                                           ', &
+     '                    MACRNO3 + OH --> CO2 + ACETOL + H2O + NO2                                       ', &
+     '                    MACRNO3 + OH --> MGLYOX + CO + H2O + NO2                                        ', &
+     '                          MACRO2 --> ACETOL + CO + OH                                               ', &
+     '                   EZCH3CO2CHCHO --> 0.9 CH3COCHCO + 0.1 CH3CO + 0.01 GLYOX + 0.18 CO + OH ... etc. ', &
+     '             EZCH3CO2CHCHO + HO2 --> CH3COOHCHCHO                                                   ', &
+     '              EZCH3CO2CHCHO + NO --> CH3COCHO2CHO + NO2                                             ', &
+     '             EZCH3CO2CHCHO + NO3 --> CH3COCHO2CHO + NO2                                             ', &
+     '                   EZCH3CO2CHCHO --> CH3COCHO2CHO                                                   ', &
+     '                   EZCHOCCH3CHO2 --> HCOCCH3CO + OH                                                 ', &
+     '              EZCHOCCH3CHO2 + NO --> HCOCO2CH3CHO + NO2                                             ', &
+     '             EZCHOCCH3CHO2 + HO2 --> HCOCCH3CHOOH                                                   ', &
+     '             EZCHOCCH3CHO2 + NO3 --> HCOCO2CH3CHO + NO2                                             ', &
+     '                   EZCHOCCH3CHO2 --> HCOCO2CH3CHO                                                   ', &
+     '                    CH3COOHCHCHO --> CH3COCHO2CHO + OH                                              ', &
+     '                    HCOCCH3CHOOH --> HCOCO2CH3CHO + OH                                              ', &
+     '               CH3COCHO2CHO + NO --> CH3CO + GLYOX + NO2                                            ', &
+     '              CH3COCHO2CHO + NO3 --> CH3CO + GLYOX + NO2                                            ', &
+     '              CH3COCHO2CHO + HO2 --> CH3CO + GLYOX + OH                                             ', &
+     '                    CH3COCHO2CHO --> CH3CO + GLYOX                                                  ', &
+     '                    HCOCO2CH3CHO --> MGLYOX + CO + HO2                                              ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_17 = (/ &
-     '               HCOCO2CH3CHO + NO --> RRG44081 + MGLYOX + CO + HO2 + NO2                             ', &
-     '              HCOCO2CH3CHO + HO2 --> RRG44082 + MGLYOX + CO + OH + HO2                              ', &
-     '              HCOCO2CH3CHO + NO3 --> RRG44083 + MGLYOX + CO + HO2 + NO2                             ', &
-     '                  HCOCCH3CO + OH --> RRG44084 + MGLYOX + CO + HO2                                   ', &
-     '                  CH3COCHCO + OH --> RRG44085 + MGLYOX + CO + HO2                                   ', &
-     '                    LMEKNO3 + OH --> RRG44086 + 0.38 NO3CH2CHO + 0.38 CH3CO + 0.62 MGLYOX ... etc.  ', &
-     '                  MEPROPENE + OH --> RRG44087 + IBUTOLBO2                                           ', &
-     '                  MEPROPENE + O3 --> RRG44088a + CH2OOA + CH3COCH3                                  ', &
-     '                  MEPROPENE + O3 --> RRG44088b + CH3COCH2O2 + HCHO + OH                             ', &
-     '                 MEPROPENE + NO3 --> RRG44089 + CH3COCH3 + HCHO + NO2                               ', &
-     '                       IBUTOLBO2 --> RRG44090 + CH3COCH3 + HCHO + HO2                               ', &
-     '                 IBUTOLBO2 + HO2 --> RRG44091a + IBUTOLBOOH                                         ', &
-     '                 IBUTOLBO2 + HO2 --> RRG44091b + CH3COCH3 + HCHO + OH + HO2                         ', &
-     '                  IBUTOLBO2 + NO --> RRG44092a + CH3COCH3 + HCHO + HO2 + NO2                        ', &
-     '                  IBUTOLBO2 + NO --> RRG44092b + IBUTOLBNO3                                         ', &
-     '                 IBUTOLBO2 + NO3 --> RRG44093 + CH3COCH3 + HCHO + HO2 + NO2                         ', &
-     '                 IBUTOLBOOH + OH --> RRG44094a + IBUTOLBO2                                          ', &
-     '                 IBUTOLBOOH + OH --> RRG44094b + CH3COCH3 + HCHO + HO2                              ', &
-     '                 IBUTOLBNO3 + OH --> RRG44095 + CH3COCH3 + HCHO + HO2 + NO2                         ', &
-     '                    BUT1ENE + OH --> RRG44096 + LBUT1ENO2                                           ', &
-     '                    BUT1ENE + O3 --> RRG44097a + 0.5 C2H5CHO + 0.5 H2O2 + 0.5 CH3CHO + 0.5 CO ... et', &
-     '                    BUT1ENE + O3 --> RRG44097b + CH2OOA + C2H5CHO                                   ', &
-     '                   BUT1ENE + NO3 --> RRG44098 + C2H5CHO + HCHO + NO2                                ', &
-     '                       LBUT1ENO2 --> RRG44099 + C2H5CHO + HCHO + HO2                                ', &
-     '                 LBUT1ENO2 + HO2 --> RRG44100a + LBUT1ENOOH                                         ', &
-     '                 LBUT1ENO2 + HO2 --> RRG44100b + C2H5CHO + HCHO + OH + HO2                          ', &
-     '                  LBUT1ENO2 + NO --> RRG44101a + C2H5CHO + HCHO + HO2 + NO2                         ', &
-     '                  LBUT1ENO2 + NO --> RRG44101b + LBUT1ENNO3                                         ', &
-     '                 LBUT1ENO2 + NO3 --> RRG44102 + C2H5CHO + HCHO + HO2 + NO2                          ', &
-     '                 LBUT1ENOOH + OH --> RRG44103a + LBUT1ENO2                                          ' /)
+     '               HCOCO2CH3CHO + NO --> MGLYOX + CO + HO2 + NO2                                        ', &
+     '              HCOCO2CH3CHO + HO2 --> MGLYOX + CO + OH + HO2                                         ', &
+     '              HCOCO2CH3CHO + NO3 --> MGLYOX + CO + HO2 + NO2                                        ', &
+     '                  HCOCCH3CO + OH --> MGLYOX + CO + HO2                                              ', &
+     '                  CH3COCHCO + OH --> MGLYOX + CO + HO2                                              ', &
+     '                    LMEKNO3 + OH --> 0.38 NO3CH2CHO + 0.38 CH3CO + 0.62 MGLYOX + 0.62 HO2 ... etc.  ', &
+     '                  MEPROPENE + OH --> IBUTOLBO2                                                      ', &
+     '                  MEPROPENE + O3 --> CH2OOA + CH3COCH3                                              ', &
+     '                  MEPROPENE + O3 --> CH3COCH2O2 + OH + HCHO                                         ', &
+     '                 MEPROPENE + NO3 --> CH3COCH3 + NO2 + HCHO                                          ', &
+     '                       IBUTOLBO2 --> CH3COCH3 + HO2 + HCHO                                          ', &
+     '                 IBUTOLBO2 + HO2 --> IBUTOLBOOH                                                     ', &
+     '                 IBUTOLBO2 + HO2 --> CH3COCH3 + OH + HO2 + HCHO                                     ', &
+     '                  IBUTOLBO2 + NO --> CH3COCH3 + HO2 + NO2 + HCHO                                    ', &
+     '                  IBUTOLBO2 + NO --> IBUTOLBNO3                                                     ', &
+     '                 IBUTOLBO2 + NO3 --> CH3COCH3 + HO2 + NO2 + HCHO                                    ', &
+     '                 IBUTOLBOOH + OH --> IBUTOLBO2                                                      ', &
+     '                 IBUTOLBOOH + OH --> CH3COCH3 + HO2 + HCHO                                          ', &
+     '                 IBUTOLBNO3 + OH --> CH3COCH3 + HO2 + NO2 + HCHO                                    ', &
+     '                    BUT1ENE + OH --> LBUT1ENO2                                                      ', &
+     '                    BUT1ENE + O3 --> 0.5 C2H5CHO + 0.5 H2O2 + 0.5 CH3CHO + 0.5 CO + 0.5 HO2 ... etc.', &
+     '                    BUT1ENE + O3 --> CH2OOA + C2H5CHO                                               ', &
+     '                   BUT1ENE + NO3 --> C2H5CHO + NO2 + HCHO                                           ', &
+     '                       LBUT1ENO2 --> C2H5CHO + HO2 + HCHO                                           ', &
+     '                 LBUT1ENO2 + HO2 --> LBUT1ENOOH                                                     ', &
+     '                 LBUT1ENO2 + HO2 --> C2H5CHO + OH + HO2 + HCHO                                      ', &
+     '                  LBUT1ENO2 + NO --> C2H5CHO + HO2 + NO2 + HCHO                                     ', &
+     '                  LBUT1ENO2 + NO --> LBUT1ENNO3                                                     ', &
+     '                 LBUT1ENO2 + NO3 --> C2H5CHO + HO2 + NO2 + HCHO                                     ', &
+     '                 LBUT1ENOOH + OH --> LBUT1ENO2                                                      ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_18 = (/ &
-     '                 LBUT1ENOOH + OH --> RRG44103b + C2H5CO3 + HCHO + HO2                               ', &
-     '                 LBUT1ENNO3 + OH --> RRG44104 + C2H5CHO + CO + HO2 + NO2                            ', &
-     '                   CBUT2ENE + OH --> RRG44105 + BUT2OLO2                                            ', &
-     '                   CBUT2ENE + O3 --> RRG44106 + 0.2 CH4 + 0.05 CH2CO + 0.16 CH3CHOHOOH + 0.2 CO2 ...', &
-     '                  CBUT2ENE + NO3 --> RRG44107 + 2 CH3CHO + NO2                                      ', &
-     '                   TBUT2ENE + OH --> RRG44108 + BUT2OLO2                                            ', &
-     '                   TBUT2ENE + O3 --> RRG44109 + 0.2 CH4 + 0.05 CH2CO + 0.16 CH3CHOHOOH + 0.2 CO2 ...', &
-     '                  TBUT2ENE + NO3 --> RRG44110 + 2 CH3CHO + NO2                                      ', &
-     '                        BUT2OLO2 --> RRG44111 + C2H5CHO + HCHO + HO2                                ', &
-     '                  BUT2OLO2 + HO2 --> RRG44112a + BUT2OLOOH                                          ', &
-     '                  BUT2OLO2 + HO2 --> RRG44112b + 2 CH3CHO + OH + HO2                                ', &
-     '                   BUT2OLO2 + NO --> RRG44113a + 2 CH3CHO + HO2 + NO2                               ', &
-     '                   BUT2OLO2 + NO --> RRG44113b + BUT2OLNO3                                          ', &
-     '                  BUT2OLO2 + NO3 --> RRG44114 + 2 CH3CHO + HO2 + NO2                                ', &
-     '                  BUT2OLOOH + OH --> RRG44115a + BUT2OLO2                                           ', &
-     '                  BUT2OLOOH + OH --> RRG44115b + LMEKOOH + HO2                                      ', &
-     '                  BUT2OLOOH + OH --> RRG44115c + BUT2OLO + OH                                       ', &
-     '                  BUT2OLNO3 + OH --> RRG44116 + LMEKNO3 + HO2                                       ', &
-     '                    BUT2OLO + OH --> RRG44117 + BIACET + HO2                                        ', &
-     '                     IPRCHO + OH --> RRG44118 + IPRCO3 + H2O                                        ', &
-     '                    IPRCHO + NO3 --> RRG44119 + IPRCO3 + HNO3                                       ', &
-     '                          IPRCO3 --> RRG44120 + IC3H7O2 + CO2                                       ', &
-     '                    IPRCO3 + HO2 --> RRG44121a + PERIBUACID                                         ', &
-     '                    IPRCO3 + HO2 --> RRG44121b + IC3H7O2 + CO2 + OH                                 ', &
-     '                    IPRCO3 + NO2 --> RRG44122 + PIPN                                                ', &
-     '                     IPRCO3 + NO --> RRG44123 + IC3H7O2 + CO2 + NO2                                 ', &
-     '                 PERIBUACID + OH --> RRG44124a + IPRCO3 + H2O                                       ', &
-     '                 PERIBUACID + OH --> RRG44124b + CO2 + CH3COCH3 + H2O                               ', &
-     '                            PIPN --> RRG44125 + IPRCO3 + NO2                                        ', &
-     '                       PIPN + OH --> RRG44126 + CO2 + CH3COCH3 + NO2                                ' /)
+     '                 LBUT1ENOOH + OH --> C2H5CO3 + HO2 + HCHO                                           ', &
+     '                 LBUT1ENNO3 + OH --> C2H5CHO + CO + HO2 + NO2                                       ', &
+     '                   CBUT2ENE + OH --> BUT2OLO2                                                       ', &
+     '                   CBUT2ENE + O3 --> 0.2 CH4 + 0.16 CH3CHOHOOH + 0.05 CH2CO + 0.2 CO2 + 0.09 CH3OH .', &
+     '                  CBUT2ENE + NO3 --> 2 CH3CHO + NO2                                                 ', &
+     '                   TBUT2ENE + OH --> BUT2OLO2                                                       ', &
+     '                   TBUT2ENE + O3 --> 0.2 CH4 + 0.16 CH3CHOHOOH + 0.05 CH2CO + 0.2 CO2 + 0.09 CH3OH .', &
+     '                  TBUT2ENE + NO3 --> 2 CH3CHO + NO2                                                 ', &
+     '                        BUT2OLO2 --> C2H5CHO + HO2 + HCHO                                           ', &
+     '                  BUT2OLO2 + HO2 --> BUT2OLOOH                                                      ', &
+     '                  BUT2OLO2 + HO2 --> 2 CH3CHO + OH + HO2                                            ', &
+     '                   BUT2OLO2 + NO --> 2 CH3CHO + HO2 + NO2                                           ', &
+     '                   BUT2OLO2 + NO --> BUT2OLNO3                                                      ', &
+     '                  BUT2OLO2 + NO3 --> 2 CH3CHO + HO2 + NO2                                           ', &
+     '                  BUT2OLOOH + OH --> BUT2OLO2                                                       ', &
+     '                  BUT2OLOOH + OH --> LMEKOOH + HO2                                                  ', &
+     '                  BUT2OLOOH + OH --> BUT2OLO + OH                                                   ', &
+     '                  BUT2OLNO3 + OH --> LMEKNO3 + HO2                                                  ', &
+     '                    BUT2OLO + OH --> BIACET + HO2                                                   ', &
+     '                     IPRCHO + OH --> IPRCO3 + H2O                                                   ', &
+     '                    IPRCHO + NO3 --> IPRCO3 + HNO3                                                  ', &
+     '                          IPRCO3 --> CO2 + IC3H7O2                                                  ', &
+     '                    IPRCO3 + HO2 --> PERIBUACID                                                     ', &
+     '                    IPRCO3 + HO2 --> CO2 + IC3H7O2 + OH                                             ', &
+     '                    IPRCO3 + NO2 --> PIPN                                                           ', &
+     '                     IPRCO3 + NO --> CO2 + IC3H7O2 + NO2                                            ', &
+     '                 PERIBUACID + OH --> IPRCO3 + H2O                                                   ', &
+     '                 PERIBUACID + OH --> CO2 + CH3COCH3 + H2O                                           ', &
+     '                            PIPN --> IPRCO3 + NO2                                                   ', &
+     '                       PIPN + OH --> CO2 + CH3COCH3 + NO2                                           ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_19 = (/ &
-     '                  MPROPENOL + OH --> RRG44127 + CH3COCH3 + OH + HCOOH                               ', &
-     '               MPROPENOL + HCOOH --> RRG44128 + IPRCHO + HCOOH                                      ', &
-     '                  IPRCHO + HCOOH --> RRG44129 + MPROPENOL + HCOOH                                   ', &
-     '                    BUTENOL + OH --> RRG44130 + C2H5CHO + OH + HCOOH                                ', &
-     '                 BUTENOL + HCOOH --> RRG44131 + C3H7CHO + HCOOH                                     ', &
-     '                 C3H7CHO + HCOOH --> RRG44132 + BUTENOL + HCOOH                                     ', &
-     '                       HVMK + OH --> RRG44133 + MGLYOX + OH + HCOOH                                 ', &
-     '                    HVMK + HCOOH --> RRG44134 + CO2C3CHO + HCOOH                                    ', &
-     '                CO2C3CHO + HCOOH --> RRG44135 + HVMK + HCOOH                                        ', &
-     '                       HMAC + OH --> RRG44136 + MGLYOX + OH + HCOOH                                 ', &
-     '                    HMAC + HCOOH --> RRG44137 + IBUTDIAL + HCOOH                                    ', &
-     '                IBUTDIAL + HCOOH --> RRG44138 + HMAC + HCOOH                                        ', &
-     '                   CO2C3CHO + OH --> RRG44139 + CO2 + CH3COCH2O2 + H2O                              ', &
-     '                  CO2C3CHO + NO3 --> RRG44140 + CO2 + CH3COCH2O2 + HNO3                             ', &
-     '                   IBUTDIAL + OH --> RRG44141 + CO2 + CH3CHO + H2O + CO + HO2                       ', &
-     '                  IBUTDIAL + NO3 --> RRG44142 + CO2 + HNO3 + CH3CHO + CO + HO2                      ', &
-     '                        BIACETO2 --> RRG44200 + CH3CO + CO + HCHO                                   ', &
-     '                  BIACETO2 + HO2 --> RRG44201 + BIACETOOH                                           ', &
-     '                   BIACETO2 + NO --> RRG44202 + CH3CO + CO + HCHO + NO2                             ', &
-     '                  BIACETOOH + OH --> RRG44203a + CO23C3CHO + OH                                     ', &
-     '                  BIACETOOH + OH --> RRG44203b + BIACETO2                                           ', &
-     '                     C44O2 + HO2 --> RRG44204 + C44OOH                                              ', &
-     '                      C44O2 + NO --> RRG44205 + HCOCH2CHO + CO2 + HO2 + NO2                         ', &
-     '                           C44O2 --> RRG44206 + HCOCH2CHO + CO2 + HO2                               ', &
-     '                     C44OOH + OH --> RRG44207 + C44O2                                               ', &
-     '                       CHOC3COO2 --> RRG44208 + HCOCH2CO3 + HCHO                                    ', &
-     '                 CHOC3COO2 + HO2 --> RRG44209 + C413COOOH                                           ', &
-     '                  CHOC3COO2 + NO --> RRG44210 + HCOCH2CO3 + HCHO + NO2                              ', &
-     '                  C413COOOH + OH --> RRG44211 + CHOC3COO2                                           ', &
-     '                   C4CODIAL + OH --> RRG44212 + C312COCO3                                           ' /)
+     '                  MPROPENOL + OH --> CH3COCH3 + OH + HCOOH                                          ', &
+     '               MPROPENOL + HCOOH --> IPRCHO + HCOOH                                                 ', &
+     '                  IPRCHO + HCOOH --> MPROPENOL + HCOOH                                              ', &
+     '                    BUTENOL + OH --> C2H5CHO + OH + HCOOH                                           ', &
+     '                 BUTENOL + HCOOH --> C3H7CHO + HCOOH                                                ', &
+     '                 C3H7CHO + HCOOH --> BUTENOL + HCOOH                                                ', &
+     '                       HVMK + OH --> MGLYOX + OH + HCOOH                                            ', &
+     '                    HVMK + HCOOH --> CO2C3CHO + HCOOH                                               ', &
+     '                CO2C3CHO + HCOOH --> HVMK + HCOOH                                                   ', &
+     '                       HMAC + OH --> MGLYOX + OH + HCOOH                                            ', &
+     '                    HMAC + HCOOH --> IBUTDIAL + HCOOH                                               ', &
+     '                IBUTDIAL + HCOOH --> HMAC + HCOOH                                                   ', &
+     '                   CO2C3CHO + OH --> CO2 + CH3COCH2O2 + H2O                                         ', &
+     '                  CO2C3CHO + NO3 --> CO2 + CH3COCH2O2 + HNO3                                        ', &
+     '                   IBUTDIAL + OH --> CO2 + CH3CHO + CO + HO2 + H2O                                  ', &
+     '                  IBUTDIAL + NO3 --> CO2 + HNO3 + CH3CHO + CO + HO2                                 ', &
+     '                        BIACETO2 --> CH3CO + CO + HCHO                                              ', &
+     '                  BIACETO2 + HO2 --> BIACETOOH                                                      ', &
+     '                   BIACETO2 + NO --> CH3CO + CO + NO2 + HCHO                                        ', &
+     '                  BIACETOOH + OH --> CO23C3CHO + OH                                                 ', &
+     '                  BIACETOOH + OH --> BIACETO2                                                       ', &
+     '                     C44O2 + HO2 --> C44OOH                                                         ', &
+     '                      C44O2 + NO --> HCOCH2CHO + CO2 + HO2 + NO2                                    ', &
+     '                           C44O2 --> HCOCH2CHO + CO2 + HO2                                          ', &
+     '                     C44OOH + OH --> C44O2                                                          ', &
+     '                       CHOC3COO2 --> HCOCH2CO3 + HCHO                                               ', &
+     '                 CHOC3COO2 + HO2 --> C413COOOH                                                      ', &
+     '                  CHOC3COO2 + NO --> HCOCH2CO3 + NO2 + HCHO                                         ', &
+     '                  C413COOOH + OH --> CHOC3COO2                                                      ', &
+     '                   C4CODIAL + OH --> C312COCO3                                                      ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_20 = (/ &
-     '                  C4CODIAL + NO3 --> RRG44213 + C312COCO3 + HNO3                                    ', &
-     '                       C312COCO3 --> RRG44214 + CO2 + CHOCOCH2O2                                    ', &
-     '                 C312COCO3 + HO2 --> RRG44215a + C312COCO3H                                         ', &
-     '                 C312COCO3 + HO2 --> RRG44215b + CO2 + CHOCOCH2O2 + OH                              ', &
-     '                 C312COCO3 + NO2 --> RRG44216 + C312COPAN                                           ', &
-     '                  C312COCO3 + NO --> RRG44217 + CO2 + CHOCOCH2O2 + NO2                              ', &
-     '                 C312COCO3H + OH --> RRG44218 + C312COCO3                                           ', &
-     '                       C312COPAN --> RRG44219 + C312COCO3 + NO2                                     ', &
-     '                  C312COPAN + OH --> RRG44220 + C33CO + CO + NO2                                    ', &
-     '                  CO23C3CHO + OH --> RRG44221 + CH3CO + 2 CO                                        ', &
-     '                 CO23C3CHO + NO3 --> RRG44222 + CH3CO + HNO3 + 2 CO                                 ', &
-     '                   IBUTALOH + OH --> RRG44223 + IPRHOCO3                                            ', &
-     '                  IPRHOCO3 + HO2 --> RRG44224a + CO2 + CH3COCH3 + OH + HO2                          ', &
-     '                  IPRHOCO3 + HO2 --> RRG44224b + IPRHOCO2H + O3                                     ', &
-     '                  IPRHOCO3 + HO2 --> RRG44224c + IPRHOCO3H                                          ', &
-     '                   IPRHOCO3 + NO --> RRG44225 + CO2 + CH3COCH3 + HO2 + NO2                          ', &
-     '                  IPRHOCO3 + NO2 --> RRG44226 + C4PAN5                                              ', &
-     '                  IPRHOCO3 + NO3 --> RRG44227 + CO2 + CH3COCH3 + HO2 + NO2                          ', &
-     '                        IPRHOCO3 --> RRG44228a + CO2 + CH3COCH3 + HO2                               ', &
-     '                        IPRHOCO3 --> RRG44228b + IPRHOCO2H                                          ', &
-     '                  IPRHOCO2H + OH --> RRG44229 + CO2 + CH3COCH3 + H2O + HO2                          ', &
-     '                  IPRHOCO3H + OH --> RRG44230 + IPRHOCO3                                            ', &
-     '                          C4PAN5 --> RRG44231 + IPRHOCO3 + NO2                                      ', &
-     '                     C4PAN5 + OH --> RRG44232 + CH3COCH3 + CO + NO2                                 ', &
-     '                           MBOOO --> RRG44233a + IPRHOCO2H                                          ', &
-     '                           MBOOO --> RRG44233b + IBUTALOH + H2O2                                    ', &
-     '                      MBOOO + CO --> RRG44234 + IBUTALOH + CO2                                      ', &
-     '                      MBOOO + NO --> RRG44235 + IBUTALOH + NO2                                      ', &
-     '                     MBOOO + NO2 --> RRG44236 + IBUTALOH + NO3                                      ', &
-     '                    MALANHY + OH --> RRG44400 + MALANHYO2                                           ' /)
+     '                  C4CODIAL + NO3 --> C312COCO3 + HNO3                                               ', &
+     '                       C312COCO3 --> CO2 + CHOCOCH2O2                                               ', &
+     '                 C312COCO3 + HO2 --> C312COCO3H                                                     ', &
+     '                 C312COCO3 + HO2 --> CO2 + CHOCOCH2O2 + OH                                          ', &
+     '                 C312COCO3 + NO2 --> C312COPAN                                                      ', &
+     '                  C312COCO3 + NO --> CO2 + CHOCOCH2O2 + NO2                                         ', &
+     '                 C312COCO3H + OH --> C312COCO3                                                      ', &
+     '                       C312COPAN --> C312COCO3 + NO2                                                ', &
+     '                  C312COPAN + OH --> C33CO + CO + NO2                                               ', &
+     '                  CO23C3CHO + OH --> CH3CO + 2 CO                                                   ', &
+     '                 CO23C3CHO + NO3 --> CH3CO + HNO3 + 2 CO                                            ', &
+     '                   IBUTALOH + OH --> IPRHOCO3                                                       ', &
+     '                  IPRHOCO3 + HO2 --> CO2 + CH3COCH3 + OH + HO2                                      ', &
+     '                  IPRHOCO3 + HO2 --> IPRHOCO2H + O3                                                 ', &
+     '                  IPRHOCO3 + HO2 --> IPRHOCO3H                                                      ', &
+     '                   IPRHOCO3 + NO --> CO2 + CH3COCH3 + HO2 + NO2                                     ', &
+     '                  IPRHOCO3 + NO2 --> C4PAN5                                                         ', &
+     '                  IPRHOCO3 + NO3 --> CO2 + CH3COCH3 + HO2 + NO2                                     ', &
+     '                        IPRHOCO3 --> CO2 + CH3COCH3 + HO2                                           ', &
+     '                        IPRHOCO3 --> IPRHOCO2H                                                      ', &
+     '                  IPRHOCO2H + OH --> CO2 + CH3COCH3 + HO2 + H2O                                     ', &
+     '                  IPRHOCO3H + OH --> IPRHOCO3                                                       ', &
+     '                          C4PAN5 --> IPRHOCO3 + NO2                                                 ', &
+     '                     C4PAN5 + OH --> CH3COCH3 + CO + NO2                                            ', &
+     '                           MBOOO --> IPRHOCO2H                                                      ', &
+     '                           MBOOO --> IBUTALOH + H2O2                                                ', &
+     '                      MBOOO + CO --> IBUTALOH + CO2                                                 ', &
+     '                      MBOOO + NO --> IBUTALOH + NO2                                                 ', &
+     '                     MBOOO + NO2 --> IBUTALOH + NO3                                                 ', &
+     '                    MALANHY + OH --> MALANHYO2                                                      ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_21 = (/ &
-     '                 MALDIALOOH + OH --> RRG44401a + HOCOC4DIAL + OH                                    ', &
-     '                 MALDIALOOH + OH --> RRG44401b + MALDIALO2                                          ', &
-     '                   NC4DCO2H + OH --> RRG44402 + MALANHY + NO2                                       ', &
-     '                 CO14O3CO2H + OH --> RRG44403 + 2 CO2 + HCOCH2O2                                    ', &
-     '                    BZFUOOH + OH --> RRG44404 + BZFUO2                                              ', &
-     '                 HOCOC4DIAL + OH --> RRG44405 + CO2C4DIAL + HO2                                     ', &
-     '                MALDIALCO3 + HO2 --> RRG44406a + MALDALCO2H + O3                                    ', &
-     '                MALDIALCO3 + HO2 --> RRG44406b + MALDALCO3H                                         ', &
-     '                MALDIALCO3 + HO2 --> RRG44406c + 0.6 MALANHY + 0.4 CO2 + 0.4 GLYOX + 0.4 CO ... etc.', &
-     '                 MALDIALCO3 + NO --> RRG44407 + 0.6 MALANHY + 0.4 CO2 + 0.4 GLYOX + 0.4 CO ... etc. ', &
-     '                MALDIALCO3 + NO2 --> RRG44408 + MALDIALPAN                                          ', &
-     '                MALDIALCO3 + NO3 --> RRG44409 + 0.6 MALANHY + 0.4 CO2 + 0.4 GLYOX + 0.4 CO ... etc. ', &
-     '                      MALDIALCO3 --> RRG44410 + 0.6 MALANHY + 0.4 CO2 + 0.4 GLYOX + 0.4 CO ... etc. ', &
-     '                   BZFUONE + NO3 --> RRG44411 + NBZFUO2                                             ', &
-     '                    BZFUONE + O3 --> RRG44412 + 0.3125 CO14O3CO2H + 0.1875 CO14O3CHO + 0.5 CO2 ... e', &
-     '                    BZFUONE + OH --> RRG44413 + BZFUO2                                              ', &
-     '                   NBZFUOOH + OH --> RRG44414 + NBZFUO2                                             ', &
-     '                 MALDALCO3H + OH --> RRG44415 + MALDIALCO3                                          ', &
-     '                  EPXDLCO2H + OH --> RRG44416 + C3DIALO2 + CO2                                      ', &
-     '                  EPXDLCO3 + HO2 --> RRG44417a + C3DIALO2 + CO2 + OH                                ', &
-     '                  EPXDLCO3 + HO2 --> RRG44417b + EPXDLCO2H + O3                                     ', &
-     '                  EPXDLCO3 + HO2 --> RRG44417c + EPXDLCO3H                                          ', &
-     '                   EPXDLCO3 + NO --> RRG44418 + C3DIALO2 + CO2 + NO2                                ', &
-     '                  EPXDLCO3 + NO2 --> RRG44419 + EPXDLPAN                                            ', &
-     '                  EPXDLCO3 + NO3 --> RRG44420 + C3DIALO2 + CO2 + NO2                                ', &
-     '                        EPXDLCO3 --> RRG44421 + C3DIALO2 + CO2                                      ', &
-     '                 MALNHYOHCO + OH --> RRG44422 + CO2 + 3 CO + HO2                                    ', &
-     '                   MALDIAL + NO3 --> RRG44423 + MALDIALCO3 + HNO3                                   ', &
-     '                    MALDIAL + O3 --> RRG44424 + 0.25 CO2 + 0.0675 H2O2 + 0.1125 HCOCO2H + 1.0675 GLY', &
-     '                    MALDIAL + OH --> RRG44425 + 0.17 MALDIALO2 + 0.83 MALDIALCO3                    ' /)
+     '                 MALDIALOOH + OH --> HOCOC4DIAL + OH                                                ', &
+     '                 MALDIALOOH + OH --> MALDIALO2                                                      ', &
+     '                   NC4DCO2H + OH --> MALANHY + NO2                                                  ', &
+     '                 CO14O3CO2H + OH --> 2 CO2 + HCOCH2O2                                               ', &
+     '                    BZFUOOH + OH --> BZFUO2                                                         ', &
+     '                 HOCOC4DIAL + OH --> CO2C4DIAL + HO2                                                ', &
+     '                MALDIALCO3 + HO2 --> MALDALCO2H + O3                                                ', &
+     '                MALDIALCO3 + HO2 --> MALDALCO3H                                                     ', &
+     '                MALDIALCO3 + HO2 --> 0.6 MALANHY + 0.4 CO2 + 0.4 GLYOX + 0.4 CO + OH + HO2 ... etc. ', &
+     '                 MALDIALCO3 + NO --> 0.6 MALANHY + 0.4 CO2 + 0.4 GLYOX + 0.4 CO + HO2 + NO2 ... etc.', &
+     '                MALDIALCO3 + NO2 --> MALDIALPAN                                                     ', &
+     '                MALDIALCO3 + NO3 --> 0.6 MALANHY + 0.4 CO2 + 0.4 GLYOX + 0.4 CO + HO2 + NO2 ... etc.', &
+     '                      MALDIALCO3 --> 0.6 MALANHY + 0.4 CO2 + 0.4 GLYOX + 0.4 CO + HO2               ', &
+     '                   BZFUONE + NO3 --> NBZFUO2                                                        ', &
+     '                    BZFUONE + O3 --> 0.3125 CO14O3CO2H + 0.1875 CO14O3CHO + 0.5 CO2 + 0.1875 H2O2 ..', &
+     '                    BZFUONE + OH --> BZFUO2                                                         ', &
+     '                   NBZFUOOH + OH --> NBZFUO2                                                        ', &
+     '                 MALDALCO3H + OH --> MALDIALCO3                                                     ', &
+     '                  EPXDLCO2H + OH --> C3DIALO2 + CO2                                                 ', &
+     '                  EPXDLCO3 + HO2 --> C3DIALO2 + CO2 + OH                                            ', &
+     '                  EPXDLCO3 + HO2 --> EPXDLCO2H + O3                                                 ', &
+     '                  EPXDLCO3 + HO2 --> EPXDLCO3H                                                      ', &
+     '                   EPXDLCO3 + NO --> C3DIALO2 + CO2 + NO2                                           ', &
+     '                  EPXDLCO3 + NO2 --> EPXDLPAN                                                       ', &
+     '                  EPXDLCO3 + NO3 --> C3DIALO2 + CO2 + NO2                                           ', &
+     '                        EPXDLCO3 --> C3DIALO2 + CO2                                                 ', &
+     '                 MALNHYOHCO + OH --> CO2 + 3 CO + HO2                                               ', &
+     '                   MALDIAL + NO3 --> MALDIALCO3 + HNO3                                              ', &
+     '                    MALDIAL + O3 --> 0.25 CO2 + 0.0675 H2O2 + 0.1125 HCOCO2H + 1.0675 GLYOX ... etc.', &
+     '                    MALDIAL + OH --> 0.17 MALDIALO2 + 0.83 MALDIALCO3                               ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_22 = (/ &
-     '                 MALANHYOOH + OH --> RRG44426 + MALNHYOHCO + OH                                     ', &
-     '                 MALDIALPAN + OH --> RRG44427 + GLYOX + 2 CO + NO2                                  ', &
-     '                      MALDIALPAN --> RRG44428 + MALDIALCO3 + NO2                                    ', &
-     '                 MALANHYO2 + HO2 --> RRG44429a + MALANHYOOH                                         ', &
-     '                 MALANHYO2 + HO2 --> RRG44429b + HCOCOHCO3 + CO2 + OH                               ', &
-     '                  MALANHYO2 + NO --> RRG44430 + HCOCOHCO3 + CO2 + NO2                               ', &
-     '                 MALANHYO2 + NO3 --> RRG44431 + HCOCOHCO3 + CO2 + NO2                               ', &
-     '                       MALANHYO2 --> RRG44432 + HCOCOHCO3 + CO2                                     ', &
-     '                  EPXDLCO3H + OH --> RRG44433 + EPXDLCO3                                            ', &
-     '                  CO2C4DIAL + OH --> RRG44434 + 4 CO + HO2                                          ', &
-     '                   NBZFUO2 + HO2 --> RRG44435a + NBZFUOOH                                           ', &
-     '                   NBZFUO2 + HO2 --> RRG44435b + 0.5 NBZFUONE + 0.5 CO14O3CHO + OH + 0.5 HO2 ... etc', &
-     '                    NBZFUO2 + NO --> RRG44436 + 0.5 NBZFUONE + 0.5 CO14O3CHO + 0.5 HO2 + 1.5 NO2 ...', &
-     '                   NBZFUO2 + NO3 --> RRG44437 + 0.5 NBZFUONE + 0.5 CO14O3CHO + 0.5 HO2 + 1.5 NO2 ...', &
-     '                         NBZFUO2 --> RRG44438 + 0.5 NBZFUONE + 0.5 CO14O3CHO + 0.5 HO2 + 0.5 NO2 ...', &
-     '                 MALDALCO2H + OH --> RRG44439 + 0.6 MALANHY + 0.4 CO2 + 0.4 GLYOX + 0.4 CO ... etc. ', &
-     '                 EPXC4DIAL + NO3 --> RRG44440 + EPXDLCO3 + HNO3                                     ', &
-     '                  EPXC4DIAL + OH --> RRG44441 + EPXDLCO3                                            ', &
-     '                MECOACETO2 + HO2 --> RRG44442a + MECOACEOOH                                         ', &
-     '                MECOACETO2 + HO2 --> RRG44442b + CO2 + HCHO + OH + CH3CO3                           ', &
-     '                 MECOACETO2 + NO --> RRG44443 + CO2 + HCHO + CH3CO3 + NO2                           ', &
-     '                MECOACETO2 + NO3 --> RRG44444 + CO2 + HCHO + CH3CO3 + NO2                           ', &
-     '                      MECOACETO2 --> RRG44445 + CO2 + HCHO + CH3CO3                                 ', &
-     '                 CO14O3CHO + NO3 --> RRG44446 + CO2 + HCOCH2O2 + HNO3 + CO                          ', &
-     '                  CO14O3CHO + OH --> RRG44447 + CO2 + HCOCH2O2 + CO                                 ', &
-     '                   NBZFUONE + OH --> RRG44448 + BZFUCO + NO2                                        ', &
-     '                    BZFUO2 + HO2 --> RRG44449a + BZFUOOH                                            ', &
-     '                    BZFUO2 + HO2 --> RRG44449b + CO14O3CHO + OH + HO2                               ', &
-     '                     BZFUO2 + NO --> RRG44450 + CO14O3CHO + HO2 + NO2                               ', &
-     '                    BZFUO2 + NO3 --> RRG44451 + CO14O3CHO + HO2 + NO2                               ' /)
+     '                 MALANHYOOH + OH --> MALNHYOHCO + OH                                                ', &
+     '                 MALDIALPAN + OH --> GLYOX + 2 CO + NO2                                             ', &
+     '                      MALDIALPAN --> MALDIALCO3 + NO2                                               ', &
+     '                 MALANHYO2 + HO2 --> MALANHYOOH                                                     ', &
+     '                 MALANHYO2 + HO2 --> HCOCOHCO3 + CO2 + OH                                           ', &
+     '                  MALANHYO2 + NO --> HCOCOHCO3 + CO2 + NO2                                          ', &
+     '                 MALANHYO2 + NO3 --> HCOCOHCO3 + CO2 + NO2                                          ', &
+     '                       MALANHYO2 --> HCOCOHCO3 + CO2                                                ', &
+     '                  EPXDLCO3H + OH --> EPXDLCO3                                                       ', &
+     '                  CO2C4DIAL + OH --> 4 CO + HO2                                                     ', &
+     '                   NBZFUO2 + HO2 --> NBZFUOOH                                                       ', &
+     '                   NBZFUO2 + HO2 --> 0.5 NBZFUONE + 0.5 CO14O3CHO + OH + 0.5 HO2 + 0.5 NO2 ... etc. ', &
+     '                    NBZFUO2 + NO --> 0.5 NBZFUONE + 0.5 CO14O3CHO + 0.5 HO2 + 1.5 NO2               ', &
+     '                   NBZFUO2 + NO3 --> 0.5 NBZFUONE + 0.5 CO14O3CHO + 0.5 HO2 + 1.5 NO2               ', &
+     '                         NBZFUO2 --> 0.5 NBZFUONE + 0.5 CO14O3CHO + 0.5 HO2 + 0.5 NO2               ', &
+     '                 MALDALCO2H + OH --> 0.6 MALANHY + 0.4 CO2 + 0.4 GLYOX + 0.4 CO + HO2               ', &
+     '                 EPXC4DIAL + NO3 --> EPXDLCO3 + HNO3                                                ', &
+     '                  EPXC4DIAL + OH --> EPXDLCO3                                                       ', &
+     '                MECOACETO2 + HO2 --> MECOACEOOH                                                     ', &
+     '                MECOACETO2 + HO2 --> CO2 + CH3CO3 + OH + HCHO                                       ', &
+     '                 MECOACETO2 + NO --> CO2 + CH3CO3 + NO2 + HCHO                                      ', &
+     '                MECOACETO2 + NO3 --> CO2 + CH3CO3 + NO2 + HCHO                                      ', &
+     '                      MECOACETO2 --> CO2 + CH3CO3 + HCHO                                            ', &
+     '                 CO14O3CHO + NO3 --> CO2 + HCOCH2O2 + HNO3 + CO                                     ', &
+     '                  CO14O3CHO + OH --> CO2 + HCOCH2O2 + CO                                            ', &
+     '                   NBZFUONE + OH --> BZFUCO + NO2                                                   ', &
+     '                    BZFUO2 + HO2 --> BZFUOOH                                                        ', &
+     '                    BZFUO2 + HO2 --> CO14O3CHO + OH + HO2                                           ', &
+     '                     BZFUO2 + NO --> CO14O3CHO + HO2 + NO2                                          ', &
+     '                    BZFUO2 + NO3 --> CO14O3CHO + HO2 + NO2                                          ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_23 = (/ &
-     '                          BZFUO2 --> RRG44452 + CO14O3CHO + HO2                                     ', &
-     '                     BZFUCO + OH --> RRG44453 + CO14O3CHO + HO2                                     ', &
-     '                 MALDIALO2 + HO2 --> RRG44456a + MALDIALOOH                                         ', &
-     '                 MALDIALO2 + HO2 --> RRG44456b + 2 GLYOX + OH + HO2                                 ', &
-     '                  MALDIALO2 + NO --> RRG44457 + 2 GLYOX + HO2 + NO2                                 ', &
-     '                 MALDIALO2 + NO3 --> RRG44458 + 2 GLYOX + HO2 + NO2                                 ', &
-     '                       MALDIALO2 --> RRG44459 + 2 GLYOX + HO2                                       ', &
-     '                   EPXDLPAN + OH --> RRG44460 + C33CO + CO + NO2                                    ', &
-     '                        EPXDLPAN --> RRG44461 + EPXDLCO3 + NO2                                      ', &
-     '                 MECOACEOOH + OH --> RRG44462 + MECOACETO2                                          ', &
-     '                       C5H8 + O3 --> 0.05408 LCARBON + RRG45000 + 0.01518 MACO2H + 0.255 CO2 ... etc', &
-     '                       C5H8 + OH --> RRG45001 + 0.63 LISOPAB + 0.3 LISOPCD + 0.07 LISOPEFO2 ... etc.', &
-     '                      C5H8 + NO3 --> RRG45002 + NISOPO2                                             ', &
-     '                    LISOPAB + O2 --> RRG45003a + LISOPACO2                                          ', &
-     '                    LISOPAB + O2 --> RRG45003b + ISOPBO2                                            ', &
-     '                    LISOPCD + O2 --> RRG45004a + LDISOPACO2                                         ', &
-     '                    LISOPCD + O2 --> RRG45004b + ISOPDO2                                            ', &
-     '                       LISOPACO2 --> RRG45005 + LISOPAB + O2                                        ', &
-     '                         ISOPBO2 --> RRG45006 + LISOPAB + O2                                        ', &
-     '                      LDISOPACO2 --> RRG45007 + LISOPCD + O2                                        ', &
-     '                         ISOPDO2 --> RRG45008 + LISOPCD + O2                                        ', &
-     '                       LISOPACO2 --> RRG45009a + C1ODC2O2C4OOH                                      ', &
-     '                       LISOPACO2 --> RRG45009b + LZCODC23DBCOOH + HO2                               ', &
-     '                      LDISOPACO2 --> RRG45010a + C1OOHC3O2C4OD                                      ', &
-     '                      LDISOPACO2 --> RRG45010b + LZCODC23DBCOOH + HO2                               ', &
-     '                       LISOPACO2 --> RRG45011 + 0.1 ISOPAOH + 0.9 LISOPACO                          ', &
-     '                 LISOPACO2 + HO2 --> RRG45012 + LISOPACOOH                                          ', &
-     '                  LISOPACO2 + NO --> RRG45013a + LISOPACO + NO2                                     ', &
-     '                  LISOPACO2 + NO --> RRG45013b + LISOPACNO3                                         ', &
-     '                 LISOPACO2 + NO3 --> RRG45014 + LISOPACO + NO2                                      ' /)
+     '                          BZFUO2 --> CO14O3CHO + HO2                                                ', &
+     '                     BZFUCO + OH --> CO14O3CHO + HO2                                                ', &
+     '                 MALDIALO2 + HO2 --> MALDIALOOH                                                     ', &
+     '                 MALDIALO2 + HO2 --> 2 GLYOX + OH + HO2                                             ', &
+     '                  MALDIALO2 + NO --> 2 GLYOX + HO2 + NO2                                            ', &
+     '                 MALDIALO2 + NO3 --> 2 GLYOX + HO2 + NO2                                            ', &
+     '                       MALDIALO2 --> 2 GLYOX + HO2                                                  ', &
+     '                   EPXDLPAN + OH --> C33CO + CO + NO2                                               ', &
+     '                        EPXDLPAN --> EPXDLCO3 + NO2                                                 ', &
+     '                 MECOACEOOH + OH --> MECOACETO2                                                     ', &
+     '                       C5H8 + O3 --> 0.05408 LCARBON + 0.01518 MACO2H + 0.255 CO2 + 0.09482 H2O2 ...', &
+     '                       C5H8 + OH --> 0.63 LISOPAB + 0.3 LISOPCD + 0.07 LISOPEFO2                    ', &
+     '                      C5H8 + NO3 --> NISOPO2                                                        ', &
+     '                    LISOPAB + O2 --> LISOPACO2                                                      ', &
+     '                    LISOPAB + O2 --> ISOPBO2                                                        ', &
+     '                    LISOPCD + O2 --> LDISOPACO2                                                     ', &
+     '                    LISOPCD + O2 --> ISOPDO2                                                        ', &
+     '                       LISOPACO2 --> LISOPAB + O2                                                   ', &
+     '                         ISOPBO2 --> LISOPAB + O2                                                   ', &
+     '                      LDISOPACO2 --> LISOPCD + O2                                                   ', &
+     '                         ISOPDO2 --> LISOPCD + O2                                                   ', &
+     '                       LISOPACO2 --> C1ODC2O2C4OOH                                                  ', &
+     '                       LISOPACO2 --> LZCODC23DBCOOH + HO2                                           ', &
+     '                      LDISOPACO2 --> C1OOHC3O2C4OD                                                  ', &
+     '                      LDISOPACO2 --> LZCODC23DBCOOH + HO2                                           ', &
+     '                       LISOPACO2 --> 0.1 ISOPAOH + 0.9 LISOPACO                                     ', &
+     '                 LISOPACO2 + HO2 --> LISOPACOOH                                                     ', &
+     '                  LISOPACO2 + NO --> LISOPACO + NO2                                                 ', &
+     '                  LISOPACO2 + NO --> LISOPACNO3                                                     ', &
+     '                 LISOPACO2 + NO3 --> LISOPACO + NO2                                                 ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_24 = (/ &
-     '                      LDISOPACO2 --> RRG45015 + 0.9 LDISOPACO + 0.1 ISOPAOH                         ', &
-     '                LDISOPACO2 + HO2 --> RRG45016 + LISOPACOOH                                          ', &
-     '                 LDISOPACO2 + NO --> RRG45017a + LDISOPACO + NO2                                    ', &
-     '                 LDISOPACO2 + NO --> RRG45017b + LISOPACNO3                                         ', &
-     '                LDISOPACO2 + NO3 --> RRG45018 + LDISOPACO + NO2                                     ', &
-     '                 LISOPACOOH + OH --> RRG45019a + LISOPACO2                                          ', &
-     '                 LISOPACOOH + OH --> RRG45019b + LZCODC23DBCOOH + HO2                               ', &
-     '                 LISOPACOOH + OH --> RRG45019c + LHC4ACCHO + OH                                     ', &
-     '                 LISOPACOOH + OH --> RRG45019d + LIEPOX + OH                                        ', &
-     '                    ISOPAOH + OH --> RRG45020 + LHC4ACCHO + HO2                                     ', &
-     '                 LISOPACNO3 + OH --> RRG45021 + LISOPACNO3O2                                        ', &
-     '                         ISOPBO2 --> RRG45022 + 0.2 ISOPBOH + 0.8 MVK + 0.8 HCHO + 0.8 HO2 ... etc. ', &
-     '                   ISOPBO2 + HO2 --> RRG45023a + ISOPBOOH                                           ', &
-     '                   ISOPBO2 + HO2 --> RRG45023b + MVK + HCHO + OH + HO2                              ', &
-     '                    ISOPBO2 + NO --> RRG45024a + MVK + HCHO + HO2 + NO2                             ', &
-     '                    ISOPBO2 + NO --> RRG45024b + ISOPBNO3                                           ', &
-     '                   ISOPBO2 + NO3 --> RRG45025 + MVK + 0.25 CH3 + 0.75 HCHO + 0.75 HO2 + NO2 ... etc.', &
-     '                   ISOPBOOH + OH --> RRG45026a + LIEPOX + OH                                        ', &
-     '                   ISOPBOOH + OH --> RRG45026b + ISOPBO2                                            ', &
-     '                   ISOPBOOH + OH --> RRG45026c + MGLYOX + HOCH2CHO                                  ', &
-     '                   ISOPBOOH + O3 --> RRG45027 + 0.5668 MACROOH + 0.228 CO2 + 0.1368 H2O2 ... etc.   ', &
-     '                    ISOPBOH + OH --> RRG45028 + MVK + 0.25 CH3 + 0.75 HCHO + 0.75 HO2               ', &
-     '                   ISOPBNO3 + OH --> RRG45029 + ISOPBDNO3O2                                         ', &
-     '                         ISOPDO2 --> RRG45030 + 0.1 ISOPDOH + 0.1 HCOC5 + 0.8 MACR + 0.8 HCHO ... et', &
-     '                   ISOPDO2 + HO2 --> RRG45031a + ISOPDOOH                                           ', &
-     '                   ISOPDO2 + HO2 --> RRG45031b + MACR + HCHO + OH + HO2                             ', &
-     '                    ISOPDO2 + NO --> RRG45032a + MACR + HCHO + HO2 + NO2                            ', &
-     '                    ISOPDO2 + NO --> RRG45032b + ISOPDNO3                                           ', &
-     '                   ISOPDO2 + NO3 --> RRG45033 + MACR + HCHO + HO2 + NO2                             ', &
-     '                   ISOPDOOH + OH --> RRG45034a + LIEPOX + OH                                        ' /)
+     '                      LDISOPACO2 --> 0.1 ISOPAOH + 0.9 LDISOPACO                                    ', &
+     '                LDISOPACO2 + HO2 --> LISOPACOOH                                                     ', &
+     '                 LDISOPACO2 + NO --> LDISOPACO + NO2                                                ', &
+     '                 LDISOPACO2 + NO --> LISOPACNO3                                                     ', &
+     '                LDISOPACO2 + NO3 --> LDISOPACO + NO2                                                ', &
+     '                 LISOPACOOH + OH --> LISOPACO2                                                      ', &
+     '                 LISOPACOOH + OH --> LZCODC23DBCOOH + HO2                                           ', &
+     '                 LISOPACOOH + OH --> LHC4ACCHO + OH                                                 ', &
+     '                 LISOPACOOH + OH --> LIEPOX + OH                                                    ', &
+     '                    ISOPAOH + OH --> LHC4ACCHO + HO2                                                ', &
+     '                 LISOPACNO3 + OH --> LISOPACNO3O2                                                   ', &
+     '                         ISOPBO2 --> 0.2 ISOPBOH + 0.8 MVK + 0.8 HO2 + 0.8 HCHO                     ', &
+     '                   ISOPBO2 + HO2 --> ISOPBOOH                                                       ', &
+     '                   ISOPBO2 + HO2 --> MVK + OH + HO2 + HCHO                                          ', &
+     '                    ISOPBO2 + NO --> MVK + HO2 + NO2 + HCHO                                         ', &
+     '                    ISOPBO2 + NO --> ISOPBNO3                                                       ', &
+     '                   ISOPBO2 + NO3 --> MVK + 0.25 CH3 + 0.75 HO2 + NO2 + 0.75 HCHO                    ', &
+     '                   ISOPBOOH + OH --> LIEPOX + OH                                                    ', &
+     '                   ISOPBOOH + OH --> ISOPBO2                                                        ', &
+     '                   ISOPBOOH + OH --> MGLYOX + HOCH2CHO                                              ', &
+     '                   ISOPBOOH + O3 --> 0.5668 MACROOH + 0.228 CO2 + 0.1368 H2O2 + 0.1591 CH2OO ... etc', &
+     '                    ISOPBOH + OH --> MVK + 0.25 CH3 + 0.75 HO2 + 0.75 HCHO                          ', &
+     '                   ISOPBNO3 + OH --> ISOPBDNO3O2                                                    ', &
+     '                         ISOPDO2 --> 0.1 ISOPDOH + 0.1 HCOC5 + 0.8 MACR + 0.8 HO2 + 0.8 HCHO ... etc', &
+     '                   ISOPDO2 + HO2 --> ISOPDOOH                                                       ', &
+     '                   ISOPDO2 + HO2 --> MACR + OH + HO2 + HCHO                                         ', &
+     '                    ISOPDO2 + NO --> MACR + HO2 + NO2 + HCHO                                        ', &
+     '                    ISOPDO2 + NO --> ISOPDNO3                                                       ', &
+     '                   ISOPDO2 + NO3 --> MACR + HO2 + NO2 + HCHO                                        ', &
+     '                   ISOPDOOH + OH --> LIEPOX + OH                                                    ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_25 = (/ &
-     '                   ISOPDOOH + OH --> RRG45034b + ISOPDO2                                            ', &
-     '                   ISOPDOOH + OH --> RRG45034c + HCOC5 + OH                                         ', &
-     '                   ISOPDOOH + OH --> RRG45034d + ACETOL + GLYOX + OH                                ', &
-     '                   ISOPDOOH + O3 --> RRG45035 + BIACETOH + 0.1221 CH2OO + 0.2079 CO + 0.67 HCHO ... ', &
-     '                    ISOPDOH + OH --> RRG45036 + HCOC5 + HO2                                         ', &
-     '                   ISOPDNO3 + OH --> RRG45037 + ISOPBDNO3O2                                         ', &
-     '                         NISOPO2 --> RRG45038 + 0.8 NC4CHO + 0.2 LISOPACNO3 + 0.6 HO2               ', &
-     '                   NISOPO2 + HO2 --> RRG45039 + NISOPOOH                                            ', &
-     '                    NISOPO2 + NO --> RRG45040 + NC4CHO + HO2 + NO2                                  ', &
-     '                   NISOPO2 + NO3 --> RRG45041 + NC4CHO + HO2 + NO2                                  ', &
-     '                   NISOPOOH + OH --> RRG45042 + NC4CHO + OH                                         ', &
-     '                     NC4CHO + OH --> RRG45043 + LNISO3                                              ', &
-     '                     NC4CHO + O3 --> RRG45044 + 0.27 NOA + 0.4055 CO2 + 0.1458 HCOCO + 0.0162 H2O2 .', &
-     '                    NC4CHO + NO3 --> RRG45045 + LNISO3 + HNO3                                       ', &
-     '                    LNISO3 + HO2 --> RRG45046 + LNISOOH                                             ', &
-     '                     LNISO3 + NO --> RRG45047 + 0.5 HOCHCHO + NOA + 0.5 CO2 + 0.5 CO + 0.5 HO2 ... e', &
-     '                    LNISO3 + NO3 --> RRG45048 + 0.5 HOCHCHO + NOA + 0.5 CO2 + 0.5 CO + 0.5 HO2 ... e', &
-     '                    LNISOOH + OH --> RRG45049 + LNISO3                                              ', &
-     '                  LHC4ACCHO + OH --> RRG45050a + LC578O2                                            ', &
-     '                  LHC4ACCHO + OH --> RRG45050b + LHC4ACCO3                                          ', &
-     '                  LHC4ACCHO + OH --> RRG45050c + C4MDIAL + HO2                                      ', &
-     '                  LHC4ACCHO + O3 --> RRG45051 + 0.0171875 HOCH2CO2H + 0.075625 H2O2 + 0.2225 CH3CO .', &
-     '                 LHC4ACCHO + NO3 --> RRG45052 + LHC4ACCO3 + HNO3                                    ', &
-     '                         LC578O2 --> RRG45053 + 0.25 HOCHCHO + 0.75 MGLYOX + 0.25 ACETOL ... etc.   ', &
-     '                   LC578O2 + HO2 --> RRG45054a + MGLYOX + HOCH2CHO + OH                             ', &
-     '                   LC578O2 + HO2 --> RRG45054b + LC578OOH                                           ', &
-     '                    LC578O2 + NO --> RRG45055 + 0.25 HOCHCHO + 0.75 MGLYOX + 0.25 ACETOL ... etc.   ', &
-     '                   LC578O2 + NO3 --> RRG45056 + 0.25 HOCHCHO + 0.75 MGLYOX + 0.25 ACETOL ... etc.   ', &
-     '                         LC578O2 --> RRG45057 + 0.75 MGLYOX + 0.25 ACETOL + HOCH2CHO + OH ... etc.  ', &
-     '                   LC578OOH + OH --> RRG45058a + LC578O2                                            ' /)
+     '                   ISOPDOOH + OH --> ISOPDO2                                                        ', &
+     '                   ISOPDOOH + OH --> HCOC5 + OH                                                     ', &
+     '                   ISOPDOOH + OH --> GLYOX + ACETOL + OH                                            ', &
+     '                   ISOPDOOH + O3 --> BIACETOH + 0.1221 CH2OO + 0.2079 CO + 1.393 OH + 0.0528 HO2 ...', &
+     '                    ISOPDOH + OH --> HCOC5 + HO2                                                    ', &
+     '                   ISOPDNO3 + OH --> ISOPBDNO3O2                                                    ', &
+     '                         NISOPO2 --> 0.8 NC4CHO + 0.2 LISOPACNO3 + 0.6 HO2                          ', &
+     '                   NISOPO2 + HO2 --> NISOPOOH                                                       ', &
+     '                    NISOPO2 + NO --> NC4CHO + HO2 + NO2                                             ', &
+     '                   NISOPO2 + NO3 --> NC4CHO + HO2 + NO2                                             ', &
+     '                   NISOPOOH + OH --> NC4CHO + OH                                                    ', &
+     '                     NC4CHO + OH --> LNISO3                                                         ', &
+     '                     NC4CHO + O3 --> 0.27 NOA + 0.4055 CO2 + 0.0162 H2O2 + 0.1458 HCOCO + 0.027 HCOC', &
+     '                    NC4CHO + NO3 --> LNISO3 + HNO3                                                  ', &
+     '                    LNISO3 + HO2 --> LNISOOH                                                        ', &
+     '                     LNISO3 + NO --> 0.5 HOCHCHO + NOA + 0.5 CO2 + 0.5 CO + 0.5 HO2 + NO2 ... etc.  ', &
+     '                    LNISO3 + NO3 --> 0.5 HOCHCHO + NOA + 0.5 CO2 + 0.5 CO + 0.5 HO2 + NO2 ... etc.  ', &
+     '                    LNISOOH + OH --> LNISO3                                                         ', &
+     '                  LHC4ACCHO + OH --> LC578O2                                                        ', &
+     '                  LHC4ACCHO + OH --> LHC4ACCO3                                                      ', &
+     '                  LHC4ACCHO + OH --> C4MDIAL + HO2                                                  ', &
+     '                  LHC4ACCHO + O3 --> 0.0171875 HOCH2CO2H + 0.075625 H2O2 + 0.2225 CH3CO + 0.0171875 ', &
+     '                 LHC4ACCHO + NO3 --> LHC4ACCO3 + HNO3                                               ', &
+     '                         LC578O2 --> 0.25 HOCHCHO + 0.25 ACETOL + 0.75 MGLYOX + 0.75 HOCH2CHO ... et', &
+     '                   LC578O2 + HO2 --> MGLYOX + HOCH2CHO + OH                                         ', &
+     '                   LC578O2 + HO2 --> LC578OOH                                                       ', &
+     '                    LC578O2 + NO --> 0.25 HOCHCHO + 0.25 ACETOL + 0.75 MGLYOX + 0.75 HOCH2CHO ... et', &
+     '                   LC578O2 + NO3 --> 0.25 HOCHCHO + 0.25 ACETOL + 0.75 MGLYOX + 0.75 HOCH2CHO ... et', &
+     '                         LC578O2 --> 0.25 ACETOL + 0.75 MGLYOX + HOCH2CHO + OH + HO2                ', &
+     '                   LC578OOH + OH --> LC578O2                                                        ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_26 = (/ &
-     '                   LC578OOH + OH --> RRG45058b + C1ODC2OOHC4OD + HO2                                ', &
-     '                       LHC4ACCO3 --> RRG45059a + CO2 + 0.5 LHMVKABO2 + 0.5 MACRO2 + OH              ', &
-     '                       LHC4ACCO3 --> RRG45059b + LHC4ACCO2H                                         ', &
-     '                 LHC4ACCO3 + HO2 --> RRG45060a + CO2 + 0.5 LHMVKABO2 + 0.5 MACRO2 + 2 OH ... etc.   ', &
-     '                 LHC4ACCO3 + HO2 --> RRG45060b + LHC4ACCO3H                                         ', &
-     '                 LHC4ACCO3 + HO2 --> RRG45060c + LHC4ACCO2H + O3                                    ', &
-     '                  LHC4ACCO3 + NO --> RRG45061 + CO2 + 0.5 LHMVKABO2 + 0.5 MACRO2 + NO2              ', &
-     '                 LHC4ACCO3 + NO2 --> RRG45062 + LC5PAN1719                                          ', &
-     '                 LHC4ACCO3 + NO3 --> RRG45063 + CO2 + 0.5 LHMVKABO2 + 0.5 MACRO2 + NO2              ', &
-     '                 LHC4ACCO2H + OH --> RRG45064a + CO2 + 0.5 LHMVKABO2 + 0.5 MACRO2 + OH              ', &
-     '                 LHC4ACCO3H + OH --> RRG45064b + LHC4ACCO3                                          ', &
-     '                      LC5PAN1719 --> RRG45065 + LHC4ACCO3 + NO2                                     ', &
-     '                 LC5PAN1719 + OH --> RRG45066 + 0.5 MACROH + 0.5 HO12CO3C4 + CO + NO2               ', &
-     '                      HCOC5 + OH --> RRG45067 + C59O2                                               ', &
-     '                      HCOC5 + O3 --> RRG45068 + BIACETOH + 0.335 H2O2 + 0.1221 CH2OO + 0.2079 CO ...', &
-     '                           C59O2 --> RRG45069 + HOCH2CO + ACETOL                                    ', &
-     '                     C59O2 + HO2 --> RRG45070a + HOCH2CO + ACETOL + OH                              ', &
-     '                     C59O2 + HO2 --> RRG45070b + C59OOH                                             ', &
-     '                      C59O2 + NO --> RRG45071 + HOCH2CO + ACETOL + NO2                              ', &
-     '                     C59O2 + NO3 --> RRG45072 + HOCH2CO + ACETOL + NO2                              ', &
-     '                     C59OOH + OH --> RRG45073 + C59O2                                               ', &
-     '                     LIEPOX + OH --> RRG45074 + DB1O + H2O                                          ', &
-     '                         ISOPBO2 --> RRG45075 + MVK + HCHO + OH                                     ', &
-     '                         ISOPDO2 --> RRG45076 + MACR + HCHO + OH                                    ', &
-     '             LZCODC23DBCOOH + OH --> RRG45077a + 0.6 C1ODC2O2C4OOH + 0.4 C1OOHC2O2C4OD              ', &
-     '             LZCODC23DBCOOH + OH --> RRG45077b + 0.4 C1OOHC3O2C4OD + 0.6 C1ODC3O2C4OOH              ', &
-     '             LZCODC23DBCOOH + OH --> RRG45077c + LZCO3HC23DBCOD                                     ', &
-     '             LZCODC23DBCOOH + OH --> RRG45077d + C4MDIAL + OH                                       ', &
-     '             LZCODC23DBCOOH + O3 --> RRG45078 + 0.1314 HCOCOCH2OOH + 0.0972 HYPERACET + 0.0405 CO2 .', &
-     '                   C1OOHC2O2C4OD --> RRG45079 + 0.78 HOCHCHO + 0.78 HYPERACET + 0.22 CO2H3CHO ... et' /)
+     '                   LC578OOH + OH --> C1ODC2OOHC4OD + HO2                                            ', &
+     '                       LHC4ACCO3 --> CO2 + 0.5 MACRO2 + 0.5 LHMVKABO2 + OH                          ', &
+     '                       LHC4ACCO3 --> LHC4ACCO2H                                                     ', &
+     '                 LHC4ACCO3 + HO2 --> CO2 + 0.5 MACRO2 + 0.5 LHMVKABO2 + 2 OH                        ', &
+     '                 LHC4ACCO3 + HO2 --> LHC4ACCO3H                                                     ', &
+     '                 LHC4ACCO3 + HO2 --> LHC4ACCO2H + O3                                                ', &
+     '                  LHC4ACCO3 + NO --> CO2 + 0.5 MACRO2 + 0.5 LHMVKABO2 + NO2                         ', &
+     '                 LHC4ACCO3 + NO2 --> LC5PAN1719                                                     ', &
+     '                 LHC4ACCO3 + NO3 --> CO2 + 0.5 MACRO2 + 0.5 LHMVKABO2 + NO2                         ', &
+     '                 LHC4ACCO2H + OH --> CO2 + 0.5 MACRO2 + 0.5 LHMVKABO2 + OH                          ', &
+     '                 LHC4ACCO3H + OH --> LHC4ACCO3                                                      ', &
+     '                      LC5PAN1719 --> LHC4ACCO3 + NO2                                                ', &
+     '                 LC5PAN1719 + OH --> 0.5 MACROH + 0.5 HO12CO3C4 + CO + NO2                          ', &
+     '                      HCOC5 + OH --> C59O2                                                          ', &
+     '                      HCOC5 + O3 --> BIACETOH + 0.335 H2O2 + 0.1221 CH2OO + 0.2079 CO + 0.0528 OH ..', &
+     '                           C59O2 --> HOCH2CO + ACETOL                                               ', &
+     '                     C59O2 + HO2 --> HOCH2CO + ACETOL + OH                                          ', &
+     '                     C59O2 + HO2 --> C59OOH                                                         ', &
+     '                      C59O2 + NO --> HOCH2CO + ACETOL + NO2                                         ', &
+     '                     C59O2 + NO3 --> HOCH2CO + ACETOL + NO2                                         ', &
+     '                     C59OOH + OH --> C59O2                                                          ', &
+     '                     LIEPOX + OH --> DB1O + H2O                                                     ', &
+     '                         ISOPBO2 --> MVK + OH + HCHO                                                ', &
+     '                         ISOPDO2 --> MACR + OH + HCHO                                               ', &
+     '             LZCODC23DBCOOH + OH --> 0.6 C1ODC2O2C4OOH + 0.4 C1OOHC2O2C4OD                          ', &
+     '             LZCODC23DBCOOH + OH --> 0.4 C1OOHC3O2C4OD + 0.6 C1ODC3O2C4OOH                          ', &
+     '             LZCODC23DBCOOH + OH --> LZCO3HC23DBCOD                                                 ', &
+     '             LZCODC23DBCOOH + OH --> C4MDIAL + OH                                                   ', &
+     '             LZCODC23DBCOOH + O3 --> 0.1314 HCOCOCH2OOH + 0.0972 HYPERACET + 0.0405 CO2 + 0.006908 H', &
+     '                   C1OOHC2O2C4OD --> 0.78 HOCHCHO + 0.78 HYPERACET + 0.22 CO2H3CHO + 0.22 OH ... etc' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_27 = (/ &
-     '              C1OOHC2O2C4OD + NO --> RRG45080 + 0.78 HOCHCHO + 0.78 HYPERACET + 0.22 CO2H3CHO ... et', &
-     '             C1OOHC2O2C4OD + HO2 --> RRG45081a + C1OOHC2OOHC4OD                                     ', &
-     '             C1OOHC2O2C4OD + HO2 --> RRG45081b + 0.78 HOCHCHO + 0.78 HYPERACET + 0.22 CO2H3CHO ... e', &
-     '                   C1OOHC2O2C4OD --> RRG45082 + HYPERACET + GLYOX + OH                              ', &
-     '                   C1ODC2O2C4OOH --> RRG45083 + C1ODC2OOHC4OD + OH                                  ', &
-     '             C1OOHC2OOHC4OD + OH --> RRG45084a + C1ODC2OOHC4OD + OH                                 ', &
-     '             C1OOHC2OOHC4OD + OH --> RRG45084b + HYPERACET + 2 CO + OH + 2 HO2                      ', &
-     '             C1OOHC2OOHC4OD + OH --> RRG45084c + C1OOHC2O2C4OD                                      ', &
-     '              C1ODC2OOHC4OD + OH --> RRG45085 + CO2H3CHO + H2O + CO + OH                            ', &
-     '                   C1ODC3O2C4OOH --> RRG45086 + MGLYOX + HOOCH2CHO + HO2                            ', &
-     '              C1ODC3O2C4OOH + NO --> RRG45087 + MGLYOX + HOOCH2CHO + HO2 + NO2                      ', &
-     '             C1ODC3O2C4OOH + HO2 --> RRG45088 + HOOCH2CO3 + 0.5 CH3CO + 0.5 MGLYOX + 0.5 CO ... etc.', &
-     '                   C1ODC3O2C4OOH --> RRG45089 + MGLYOX + HOOCH2CHO + OH                             ', &
-     '                   C1OOHC3O2C4OD --> RRG45090 + 0.375 CO2 + 0.375 CH3CO + 0.625 MGLYOX + 2 CO ... et', &
-     '                       LHC4ACCO3 --> RRG45091 + LZCO3HC23DBCOD + HO2                                ', &
-     '                    C4MDIAL + OH --> RRG45092a + C1ODC2O2C4OD                                       ', &
-     '                    C4MDIAL + OH --> RRG45092b + LZCO3C23DBCOD                                      ', &
-     '                   C4MDIAL + NO3 --> RRG45093 + LZCO3C23DBCOD + HNO3                                ', &
-     '              C1ODC2O2C4OD + HO2 --> RRG45094a + HOCHCHO + MGLYOX + OH                              ', &
-     '              C1ODC2O2C4OD + HO2 --> RRG45094b + C1ODC2OOHC4OD                                      ', &
-     '               C1ODC2O2C4OD + NO --> RRG45095 + HOCHCHO + MGLYOX + NO2                              ', &
-     '                    C1ODC2O2C4OD --> RRG45096 + HOCHCHO + MGLYOX                                    ', &
-     '              C1ODC2OOHC4OD + OH --> RRG45097a + MGLYOX + 2 CO                                      ', &
-     '              C1ODC2OOHC4OD + OH --> RRG45097b + MGLYOX + 2 CO + OH                                 ', &
-     '               LISOPACNO3O2 + NO --> RRG45098 + 0.49 HO12CO3C4 + 0.21 NOA + 0.045 MVKNO3 ... etc.   ', &
-     '                    LISOPACNO3O2 --> RRG45099 + 0.49 HO12CO3C4 + 0.21 NOA + 0.045 MVKNO3 ... etc.   ', &
-     '                ISOPBDNO3O2 + NO --> RRG45100 + 0.26 MACRNO3 + 0.14 MVKNO3 + 0.6 ACETOL + 0.6 HOCH2C', &
-     '                     ISOPBDNO3O2 --> RRG45101 + 0.26 MACRNO3 + 0.14 MVKNO3 + 0.6 ACETOL + 0.6 HOCH2C', &
-     '                 LISOPACNO3 + O3 --> RRG45102 + 0.0675 HOCHCHO + 0.135 NOA + 0.4325 NO3CH2CHO ... et', &
-     '                           DB1O2 --> RRG45103 + DB1O                                                ' /)
+     '              C1OOHC2O2C4OD + NO --> 0.78 HOCHCHO + 0.78 HYPERACET + 0.22 CO2H3CHO + 0.22 OH ... etc', &
+     '             C1OOHC2O2C4OD + HO2 --> C1OOHC2OOHC4OD                                                 ', &
+     '             C1OOHC2O2C4OD + HO2 --> 0.78 HOCHCHO + 0.78 HYPERACET + 0.22 CO2H3CHO + 1.22 OH ... etc', &
+     '                   C1OOHC2O2C4OD --> HYPERACET + GLYOX + OH                                         ', &
+     '                   C1ODC2O2C4OOH --> C1ODC2OOHC4OD + OH                                             ', &
+     '             C1OOHC2OOHC4OD + OH --> C1ODC2OOHC4OD + OH                                             ', &
+     '             C1OOHC2OOHC4OD + OH --> HYPERACET + 2 CO + OH + 2 HO2                                  ', &
+     '             C1OOHC2OOHC4OD + OH --> C1OOHC2O2C4OD                                                  ', &
+     '              C1ODC2OOHC4OD + OH --> CO2H3CHO + CO + OH + H2O                                       ', &
+     '                   C1ODC3O2C4OOH --> HOOCH2CHO + MGLYOX + HO2                                       ', &
+     '              C1ODC3O2C4OOH + NO --> HOOCH2CHO + MGLYOX + HO2 + NO2                                 ', &
+     '             C1ODC3O2C4OOH + HO2 --> HOOCH2CO3 + 0.5 CH3CO + 0.5 MGLYOX + 0.5 CO + 0.5 HO2 ... etc. ', &
+     '                   C1ODC3O2C4OOH --> HOOCH2CHO + MGLYOX + OH                                        ', &
+     '                   C1OOHC3O2C4OD --> 0.375 CO2 + 0.375 CH3CO + 0.625 MGLYOX + 2 CO + OH + 1.625 HO2 ', &
+     '                       LHC4ACCO3 --> LZCO3HC23DBCOD + HO2                                           ', &
+     '                    C4MDIAL + OH --> C1ODC2O2C4OD                                                   ', &
+     '                    C4MDIAL + OH --> LZCO3C23DBCOD                                                  ', &
+     '                   C4MDIAL + NO3 --> LZCO3C23DBCOD + HNO3                                           ', &
+     '              C1ODC2O2C4OD + HO2 --> HOCHCHO + MGLYOX + OH                                          ', &
+     '              C1ODC2O2C4OD + HO2 --> C1ODC2OOHC4OD                                                  ', &
+     '               C1ODC2O2C4OD + NO --> HOCHCHO + MGLYOX + NO2                                         ', &
+     '                    C1ODC2O2C4OD --> HOCHCHO + MGLYOX                                               ', &
+     '              C1ODC2OOHC4OD + OH --> MGLYOX + 2 CO                                                  ', &
+     '              C1ODC2OOHC4OD + OH --> MGLYOX + 2 CO + OH                                             ', &
+     '               LISOPACNO3O2 + NO --> 0.49 HO12CO3C4 + 0.21 NOA + 0.045 MVKNO3 + 0.255 NO3CH2CHO ... ', &
+     '                    LISOPACNO3O2 --> 0.49 HO12CO3C4 + 0.21 NOA + 0.045 MVKNO3 + 0.255 NO3CH2CHO ... ', &
+     '                ISOPBDNO3O2 + NO --> 0.26 MACRNO3 + 0.14 MVKNO3 + 0.6 ACETOL + 0.6 HOCH2CHO ... etc.', &
+     '                     ISOPBDNO3O2 --> 0.26 MACRNO3 + 0.14 MVKNO3 + 0.6 ACETOL + 0.6 HOCH2CHO ... etc.', &
+     '                 LISOPACNO3 + O3 --> 0.0675 HOCHCHO + 0.135 NOA + 0.0054 HOCH2CO + 0.4325 NO3CH2CHO ', &
+     '                           DB1O2 --> DB1O                                                           ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_28 = (/ &
-     '                     DB1O2 + HO2 --> RRG45104a + DB1OOH                                             ', &
-     '                     DB1O2 + HO2 --> RRG45104b + DB1O + OH                                          ', &
-     '                      DB1O2 + NO --> RRG45105a + DB1O + NO2                                         ', &
-     '                      DB1O2 + NO --> RRG45105b + DB1NO3                                             ', &
-     '                     DB1O2 + NO3 --> RRG45106 + DB1O + NO2                                          ', &
-     '                           DB1O2 --> RRG45107 + DB2O2 + OH                                          ', &
-     '                            DB1O --> RRG45108a + DB2O2                                              ', &
-     '                            DB1O --> RRG45108b + 0.5 HMAC + 0.5 HVMK + HCHO + HO2                   ', &
-     '                           DB2O2 --> RRG45109 + 0.52 MGLYOX + 0.48 ACETOL + 0.48 GLYOX + 0.52 HOCH2C', &
-     '                     DB2O2 + HO2 --> RRG45110a + DB2OOH                                             ', &
-     '                     DB2O2 + HO2 --> RRG45110b + 0.52 MGLYOX + 0.48 ACETOL + 0.48 GLYOX + 0.52 HOCH2', &
-     '                      DB2O2 + NO --> RRG45111 + 0.52 MGLYOX + 0.48 ACETOL + 0.48 GLYOX + 0.52 HOCH2C', &
-     '                     DB2O2 + NO3 --> RRG45112 + 0.52 MGLYOX + 0.48 ACETOL + 0.48 GLYOX + 0.52 HOCH2C', &
-     '                           DB2O2 --> RRG45113 + 0.52 LHMVKABOOH + 0.48 MACROOH + CO + OH ... etc.   ', &
-     '                     DB1OOH + OH --> RRG45114a + DB1O2                                              ', &
-     '                     DB1OOH + OH --> RRG45114b + CH3COCHO2CHO + HO2 + HCOOH                         ', &
-     '                  DB1OOH + HCOOH --> RRG45115 + C1ODC2OOHC4OD + HCOOH                               ', &
-     '                     DB1NO3 + OH --> RRG45116 + CH3COCHO2CHO + HCOOH + NO2                          ', &
-     '                     DB2OOH + OH --> RRG45117 + DB2O2                                               ', &
-     '                 LISOPACOOH + O3 --> RRG45118 + 0.1825 HOCH2COCH2O2 + 0.0675 HOCHCHO + 0.135 HYPERAC', &
-     '             LZCO3HC23DBCOD + OH --> RRG45119a + 0.38 HCOCO3H + 0.62 CO2 + 0.62 CO2H3CHO ... etc.   ', &
-     '             LZCO3HC23DBCOD + OH --> RRG45119b + 0.62 CH3COCO3H + 0.38 CO2 + 0.38 MGLYOX ... etc.   ', &
-     '                       LISOPEFO2 --> RRG45120 + LISOPEFO                                            ', &
-     '                  LISOPEFO2 + NO --> RRG45121a + LISOPEFO + NO2                                     ', &
-     '                  LISOPEFO2 + NO --> RRG45121b + ISOPDNO3                                           ', &
-     '                 LISOPEFO2 + HO2 --> RRG45122a + 0.2857 ISOPBOOH + 0.7143 ISOPDOOH                  ', &
-     '                 LISOPEFO2 + HO2 --> RRG45122b + LISOPEFO + OH                                      ', &
-     '                 LISOPEFO2 + NO3 --> RRG45123 + LISOPEFO + NO2                                      ', &
-     '                       LISOPEFO2 --> RRG45124 + 0.7143 MACR + 0.2857 MVK + HCHO + OH                ', &
-     '                        LISOPEFO --> RRG45125 + 0.7143 MACR + 0.2857 MVK + HCHO + HO2               ' /)
+     '                     DB1O2 + HO2 --> DB1OOH                                                         ', &
+     '                     DB1O2 + HO2 --> DB1O + OH                                                      ', &
+     '                      DB1O2 + NO --> DB1O + NO2                                                     ', &
+     '                      DB1O2 + NO --> DB1NO3                                                         ', &
+     '                     DB1O2 + NO3 --> DB1O + NO2                                                     ', &
+     '                           DB1O2 --> DB2O2 + OH                                                     ', &
+     '                            DB1O --> DB2O2                                                          ', &
+     '                            DB1O --> 0.5 HMAC + 0.5 HVMK + HO2 + HCHO                               ', &
+     '                           DB2O2 --> 0.48 GLYOX + 0.48 ACETOL + 0.52 MGLYOX + 0.52 HOCH2CHO ... etc.', &
+     '                     DB2O2 + HO2 --> DB2OOH                                                         ', &
+     '                     DB2O2 + HO2 --> 0.48 GLYOX + 0.48 ACETOL + 0.52 MGLYOX + 0.52 HOCH2CHO ... etc.', &
+     '                      DB2O2 + NO --> 0.48 GLYOX + 0.48 ACETOL + 0.52 MGLYOX + 0.52 HOCH2CHO ... etc.', &
+     '                     DB2O2 + NO3 --> 0.48 GLYOX + 0.48 ACETOL + 0.52 MGLYOX + 0.52 HOCH2CHO ... etc.', &
+     '                           DB2O2 --> 0.52 LHMVKABOOH + 0.48 MACROOH + CO + OH                       ', &
+     '                     DB1OOH + OH --> DB1O2                                                          ', &
+     '                     DB1OOH + OH --> CH3COCHO2CHO + HO2 + HCOOH                                     ', &
+     '                  DB1OOH + HCOOH --> C1ODC2OOHC4OD + HCOOH                                          ', &
+     '                     DB1NO3 + OH --> CH3COCHO2CHO + NO2 + HCOOH                                     ', &
+     '                     DB2OOH + OH --> DB2O2                                                          ', &
+     '                 LISOPACOOH + O3 --> 0.0675 HOCHCHO + 0.1825 HOCH2COCH2O2 + 0.135 HYPERACET ... etc.', &
+     '             LZCO3HC23DBCOD + OH --> 0.38 HCOCO3H + 0.62 CO2 + 0.62 CO2H3CHO + 0.38 MGLYOX ... etc. ', &
+     '             LZCO3HC23DBCOD + OH --> 0.62 CH3COCO3H + 0.38 CO2 + 0.38 MGLYOX + 1.62 CO + 0.38 OH ...', &
+     '                       LISOPEFO2 --> LISOPEFO                                                       ', &
+     '                  LISOPEFO2 + NO --> LISOPEFO + NO2                                                 ', &
+     '                  LISOPEFO2 + NO --> ISOPDNO3                                                       ', &
+     '                 LISOPEFO2 + HO2 --> 0.2857 ISOPBOOH + 0.7143 ISOPDOOH                              ', &
+     '                 LISOPEFO2 + HO2 --> LISOPEFO + OH                                                  ', &
+     '                 LISOPEFO2 + NO3 --> LISOPEFO + NO2                                                 ', &
+     '                       LISOPEFO2 --> 0.7143 MACR + 0.2857 MVK + OH + HCHO                           ', &
+     '                        LISOPEFO --> 0.7143 MACR + 0.2857 MVK + HO2 + HCHO                          ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_29 = (/ &
-     '                        LISOPACO --> RRG45126a + ME3FURAN + HO2                                     ', &
-     '                        LISOPACO --> RRG45126b + 0.35 DB1O2 + 0.65 LHC4ACCHO + 0.65 HO2             ', &
-     '                       LDISOPACO --> RRG45127a + ME3FURAN + HO2                                     ', &
-     '                       LDISOPACO --> RRG45127b + 0.35 DB1O2 + 0.65 LHC4ACCHO + 0.65 HO2             ', &
-     '                   ME3FURAN + OH --> RRG45128 + LME3FURANO2                                         ', &
-     '                  ME3FURAN + NO3 --> RRG45129 + LME3FURANO2 + NO2                                   ', &
-     '                     LME3FURANO2 --> RRG45130 + C4MDIAL + HO2                                       ', &
-     '                LME3FURANO2 + NO --> RRG45131 + C4MDIAL + HO2 + NO2                                 ', &
-     '               LME3FURANO2 + HO2 --> RRG45132 + C4MDIAL + HO2                                       ', &
-     '                   LZCO3C23DBCOD --> RRG45133 + 0.38 EZCHOCCH3CHO2 + 0.62 EZCH3CO2CHCHO + CO2 ... et', &
-     '             LZCO3C23DBCOD + HO2 --> RRG45134a + 0.38 EZCHOCCH3CHO2 + 0.62 EZCH3CO2CHCHO ... etc.   ', &
-     '             LZCO3C23DBCOD + HO2 --> RRG45134b + LZCO3HC23DBCOD                                     ', &
-     '              LZCO3C23DBCOD + NO --> RRG45135 + 0.38 EZCHOCCH3CHO2 + 0.62 EZCH3CO2CHCHO + CO2 ... et', &
-     '             LZCO3C23DBCOD + NO2 --> RRG45136 + LZCPANC23DBCOD                                      ', &
-     '             LZCO3C23DBCOD + NO3 --> RRG45137 + 0.38 EZCHOCCH3CHO2 + 0.62 EZCH3CO2CHCHO + CO2 ... et', &
-     '                  LZCPANC23DBCOD --> RRG45138 + LZCO3C23DBCOD + NO2                                 ', &
-     '             LZCPANC23DBCOD + OH --> RRG45139 + 0.38 EZCHOCCH3CHO2 + 0.62 EZCH3CO2CHCHO + CO2 ... et', &
-     '                          C511O2 --> RRG45200 + HCOCH2CHO + CH3CO                                   ', &
-     '                     C511O2 + NO --> RRG45201 + HCOCH2CHO + CH3CO + NO2                             ', &
-     '                    C511O2 + HO2 --> RRG45202a + C511OOH                                            ', &
-     '                    C511O2 + HO2 --> RRG45202b + HCOCH2CHO + CH3CO + OH                             ', &
-     '                    C511OOH + OH --> RRG45203 + C511O2                                              ', &
-     '                  CO23C4CHO + OH --> RRG45204 + CO23C4CO3                                           ', &
-     '                 CO23C4CHO + NO3 --> RRG45205 + CO23C4CO3 + HNO3                                    ', &
-     '                       CO23C4CO3 --> RRG45206 + BIACETO2 + CO2                                      ', &
-     '                  CO23C4CO3 + NO --> RRG45207 + BIACETO2 + CO2 + NO2                                ', &
-     '                 CO23C4CO3 + NO2 --> RRG45208 + C5PAN9                                              ', &
-     '                 CO23C4CO3 + HO2 --> RRG45209a + CO23C4CO3H                                         ', &
-     '                 CO23C4CO3 + HO2 --> RRG45209b + BIACETO2 + CO2 + OH                                ', &
-     '                          C5PAN9 --> RRG45210 + CO23C4CO3 + NO2                                     ' /)
+     '                        LISOPACO --> ME3FURAN + HO2                                                 ', &
+     '                        LISOPACO --> 0.35 DB1O2 + 0.65 LHC4ACCHO + 0.65 HO2                         ', &
+     '                       LDISOPACO --> ME3FURAN + HO2                                                 ', &
+     '                       LDISOPACO --> 0.35 DB1O2 + 0.65 LHC4ACCHO + 0.65 HO2                         ', &
+     '                   ME3FURAN + OH --> LME3FURANO2                                                    ', &
+     '                  ME3FURAN + NO3 --> LME3FURANO2 + NO2                                              ', &
+     '                     LME3FURANO2 --> C4MDIAL + HO2                                                  ', &
+     '                LME3FURANO2 + NO --> C4MDIAL + HO2 + NO2                                            ', &
+     '               LME3FURANO2 + HO2 --> C4MDIAL + HO2                                                  ', &
+     '                   LZCO3C23DBCOD --> 0.38 EZCHOCCH3CHO2 + CO2 + 0.62 EZCH3CO2CHCHO                  ', &
+     '             LZCO3C23DBCOD + HO2 --> 0.38 EZCHOCCH3CHO2 + CO2 + 0.62 EZCH3CO2CHCHO + OH             ', &
+     '             LZCO3C23DBCOD + HO2 --> LZCO3HC23DBCOD                                                 ', &
+     '              LZCO3C23DBCOD + NO --> 0.38 EZCHOCCH3CHO2 + CO2 + 0.62 EZCH3CO2CHCHO + NO2 ... etc.   ', &
+     '             LZCO3C23DBCOD + NO2 --> LZCPANC23DBCOD                                                 ', &
+     '             LZCO3C23DBCOD + NO3 --> 0.38 EZCHOCCH3CHO2 + CO2 + 0.62 EZCH3CO2CHCHO + NO2 ... etc.   ', &
+     '                  LZCPANC23DBCOD --> LZCO3C23DBCOD + NO2                                            ', &
+     '             LZCPANC23DBCOD + OH --> 0.38 EZCHOCCH3CHO2 + CO2 + 0.62 EZCH3CO2CHCHO + NO2 ... etc.   ', &
+     '                          C511O2 --> HCOCH2CHO + CH3CO                                              ', &
+     '                     C511O2 + NO --> HCOCH2CHO + CH3CO + NO2                                        ', &
+     '                    C511O2 + HO2 --> C511OOH                                                        ', &
+     '                    C511O2 + HO2 --> HCOCH2CHO + CH3CO + OH                                         ', &
+     '                    C511OOH + OH --> C511O2                                                         ', &
+     '                  CO23C4CHO + OH --> CO23C4CO3                                                      ', &
+     '                 CO23C4CHO + NO3 --> CO23C4CO3 + HNO3                                               ', &
+     '                       CO23C4CO3 --> BIACETO2 + CO2                                                 ', &
+     '                  CO23C4CO3 + NO --> BIACETO2 + CO2 + NO2                                           ', &
+     '                 CO23C4CO3 + NO2 --> C5PAN9                                                         ', &
+     '                 CO23C4CO3 + HO2 --> CO23C4CO3H                                                     ', &
+     '                 CO23C4CO3 + HO2 --> BIACETO2 + CO2 + OH                                            ', &
+     '                          C5PAN9 --> CO23C4CO3 + NO2                                                ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_30 = (/ &
-     '                     C5PAN9 + OH --> RRG45211 + CO23C3CHO + CO + NO2                                ', &
-     '                          C512O2 --> RRG45212 + C513O2                                              ', &
-     '                    C512O2 + HO2 --> RRG45213 + C512OOH                                             ', &
-     '                     C512O2 + NO --> RRG45214 + C513O2 + NO2                                        ', &
-     '                    C512OOH + OH --> RRG45215 + CO13C4CHO + OH                                      ', &
-     '                          C513O2 --> RRG45216 + HOC2H4CO3 + GLYOX                                   ', &
-     '                     C513O2 + NO --> RRG45217 + HOC2H4CO3 + GLYOX + NO2                             ', &
-     '                    C513O2 + HO2 --> RRG45218a + C513OOH                                            ', &
-     '                    C513O2 + HO2 --> RRG45218b + HOC2H4CO3 + GLYOX + OH                             ', &
-     '                  CO13C4CHO + OH --> RRG45219 + CHOC3COCO3                                          ', &
-     '                 CO13C4CHO + NO3 --> RRG45220 + CHOC3COCO3 + HNO3                                   ', &
-     '                    C513OOH + OH --> RRG45221 + C513CO + OH                                         ', &
-     '                      CHOC3COCO3 --> RRG45222 + CHOC3COO2 + CO2                                     ', &
-     '                CHOC3COCO3 + HO2 --> RRG45223 + CHOC3COOOH                                          ', &
-     '                CHOC3COCO3 + NO2 --> RRG45224 + CHOC3COPAN                                          ', &
-     '                 CHOC3COCO3 + NO --> RRG45225 + CHOC3COO2 + CO2 + NO2                               ', &
-     '                     C513CO + OH --> RRG45226 + HOC2H4CO3 + 2 CO                                    ', &
-     '                    C514O2 + HO2 --> RRG45227 + C514OOH                                             ', &
-     '                     C514O2 + NO --> RRG45228a + CO13C4CHO + HO2 + NO2                              ', &
-     '                     C514O2 + NO --> RRG45228b + C514NO3                                            ', &
-     '                    C514O2 + NO3 --> RRG45229 + CO13C4CHO + HO2 + NO2                               ', &
-     '                          C514O2 --> RRG45230 + CO13C4CHO + HO2                                     ', &
-     '                    C514OOH + OH --> RRG45231 + CO13C4CHO + OH                                      ', &
-     '                    C514NO3 + OH --> RRG45232 + CO13C4CHO + NO2                                     ', &
-     '                 CHOC3COOOH + OH --> RRG45233 + CHOC3COCO3                                          ', &
-     '                      CHOC3COPAN --> RRG45234 + CHOC3COCO3 + NO2                                    ', &
-     '                 CHOC3COPAN + OH --> RRG45235 + C4CODIAL + CO + NO2                                 ', &
-     '                        MBO + OH --> RRG45236 + LMBOABO2                                            ', &
-     '                        MBO + O3 --> RRG45237a + 0.84 MBOOO + 0.16 CH3COCH3 + 0.16 CO + HCHO ... etc', &
-     '                        MBO + O3 --> RRG45237b + IBUTALOH + 0.37 HOCH2OOH + 0.63 CO + 0.16 OH ... et' /)
+     '                     C5PAN9 + OH --> CO23C3CHO + CO + NO2                                           ', &
+     '                          C512O2 --> C513O2                                                         ', &
+     '                    C512O2 + HO2 --> C512OOH                                                        ', &
+     '                     C512O2 + NO --> C513O2 + NO2                                                   ', &
+     '                    C512OOH + OH --> CO13C4CHO + OH                                                 ', &
+     '                          C513O2 --> HOC2H4CO3 + GLYOX                                              ', &
+     '                     C513O2 + NO --> HOC2H4CO3 + GLYOX + NO2                                        ', &
+     '                    C513O2 + HO2 --> C513OOH                                                        ', &
+     '                    C513O2 + HO2 --> HOC2H4CO3 + GLYOX + OH                                         ', &
+     '                  CO13C4CHO + OH --> CHOC3COCO3                                                     ', &
+     '                 CO13C4CHO + NO3 --> CHOC3COCO3 + HNO3                                              ', &
+     '                    C513OOH + OH --> C513CO + OH                                                    ', &
+     '                      CHOC3COCO3 --> CHOC3COO2 + CO2                                                ', &
+     '                CHOC3COCO3 + HO2 --> CHOC3COOOH                                                     ', &
+     '                CHOC3COCO3 + NO2 --> CHOC3COPAN                                                     ', &
+     '                 CHOC3COCO3 + NO --> CHOC3COO2 + CO2 + NO2                                          ', &
+     '                     C513CO + OH --> HOC2H4CO3 + 2 CO                                               ', &
+     '                    C514O2 + HO2 --> C514OOH                                                        ', &
+     '                     C514O2 + NO --> CO13C4CHO + HO2 + NO2                                          ', &
+     '                     C514O2 + NO --> C514NO3                                                        ', &
+     '                    C514O2 + NO3 --> CO13C4CHO + HO2 + NO2                                          ', &
+     '                          C514O2 --> CO13C4CHO + HO2                                                ', &
+     '                    C514OOH + OH --> CO13C4CHO + OH                                                 ', &
+     '                    C514NO3 + OH --> CO13C4CHO + NO2                                                ', &
+     '                 CHOC3COOOH + OH --> CHOC3COCO3                                                     ', &
+     '                      CHOC3COPAN --> CHOC3COCO3 + NO2                                               ', &
+     '                 CHOC3COPAN + OH --> C4CODIAL + CO + NO2                                            ', &
+     '                        MBO + OH --> LMBOABO2                                                       ', &
+     '                        MBO + O3 --> 0.84 MBOOO + 0.16 CH3COCH3 + 0.16 CO + 0.16 OH + 0.16 HO2 ... e', &
+     '                        MBO + O3 --> 0.37 HOCH2OOH + IBUTALOH + 0.63 CO + 0.16 OH + 0.16 HO2 ... etc' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_31 = (/ &
-     '                       MBO + NO3 --> RRG45238 + LNMBOABO2                                           ', &
-     '                  LMBOABO2 + HO2 --> RRG45239 + LMBOABOOH                                           ', &
-     '                   LMBOABO2 + NO --> RRG45240a + LMBOABNO3                                          ', &
-     '                   LMBOABO2 + NO --> RRG45240b + CH3COCH3 + HOCH2CHO + HO2 + NO2                    ', &
-     '                   LMBOABO2 + NO --> RRG45240c + IBUTALOH + HCHO + HO2 + NO2                        ', &
-     '                        LMBOABO2 --> RRG45241a + CH3COCH3 + HOCH2CHO + HO2                          ', &
-     '                        LMBOABO2 --> RRG45241b + IBUTALOH + HCHO + HO2                              ', &
-     '                  LMBOABOOH + OH --> RRG45242a + MBOACO                                             ', &
-     '                  LMBOABOOH + OH --> RRG45242b + LMBOABO2                                           ', &
-     '                  LMBOABNO3 + OH --> RRG45243 + MBOACO + NO2                                        ', &
-     '                     MBOACO + OH --> RRG45244 + MBOCOCO + HO2                                       ', &
-     '                    MBOCOCO + OH --> RRG45245 + IPRHOCO3 + CO                                       ', &
-     '                 LNMBOABO2 + HO2 --> RRG45246 + LNMBOABOOH                                          ', &
-     '                  LNMBOABO2 + NO --> RRG45247 + 0.35 IBUTALOH + 0.65 NO3CH2CHO + 0.65 CH3COCH3 ... e', &
-     '                 LNMBOABO2 + NO3 --> RRG45248 + 0.35 IBUTALOH + 0.65 NO3CH2CHO + 0.65 CH3COCH3 ... e', &
-     '                       LNMBOABO2 --> RRG45249 + 0.35 IBUTALOH + 0.65 NO3CH2CHO + 0.65 CH3COCH3 ... e', &
-     '                 LNMBOABOOH + OH --> RRG45250a + 0.35 NMBOBCO + 0.65 C4MCONO3OH                     ', &
-     '                 LNMBOABOOH + OH --> RRG45250b + LNMBOABO2                                          ', &
-     '                    NMBOBCO + OH --> RRG45251 + NC4OHCO3                                            ', &
-     '                  NC4OHCO3 + HO2 --> RRG45252a + IBUTALOH + CO2 + OH + NO2                          ', &
-     '                  NC4OHCO3 + HO2 --> RRG45252b + NC4OHCO3H                                          ', &
-     '                   NC4OHCO3 + NO --> RRG45253 + IBUTALOH + CO2 + 2 NO2                              ', &
-     '                  NC4OHCO3 + NO2 --> RRG45254 + NC4OHCPAN                                           ', &
-     '                  NC4OHCO3 + NO3 --> RRG45255 + IBUTALOH + CO2 + 2 NO2                              ', &
-     '                        NC4OHCO3 --> RRG45256 + IBUTALOH + CO2 + NO2                                ', &
-     '                  NC4OHCO3H + OH --> RRG45257 + NC4OHCO3                                            ', &
-     '                  NC4OHCPAN + OH --> RRG45258 + IBUTALOH + CO + 2 NO2                               ', &
-     '                       NC4OHCPAN --> RRG45259 + NC4OHCO3 + NO2                                      ', &
-     '                 C4MCONO3OH + OH --> RRG45260 + CO2 + CH3COCH3 + HCHO + NO2                         ', &
-     '                  NC4MDCO2H + OH --> RRG45400 + MMALANHY + NO2                                      ' /)
+     '                       MBO + NO3 --> LNMBOABO2                                                      ', &
+     '                  LMBOABO2 + HO2 --> LMBOABOOH                                                      ', &
+     '                   LMBOABO2 + NO --> LMBOABNO3                                                      ', &
+     '                   LMBOABO2 + NO --> CH3COCH3 + HOCH2CHO + HO2 + NO2                                ', &
+     '                   LMBOABO2 + NO --> IBUTALOH + HO2 + NO2 + HCHO                                    ', &
+     '                        LMBOABO2 --> CH3COCH3 + HOCH2CHO + HO2                                      ', &
+     '                        LMBOABO2 --> IBUTALOH + HO2 + HCHO                                          ', &
+     '                  LMBOABOOH + OH --> MBOACO                                                         ', &
+     '                  LMBOABOOH + OH --> LMBOABO2                                                       ', &
+     '                  LMBOABNO3 + OH --> MBOACO + NO2                                                   ', &
+     '                     MBOACO + OH --> MBOCOCO + HO2                                                  ', &
+     '                    MBOCOCO + OH --> IPRHOCO3 + CO                                                  ', &
+     '                 LNMBOABO2 + HO2 --> LNMBOABOOH                                                     ', &
+     '                  LNMBOABO2 + NO --> 0.35 IBUTALOH + 0.65 NO3CH2CHO + 0.65 CH3COCH3 + 0.65 HO2 ... e', &
+     '                 LNMBOABO2 + NO3 --> 0.35 IBUTALOH + 0.65 NO3CH2CHO + 0.65 CH3COCH3 + 0.65 HO2 ... e', &
+     '                       LNMBOABO2 --> 0.35 IBUTALOH + 0.65 NO3CH2CHO + 0.65 CH3COCH3 + 0.65 HO2 ... e', &
+     '                 LNMBOABOOH + OH --> 0.35 NMBOBCO + 0.65 C4MCONO3OH                                 ', &
+     '                 LNMBOABOOH + OH --> LNMBOABO2                                                      ', &
+     '                    NMBOBCO + OH --> NC4OHCO3                                                       ', &
+     '                  NC4OHCO3 + HO2 --> IBUTALOH + CO2 + OH + NO2                                      ', &
+     '                  NC4OHCO3 + HO2 --> NC4OHCO3H                                                      ', &
+     '                   NC4OHCO3 + NO --> IBUTALOH + CO2 + 2 NO2                                         ', &
+     '                  NC4OHCO3 + NO2 --> NC4OHCPAN                                                      ', &
+     '                  NC4OHCO3 + NO3 --> IBUTALOH + CO2 + 2 NO2                                         ', &
+     '                        NC4OHCO3 --> IBUTALOH + CO2 + NO2                                           ', &
+     '                  NC4OHCO3H + OH --> NC4OHCO3                                                       ', &
+     '                  NC4OHCPAN + OH --> IBUTALOH + CO + 2 NO2                                          ', &
+     '                       NC4OHCPAN --> NC4OHCO3 + NO2                                                 ', &
+     '                 C4MCONO3OH + OH --> CO2 + CH3COCH3 + NO2 + HCHO                                    ', &
+     '                  NC4MDCO2H + OH --> MMALANHY + NO2                                                 ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_32 = (/ &
-     '                     C54CO + NO3 --> RRG45401 + HNO3 + 3 CO + CH3CO3                                ', &
-     '                      C54CO + OH --> RRG45402 + 3 CO + CH3CO3                                       ', &
-     '                   NTLFUO2 + HO2 --> RRG45403a + NTLFUOOH                                           ', &
-     '                   NTLFUO2 + HO2 --> RRG45403b + ACCOMECHO + OH + NO2                               ', &
-     '                    NTLFUO2 + NO --> RRG45404 + ACCOMECHO + 2 NO2                                   ', &
-     '                   NTLFUO2 + NO3 --> RRG45405 + ACCOMECHO + 2 NO2                                   ', &
-     '                         NTLFUO2 --> RRG45406 + ACCOMECHO + NO2                                     ', &
-     '                 C5134CO2OH + OH --> RRG45407 + C54CO + HO2                                         ', &
-     '                  C5COO2NO2 + OH --> RRG45408 + MGLYOX + 2 CO + NO2                                 ', &
-     '                       C5COO2NO2 --> RRG45409 + C5CO14O2 + NO2                                      ', &
-     '                  C5DIALOOH + OH --> RRG45410 + C5DIALCO + OH                                       ', &
-     '                C4CO2DBCO3 + HO2 --> RRG45411a + C4CO2DCO3H                                         ', &
-     '                C4CO2DBCO3 + HO2 --> RRG45411b + C33CO + CO2 + CO + OH + HO2                        ', &
-     '                 C4CO2DBCO3 + NO --> RRG45412 + C33CO + CO2 + CO + HO2 + NO2                        ', &
-     '                C4CO2DBCO3 + NO2 --> RRG45413 + C4CO2DBPAN                                          ', &
-     '                C4CO2DBCO3 + NO3 --> RRG45414 + C33CO + CO2 + CO + HO2 + NO2                        ', &
-     '                      C4CO2DBCO3 --> RRG45415 + C33CO + CO2 + CO + HO2                              ', &
-     '                   MMALANHY + OH --> RRG45416 + MMALANHYO2                                          ', &
-     '                MMALANHYO2 + HO2 --> RRG45421a + MMALNHYOOH                                         ', &
-     '                MMALANHYO2 + HO2 --> RRG45421b + CO2H3CO3 + CO2 + OH                                ', &
-     '                 MMALANHYO2 + NO --> RRG45422 + CO2H3CO3 + CO2 + NO2                                ', &
-     '                MMALANHYO2 + NO3 --> RRG45423 + CO2H3CO3 + CO2 + NO2                                ', &
-     '                      MMALANHYO2 --> RRG45424 + CO2H3CO3 + CO2                                      ', &
-     '                 C4CO2DBPAN + OH --> RRG45428 + C33CO + CO2 + CO + NO2                              ', &
-     '                      C4CO2DBPAN --> RRG45429 + C4CO2DBCO3 + NO2                                    ', &
-     '                  C5CO14O2 + HO2 --> RRG45430a + 0.83 MALANHY + 0.17 CO2 + 0.17 MGLYOX + 0.83 CH3 ..', &
-     '                  C5CO14O2 + HO2 --> RRG45430b + C5CO14OH + O3                                      ', &
-     '                  C5CO14O2 + HO2 --> RRG45430c + C5CO14OOH                                          ', &
-     '                   C5CO14O2 + NO --> RRG45431 + 0.83 MALANHY + 0.17 CO2 + 0.17 MGLYOX + 0.83 CH3 ...', &
-     '                  C5CO14O2 + NO2 --> RRG45432 + C5COO2NO2                                           ' /)
+     '                     C54CO + NO3 --> HNO3 + CH3CO3 + 3 CO                                           ', &
+     '                      C54CO + OH --> CH3CO3 + 3 CO                                                  ', &
+     '                   NTLFUO2 + HO2 --> NTLFUOOH                                                       ', &
+     '                   NTLFUO2 + HO2 --> ACCOMECHO + OH + NO2                                           ', &
+     '                    NTLFUO2 + NO --> ACCOMECHO + 2 NO2                                              ', &
+     '                   NTLFUO2 + NO3 --> ACCOMECHO + 2 NO2                                              ', &
+     '                         NTLFUO2 --> ACCOMECHO + NO2                                                ', &
+     '                 C5134CO2OH + OH --> C54CO + HO2                                                    ', &
+     '                  C5COO2NO2 + OH --> MGLYOX + 2 CO + NO2                                            ', &
+     '                       C5COO2NO2 --> C5CO14O2 + NO2                                                 ', &
+     '                  C5DIALOOH + OH --> C5DIALCO + OH                                                  ', &
+     '                C4CO2DBCO3 + HO2 --> C4CO2DCO3H                                                     ', &
+     '                C4CO2DBCO3 + HO2 --> C33CO + CO2 + CO + OH + HO2                                    ', &
+     '                 C4CO2DBCO3 + NO --> C33CO + CO2 + CO + HO2 + NO2                                   ', &
+     '                C4CO2DBCO3 + NO2 --> C4CO2DBPAN                                                     ', &
+     '                C4CO2DBCO3 + NO3 --> C33CO + CO2 + CO + HO2 + NO2                                   ', &
+     '                      C4CO2DBCO3 --> C33CO + CO2 + CO + HO2                                         ', &
+     '                   MMALANHY + OH --> MMALANHYO2                                                     ', &
+     '                MMALANHYO2 + HO2 --> MMALNHYOOH                                                     ', &
+     '                MMALANHYO2 + HO2 --> CO2 + CO2H3CO3 + OH                                            ', &
+     '                 MMALANHYO2 + NO --> CO2 + CO2H3CO3 + NO2                                           ', &
+     '                MMALANHYO2 + NO3 --> CO2 + CO2H3CO3 + NO2                                           ', &
+     '                      MMALANHYO2 --> CO2 + CO2H3CO3                                                 ', &
+     '                 C4CO2DBPAN + OH --> C33CO + CO2 + CO + NO2                                         ', &
+     '                      C4CO2DBPAN --> C4CO2DBCO3 + NO2                                               ', &
+     '                  C5CO14O2 + HO2 --> 0.83 MALANHY + 0.17 CO2 + 0.83 CH3 + 0.17 MGLYOX + 0.17 CO ... ', &
+     '                  C5CO14O2 + HO2 --> C5CO14OH + O3                                                  ', &
+     '                  C5CO14O2 + HO2 --> C5CO14OOH                                                      ', &
+     '                   C5CO14O2 + NO --> 0.83 MALANHY + 0.17 CO2 + 0.83 CH3 + 0.17 MGLYOX + 0.17 CO ... ', &
+     '                  C5CO14O2 + NO2 --> C5COO2NO2                                                      ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_33 = (/ &
-     '                  C5CO14O2 + NO3 --> RRG45433 + 0.83 MALANHY + 0.17 CO2 + 0.17 MGLYOX + 0.83 CH3 ...', &
-     '                        C5CO14O2 --> RRG45434 + 0.83 MALANHY + 0.17 CO2 + 0.17 MGLYOX + 0.83 CH3 ...', &
-     '                   C5CO14OH + OH --> RRG45436 + 0.83 MALANHY + 0.17 CO2 + 0.17 MGLYOX + 0.83 CH3 ...', &
-     '                  C5DICARB + NO3 --> RRG45441 + C5CO14O2 + HNO3                                     ', &
-     '                   C5DICARB + O3 --> RRG45442 + 0.2465 CO2 + 0.676 H2O2 + 0.0563 CH3COCO2H ... etc. ', &
-     '                   C5DICARB + OH --> RRG45443 + 0.52 C5DICARBO2 + 0.48 C5CO14O2                     ', &
-     '                 MC3ODBCO2H + OH --> RRG45444 + 0.65 MMALANHY + 0.35 CO2 + 0.35 CH3 + 0.35 GLYOX ...', &
-     '                   TLFUONE + NO3 --> RRG45451 + NTLFUO2                                             ', &
-     '                    TLFUONE + O3 --> RRG45452 + 0.3125 C24O3CCO2H + 0.1875 ACCOMECHO + 0.5 MECOACETO', &
-     '                    TLFUONE + OH --> RRG45453 + TLFUO2                                              ', &
-     '                 ACCOMECO3 + HO2 --> RRG45454a + ACCOMECO3H                                         ', &
-     '                 ACCOMECO3 + HO2 --> RRG45454b + MECOACETO2 + CO2 + OH                              ', &
-     '                  ACCOMECO3 + NO --> RRG45455 + MECOACETO2 + CO2 + NO2                              ', &
-     '                 ACCOMECO3 + NO2 --> RRG45456 + ACCOMEPAN                                           ', &
-     '                 ACCOMECO3 + NO3 --> RRG45457 + MECOACETO2 + CO2 + NO2                              ', &
-     '                       ACCOMECO3 --> RRG45458 + MECOACETO2 + CO2                                    ', &
-     '                 C4CO2DCO3H + OH --> RRG45459 + C4CO2DBCO3                                          ', &
-     '                 ACCOMECHO + NO3 --> RRG45464 + ACCOMECO3 + HNO3                                    ', &
-     '                  ACCOMECHO + OH --> RRG45465 + ACCOMECO3                                           ', &
-     '                 MMALNHYOOH + OH --> RRG45466 + MMALANHYO2                                          ', &
-     '                 C5DICAROOH + OH --> RRG45467a + C5134CO2OH + OH                                    ', &
-     '                 C5DICAROOH + OH --> RRG45467b + C5DICARBO2                                         ', &
-     '                 C24O3CCO2H + OH --> RRG45468 + MECOACETO2 + CO2                                    ', &
-     '                   NTLFUOOH + OH --> RRG45469 + NTLFUO2                                             ', &
-     '                  ACCOMEPAN + OH --> RRG45470 + METACETHO + 2 CO + NO2                              ', &
-     '                       ACCOMEPAN --> RRG45471 + ACCOMECO3 + NO2                                     ', &
-     '                    TLFUO2 + HO2 --> RRG45476a + TLFUOOH                                            ', &
-     '                    TLFUO2 + HO2 --> RRG45476b + ACCOMECHO + OH + HO2                               ', &
-     '                     TLFUO2 + NO --> RRG45477 + ACCOMECHO + HO2 + NO2                               ', &
-     '                    TLFUO2 + NO3 --> RRG45478 + ACCOMECHO + HO2 + NO2                               ' /)
+     '                  C5CO14O2 + NO3 --> 0.83 MALANHY + 0.17 CO2 + 0.83 CH3 + 0.17 MGLYOX + 0.17 CO ... ', &
+     '                        C5CO14O2 --> 0.83 MALANHY + 0.17 CO2 + 0.83 CH3 + 0.17 MGLYOX + 0.17 CO ... ', &
+     '                   C5CO14OH + OH --> 0.83 MALANHY + 0.17 CO2 + 0.83 CH3 + 0.17 MGLYOX + 0.17 CO ... ', &
+     '                  C5DICARB + NO3 --> C5CO14O2 + HNO3                                                ', &
+     '                   C5DICARB + O3 --> 0.2465 CO2 + 0.676 H2O2 + 0.0563 HCOCO2H + 0.0563 CH3COCO2H ...', &
+     '                   C5DICARB + OH --> 0.52 C5DICARBO2 + 0.48 C5CO14O2                                ', &
+     '                 MC3ODBCO2H + OH --> 0.65 MMALANHY + 0.35 CO2 + 0.35 CH3 + 0.35 GLYOX + 0.35 CO ... ', &
+     '                   TLFUONE + NO3 --> NTLFUO2                                                        ', &
+     '                    TLFUONE + O3 --> 0.3125 C24O3CCO2H + 0.1875 ACCOMECHO + 0.5 MECOACETO2 ... etc. ', &
+     '                    TLFUONE + OH --> TLFUO2                                                         ', &
+     '                 ACCOMECO3 + HO2 --> ACCOMECO3H                                                     ', &
+     '                 ACCOMECO3 + HO2 --> MECOACETO2 + CO2 + OH                                          ', &
+     '                  ACCOMECO3 + NO --> MECOACETO2 + CO2 + NO2                                         ', &
+     '                 ACCOMECO3 + NO2 --> ACCOMEPAN                                                      ', &
+     '                 ACCOMECO3 + NO3 --> MECOACETO2 + CO2 + NO2                                         ', &
+     '                       ACCOMECO3 --> MECOACETO2 + CO2                                               ', &
+     '                 C4CO2DCO3H + OH --> C4CO2DBCO3                                                     ', &
+     '                 ACCOMECHO + NO3 --> ACCOMECO3 + HNO3                                               ', &
+     '                  ACCOMECHO + OH --> ACCOMECO3                                                      ', &
+     '                 MMALNHYOOH + OH --> MMALANHYO2                                                     ', &
+     '                 C5DICAROOH + OH --> C5134CO2OH + OH                                                ', &
+     '                 C5DICAROOH + OH --> C5DICARBO2                                                     ', &
+     '                 C24O3CCO2H + OH --> MECOACETO2 + CO2                                               ', &
+     '                   NTLFUOOH + OH --> NTLFUO2                                                        ', &
+     '                  ACCOMEPAN + OH --> METACETHO + 2 CO + NO2                                         ', &
+     '                       ACCOMEPAN --> ACCOMECO3 + NO2                                                ', &
+     '                    TLFUO2 + HO2 --> TLFUOOH                                                        ', &
+     '                    TLFUO2 + HO2 --> ACCOMECHO + OH + HO2                                           ', &
+     '                     TLFUO2 + NO --> ACCOMECHO + HO2 + NO2                                          ', &
+     '                    TLFUO2 + NO3 --> ACCOMECHO + HO2 + NO2                                          ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_34 = (/ &
-     '                          TLFUO2 --> RRG45479 + ACCOMECHO + HO2                                     ', &
-     '                  C5CO14OOH + OH --> RRG45480 + C5CO14O2                                            ', &
-     '                    TLFUOOH + OH --> RRG45483 + TLFUO2                                              ', &
-     '                 ACCOMECO3H + OH --> RRG45485 + ACCOMECO3                                           ', &
-     '                  C5DIALO2 + HO2 --> RRG45486a + C5DIALOOH                                          ', &
-     '                  C5DIALO2 + HO2 --> RRG45486b + MALDIAL + CO + OH + HO2                            ', &
-     '                   C5DIALO2 + NO --> RRG45487 + MALDIAL + CO + HO2 + NO2                            ', &
-     '                  C5DIALO2 + NO3 --> RRG45488 + MALDIAL + CO + HO2 + NO2                            ', &
-     '                        C5DIALO2 --> RRG45489 + MALDIAL + CO + HO2                                  ', &
-     '                C5DICARBO2 + HO2 --> RRG45490a + C5DICAROOH                                         ', &
-     '                C5DICARBO2 + HO2 --> RRG45491b + MGLYOX + GLYOX + OH + HO2                          ', &
-     '                 C5DICARBO2 + NO --> RRG45492 + MGLYOX + GLYOX + HO2 + NO2                          ', &
-     '                C5DICARBO2 + NO3 --> RRG45493 + MGLYOX + GLYOX + HO2 + NO2                          ', &
-     '                      C5DICARBO2 --> RRG45494 + MGLYOX + GLYOX + HO2                                ', &
-     '                 CO235C6O2 + HO2 --> RRG46200a + CO235C6OOH                                         ', &
-     '                 CO235C6O2 + HO2 --> RRG46200b + CO23C4CO3 + HCHO + OH                              ', &
-     '                  CO235C6O2 + NO --> RRG46201 + CO23C4CO3 + HCHO + NO2                              ', &
-     '                       CO235C6O2 --> RRG46202 + CO23C4CO3 + HCHO                                    ', &
-     '                 CO235C6OOH + OH --> RRG46203 + CO235C6O2                                           ', &
-     '                          C614O2 --> RRG46204 + CO23C4CHO + HCHO + HO2                              ', &
-     '                     C614O2 + NO --> RRG46205a + CO23C4CHO + HCHO + HO2 + NO2                       ', &
-     '                     C614O2 + NO --> RRG46205b + C614NO3                                            ', &
-     '                    C614O2 + HO2 --> RRG46206a + C614OOH                                            ', &
-     '                    C614O2 + HO2 --> RRG46206b + CO23C4CHO + HCHO + OH + HO2                        ', &
-     '                    C614NO3 + OH --> RRG46207 + C614CO + NO2                                        ', &
-     '                    C614OOH + OH --> RRG46208 + C614CO + OH                                         ', &
-     '                     C614CO + OH --> RRG46209 + CO235C5CHO + HO2                                    ', &
-     '                 CO235C5CHO + OH --> RRG46210 + CO23C4CO3 + CO                                      ', &
-     '                CO235C5CHO + NO3 --> RRG46211 + CO23C4CO3 + HNO3 + CO                               ', &
-     '                    PHENOOH + OH --> RRG46400 + PHENO2                                              ' /)
+     '                          TLFUO2 --> ACCOMECHO + HO2                                                ', &
+     '                  C5CO14OOH + OH --> C5CO14O2                                                       ', &
+     '                    TLFUOOH + OH --> TLFUO2                                                         ', &
+     '                 ACCOMECO3H + OH --> ACCOMECO3                                                      ', &
+     '                  C5DIALO2 + HO2 --> C5DIALOOH                                                      ', &
+     '                  C5DIALO2 + HO2 --> MALDIAL + CO + OH + HO2                                        ', &
+     '                   C5DIALO2 + NO --> MALDIAL + CO + HO2 + NO2                                       ', &
+     '                  C5DIALO2 + NO3 --> MALDIAL + CO + HO2 + NO2                                       ', &
+     '                        C5DIALO2 --> MALDIAL + CO + HO2                                             ', &
+     '                C5DICARBO2 + HO2 --> C5DICAROOH                                                     ', &
+     '                C5DICARBO2 + HO2 --> GLYOX + MGLYOX + OH + HO2                                      ', &
+     '                 C5DICARBO2 + NO --> GLYOX + MGLYOX + HO2 + NO2                                     ', &
+     '                C5DICARBO2 + NO3 --> GLYOX + MGLYOX + HO2 + NO2                                     ', &
+     '                      C5DICARBO2 --> GLYOX + MGLYOX + HO2                                           ', &
+     '                 CO235C6O2 + HO2 --> CO235C6OOH                                                     ', &
+     '                 CO235C6O2 + HO2 --> CO23C4CO3 + OH + HCHO                                          ', &
+     '                  CO235C6O2 + NO --> CO23C4CO3 + NO2 + HCHO                                         ', &
+     '                       CO235C6O2 --> CO23C4CO3 + HCHO                                               ', &
+     '                 CO235C6OOH + OH --> CO235C6O2                                                      ', &
+     '                          C614O2 --> CO23C4CHO + HO2 + HCHO                                         ', &
+     '                     C614O2 + NO --> CO23C4CHO + HO2 + NO2 + HCHO                                   ', &
+     '                     C614O2 + NO --> C614NO3                                                        ', &
+     '                    C614O2 + HO2 --> C614OOH                                                        ', &
+     '                    C614O2 + HO2 --> CO23C4CHO + OH + HO2 + HCHO                                    ', &
+     '                    C614NO3 + OH --> C614CO + NO2                                                   ', &
+     '                    C614OOH + OH --> C614CO + OH                                                    ', &
+     '                     C614CO + OH --> CO235C5CHO + HO2                                               ', &
+     '                 CO235C5CHO + OH --> CO23C4CO3 + CO                                                 ', &
+     '                CO235C5CHO + NO3 --> CO23C4CO3 + HNO3 + CO                                          ', &
+     '                    PHENOOH + OH --> PHENO2                                                         ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_35 = (/ &
-     '                    C6CO4DB + OH --> RRG46401 + C33CO + 3 CO + HO2                                  ', &
-     '                 C5CO2DCO3H + OH --> RRG46402 + C5CO2DBCO3                                          ', &
-     '                 NDNPHENOOH + OH --> RRG46403 + NDNPHENO2                                           ', &
-     '                 C615CO2O2 + HO2 --> RRG46404a + C615CO2OOH                                         ', &
-     '                 C615CO2O2 + HO2 --> RRG46404b + C5DICARB + CO + OH + HO2                           ', &
-     '                  C615CO2O2 + NO --> RRG46405 + C5DICARB + CO + HO2 + NO2                           ', &
-     '                 C615CO2O2 + NO3 --> RRG46406 + C5DICARB + CO + HO2 + NO2                           ', &
-     '                       C615CO2O2 --> RRG46407 + C5DICARB + CO + HO2                                 ', &
-     '                  BZEMUCPAN + OH --> RRG46408 + CO2 + MALDIAL + CO + NO2                            ', &
-     '                       BZEMUCPAN --> RRG46409 + BZEMUCCO3 + NO2                                     ', &
-     '                 BZBIPERNO3 + OH --> RRG46410 + BZOBIPEROH + NO2                                    ', &
-     '                 HOC6H4NO2 + NO3 --> RRG46411 + NPHEN1O + HNO3                                      ', &
-     '                  HOC6H4NO2 + OH --> RRG46412 + NPHEN1O                                             ', &
-     '                 NDNPHENO2 + HO2 --> RRG46413a + NDNPHENOOH                                         ', &
-     '                 NDNPHENO2 + HO2 --> RRG46413b + NC4DCO2H + HNO3 + 2 CO + OH + NO2                  ', &
-     '                  NDNPHENO2 + NO --> RRG46414 + NC4DCO2H + HNO3 + 2 CO + 2 NO2                      ', &
-     '                 NDNPHENO2 + NO3 --> RRG46415 + NC4DCO2H + HNO3 + 2 CO + 2 NO2                      ', &
-     '                       NDNPHENO2 --> RRG46416 + NC4DCO2H + HNO3 + 2 CO + NO2                        ', &
-     '                     PBZQCO + OH --> RRG46417 + C5CO2OHCO3                                          ', &
-     '                  CATECHOL + NO3 --> RRG46418 + CATEC1O + HNO3                                      ', &
-     '                   CATECHOL + O3 --> RRG46419 + MALDALCO2H + HCOCO2H + OH + HO2                     ', &
-     '                   CATECHOL + OH --> RRG46420 + CATEC1O                                             ', &
-     '                 C5COOHCO3H + OH --> RRG46421 + C5CO2OHCO3                                          ', &
-     '                 NCATECHOL + NO3 --> RRG46422 + NNCATECO2                                           ', &
-     '                  NCATECHOL + OH --> RRG46423 + NCATECO2                                            ', &
-     '                C5CO2OHCO3 + HO2 --> RRG46424a + C5COOHCO3H                                         ', &
-     '                C5CO2OHCO3 + HO2 --> RRG46424b + HOCOC4DIAL + CO2 + CO + OH + HO2                   ', &
-     '                 C5CO2OHCO3 + NO --> RRG46425 + HOCOC4DIAL + CO2 + CO + HO2 + NO2                   ', &
-     '                C5CO2OHCO3 + NO2 --> RRG46426 + C5CO2OHPAN                                          ', &
-     '                C5CO2OHCO3 + NO3 --> RRG46427 + HOCOC4DIAL + CO2 + CO + HO2 + NO2                   ' /)
+     '                    C6CO4DB + OH --> C33CO + 3 CO + HO2                                             ', &
+     '                 C5CO2DCO3H + OH --> C5CO2DBCO3                                                     ', &
+     '                 NDNPHENOOH + OH --> NDNPHENO2                                                      ', &
+     '                 C615CO2O2 + HO2 --> C615CO2OOH                                                     ', &
+     '                 C615CO2O2 + HO2 --> C5DICARB + CO + OH + HO2                                       ', &
+     '                  C615CO2O2 + NO --> C5DICARB + CO + HO2 + NO2                                      ', &
+     '                 C615CO2O2 + NO3 --> C5DICARB + CO + HO2 + NO2                                      ', &
+     '                       C615CO2O2 --> C5DICARB + CO + HO2                                            ', &
+     '                  BZEMUCPAN + OH --> CO2 + MALDIAL + CO + NO2                                       ', &
+     '                       BZEMUCPAN --> BZEMUCCO3 + NO2                                                ', &
+     '                 BZBIPERNO3 + OH --> BZOBIPEROH + NO2                                               ', &
+     '                 HOC6H4NO2 + NO3 --> NPHEN1O + HNO3                                                 ', &
+     '                  HOC6H4NO2 + OH --> NPHEN1O                                                        ', &
+     '                 NDNPHENO2 + HO2 --> NDNPHENOOH                                                     ', &
+     '                 NDNPHENO2 + HO2 --> NC4DCO2H + HNO3 + 2 CO + OH + NO2                              ', &
+     '                  NDNPHENO2 + NO --> NC4DCO2H + HNO3 + 2 CO + 2 NO2                                 ', &
+     '                 NDNPHENO2 + NO3 --> NC4DCO2H + HNO3 + 2 CO + 2 NO2                                 ', &
+     '                       NDNPHENO2 --> NC4DCO2H + HNO3 + 2 CO + NO2                                   ', &
+     '                     PBZQCO + OH --> C5CO2OHCO3                                                     ', &
+     '                  CATECHOL + NO3 --> CATEC1O + HNO3                                                 ', &
+     '                   CATECHOL + O3 --> MALDALCO2H + HCOCO2H + OH + HO2                                ', &
+     '                   CATECHOL + OH --> CATEC1O                                                        ', &
+     '                 C5COOHCO3H + OH --> C5CO2OHCO3                                                     ', &
+     '                 NCATECHOL + NO3 --> NNCATECO2                                                      ', &
+     '                  NCATECHOL + OH --> NCATECO2                                                       ', &
+     '                C5CO2OHCO3 + HO2 --> C5COOHCO3H                                                     ', &
+     '                C5CO2OHCO3 + HO2 --> HOCOC4DIAL + CO2 + CO + OH + HO2                               ', &
+     '                 C5CO2OHCO3 + NO --> HOCOC4DIAL + CO2 + CO + HO2 + NO2                              ', &
+     '                C5CO2OHCO3 + NO2 --> C5CO2OHPAN                                                     ', &
+     '                C5CO2OHCO3 + NO3 --> HOCOC4DIAL + CO2 + CO + HO2 + NO2                              ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_36 = (/ &
-     '                      C5CO2OHCO3 --> RRG46428 + HOCOC4DIAL + CO2 + CO + HO2                         ', &
-     '                 BZEPOXMUC + NO3 --> RRG46429 + BZEMUCCO3 + HNO3                                    ', &
-     '                  BZEPOXMUC + O3 --> RRG46430 + EPXC4DIAL + 0.25 CO2 + 0.0675 H2O2 + 0.1125 HCOCO2H ', &
-     '                  BZEPOXMUC + OH --> RRG46431 + 0.31 BZEMUCCO3 + 0.69 BZEMUCO2                      ', &
-     '                  NCATECO2 + HO2 --> RRG46432a + NCATECOOH                                          ', &
-     '                  NCATECO2 + HO2 --> RRG46432b + NC4DCO2H + HCOCO2H + OH + HO2                      ', &
-     '                   NCATECO2 + NO --> RRG46433 + NC4DCO2H + HCOCO2H + HO2 + NO2                      ', &
-     '                  NCATECO2 + NO3 --> RRG46434 + NC4DCO2H + HCOCO2H + HO2 + NO2                      ', &
-     '                        NCATECO2 --> RRG46435 + NC4DCO2H + HCOCO2H + HO2                            ', &
-     '                  NPHEN1OOH + OH --> RRG46436 + NPHEN1O2                                            ', &
-     '                   NPHENO2 + HO2 --> RRG46437a + NPHENOOH                                           ', &
-     '                   NPHENO2 + HO2 --> RRG46437b + MALDALCO2H + GLYOX + OH + NO2                      ', &
-     '                    NPHENO2 + NO --> RRG46438 + MALDALCO2H + GLYOX + 2 NO2                          ', &
-     '                   NPHENO2 + NO3 --> RRG46439 + MALDALCO2H + GLYOX + 2 NO2                          ', &
-     '                         NPHENO2 --> RRG46440 + MALDALCO2H + GLYOX + NO2                            ', &
-     '                    BENZENE + OH --> RRG46441 + 0.352 BZBIPERO2 + 0.118 BZEPOXMUC + 0.53 PHENOL ... ', &
-     '                 C5CO2OHPAN + OH --> RRG46442 + HOCOC4DIAL + 2 CO + NO2                             ', &
-     '                      C5CO2OHPAN --> RRG46443 + C5CO2OHCO3 + NO2                                    ', &
-     '                   CATEC1O + NO2 --> RRG46444 + NCATECHOL                                           ', &
-     '                    CATEC1O + O3 --> RRG46445 + CATEC1O2                                            ', &
-     '                   BZEMUCCO + OH --> RRG46446 + EPXDLCO3 + GLYOX                                    ', &
-     '                 NNCATECO2 + HO2 --> RRG46447a + NNCATECOOH                                         ', &
-     '                 NNCATECO2 + HO2 --> RRG46447b + NC4DCO2H + HCOCO2H + OH + NO2                      ', &
-     '                  NNCATECO2 + NO --> RRG46448 + NC4DCO2H + HCOCO2H + 2 NO2                          ', &
-     '                 NNCATECO2 + NO3 --> RRG46449 + NC4DCO2H + HCOCO2H + 2 NO2                          ', &
-     '                       NNCATECO2 --> RRG46450 + NC4DCO2H + HCOCO2H + NO2                            ', &
-     '                 BZEMUCCO2H + OH --> RRG46451 + C5DIALO2 + CO2                                      ', &
-     '                 NNCATECOOH + OH --> RRG46452 + NNCATECO2                                           ', &
-     '                   NPHEN1O + NO2 --> RRG46453 + DNPHEN                                              ', &
-     '                    NPHEN1O + O3 --> RRG46454 + NPHEN1O2                                            ' /)
+     '                      C5CO2OHCO3 --> HOCOC4DIAL + CO2 + CO + HO2                                    ', &
+     '                 BZEPOXMUC + NO3 --> BZEMUCCO3 + HNO3                                               ', &
+     '                  BZEPOXMUC + O3 --> EPXC4DIAL + 0.25 CO2 + 0.0675 H2O2 + 0.1125 HCOCO2H ... etc.   ', &
+     '                  BZEPOXMUC + OH --> 0.69 BZEMUCO2 + 0.31 BZEMUCCO3                                 ', &
+     '                  NCATECO2 + HO2 --> NCATECOOH                                                      ', &
+     '                  NCATECO2 + HO2 --> NC4DCO2H + HCOCO2H + OH + HO2                                  ', &
+     '                   NCATECO2 + NO --> NC4DCO2H + HCOCO2H + HO2 + NO2                                 ', &
+     '                  NCATECO2 + NO3 --> NC4DCO2H + HCOCO2H + HO2 + NO2                                 ', &
+     '                        NCATECO2 --> NC4DCO2H + HCOCO2H + HO2                                       ', &
+     '                  NPHEN1OOH + OH --> NPHEN1O2                                                       ', &
+     '                   NPHENO2 + HO2 --> NPHENOOH                                                       ', &
+     '                   NPHENO2 + HO2 --> MALDALCO2H + GLYOX + OH + NO2                                  ', &
+     '                    NPHENO2 + NO --> MALDALCO2H + GLYOX + 2 NO2                                     ', &
+     '                   NPHENO2 + NO3 --> MALDALCO2H + GLYOX + 2 NO2                                     ', &
+     '                         NPHENO2 --> MALDALCO2H + GLYOX + NO2                                       ', &
+     '                    BENZENE + OH --> 0.352 BZBIPERO2 + 0.118 BZEPOXMUC + 0.53 PHENOL + 0.648 HO2 ...', &
+     '                 C5CO2OHPAN + OH --> HOCOC4DIAL + 2 CO + NO2                                        ', &
+     '                      C5CO2OHPAN --> C5CO2OHCO3 + NO2                                               ', &
+     '                   CATEC1O + NO2 --> NCATECHOL                                                      ', &
+     '                    CATEC1O + O3 --> CATEC1O2                                                       ', &
+     '                   BZEMUCCO + OH --> EPXDLCO3 + GLYOX                                               ', &
+     '                 NNCATECO2 + HO2 --> NNCATECOOH                                                     ', &
+     '                 NNCATECO2 + HO2 --> NC4DCO2H + HCOCO2H + OH + NO2                                  ', &
+     '                  NNCATECO2 + NO --> NC4DCO2H + HCOCO2H + 2 NO2                                     ', &
+     '                 NNCATECO2 + NO3 --> NC4DCO2H + HCOCO2H + 2 NO2                                     ', &
+     '                       NNCATECO2 --> NC4DCO2H + HCOCO2H + NO2                                       ', &
+     '                 BZEMUCCO2H + OH --> C5DIALO2 + CO2                                                 ', &
+     '                 NNCATECOOH + OH --> NNCATECO2                                                      ', &
+     '                   NPHEN1O + NO2 --> DNPHEN                                                         ', &
+     '                    NPHEN1O + O3 --> NPHEN1O2                                                       ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_37 = (/ &
-     '                    DNPHEN + NO3 --> RRG46455 + NDNPHENO2                                           ', &
-     '                     DNPHEN + OH --> RRG46456 + DNPHENO2                                            ', &
-     '                    PHENOL + NO3 --> RRG46457 + 0.258 NPHENO2 + 0.742 C6H5O + 0.742 HNO3 ... etc.   ', &
-     '                     PHENOL + OH --> RRG46458 + 0.06 C6H5O + 0.14 PHENO2 + 0.8 CATECHOL + 0.8 HO2 ..', &
-     '                   PBZQONE + NO3 --> RRG46459 + NBZQO2                                              ', &
-     '                    PBZQONE + OH --> RRG46460 + PBZQO2                                              ', &
-     '                    PHENO2 + HO2 --> RRG46461a + PHENOOH                                            ', &
-     '                    PHENO2 + HO2 --> RRG46461b + 0.29 PBZQONE + 0.71 MALDALCO2H + 0.71 GLYOX ... etc', &
-     '                     PHENO2 + NO --> RRG46462 + 0.29 PBZQONE + 0.71 MALDALCO2H + 0.71 GLYOX ... etc.', &
-     '                    PHENO2 + NO3 --> RRG46463 + 0.29 PBZQONE + 0.71 MALDALCO2H + 0.71 GLYOX ... etc.', &
-     '                          PHENO2 --> RRG46464 + 0.29 PBZQONE + 0.71 MALDALCO2H + 0.71 GLYOX ... etc.', &
-     '                 C615CO2OOH + OH --> RRG46465 + C6125CO + OH                                        ', &
-     '                C5CO2DBCO3 + HO2 --> RRG46466a + C5CO2DCO3H                                         ', &
-     '                C5CO2DBCO3 + HO2 --> RRG46466b + C33CO + CO2 + CH3CO + OH                           ', &
-     '                 C5CO2DBCO3 + NO --> RRG46467 + C33CO + CO2 + CH3CO + NO2                           ', &
-     '                C5CO2DBCO3 + NO2 --> RRG46468 + C5CO2DBPAN                                          ', &
-     '                C5CO2DBCO3 + NO3 --> RRG46469 + C33CO + CO2 + CH3CO + NO2                           ', &
-     '                      C5CO2DBCO3 --> RRG46470 + C33CO + CO2 + CH3CO                                 ', &
-     '                  NPHEN1O2 + HO2 --> RRG46471 + NPHEN1OOH                                           ', &
-     '                   NPHEN1O2 + NO --> RRG46472a + NPHEN1O + NO2                                      ', &
-     '                  NPHEN1O2 + NO2 --> RRG46472b + NPHEN1O + NO3                                      ', &
-     '                  NPHEN1O2 + NO3 --> RRG46473 + NPHEN1O + NO2                                       ', &
-     '                        NPHEN1O2 --> RRG46474 + NPHEN1O                                             ', &
-     '                   NPHENOOH + OH --> RRG46475 + NPHENO2                                             ', &
-     '                     C6H5O + NO2 --> RRG46476 + HOC6H4NO2                                           ', &
-     '                      C6H5O + O3 --> RRG46477 + C6H5O2                                              ', &
-     '                  NCATECOOH + OH --> RRG46478 + NCATECO2                                            ', &
-     '                    PBZQOOH + OH --> RRG46479 + PBZQCO + OH                                         ', &
-     '                    PBZQO2 + HO2 --> RRG46480a + PBZQOOH                                            ', &
-     '                    PBZQO2 + HO2 --> RRG46480b + C5CO2OHCO3 + OH                                    ' /)
+     '                    DNPHEN + NO3 --> NDNPHENO2                                                      ', &
+     '                     DNPHEN + OH --> DNPHENO2                                                       ', &
+     '                    PHENOL + NO3 --> 0.258 NPHENO2 + 0.742 C6H5O + 0.742 HNO3                       ', &
+     '                     PHENOL + OH --> 0.8 CATECHOL + 0.06 C6H5O + 0.14 PHENO2 + 0.8 HO2              ', &
+     '                   PBZQONE + NO3 --> NBZQO2                                                         ', &
+     '                    PBZQONE + OH --> PBZQO2                                                         ', &
+     '                    PHENO2 + HO2 --> PHENOOH                                                        ', &
+     '                    PHENO2 + HO2 --> 0.29 PBZQONE + 0.71 MALDALCO2H + 0.71 GLYOX + OH + HO2 ... etc.', &
+     '                     PHENO2 + NO --> 0.29 PBZQONE + 0.71 MALDALCO2H + 0.71 GLYOX + HO2 + NO2 ... etc', &
+     '                    PHENO2 + NO3 --> 0.29 PBZQONE + 0.71 MALDALCO2H + 0.71 GLYOX + HO2 + NO2 ... etc', &
+     '                          PHENO2 --> 0.29 PBZQONE + 0.71 MALDALCO2H + 0.71 GLYOX + HO2              ', &
+     '                 C615CO2OOH + OH --> C6125CO + OH                                                   ', &
+     '                C5CO2DBCO3 + HO2 --> C5CO2DCO3H                                                     ', &
+     '                C5CO2DBCO3 + HO2 --> C33CO + CO2 + CH3CO + OH                                       ', &
+     '                 C5CO2DBCO3 + NO --> C33CO + CO2 + CH3CO + NO2                                      ', &
+     '                C5CO2DBCO3 + NO2 --> C5CO2DBPAN                                                     ', &
+     '                C5CO2DBCO3 + NO3 --> C33CO + CO2 + CH3CO + NO2                                      ', &
+     '                      C5CO2DBCO3 --> C33CO + CO2 + CH3CO                                            ', &
+     '                  NPHEN1O2 + HO2 --> NPHEN1OOH                                                      ', &
+     '                   NPHEN1O2 + NO --> NPHEN1O + NO2                                                  ', &
+     '                  NPHEN1O2 + NO2 --> NPHEN1O + NO3                                                  ', &
+     '                  NPHEN1O2 + NO3 --> NPHEN1O + NO2                                                  ', &
+     '                        NPHEN1O2 --> NPHEN1O                                                        ', &
+     '                   NPHENOOH + OH --> NPHENO2                                                        ', &
+     '                     C6H5O + NO2 --> HOC6H4NO2                                                      ', &
+     '                      C6H5O + O3 --> C6H5O2                                                         ', &
+     '                  NCATECOOH + OH --> NCATECO2                                                       ', &
+     '                    PBZQOOH + OH --> PBZQCO + OH                                                    ', &
+     '                    PBZQO2 + HO2 --> PBZQOOH                                                        ', &
+     '                    PBZQO2 + HO2 --> C5CO2OHCO3 + OH                                                ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_38 = (/ &
-     '                     PBZQO2 + NO --> RRG46481 + C5CO2OHCO3 + NO2                                    ', &
-     '                    PBZQO2 + NO3 --> RRG46482 + C5CO2OHCO3 + NO2                                    ', &
-     '                          PBZQO2 --> RRG46483 + C5CO2OHCO3                                          ', &
-     '                 BZOBIPEROH + OH --> RRG46484 + MALDIALCO3 + GLYOX                                  ', &
-     '                  DNPHENO2 + HO2 --> RRG46485a + DNPHENOOH                                          ', &
-     '                  DNPHENO2 + HO2 --> RRG46485b + NC4DCO2H + HCOCO2H + OH + NO2                      ', &
-     '                   DNPHENO2 + NO --> RRG46486 + NC4DCO2H + HCOCO2H + 2 NO2                          ', &
-     '                  DNPHENO2 + NO3 --> RRG46487 + NC4DCO2H + HCOCO2H + 2 NO2                          ', &
-     '                        DNPHENO2 --> RRG46488 + NC4DCO2H + HCOCO2H + NO2                            ', &
-     '                 BZBIPEROOH + OH --> RRG46489 + BZOBIPEROH + OH                                     ', &
-     '                  BZEMUCO2 + HO2 --> RRG46490a + BZEMUCOOH                                          ', &
-     '                  BZEMUCO2 + HO2 --> RRG46490b + 0.5 C32OH13CO + 0.5 C3DIALO2 + 0.5 EPXC4DIAL ... et', &
-     '                   BZEMUCO2 + NO --> RRG46491a + BZEMUCNO3                                          ', &
-     '                   BZEMUCO2 + NO --> RRG46491b + 0.5 C32OH13CO + 0.5 C3DIALO2 + 0.5 EPXC4DIAL ... et', &
-     '                  BZEMUCO2 + NO3 --> RRG46492 + 0.5 C32OH13CO + 0.5 C3DIALO2 + 0.5 EPXC4DIAL ... etc', &
-     '                        BZEMUCO2 --> RRG46493 + 0.5 C32OH13CO + 0.5 C3DIALO2 + 0.5 EPXC4DIAL ... etc', &
-     '                 C5CO2DBPAN + OH --> RRG46494 + C33CO + CO2 + CH3CHO + NO2                          ', &
-     '                      C5CO2DBPAN --> RRG46495 + C5CO2DBCO3 + NO2                                    ', &
-     '                    NBZQOOH + OH --> RRG46496 + NBZQO2                                              ', &
-     '                  CATEC1OOH + OH --> RRG46497 + CATEC1O2                                            ', &
-     '                    C6125CO + OH --> RRG46498 + C5CO14O2 + CO                                       ', &
-     '                    NBZQO2 + HO2 --> RRG46499a + NBZQOOH                                            ', &
-     '                    NBZQO2 + HO2 --> RRG46499b + C6CO4DB + OH + NO2                                 ', &
-     '                     NBZQO2 + NO --> RRG46500 + C6CO4DB + 2 NO2                                     ', &
-     '                    NBZQO2 + NO3 --> RRG46501 + C6CO4DB + 2 NO2                                     ', &
-     '                          NBZQO2 --> RRG46502 + C6CO4DB + NO2                                       ', &
-     '                  DNPHENOOH + OH --> RRG46503 + DNPHENO2                                            ', &
-     '                  CATEC1O2 + HO2 --> RRG46504 + CATEC1OOH                                           ', &
-     '                   CATEC1O2 + NO --> RRG46505a + CATEC1O + NO2                                      ', &
-     '                  CATEC1O2 + NO2 --> RRG46505b + CATEC1O + NO3                                      ' /)
+     '                     PBZQO2 + NO --> C5CO2OHCO3 + NO2                                               ', &
+     '                    PBZQO2 + NO3 --> C5CO2OHCO3 + NO2                                               ', &
+     '                          PBZQO2 --> C5CO2OHCO3                                                     ', &
+     '                 BZOBIPEROH + OH --> MALDIALCO3 + GLYOX                                             ', &
+     '                  DNPHENO2 + HO2 --> DNPHENOOH                                                      ', &
+     '                  DNPHENO2 + HO2 --> NC4DCO2H + HCOCO2H + OH + NO2                                  ', &
+     '                   DNPHENO2 + NO --> NC4DCO2H + HCOCO2H + 2 NO2                                     ', &
+     '                  DNPHENO2 + NO3 --> NC4DCO2H + HCOCO2H + 2 NO2                                     ', &
+     '                        DNPHENO2 --> NC4DCO2H + HCOCO2H + NO2                                       ', &
+     '                 BZBIPEROOH + OH --> BZOBIPEROH + OH                                                ', &
+     '                  BZEMUCO2 + HO2 --> BZEMUCOOH                                                      ', &
+     '                  BZEMUCO2 + HO2 --> 0.5 C32OH13CO + 0.5 EPXC4DIAL + 0.5 C3DIALO2 + 0.5 GLYOX ... et', &
+     '                   BZEMUCO2 + NO --> BZEMUCNO3                                                      ', &
+     '                   BZEMUCO2 + NO --> 0.5 C32OH13CO + 0.5 EPXC4DIAL + 0.5 C3DIALO2 + 0.5 GLYOX ... et', &
+     '                  BZEMUCO2 + NO3 --> 0.5 C32OH13CO + 0.5 EPXC4DIAL + 0.5 C3DIALO2 + 0.5 GLYOX ... et', &
+     '                        BZEMUCO2 --> 0.5 C32OH13CO + 0.5 EPXC4DIAL + 0.5 C3DIALO2 + 0.5 GLYOX ... et', &
+     '                 C5CO2DBPAN + OH --> C33CO + CO2 + CH3CHO + NO2                                     ', &
+     '                      C5CO2DBPAN --> C5CO2DBCO3 + NO2                                               ', &
+     '                    NBZQOOH + OH --> NBZQO2                                                         ', &
+     '                  CATEC1OOH + OH --> CATEC1O2                                                       ', &
+     '                    C6125CO + OH --> C5CO14O2 + CO                                                  ', &
+     '                    NBZQO2 + HO2 --> NBZQOOH                                                        ', &
+     '                    NBZQO2 + HO2 --> C6CO4DB + OH + NO2                                             ', &
+     '                     NBZQO2 + NO --> C6CO4DB + 2 NO2                                                ', &
+     '                    NBZQO2 + NO3 --> C6CO4DB + 2 NO2                                                ', &
+     '                          NBZQO2 --> C6CO4DB + NO2                                                  ', &
+     '                  DNPHENOOH + OH --> DNPHENO2                                                       ', &
+     '                  CATEC1O2 + HO2 --> CATEC1OOH                                                      ', &
+     '                   CATEC1O2 + NO --> CATEC1O + NO2                                                  ', &
+     '                  CATEC1O2 + NO2 --> CATEC1O + NO3                                                  ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_39 = (/ &
-     '                  CATEC1O2 + NO3 --> RRG46506 + CATEC1O + NO2                                       ', &
-     '                        CATEC1O2 --> RRG46507 + CATEC1O                                             ', &
-     '                 BZEMUCCO3H + OH --> RRG46508 + BZEMUCCO3                                           ', &
-     '                    C6H5OOH + OH --> RRG46509 + C6H5O2                                              ', &
-     '                  BZEMUCOOH + OH --> RRG46510 + BZEMUCCO + OH                                       ', &
-     '                 BZEMUCCO3 + HO2 --> RRG46511a + BZEMUCCO2H + O3                                    ', &
-     '                 BZEMUCCO3 + HO2 --> RRG46511b + BZEMUCCO3H                                         ', &
-     '                 BZEMUCCO3 + HO2 --> RRG46511c + C5DIALO2 + CO2 + OH                                ', &
-     '                  BZEMUCCO3 + NO --> RRG46512 + C5DIALO2 + CO2 + NO2                                ', &
-     '                 BZEMUCCO3 + NO2 --> RRG46513 + BZEMUCPAN                                           ', &
-     '                 BZEMUCCO3 + NO3 --> RRG46514 + C5DIALO2 + CO2 + NO2                                ', &
-     '                       BZEMUCCO3 --> RRG46515 + C5DIALO2 + CO2                                      ', &
-     '                    C6H5O2 + HO2 --> RRG46516 + C6H5OOH                                             ', &
-     '                     C6H5O2 + NO --> RRG46517 + C6H5O + NO2                                         ', &
-     '                    C6H5O2 + NO3 --> RRG46518 + C6H5O + NO2                                         ', &
-     '                          C6H5O2 --> RRG46519 + C6H5O                                               ', &
-     '                    C6H5O2 + NO2 --> RRG46520 + C6H5O + NO3                                         ', &
-     '                  BZEMUCNO3 + OH --> RRG46521 + BZEMUCCO + NO2                                      ', &
-     '                 BZBIPERO2 + HO2 --> RRG46522a + BZBIPEROOH                                         ', &
-     '                 BZBIPERO2 + HO2 --> RRG46522b + BZFUONE + GLYOX + OH + HO2                         ', &
-     '                  BZBIPERO2 + NO --> RRG46523a + BZBIPERNO3                                         ', &
-     '                  BZBIPERO2 + NO --> RRG46523b + BZFUONE + GLYOX + HO2 + NO2                        ', &
-     '                 BZBIPERO2 + NO3 --> RRG46524 + BZFUONE + GLYOX + HO2 + NO2                         ', &
-     '                       BZBIPERO2 --> RRG46525 + BZFUONE + GLYOX + HO2                               ', &
-     '                CO235C6CHO + NO3 --> RRG47200 + CO235C6CO3 + HNO3                                   ', &
-     '                 CO235C6CHO + OH --> RRG47201 + CO235C6CO3                                          ', &
-     '                CO235C6CO3 + HO2 --> RRG47202a + C235C6CO3H                                         ', &
-     '                CO235C6CO3 + HO2 --> RRG47202b + CO235C6O2 + CO2 + OH                               ', &
-     '                 CO235C6CO3 + NO --> RRG47203 + CO235C6O2 + CO2 + NO2                               ', &
-     '                CO235C6CO3 + NO2 --> RRG47204 + C7PAN3                                              ' /)
+     '                  CATEC1O2 + NO3 --> CATEC1O + NO2                                                  ', &
+     '                        CATEC1O2 --> CATEC1O                                                        ', &
+     '                 BZEMUCCO3H + OH --> BZEMUCCO3                                                      ', &
+     '                    C6H5OOH + OH --> C6H5O2                                                         ', &
+     '                  BZEMUCOOH + OH --> BZEMUCCO + OH                                                  ', &
+     '                 BZEMUCCO3 + HO2 --> BZEMUCCO2H + O3                                                ', &
+     '                 BZEMUCCO3 + HO2 --> BZEMUCCO3H                                                     ', &
+     '                 BZEMUCCO3 + HO2 --> C5DIALO2 + CO2 + OH                                            ', &
+     '                  BZEMUCCO3 + NO --> C5DIALO2 + CO2 + NO2                                           ', &
+     '                 BZEMUCCO3 + NO2 --> BZEMUCPAN                                                      ', &
+     '                 BZEMUCCO3 + NO3 --> C5DIALO2 + CO2 + NO2                                           ', &
+     '                       BZEMUCCO3 --> C5DIALO2 + CO2                                                 ', &
+     '                    C6H5O2 + HO2 --> C6H5OOH                                                        ', &
+     '                     C6H5O2 + NO --> C6H5O + NO2                                                    ', &
+     '                    C6H5O2 + NO3 --> C6H5O + NO2                                                    ', &
+     '                          C6H5O2 --> C6H5O                                                          ', &
+     '                    C6H5O2 + NO2 --> C6H5O + NO3                                                    ', &
+     '                  BZEMUCNO3 + OH --> BZEMUCCO + NO2                                                 ', &
+     '                 BZBIPERO2 + HO2 --> BZBIPEROOH                                                     ', &
+     '                 BZBIPERO2 + HO2 --> BZFUONE + GLYOX + OH + HO2                                     ', &
+     '                  BZBIPERO2 + NO --> BZBIPERNO3                                                     ', &
+     '                  BZBIPERO2 + NO --> BZFUONE + GLYOX + HO2 + NO2                                    ', &
+     '                 BZBIPERO2 + NO3 --> BZFUONE + GLYOX + HO2 + NO2                                    ', &
+     '                       BZBIPERO2 --> BZFUONE + GLYOX + HO2                                          ', &
+     '                CO235C6CHO + NO3 --> CO235C6CO3 + HNO3                                              ', &
+     '                 CO235C6CHO + OH --> CO235C6CO3                                                     ', &
+     '                CO235C6CO3 + HO2 --> C235C6CO3H                                                     ', &
+     '                CO235C6CO3 + HO2 --> CO235C6O2 + CO2 + OH                                           ', &
+     '                 CO235C6CO3 + NO --> CO235C6O2 + CO2 + NO2                                          ', &
+     '                CO235C6CO3 + NO2 --> C7PAN3                                                         ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_40 = (/ &
-     '                      CO235C6CO3 --> RRG47205 + CO235C6O2 + CO2                                     ', &
-     '                 C235C6CO3H + OH --> RRG47206 + CO235C6CO3                                          ', &
-     '                     C7PAN3 + OH --> RRG47207 + CO235C5CHO + CO + NO2                               ', &
-     '                          C7PAN3 --> RRG47208 + CO235C6CO3 + NO2                                    ', &
-     '                    C716O2 + HO2 --> RRG47209a + C716OOH                                            ', &
-     '                    C716O2 + HO2 --> RRG47209b + CO13C4CHO + CH3CO + OH                             ', &
-     '                     C716O2 + NO --> RRG47210 + CO13C4CHO + CH3CO + NO2                             ', &
-     '                          C716O2 --> RRG47211 + CO13C4CHO + CH3CO                                   ', &
-     '                    C716OOH + OH --> RRG47212 + CO235C6CHO + OH                                     ', &
-     '                    C721O2 + HO2 --> RRG47213 + C721OOH                                             ', &
-     '                     C721O2 + NO --> RRG47214 + C722O2 + NO2                                        ', &
-     '                          C721O2 --> RRG47215 + C722O2                                              ', &
-     '                    C721OOH + OH --> RRG47216 + C721O2                                              ', &
-     '                    C722O2 + HO2 --> RRG47217 + C722OOH                                             ', &
-     '                     C722O2 + NO --> RRG47218 + C44O2 + CH3COCH3 + NO2                              ', &
-     '                          C722O2 --> RRG47219 + C44O2 + CH3COCH3                                    ', &
-     '                    C722OOH + OH --> RRG47220 + C722O2                                              ', &
-     '                        ROO6R3O2 --> RRG47221 + ROO6R5O2                                            ', &
-     '                   ROO6R3O2 + NO --> RRG47222 + ROO6R3O + NO2                                       ', &
-     '                  ROO6R3O2 + HO2 --> 7 LCARBON + RRG47223                                           ', &
-     '                        ROO6R3O2 --> RRG47224 + ROO6R3O                                             ', &
-     '                         ROO6R3O --> 7 LCARBON + RRG47225 + HO2                                     ', &
-     '                        ROO6R5O2 --> 7 LCARBON + RRG47226 + OH                                      ', &
-     '                    TOLUENE + OH --> RRG47400 + 0.07 C6H5CH2O2 + 0.18 CRESOL + 0.65 TLBIPERO2 ... et', &
-     '                 C6H5CH2O2 + HO2 --> RRG47401 + C6H5CH2OOH                                          ', &
-     '                  C6H5CH2O2 + NO --> RRG47402a + C6H5CH2NO3                                         ', &
-     '                  C6H5CH2O2 + NO --> RRG47402b + BENZAL + HO2 + NO2                                 ', &
-     '                 C6H5CH2O2 + NO3 --> RRG47403 + BENZAL + HO2 + NO2                                  ', &
-     '                       C6H5CH2O2 --> RRG47404 + BENZAL + HO2                                        ', &
-     '                    CRESOL + NO3 --> RRG47405 + 0.391 TOL1O + 0.506 NCRESO2 + 0.103 CRESO2 ... etc. ' /)
+     '                      CO235C6CO3 --> CO235C6O2 + CO2                                                ', &
+     '                 C235C6CO3H + OH --> CO235C6CO3                                                     ', &
+     '                     C7PAN3 + OH --> CO235C5CHO + CO + NO2                                          ', &
+     '                          C7PAN3 --> CO235C6CO3 + NO2                                               ', &
+     '                    C716O2 + HO2 --> C716OOH                                                        ', &
+     '                    C716O2 + HO2 --> CO13C4CHO + CH3CO + OH                                         ', &
+     '                     C716O2 + NO --> CO13C4CHO + CH3CO + NO2                                        ', &
+     '                          C716O2 --> CO13C4CHO + CH3CO                                              ', &
+     '                    C716OOH + OH --> CO235C6CHO + OH                                                ', &
+     '                    C721O2 + HO2 --> C721OOH                                                        ', &
+     '                     C721O2 + NO --> C722O2 + NO2                                                   ', &
+     '                          C721O2 --> C722O2                                                         ', &
+     '                    C721OOH + OH --> C721O2                                                         ', &
+     '                    C722O2 + HO2 --> C722OOH                                                        ', &
+     '                     C722O2 + NO --> C44O2 + CH3COCH3 + NO2                                         ', &
+     '                          C722O2 --> C44O2 + CH3COCH3                                               ', &
+     '                    C722OOH + OH --> C722O2                                                         ', &
+     '                        ROO6R3O2 --> ROO6R5O2                                                       ', &
+     '                   ROO6R3O2 + NO --> ROO6R3O + NO2                                                  ', &
+     '                  ROO6R3O2 + HO2 --> 7 LCARBON                                                      ', &
+     '                        ROO6R3O2 --> ROO6R3O                                                        ', &
+     '                         ROO6R3O --> 7 LCARBON + HO2                                                ', &
+     '                        ROO6R5O2 --> 7 LCARBON + OH                                                 ', &
+     '                    TOLUENE + OH --> 0.18 CRESOL + 0.07 C6H5CH2O2 + 0.65 TLBIPERO2 + 0.1 TLEPOXMUC .', &
+     '                 C6H5CH2O2 + HO2 --> C6H5CH2OOH                                                     ', &
+     '                  C6H5CH2O2 + NO --> C6H5CH2NO3                                                     ', &
+     '                  C6H5CH2O2 + NO --> BENZAL + HO2 + NO2                                             ', &
+     '                 C6H5CH2O2 + NO3 --> BENZAL + HO2 + NO2                                             ', &
+     '                       C6H5CH2O2 --> BENZAL + HO2                                                   ', &
+     '                    CRESOL + NO3 --> 0.506 NCRESO2 + 0.103 CRESO2 + 0.391 TOL1O + 0.494 HNO3 ... etc' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_41 = (/ &
-     '                     CRESOL + OH --> RRG47406 + 0.073 TOL1O + 0.2 CRESO2 + 0.727 MCATECHOL ... etc. ', &
-     '                 TLBIPERO2 + HO2 --> RRG47407a + TLBIPEROOH                                         ', &
-     '                 TLBIPERO2 + HO2 --> RRG47407b + 0.2 BZFUONE + 0.2 TLFUONE + 0.2 MALDIAL ... etc.   ', &
-     '                  TLBIPERO2 + NO --> RRG47408a + 0.2 BZFUONE + 0.2 TLFUONE + 0.2 MALDIAL ... etc.   ', &
-     '                  TLBIPERO2 + NO --> RRG47408b + TLBIPERNO3                                         ', &
-     '                 TLBIPERO2 + NO3 --> RRG47409 + 0.2 BZFUONE + 0.2 TLFUONE + 0.2 MALDIAL + 0.2 C5DICA', &
-     '                       TLBIPERO2 --> RRG47410 + 0.2 BZFUONE + 0.2 TLFUONE + 0.2 MALDIAL + 0.2 C5DICA', &
-     '                 TLEPOXMUC + NO3 --> RRG47411 + TLEMUCCO3 + HNO3                                    ', &
-     '                  TLEPOXMUC + O3 --> RRG47412 + EPXC4DIAL + 0.25 CO2 + 0.0675 H2O2 + 0.695 CH3CO ...', &
-     '                  TLEPOXMUC + OH --> RRG47413 + 0.31 TLEMUCCO3 + 0.69 TLEMUCO2                      ', &
-     '                 C6H5CH2OOH + OH --> RRG47414 + BENZAL + OH                                         ', &
-     '                 C6H5CH2NO3 + OH --> RRG47415 + BENZAL + NO2                                        ', &
-     '                    BENZAL + NO3 --> RRG47416 + C6H5CO3 + HNO3                                      ', &
-     '                     BENZAL + OH --> RRG47417 + C6H5CO3                                             ', &
-     '                    CRESO2 + HO2 --> RRG47418a + CRESOOH                                            ', &
-     '                    CRESO2 + HO2 --> RRG47418b + 0.32 PTLQONE + 0.68 C5CO14OH + 0.68 GLYOX ... etc. ', &
-     '                     CRESO2 + NO --> RRG47419 + 0.32 PTLQONE + 0.68 C5CO14OH + 0.68 GLYOX ... etc.  ', &
-     '                    CRESO2 + NO3 --> RRG47420 + 0.32 PTLQONE + 0.68 C5CO14OH + 0.68 GLYOX ... etc.  ', &
-     '                          CRESO2 --> RRG47421 + 0.32 PTLQONE + 0.68 C5CO14OH + 0.68 GLYOX ... etc.  ', &
-     '                   NCRESO2 + HO2 --> RRG47422a + NCRESOOH                                           ', &
-     '                   NCRESO2 + HO2 --> RRG47422b + C5CO14OH + GLYOX + OH + NO2                        ', &
-     '                    NCRESO2 + NO --> RRG47423 + C5CO14OH + GLYOX + 2 NO2                            ', &
-     '                   NCRESO2 + NO3 --> RRG47424 + C5CO14OH + GLYOX + 2 NO2                            ', &
-     '                         NCRESO2 --> RRG47425 + C5CO14OH + GLYOX + NO2                              ', &
-     '                     TOL1O + NO2 --> RRG47426 + TOL1OHNO2                                           ', &
-     '                      TOL1O + O3 --> RRG47427 + OXYL1O2                                             ', &
-     '                 MCATECHOL + NO3 --> RRG47428 + MCATEC1O + HNO3                                     ', &
-     '                  MCATECHOL + O3 --> RRG47429 + MC3ODBCO2H + HCOCO2H + OH + HO2                     ', &
-     '                  MCATECHOL + OH --> RRG47430 + MCATEC1O                                            ', &
-     '                 TLBIPEROOH + OH --> RRG47431 + TLOBIPEROH + OH                                     ' /)
+     '                     CRESOL + OH --> 0.2 CRESO2 + 0.727 MCATECHOL + 0.073 TOL1O + 0.727 HO2 ... etc.', &
+     '                 TLBIPERO2 + HO2 --> TLBIPEROOH                                                     ', &
+     '                 TLBIPERO2 + HO2 --> 0.2 BZFUONE + 0.2 TLFUONE + 0.2 MALDIAL + 0.2 C5DICARB ... etc.', &
+     '                  TLBIPERO2 + NO --> 0.2 BZFUONE + 0.2 TLFUONE + 0.2 MALDIAL + 0.2 C5DICARB ... etc.', &
+     '                  TLBIPERO2 + NO --> TLBIPERNO3                                                     ', &
+     '                 TLBIPERO2 + NO3 --> 0.2 BZFUONE + 0.2 TLFUONE + 0.2 MALDIAL + 0.2 C5DICARB ... etc.', &
+     '                       TLBIPERO2 --> 0.2 BZFUONE + 0.2 TLFUONE + 0.2 MALDIAL + 0.2 C5DICARB ... etc.', &
+     '                 TLEPOXMUC + NO3 --> TLEMUCCO3 + HNO3                                               ', &
+     '                  TLEPOXMUC + O3 --> EPXC4DIAL + 0.25 CO2 + 0.0675 H2O2 + 0.695 CH3CO + 0.1125 CH3CO', &
+     '                  TLEPOXMUC + OH --> 0.69 TLEMUCO2 + 0.31 TLEMUCCO3                                 ', &
+     '                 C6H5CH2OOH + OH --> BENZAL + OH                                                    ', &
+     '                 C6H5CH2NO3 + OH --> BENZAL + NO2                                                   ', &
+     '                    BENZAL + NO3 --> C6H5CO3 + HNO3                                                 ', &
+     '                     BENZAL + OH --> C6H5CO3                                                        ', &
+     '                    CRESO2 + HO2 --> CRESOOH                                                        ', &
+     '                    CRESO2 + HO2 --> 0.32 PTLQONE + 0.68 C5CO14OH + 0.68 GLYOX + OH + HO2 ... etc.  ', &
+     '                     CRESO2 + NO --> 0.32 PTLQONE + 0.68 C5CO14OH + 0.68 GLYOX + HO2 + NO2 ... etc. ', &
+     '                    CRESO2 + NO3 --> 0.32 PTLQONE + 0.68 C5CO14OH + 0.68 GLYOX + HO2 + NO2 ... etc. ', &
+     '                          CRESO2 --> 0.32 PTLQONE + 0.68 C5CO14OH + 0.68 GLYOX + HO2                ', &
+     '                   NCRESO2 + HO2 --> NCRESOOH                                                       ', &
+     '                   NCRESO2 + HO2 --> C5CO14OH + GLYOX + OH + NO2                                    ', &
+     '                    NCRESO2 + NO --> C5CO14OH + GLYOX + 2 NO2                                       ', &
+     '                   NCRESO2 + NO3 --> C5CO14OH + GLYOX + 2 NO2                                       ', &
+     '                         NCRESO2 --> C5CO14OH + GLYOX + NO2                                         ', &
+     '                     TOL1O + NO2 --> TOL1OHNO2                                                      ', &
+     '                      TOL1O + O3 --> OXYL1O2                                                        ', &
+     '                 MCATECHOL + NO3 --> MCATEC1O + HNO3                                                ', &
+     '                  MCATECHOL + O3 --> MC3ODBCO2H + HCOCO2H + OH + HO2                                ', &
+     '                  MCATECHOL + OH --> MCATEC1O                                                       ', &
+     '                 TLBIPEROOH + OH --> TLOBIPEROH + OH                                                ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_42 = (/ &
-     '                 TLBIPERNO3 + OH --> RRG47432 + TLOBIPEROH + NO2                                    ', &
-     '                 TLOBIPEROH + OH --> RRG47433 + C5CO14O2 + GLYOX                                    ', &
-     '                 TLEMUCCO3 + HO2 --> RRG47434a + C615CO2O2 + CO2 + OH                               ', &
-     '                 TLEMUCCO3 + HO2 --> RRG47434b + TLEMUCCO2H + O3                                    ', &
-     '                 TLEMUCCO3 + HO2 --> RRG47434c + TLEMUCCO3H                                         ', &
-     '                  TLEMUCCO3 + NO --> RRG47435 + C615CO2O2 + CO2 + NO2                               ', &
-     '                 TLEMUCCO3 + NO2 --> RRG47436 + TLEMUCPAN                                           ', &
-     '                 TLEMUCCO3 + NO3 --> RRG47437 + C615CO2O2 + CO2 + NO2                               ', &
-     '                       TLEMUCCO3 --> RRG47438 + C615CO2O2 + CO2                                     ', &
-     '                  TLEMUCO2 + HO2 --> RRG47439a + TLEMUCOOH                                          ', &
-     '                  TLEMUCO2 + HO2 --> RRG47439b + 0.5 C3DIALO2 + 0.5 EPXC4DIAL + 0.5 CO2H3CHO ... etc', &
-     '                   TLEMUCO2 + NO --> RRG47440a + TLEMUCNO3                                          ', &
-     '                   TLEMUCO2 + NO --> RRG47440b + 0.5 C3DIALO2 + 0.5 EPXC4DIAL + 0.5 CO2H3CHO ... etc', &
-     '                  TLEMUCO2 + NO3 --> RRG47441 + 0.5 C3DIALO2 + 0.5 EPXC4DIAL + 0.5 CO2H3CHO ... etc.', &
-     '                        TLEMUCO2 --> RRG47442 + 0.5 C3DIALO2 + 0.5 EPXC4DIAL + 0.5 CO2H3CHO ... etc.', &
-     '                   C6H5CO3 + HO2 --> RRG47443a + C6H5CO3H                                           ', &
-     '                   C6H5CO3 + HO2 --> RRG47443b + C6H5O2 + CO2 + OH                                  ', &
-     '                   C6H5CO3 + HO2 --> RRG47443c + PHCOOH + O3                                        ', &
-     '                    C6H5CO3 + NO --> RRG47444 + C6H5O2 + CO2 + NO2                                  ', &
-     '                   C6H5CO3 + NO2 --> RRG47445 + PBZN                                                ', &
-     '                   C6H5CO3 + NO3 --> RRG47446 + C6H5O2 + CO2 + NO2                                  ', &
-     '                         C6H5CO3 --> RRG47447 + C6H5O2 + CO2                                        ', &
-     '                    CRESOOH + OH --> RRG47448 + CRESO2                                              ', &
-     '                   NCRESOOH + OH --> RRG47449 + NCRESO2                                             ', &
-     '                 TOL1OHNO2 + NO3 --> RRG47450 + NCRES1O + HNO3                                      ', &
-     '                  TOL1OHNO2 + OH --> RRG47451 + NCRES1O                                             ', &
-     '                   OXYL1O2 + HO2 --> RRG47452 + OXYL1OOH                                            ', &
-     '                    OXYL1O2 + NO --> RRG47453 + TOL1O + NO2                                         ', &
-     '                   OXYL1O2 + NO2 --> RRG47454 + TOL1O + NO3                                         ', &
-     '                   OXYL1O2 + NO3 --> RRG47455 + TOL1O + NO2                                         ' /)
+     '                 TLBIPERNO3 + OH --> TLOBIPEROH + NO2                                               ', &
+     '                 TLOBIPEROH + OH --> C5CO14O2 + GLYOX                                               ', &
+     '                 TLEMUCCO3 + HO2 --> C615CO2O2 + CO2 + OH                                           ', &
+     '                 TLEMUCCO3 + HO2 --> TLEMUCCO2H + O3                                                ', &
+     '                 TLEMUCCO3 + HO2 --> TLEMUCCO3H                                                     ', &
+     '                  TLEMUCCO3 + NO --> C615CO2O2 + CO2 + NO2                                          ', &
+     '                 TLEMUCCO3 + NO2 --> TLEMUCPAN                                                      ', &
+     '                 TLEMUCCO3 + NO3 --> C615CO2O2 + CO2 + NO2                                          ', &
+     '                       TLEMUCCO3 --> C615CO2O2 + CO2                                                ', &
+     '                  TLEMUCO2 + HO2 --> TLEMUCOOH                                                      ', &
+     '                  TLEMUCO2 + HO2 --> 0.5 EPXC4DIAL + 0.5 C3DIALO2 + 0.5 CO2H3CHO + 0.5 MGLYOX ... et', &
+     '                   TLEMUCO2 + NO --> TLEMUCNO3                                                      ', &
+     '                   TLEMUCO2 + NO --> 0.5 EPXC4DIAL + 0.5 C3DIALO2 + 0.5 CO2H3CHO + 0.5 MGLYOX ... et', &
+     '                  TLEMUCO2 + NO3 --> 0.5 EPXC4DIAL + 0.5 C3DIALO2 + 0.5 CO2H3CHO + 0.5 MGLYOX ... et', &
+     '                        TLEMUCO2 --> 0.5 EPXC4DIAL + 0.5 C3DIALO2 + 0.5 CO2H3CHO + 0.5 MGLYOX ... et', &
+     '                   C6H5CO3 + HO2 --> C6H5CO3H                                                       ', &
+     '                   C6H5CO3 + HO2 --> C6H5O2 + CO2 + OH                                              ', &
+     '                   C6H5CO3 + HO2 --> PHCOOH + O3                                                    ', &
+     '                    C6H5CO3 + NO --> C6H5O2 + CO2 + NO2                                             ', &
+     '                   C6H5CO3 + NO2 --> PBZN                                                           ', &
+     '                   C6H5CO3 + NO3 --> C6H5O2 + CO2 + NO2                                             ', &
+     '                         C6H5CO3 --> C6H5O2 + CO2                                                   ', &
+     '                    CRESOOH + OH --> CRESO2                                                         ', &
+     '                   NCRESOOH + OH --> NCRESO2                                                        ', &
+     '                 TOL1OHNO2 + NO3 --> NCRES1O + HNO3                                                 ', &
+     '                  TOL1OHNO2 + OH --> NCRES1O                                                        ', &
+     '                   OXYL1O2 + HO2 --> OXYL1OOH                                                       ', &
+     '                    OXYL1O2 + NO --> TOL1O + NO2                                                    ', &
+     '                   OXYL1O2 + NO2 --> TOL1O + NO3                                                    ', &
+     '                   OXYL1O2 + NO3 --> TOL1O + NO2                                                    ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_43 = (/ &
-     '                         OXYL1O2 --> RRG47456 + TOL1O                                               ', &
-     '                  MCATEC1O + NO2 --> RRG47457 + MNCATECH                                            ', &
-     '                   MCATEC1O + O3 --> RRG47458 + MCATEC1O2                                           ', &
-     '                 TLEMUCCO2H + OH --> RRG47459 + C615CO2O2 + CO2                                     ', &
-     '                 TLEMUCCO3H + OH --> RRG47460 + TLEMUCCO3                                           ', &
-     '                  TLEMUCPAN + OH --> RRG47461 + CO2 + C5DICARB + CO + NO2                           ', &
-     '                       TLEMUCPAN --> RRG47462 + TLEMUCCO3 + NO2                                     ', &
-     '                  TLEMUCOOH + OH --> RRG47463 + TLEMUCCO + OH                                       ', &
-     '                  TLEMUCNO3 + OH --> RRG47464 + TLEMUCCO + NO2                                      ', &
-     '                   TLEMUCCO + OH --> RRG47465 + EPXC4DIAL + CH3CO + CO                              ', &
-     '                   C6H5CO3H + OH --> RRG47466 + C6H5CO3                                             ', &
-     '                     PHCOOH + OH --> RRG47467 + C6H5O2 + CO2                                        ', &
-     '                       PBZN + OH --> RRG47468 + C6H5OOH + CO + NO2                                  ', &
-     '                            PBZN --> RRG47469 + C6H5CO3 + NO2                                       ', &
-     '                   PTLQONE + NO3 --> RRG47470 + NPTLQO2                                             ', &
-     '                    PTLQONE + OH --> RRG47471 + PTLQO2                                              ', &
-     '                   NCRES1O + NO2 --> RRG47472 + DNCRES                                              ', &
-     '                    NCRES1O + O3 --> RRG47473 + NCRES1O2                                            ', &
-     '                   OXYL1OOH + OH --> RRG47474 + OXYL1O2                                             ', &
-     '                  MNCATECH + NO3 --> RRG47475 + MNNCATECO2                                          ', &
-     '                   MNCATECH + OH --> RRG47476 + MNCATECO2                                           ', &
-     '                 MCATEC1O2 + HO2 --> RRG47477 + MCATEC1OOH                                          ', &
-     '                  MCATEC1O2 + NO --> RRG47478 + MCATEC1O + NO2                                      ', &
-     '                 MCATEC1O2 + NO2 --> RRG47479 + MCATEC1O + NO3                                      ', &
-     '                 MCATEC1O2 + NO3 --> RRG47480 + MCATEC1O + NO2                                      ', &
-     '                       MCATEC1O2 --> RRG47481 + MCATEC1O                                            ', &
-     '                   NPTLQO2 + HO2 --> RRG47482a + NPTLQOOH                                           ', &
-     '                   NPTLQO2 + HO2 --> RRG47482b + C7CO4DB + OH + NO2                                 ', &
-     '                    NPTLQO2 + NO --> RRG47483 + C7CO4DB + 2 NO2                                     ', &
-     '                   NPTLQO2 + NO3 --> RRG47484 + C7CO4DB + 2 NO2                                     ' /)
+     '                         OXYL1O2 --> TOL1O                                                          ', &
+     '                  MCATEC1O + NO2 --> MNCATECH                                                       ', &
+     '                   MCATEC1O + O3 --> MCATEC1O2                                                      ', &
+     '                 TLEMUCCO2H + OH --> C615CO2O2 + CO2                                                ', &
+     '                 TLEMUCCO3H + OH --> TLEMUCCO3                                                      ', &
+     '                  TLEMUCPAN + OH --> CO2 + C5DICARB + CO + NO2                                      ', &
+     '                       TLEMUCPAN --> TLEMUCCO3 + NO2                                                ', &
+     '                  TLEMUCOOH + OH --> TLEMUCCO + OH                                                  ', &
+     '                  TLEMUCNO3 + OH --> TLEMUCCO + NO2                                                 ', &
+     '                   TLEMUCCO + OH --> EPXC4DIAL + CH3CO + CO                                         ', &
+     '                   C6H5CO3H + OH --> C6H5CO3                                                        ', &
+     '                     PHCOOH + OH --> C6H5O2 + CO2                                                   ', &
+     '                       PBZN + OH --> C6H5OOH + CO + NO2                                             ', &
+     '                            PBZN --> C6H5CO3 + NO2                                                  ', &
+     '                   PTLQONE + NO3 --> NPTLQO2                                                        ', &
+     '                    PTLQONE + OH --> PTLQO2                                                         ', &
+     '                   NCRES1O + NO2 --> DNCRES                                                         ', &
+     '                    NCRES1O + O3 --> NCRES1O2                                                       ', &
+     '                   OXYL1OOH + OH --> OXYL1O2                                                        ', &
+     '                  MNCATECH + NO3 --> MNNCATECO2                                                     ', &
+     '                   MNCATECH + OH --> MNCATECO2                                                      ', &
+     '                 MCATEC1O2 + HO2 --> MCATEC1OOH                                                     ', &
+     '                  MCATEC1O2 + NO --> MCATEC1O + NO2                                                 ', &
+     '                 MCATEC1O2 + NO2 --> MCATEC1O + NO3                                                 ', &
+     '                 MCATEC1O2 + NO3 --> MCATEC1O + NO2                                                 ', &
+     '                       MCATEC1O2 --> MCATEC1O                                                       ', &
+     '                   NPTLQO2 + HO2 --> NPTLQOOH                                                       ', &
+     '                   NPTLQO2 + HO2 --> C7CO4DB + OH + NO2                                             ', &
+     '                    NPTLQO2 + NO --> C7CO4DB + 2 NO2                                                ', &
+     '                   NPTLQO2 + NO3 --> C7CO4DB + 2 NO2                                                ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_44 = (/ &
-     '                         NPTLQO2 --> RRG47485 + C7CO4DB + NO2                                       ', &
-     '                    PTLQO2 + HO2 --> RRG47486a + PTLQOOH                                            ', &
-     '                    PTLQO2 + HO2 --> RRG47486b + C6CO2OHCO3 + OH                                    ', &
-     '                     PTLQO2 + NO --> RRG47487 + C6CO2OHCO3 + NO2                                    ', &
-     '                    PTLQO2 + NO3 --> RRG47488 + C6CO2OHCO3 + NO2                                    ', &
-     '                          PTLQO2 --> RRG47489 + C6CO2OHCO3                                          ', &
-     '                    DNCRES + NO3 --> RRG47490 + NDNCRESO2                                           ', &
-     '                     DNCRES + OH --> RRG47491 + DNCRESO2                                            ', &
-     '                  NCRES1O2 + HO2 --> RRG47492 + NCRES1OOH                                           ', &
-     '                   NCRES1O2 + NO --> RRG47493 + NCRES1O + NO2                                       ', &
-     '                  NCRES1O2 + NO2 --> RRG47494 + NCRES1O + NO3                                       ', &
-     '                  NCRES1O2 + NO3 --> RRG47495 + NCRES1O + NO2                                       ', &
-     '                        NCRES1O2 --> RRG47496 + NCRES1O                                             ', &
-     '                MNNCATECO2 + HO2 --> RRG47497a + MNNCATCOOH                                         ', &
-     '                MNNCATECO2 + HO2 --> RRG47497b + NC4MDCO2H + HCOCO2H + OH + NO2                     ', &
-     '                 MNNCATECO2 + NO --> RRG47498 + NC4MDCO2H + HCOCO2H + 2 NO2                         ', &
-     '                MNNCATECO2 + NO3 --> RRG47499 + NC4MDCO2H + HCOCO2H + 2 NO2                         ', &
-     '                      MNNCATECO2 --> RRG47500 + NC4MDCO2H + HCOCO2H + NO2                           ', &
-     '                 MNCATECO2 + HO2 --> RRG47501a + MNCATECOOH                                         ', &
-     '                 MNCATECO2 + HO2 --> RRG47501b + NC4MDCO2H + HCOCO2H + OH + HO2                     ', &
-     '                  MNCATECO2 + NO --> RRG47502 + NC4MDCO2H + HCOCO2H + HO2 + NO2                     ', &
-     '                 MNCATECO2 + NO3 --> RRG47503 + NC4MDCO2H + HCOCO2H + HO2 + NO2                     ', &
-     '                       MNCATECO2 --> RRG47504 + NC4MDCO2H + HCOCO2H + HO2                           ', &
-     '                 MCATEC1OOH + OH --> RRG47505 + MCATEC1O2                                           ', &
-     '                   NPTLQOOH + OH --> RRG47506 + NPTLQO2                                             ', &
-     '                    PTLQOOH + OH --> RRG47507 + PTLQCO + OH                                         ', &
-     '                     PTLQCO + OH --> RRG47508 + C6CO2OHCO3                                          ', &
-     '                 NDNCRESO2 + HO2 --> RRG47509a + NDNCRESOOH                                         ', &
-     '                 NDNCRESO2 + HO2 --> RRG47509b + NC4MDCO2H + HNO3 + 2 CO + OH + NO2                 ', &
-     '                  NDNCRESO2 + NO --> RRG47510 + NC4MDCO2H + HNO3 + 2 CO + 2 NO2                     ' /)
+     '                         NPTLQO2 --> C7CO4DB + NO2                                                  ', &
+     '                    PTLQO2 + HO2 --> PTLQOOH                                                        ', &
+     '                    PTLQO2 + HO2 --> C6CO2OHCO3 + OH                                                ', &
+     '                     PTLQO2 + NO --> C6CO2OHCO3 + NO2                                               ', &
+     '                    PTLQO2 + NO3 --> C6CO2OHCO3 + NO2                                               ', &
+     '                          PTLQO2 --> C6CO2OHCO3                                                     ', &
+     '                    DNCRES + NO3 --> NDNCRESO2                                                      ', &
+     '                     DNCRES + OH --> DNCRESO2                                                       ', &
+     '                  NCRES1O2 + HO2 --> NCRES1OOH                                                      ', &
+     '                   NCRES1O2 + NO --> NCRES1O + NO2                                                  ', &
+     '                  NCRES1O2 + NO2 --> NCRES1O + NO3                                                  ', &
+     '                  NCRES1O2 + NO3 --> NCRES1O + NO2                                                  ', &
+     '                        NCRES1O2 --> NCRES1O                                                        ', &
+     '                MNNCATECO2 + HO2 --> MNNCATCOOH                                                     ', &
+     '                MNNCATECO2 + HO2 --> NC4MDCO2H + HCOCO2H + OH + NO2                                 ', &
+     '                 MNNCATECO2 + NO --> NC4MDCO2H + HCOCO2H + 2 NO2                                    ', &
+     '                MNNCATECO2 + NO3 --> NC4MDCO2H + HCOCO2H + 2 NO2                                    ', &
+     '                      MNNCATECO2 --> NC4MDCO2H + HCOCO2H + NO2                                      ', &
+     '                 MNCATECO2 + HO2 --> MNCATECOOH                                                     ', &
+     '                 MNCATECO2 + HO2 --> NC4MDCO2H + HCOCO2H + OH + HO2                                 ', &
+     '                  MNCATECO2 + NO --> NC4MDCO2H + HCOCO2H + HO2 + NO2                                ', &
+     '                 MNCATECO2 + NO3 --> NC4MDCO2H + HCOCO2H + HO2 + NO2                                ', &
+     '                       MNCATECO2 --> NC4MDCO2H + HCOCO2H + HO2                                      ', &
+     '                 MCATEC1OOH + OH --> MCATEC1O2                                                      ', &
+     '                   NPTLQOOH + OH --> NPTLQO2                                                        ', &
+     '                    PTLQOOH + OH --> PTLQCO + OH                                                    ', &
+     '                     PTLQCO + OH --> C6CO2OHCO3                                                     ', &
+     '                 NDNCRESO2 + HO2 --> NDNCRESOOH                                                     ', &
+     '                 NDNCRESO2 + HO2 --> NC4MDCO2H + HNO3 + 2 CO + OH + NO2                             ', &
+     '                  NDNCRESO2 + NO --> NC4MDCO2H + HNO3 + 2 CO + 2 NO2                                ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_45 = (/ &
-     '                 NDNCRESO2 + NO3 --> RRG47511 + NC4MDCO2H + HNO3 + 2 CO + 2 NO2                     ', &
-     '                       NDNCRESO2 --> RRG47512 + NC4MDCO2H + HNO3 + 2 CO + NO2                       ', &
-     '                  DNCRESO2 + HO2 --> RRG47513a + DNCRESOOH                                          ', &
-     '                  DNCRESO2 + HO2 --> RRG47513b + NC4MDCO2H + HCOCO2H + OH + NO2                     ', &
-     '                   DNCRESO2 + NO --> RRG47514 + NC4MDCO2H + HCOCO2H + 2 NO2                         ', &
-     '                  DNCRESO2 + NO3 --> RRG47515 + NC4MDCO2H + HCOCO2H + 2 NO2                         ', &
-     '                        DNCRESO2 --> RRG47516 + NC4MDCO2H + HCOCO2H + NO2                           ', &
-     '                  NCRES1OOH + OH --> RRG47517 + NCRES1O2                                            ', &
-     '                 MNNCATCOOH + OH --> RRG47518 + MNNCATECO2                                          ', &
-     '                 MNCATECOOH + OH --> RRG47519 + MNCATECO2                                           ', &
-     '                    C7CO4DB + OH --> RRG47520 + C33CO + CH3CO + 2 CO                                ', &
-     '                C6CO2OHCO3 + HO2 --> RRG47521a + C5134CO2OH + CO2 + CO + OH + HO2                   ', &
-     '                C6CO2OHCO3 + HO2 --> RRG47521b + C6COOHCO3H                                         ', &
-     '                 C6CO2OHCO3 + NO --> RRG47522 + C5134CO2OH + CO2 + CO + HO2 + NO2                   ', &
-     '                C6CO2OHCO3 + NO2 --> RRG47523 + C6CO2OHPAN                                          ', &
-     '                C6CO2OHCO3 + NO3 --> RRG47524 + C5134CO2OH + CO2 + CO + HO2 + NO2                   ', &
-     '                      C6CO2OHCO3 --> RRG47525 + C5134CO2OH + CO2 + CO + HO2                         ', &
-     '                 NDNCRESOOH + OH --> RRG47526 + NDNCRESO2                                           ', &
-     '                  DNCRESOOH + OH --> RRG47527 + DNCRESO2                                            ', &
-     '                 C6COOHCO3H + OH --> RRG47528 + C6CO2OHCO3                                          ', &
-     '                 C6CO2OHPAN + OH --> RRG47529 + C5134CO2OH + 2 CO + NO2                             ', &
-     '                      C6CO2OHPAN --> RRG47530 + C6CO2OHCO3 + NO2                                    ', &
-     '                           C85O2 --> RRG48200 + C86O2                                               ', &
-     '                     C85O2 + HO2 --> RRG48201 + C85OOH                                              ', &
-     '                      C85O2 + NO --> RRG48202 + C86O2 + NO2                                         ', &
-     '                     C85OOH + OH --> RRG48203 + C85O2                                               ', &
-     '                           C86O2 --> RRG48204 + C511O2 + CH3COCH3                                   ', &
-     '                      C86O2 + NO --> RRG48205 + C511O2 + CH3COCH3 + NO2                             ', &
-     '                     C86O2 + HO2 --> RRG48206 + C86OOH                                              ', &
-     '                     C86OOH + OH --> RRG48207 + C86O2                                               ' /)
+     '                 NDNCRESO2 + NO3 --> NC4MDCO2H + HNO3 + 2 CO + 2 NO2                                ', &
+     '                       NDNCRESO2 --> NC4MDCO2H + HNO3 + 2 CO + NO2                                  ', &
+     '                  DNCRESO2 + HO2 --> DNCRESOOH                                                      ', &
+     '                  DNCRESO2 + HO2 --> NC4MDCO2H + HCOCO2H + OH + NO2                                 ', &
+     '                   DNCRESO2 + NO --> NC4MDCO2H + HCOCO2H + 2 NO2                                    ', &
+     '                  DNCRESO2 + NO3 --> NC4MDCO2H + HCOCO2H + 2 NO2                                    ', &
+     '                        DNCRESO2 --> NC4MDCO2H + HCOCO2H + NO2                                      ', &
+     '                  NCRES1OOH + OH --> NCRES1O2                                                       ', &
+     '                 MNNCATCOOH + OH --> MNNCATECO2                                                     ', &
+     '                 MNCATECOOH + OH --> MNCATECO2                                                      ', &
+     '                    C7CO4DB + OH --> C33CO + CH3CO + 2 CO                                           ', &
+     '                C6CO2OHCO3 + HO2 --> C5134CO2OH + CO2 + CO + OH + HO2                               ', &
+     '                C6CO2OHCO3 + HO2 --> C6COOHCO3H                                                     ', &
+     '                 C6CO2OHCO3 + NO --> C5134CO2OH + CO2 + CO + HO2 + NO2                              ', &
+     '                C6CO2OHCO3 + NO2 --> C6CO2OHPAN                                                     ', &
+     '                C6CO2OHCO3 + NO3 --> C5134CO2OH + CO2 + CO + HO2 + NO2                              ', &
+     '                      C6CO2OHCO3 --> C5134CO2OH + CO2 + CO + HO2                                    ', &
+     '                 NDNCRESOOH + OH --> NDNCRESO2                                                      ', &
+     '                  DNCRESOOH + OH --> DNCRESO2                                                       ', &
+     '                 C6COOHCO3H + OH --> C6CO2OHCO3                                                     ', &
+     '                 C6CO2OHPAN + OH --> C5134CO2OH + 2 CO + NO2                                        ', &
+     '                      C6CO2OHPAN --> C6CO2OHCO3 + NO2                                               ', &
+     '                           C85O2 --> C86O2                                                          ', &
+     '                     C85O2 + HO2 --> C85OOH                                                         ', &
+     '                      C85O2 + NO --> C86O2 + NO2                                                    ', &
+     '                     C85OOH + OH --> C85O2                                                          ', &
+     '                           C86O2 --> C511O2 + CH3COCH3                                              ', &
+     '                      C86O2 + NO --> C511O2 + CH3COCH3 + NO2                                        ', &
+     '                     C86O2 + HO2 --> C86OOH                                                         ', &
+     '                     C86OOH + OH --> C86O2                                                          ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_46 = (/ &
-     '                          C811O2 --> RRG48208 + C812O2                                              ', &
-     '                    C811O2 + HO2 --> 8 LCARBON + RRG48209                                           ', &
-     '                     C811O2 + NO --> RRG48210 + C812O2 + NO2                                        ', &
-     '                          C812O2 --> RRG48211 + C813O2                                              ', &
-     '                     C812O2 + NO --> RRG48212 + C813O2 + NO2                                        ', &
-     '                    C812O2 + HO2 --> RRG48213 + C812OOH                                             ', &
-     '                    C812OOH + OH --> RRG48214 + C812O2                                              ', &
-     '                          C813O2 --> RRG48215 + C512O2 + CH3COCH3                                   ', &
-     '                     C813O2 + NO --> RRG48216 + C512O2 + CH3COCH3 + NO2                             ', &
-     '                    C813O2 + HO2 --> RRG48217 + C813OOH                                             ', &
-     '                    C813OOH + OH --> RRG48218 + C813O2                                              ', &
-     '                   C721CHO + NO3 --> RRG48219 + C721CO3 + HNO3                                      ', &
-     '                    C721CHO + OH --> RRG48220 + C721CO3                                             ', &
-     '                   C721CO3 + HO2 --> RRG48221a + C721CO3H                                           ', &
-     '                   C721CO3 + HO2 --> RRG48221b + C721O2 + CO2 + OH                                  ', &
-     '                   C721CO3 + HO2 --> RRG48221c + NORPINIC + O3                                      ', &
-     '                    C721CO3 + NO --> RRG48222 + C721O2 + CO2 + NO2                                  ', &
-     '                   C721CO3 + NO2 --> RRG48223 + C721PAN                                             ', &
-     '                   C721CO3 + NO3 --> RRG48224 + C721O2 + CO2 + NO2                                  ', &
-     '                         C721CO3 --> RRG48225 + C721O2 + CO2                                        ', &
-     '                         C721CO3 --> RRG48226 + NORPINIC                                            ', &
-     '                   C721CO3H + OH --> RRG48227 + C721CO3                                             ', &
-     '                   NORPINIC + OH --> RRG48228 + C721O2 + CO2                                        ', &
-     '                    C721PAN + OH --> RRG48229 + C721OOH + CO + NO2                                  ', &
-     '                         C721PAN --> RRG48230 + C721CO3 + NO2                                       ', &
-     '                       C8BC + OH --> RRG48231 + C8BCO2                                              ', &
-     '                    C8BCO2 + HO2 --> RRG48232 + C8BCOOH                                             ', &
-     '                     C8BCO2 + NO --> RRG48233a + C89O2 + NO2                                        ', &
-     '                     C8BCO2 + NO --> RRG48233b + C8BCNO3                                            ', &
-     '                          C8BCO2 --> RRG48234 + C89O2                                               ' /)
+     '                          C811O2 --> C812O2                                                         ', &
+     '                    C811O2 + HO2 --> 8 LCARBON                                                      ', &
+     '                     C811O2 + NO --> C812O2 + NO2                                                   ', &
+     '                          C812O2 --> C813O2                                                         ', &
+     '                     C812O2 + NO --> C813O2 + NO2                                                   ', &
+     '                    C812O2 + HO2 --> C812OOH                                                        ', &
+     '                    C812OOH + OH --> C812O2                                                         ', &
+     '                          C813O2 --> C512O2 + CH3COCH3                                              ', &
+     '                     C813O2 + NO --> C512O2 + CH3COCH3 + NO2                                        ', &
+     '                    C813O2 + HO2 --> C813OOH                                                        ', &
+     '                    C813OOH + OH --> C813O2                                                         ', &
+     '                   C721CHO + NO3 --> C721CO3 + HNO3                                                 ', &
+     '                    C721CHO + OH --> C721CO3                                                        ', &
+     '                   C721CO3 + HO2 --> C721CO3H                                                       ', &
+     '                   C721CO3 + HO2 --> C721O2 + CO2 + OH                                              ', &
+     '                   C721CO3 + HO2 --> NORPINIC + O3                                                  ', &
+     '                    C721CO3 + NO --> C721O2 + CO2 + NO2                                             ', &
+     '                   C721CO3 + NO2 --> C721PAN                                                        ', &
+     '                   C721CO3 + NO3 --> C721O2 + CO2 + NO2                                             ', &
+     '                         C721CO3 --> C721O2 + CO2                                                   ', &
+     '                         C721CO3 --> NORPINIC                                                       ', &
+     '                   C721CO3H + OH --> C721CO3                                                        ', &
+     '                   NORPINIC + OH --> C721O2 + CO2                                                   ', &
+     '                    C721PAN + OH --> C721OOH + CO + NO2                                             ', &
+     '                         C721PAN --> C721CO3 + NO2                                                  ', &
+     '                       C8BC + OH --> C8BCO2                                                         ', &
+     '                    C8BCO2 + HO2 --> C8BCOOH                                                        ', &
+     '                     C8BCO2 + NO --> C89O2 + NO2                                                    ', &
+     '                     C8BCO2 + NO --> C8BCNO3                                                        ', &
+     '                          C8BCO2 --> C89O2                                                          ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_47 = (/ &
-     '                    C8BCOOH + OH --> RRG48235 + C8BCCO + OH                                         ', &
-     '                    C8BCNO3 + OH --> RRG48236 + C8BCCO + NO2                                        ', &
-     '                     C8BCCO + OH --> RRG48237 + C89O2                                               ', &
-     '                     C89O2 + HO2 --> RRG48238 + C89OOH                                              ', &
-     '                      C89O2 + NO --> RRG48239a + C810O2 + NO2                                       ', &
-     '                      C89O2 + NO --> RRG48239b + C89NO3                                             ', &
-     '                     C89O2 + NO3 --> RRG48240 + C810O2 + NO2                                        ', &
-     '                           C89O2 --> RRG48241 + C810O2                                              ', &
-     '                     C89OOH + OH --> RRG48242 + C89O2                                               ', &
-     '                     C89NO3 + OH --> RRG48243 + CO13C4CHO + CH3COCH3 + NO2                          ', &
-     '                    C810O2 + HO2 --> RRG48244 + C810OOH                                             ', &
-     '                     C810O2 + NO --> RRG48245a + C514O2 + CH3COCH3 + NO2                            ', &
-     '                     C810O2 + NO --> RRG48245b + C810NO3                                            ', &
-     '                    C810O2 + NO3 --> RRG48246 + C514O2 + CH3COCH3 + NO2                             ', &
-     '                          C810O2 --> RRG48247 + C514O2 + CH3COCH3                                   ', &
-     '                    C810OOH + OH --> RRG48248 + C810O2                                              ', &
-     '                    C810NO3 + OH --> RRG48249 + CO13C4CHO + CH3COCH3 + NO2                          ', &
-     '                       LXYL + OH --> LCARBON + RRG48400a + TLEPOXMUC + HO2                          ', &
-     '                       LXYL + OH --> LCARBON + RRG48400b + C6H5CH2O2                                ', &
-     '                       LXYL + OH --> LCARBON + RRG48400c + CRESOL                                   ', &
-     '                       LXYL + OH --> LCARBON + RRG48400d + TLBIPERO2 + HO2                          ', &
-     '                      LXYL + NO3 --> LCARBON + RRG48401 + C6H5CH2O2 + HNO3                          ', &
-     '                      EBENZ + OH --> LCARBON + RRG48402 + 0.07 C6H5CH2O2 + 0.18 CRESOL + 0.65 TLBIPE', &
-     '                     EBENZ + NO3 --> LCARBON + RRG48403 + C6H5CH2O2 + HNO3                          ', &
-     '                   STYRENE + NO3 --> RRG48404 + NSTYRENO2                                           ', &
-     '                    STYRENE + O3 --> RRG48405 + 0.075 PHCOOH + 0.28 C6H5O2 + 0.1 BENZENE ... etc.   ', &
-     '                    STYRENE + OH --> RRG48406 + STYRENO2                                            ', &
-     '                 NSTYRENO2 + HO2 --> RRG48407 + NSTYRENOOH                                          ', &
-     '                  NSTYRENO2 + NO --> RRG48408 + BENZAL + HCHO + 2 NO2                               ', &
-     '                 NSTYRENO2 + NO3 --> RRG48409 + BENZAL + HCHO + 2 NO2                               ' /)
+     '                    C8BCOOH + OH --> C8BCCO + OH                                                    ', &
+     '                    C8BCNO3 + OH --> C8BCCO + NO2                                                   ', &
+     '                     C8BCCO + OH --> C89O2                                                          ', &
+     '                     C89O2 + HO2 --> C89OOH                                                         ', &
+     '                      C89O2 + NO --> C810O2 + NO2                                                   ', &
+     '                      C89O2 + NO --> C89NO3                                                         ', &
+     '                     C89O2 + NO3 --> C810O2 + NO2                                                   ', &
+     '                           C89O2 --> C810O2                                                         ', &
+     '                     C89OOH + OH --> C89O2                                                          ', &
+     '                     C89NO3 + OH --> CO13C4CHO + CH3COCH3 + NO2                                     ', &
+     '                    C810O2 + HO2 --> C810OOH                                                        ', &
+     '                     C810O2 + NO --> C514O2 + CH3COCH3 + NO2                                        ', &
+     '                     C810O2 + NO --> C810NO3                                                        ', &
+     '                    C810O2 + NO3 --> C514O2 + CH3COCH3 + NO2                                        ', &
+     '                          C810O2 --> C514O2 + CH3COCH3                                              ', &
+     '                    C810OOH + OH --> C810O2                                                         ', &
+     '                    C810NO3 + OH --> CO13C4CHO + CH3COCH3 + NO2                                     ', &
+     '                       LXYL + OH --> LCARBON + TLEPOXMUC + HO2                                      ', &
+     '                       LXYL + OH --> LCARBON + C6H5CH2O2                                            ', &
+     '                       LXYL + OH --> LCARBON + CRESOL                                               ', &
+     '                       LXYL + OH --> LCARBON + TLBIPERO2 + HO2                                      ', &
+     '                      LXYL + NO3 --> LCARBON + C6H5CH2O2 + HNO3                                     ', &
+     '                      EBENZ + OH --> LCARBON + 0.18 CRESOL + 0.07 C6H5CH2O2 + 0.65 TLBIPERO2 ... etc', &
+     '                     EBENZ + NO3 --> LCARBON + C6H5CH2O2 + HNO3                                     ', &
+     '                   STYRENE + NO3 --> NSTYRENO2                                                      ', &
+     '                    STYRENE + O3 --> 0.075 PHCOOH + 0.1 BENZENE + 0.545 BENZAL + 0.28 C6H5O2 ... etc', &
+     '                    STYRENE + OH --> STYRENO2                                                       ', &
+     '                 NSTYRENO2 + HO2 --> NSTYRENOOH                                                     ', &
+     '                  NSTYRENO2 + NO --> BENZAL + 2 NO2 + HCHO                                          ', &
+     '                 NSTYRENO2 + NO3 --> BENZAL + 2 NO2 + HCHO                                          ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_48 = (/ &
-     '                       NSTYRENO2 --> RRG48410 + BENZAL + HCHO + NO2                                 ', &
-     '                 NSTYRENOOH + OH --> RRG48411 + NSTYRENO2                                           ', &
-     '                  STYRENO2 + HO2 --> RRG48412a + STYRENOOH                                          ', &
-     '                  STYRENO2 + HO2 --> RRG48412b + BENZAL + HCHO + OH + HO2                           ', &
-     '                   STYRENO2 + NO --> RRG48413 + BENZAL + HCHO + HO2 + NO2                           ', &
-     '                  STYRENO2 + NO3 --> RRG48414 + BENZAL + HCHO + HO2 + NO2                           ', &
-     '                        STYRENO2 --> RRG48415 + BENZAL + HCHO + HO2                                 ', &
-     '                  STYRENOOH + OH --> RRG48416 + STYRENO2                                            ', &
-     '                           C96O2 --> RRG49200 + C97O2                                               ', &
-     '                     C96O2 + HO2 --> RRG49201 + C96OOH                                              ', &
-     '                      C96O2 + NO --> RRG49202a + C97O2 + NO2                                        ', &
-     '                      C96O2 + NO --> RRG49202b + C96NO3                                             ', &
-     '                     C96NO3 + OH --> RRG49203 + NORPINAL + NO2                                      ', &
-     '                     C96OOH + OH --> RRG49204a + C96O2                                              ', &
-     '                     C96OOH + OH --> RRG49205b + NORPINAL + OH                                      ', &
-     '                           C97O2 --> RRG49206 + C98O2                                               ', &
-     '                      C97O2 + NO --> RRG49207 + C98O2 + NO2                                         ', &
-     '                     C97O2 + HO2 --> RRG49208a + C97OOH                                             ', &
-     '                     C97O2 + HO2 --> RRG49208b + C98O2 + OH                                         ', &
-     '                     C97OOH + OH --> RRG49209 + C97O2                                               ', &
-     '                           C98O2 --> RRG49210 + C614O2 + CH3COCH3                                   ', &
-     '                      C98O2 + NO --> RRG49211a + C614O2 + CH3COCH3 + NO2                            ', &
-     '                      C98O2 + NO --> LNITROGEN + 9 LCARBON + RRG49211b                              ', &
-     '                     C98O2 + HO2 --> RRG49212 + C98OOH                                              ', &
-     '                     C98OOH + OH --> RRG49213 + C98O2                                               ', &
-     '                   NORPINAL + OH --> RRG49214 + C85CO3                                              ', &
-     '                  NORPINAL + NO3 --> RRG49215 + C85CO3 + HNO3                                       ', &
-     '                          C85CO3 --> RRG49216 + C85O2 + CO2                                         ', &
-     '                     C85CO3 + NO --> RRG49217 + C85O2 + CO2 + NO2                                   ', &
-     '                    C85CO3 + NO2 --> RRG49218 + C9PAN2                                              ' /)
+     '                       NSTYRENO2 --> BENZAL + NO2 + HCHO                                            ', &
+     '                 NSTYRENOOH + OH --> NSTYRENO2                                                      ', &
+     '                  STYRENO2 + HO2 --> STYRENOOH                                                      ', &
+     '                  STYRENO2 + HO2 --> BENZAL + OH + HO2 + HCHO                                       ', &
+     '                   STYRENO2 + NO --> BENZAL + HO2 + NO2 + HCHO                                      ', &
+     '                  STYRENO2 + NO3 --> BENZAL + HO2 + NO2 + HCHO                                      ', &
+     '                        STYRENO2 --> BENZAL + HO2 + HCHO                                            ', &
+     '                  STYRENOOH + OH --> STYRENO2                                                       ', &
+     '                           C96O2 --> C97O2                                                          ', &
+     '                     C96O2 + HO2 --> C96OOH                                                         ', &
+     '                      C96O2 + NO --> C97O2 + NO2                                                    ', &
+     '                      C96O2 + NO --> C96NO3                                                         ', &
+     '                     C96NO3 + OH --> NORPINAL + NO2                                                 ', &
+     '                     C96OOH + OH --> C96O2                                                          ', &
+     '                     C96OOH + OH --> NORPINAL + OH                                                  ', &
+     '                           C97O2 --> C98O2                                                          ', &
+     '                      C97O2 + NO --> C98O2 + NO2                                                    ', &
+     '                     C97O2 + HO2 --> C97OOH                                                         ', &
+     '                     C97O2 + HO2 --> C98O2 + OH                                                     ', &
+     '                     C97OOH + OH --> C97O2                                                          ', &
+     '                           C98O2 --> C614O2 + CH3COCH3                                              ', &
+     '                      C98O2 + NO --> C614O2 + CH3COCH3 + NO2                                        ', &
+     '                      C98O2 + NO --> LNITROGEN + 9 LCARBON                                          ', &
+     '                     C98O2 + HO2 --> C98OOH                                                         ', &
+     '                     C98OOH + OH --> C98O2                                                          ', &
+     '                   NORPINAL + OH --> C85CO3                                                         ', &
+     '                  NORPINAL + NO3 --> C85CO3 + HNO3                                                  ', &
+     '                          C85CO3 --> C85O2 + CO2                                                    ', &
+     '                     C85CO3 + NO --> C85O2 + CO2 + NO2                                              ', &
+     '                    C85CO3 + NO2 --> C9PAN2                                                         ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_49 = (/ &
-     '                    C85CO3 + HO2 --> RRG49219a + C85CO3H                                            ', &
-     '                    C85CO3 + HO2 --> RRG49219b + C85O2 + CO2 + OH                                   ', &
-     '                          C9PAN2 --> RRG49220 + C85CO3 + NO2                                        ', &
-     '                     C9PAN2 + OH --> RRG49221 + C85OOH + CO + NO2                                   ', &
-     '                    C85CO3H + OH --> RRG49222 + C85CO3                                              ', &
-     '                          C89CO3 --> RRG49223a + 0.2 C89O2 + 0.8 C811CO3 + 0.2 CO2                  ', &
-     '                          C89CO3 --> RRG49223b + C89CO2H                                            ', &
-     '                    C89CO3 + HO2 --> RRG49224a + C89CO3H                                            ', &
-     '                    C89CO3 + HO2 --> RRG49224b + C89CO2H + O3                                       ', &
-     '                    C89CO3 + HO2 --> RRG49224c + 0.2 C89O2 + 0.8 C811CO3 + 0.2 CO2 + OH             ', &
-     '                    C89CO3 + NO2 --> RRG49225 + C89PAN                                              ', &
-     '                     C89CO3 + NO --> RRG49226 + 0.2 C89O2 + 0.8 C811CO3 + 0.2 CO2 + NO2             ', &
-     '                    C89CO2H + OH --> RRG49227 + 0.2 C89O2 + 0.8 C811CO3 + 0.2 CO2                   ', &
-     '                    C89CO3H + OH --> RRG49228 + C89CO3                                              ', &
-     '                          C89PAN --> RRG49229 + C89CO3 + NO2                                        ', &
-     '                     C89PAN + OH --> RRG49230 + CO13C4CHO + CH3COCH3 + CO + NO2                     ', &
-     '                         C811CO3 --> RRG49231a + C811O2 + CO2                                       ', &
-     '                         C811CO3 --> RRG49231b + PINIC                                              ', &
-     '                   C811CO3 + HO2 --> RRG49232a + C811CO3H                                           ', &
-     '                   C811CO3 + HO2 --> RRG49232b + PINIC + O3                                         ', &
-     '                   C811CO3 + HO2 --> RRG49232c + C811O2 + CO2 + OH                                  ', &
-     '                    C811CO3 + NO --> RRG49233 + C811O2 + CO2 + NO2                                  ', &
-     '                   C811CO3 + NO2 --> RRG49234 + C811PAN                                             ', &
-     '                      PINIC + OH --> RRG49235 + C811O2 + CO2                                        ', &
-     '                   NOPINONE + OH --> RRG49236 + NOPINDO2                                            ', &
-     '                  NOPINDO2 + HO2 --> RRG49237a + NOPINDOOH                                          ', &
-     '                  NOPINDO2 + HO2 --> RRG49237b + C89CO3 + OH                                        ', &
-     '                   NOPINDO2 + NO --> RRG49238 + C89CO3 + NO2                                        ', &
-     '                        NOPINDO2 --> RRG49239 + C89CO3                                              ', &
-     '                       NOPINDOOH --> RRG49240 + NOPINDCO                                            ' /)
+     '                    C85CO3 + HO2 --> C85CO3H                                                        ', &
+     '                    C85CO3 + HO2 --> C85O2 + CO2 + OH                                               ', &
+     '                          C9PAN2 --> C85CO3 + NO2                                                   ', &
+     '                     C9PAN2 + OH --> C85OOH + CO + NO2                                              ', &
+     '                    C85CO3H + OH --> C85CO3                                                         ', &
+     '                          C89CO3 --> 0.2 C89O2 + 0.8 C811CO3 + 0.2 CO2                              ', &
+     '                          C89CO3 --> C89CO2H                                                        ', &
+     '                    C89CO3 + HO2 --> C89CO3H                                                        ', &
+     '                    C89CO3 + HO2 --> C89CO2H + O3                                                   ', &
+     '                    C89CO3 + HO2 --> 0.2 C89O2 + 0.8 C811CO3 + 0.2 CO2 + OH                         ', &
+     '                    C89CO3 + NO2 --> C89PAN                                                         ', &
+     '                     C89CO3 + NO --> 0.2 C89O2 + 0.8 C811CO3 + 0.2 CO2 + NO2                        ', &
+     '                    C89CO2H + OH --> 0.2 C89O2 + 0.8 C811CO3 + 0.2 CO2                              ', &
+     '                    C89CO3H + OH --> C89CO3                                                         ', &
+     '                          C89PAN --> C89CO3 + NO2                                                   ', &
+     '                     C89PAN + OH --> CO13C4CHO + CH3COCH3 + CO + NO2                                ', &
+     '                         C811CO3 --> C811O2 + CO2                                                   ', &
+     '                         C811CO3 --> PINIC                                                          ', &
+     '                   C811CO3 + HO2 --> C811CO3H                                                       ', &
+     '                   C811CO3 + HO2 --> PINIC + O3                                                     ', &
+     '                   C811CO3 + HO2 --> C811O2 + CO2 + OH                                              ', &
+     '                    C811CO3 + NO --> C811O2 + CO2 + NO2                                             ', &
+     '                   C811CO3 + NO2 --> C811PAN                                                        ', &
+     '                      PINIC + OH --> C811O2 + CO2                                                   ', &
+     '                   NOPINONE + OH --> NOPINDO2                                                       ', &
+     '                  NOPINDO2 + HO2 --> NOPINDOOH                                                      ', &
+     '                  NOPINDO2 + HO2 --> C89CO3 + OH                                                    ', &
+     '                   NOPINDO2 + NO --> C89CO3 + NO2                                                   ', &
+     '                        NOPINDO2 --> C89CO3                                                         ', &
+     '                       NOPINDOOH --> NOPINDCO                                                       ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_50 = (/ &
-     '                   NOPINDCO + OH --> RRG49241 + C89CO3                                              ', &
-     '                         NOPINOO --> RRG49242 + NOPINONE + H2O2                                     ', &
-     '                    NOPINOO + CO --> RRG49243 + NOPINONE + CO2                                      ', &
-     '                    NOPINOO + NO --> RRG49244 + NOPINONE + NO2                                      ', &
-     '                   NOPINOO + NO2 --> RRG49245 + NOPINONE + NO3                                      ', &
-     '                 NORPINENOL + OH --> RRG49246 + C86O2 + OH + HCOOH                                  ', &
-     '              NORPINENOL + HCOOH --> RRG49247 + NORPINAL + HCOOH                                    ', &
-     '                NORPINAL + HCOOH --> RRG49248 + NORPINENOL + HCOOH                                  ', &
-     '                   C811CO3H + OH --> RRG49249 + C811CO3                                             ', &
-     '                         C811PAN --> RRG49250 + C811CO3 + NO2                                       ', &
-     '                    C811PAN + OH --> RRG49251 + C721CHO + CO + NO2                                  ', &
-     '                       LTMB + OH --> 2 LCARBON + RRG49400a + TLEPOXMUC + HO2                        ', &
-     '                       LTMB + OH --> 2 LCARBON + RRG49400b + C6H5CH2O2                              ', &
-     '                       LTMB + OH --> 2 LCARBON + RRG49400c + CRESOL                                 ', &
-     '                       LTMB + OH --> 2 LCARBON + RRG49400d + TLBIPERO2 + HO2                        ', &
-     '                      LTMB + NO3 --> 2 LCARBON + RRG49401 + C6H5CH2O2 + HNO3                        ', &
-     '                    APINENE + OH --> RRG40200 + 0.15 MENTHEN6ONE + 0.75 LAPINABO2 + 0.1 ROO6R1O2 ...', &
-     '                  LAPINABO2 + NO --> RRG40201a + PINAL + HO2 + NO2                                  ', &
-     '                  LAPINABO2 + NO --> RRG40201b + LAPINABNO3                                         ', &
-     '                 LAPINABO2 + HO2 --> RRG40202a + LAPINABOOH                                         ', &
-     '                 LAPINABO2 + HO2 --> RRG40202b + PINAL + OH + HO2                                   ', &
-     '                       LAPINABO2 --> RRG40203 + PINAL + HO2                                         ', &
-     '                 LAPINABOOH + OH --> RRG40204 + 0.35 LAPINABO2 + 0.65 C96CO3                        ', &
-     '                 LAPINABNO3 + OH --> RRG40205 + 0.65 C96CO3 + 0.35 PINAL + NO2                      ', &
-     '                MENTHEN6ONE + OH --> RRG40206 + OHMENTHEN6ONEO2                                     ', &
-     '            OHMENTHEN6ONEO2 + NO --> RRG40207 + OH2MENTHEN6ONE + HO2 + NO2                          ', &
-     '           OHMENTHEN6ONEO2 + HO2 --> RRG40208 + OH2MENTHEN6ONE                                      ', &
-     '                 OHMENTHEN6ONEO2 --> RRG40209 + OH2MENTHEN6ONE + HO2                                ', &
-     '             OH2MENTHEN6ONE + OH --> 1 LCARBON + RRG40210                                           ', &
-     '                      PINAL + OH --> RRG40211 + 0.228 PINALO2 + 0.772 C96CO3                        ' /)
+     '                   NOPINDCO + OH --> C89CO3                                                         ', &
+     '                         NOPINOO --> NOPINONE + H2O2                                                ', &
+     '                    NOPINOO + CO --> NOPINONE + CO2                                                 ', &
+     '                    NOPINOO + NO --> NOPINONE + NO2                                                 ', &
+     '                   NOPINOO + NO2 --> NOPINONE + NO3                                                 ', &
+     '                 NORPINENOL + OH --> C86O2 + OH + HCOOH                                             ', &
+     '              NORPINENOL + HCOOH --> NORPINAL + HCOOH                                               ', &
+     '                NORPINAL + HCOOH --> NORPINENOL + HCOOH                                             ', &
+     '                   C811CO3H + OH --> C811CO3                                                        ', &
+     '                         C811PAN --> C811CO3 + NO2                                                  ', &
+     '                    C811PAN + OH --> C721CHO + CO + NO2                                             ', &
+     '                       LTMB + OH --> 2 LCARBON + TLEPOXMUC + HO2                                    ', &
+     '                       LTMB + OH --> 2 LCARBON + C6H5CH2O2                                          ', &
+     '                       LTMB + OH --> 2 LCARBON + CRESOL                                             ', &
+     '                       LTMB + OH --> 2 LCARBON + TLBIPERO2 + HO2                                    ', &
+     '                      LTMB + NO3 --> 2 LCARBON + C6H5CH2O2 + HNO3                                   ', &
+     '                    APINENE + OH --> 0.15 MENTHEN6ONE + 0.75 LAPINABO2 + 0.1 ROO6R1O2 + 0.15 HO2 ...', &
+     '                  LAPINABO2 + NO --> PINAL + HO2 + NO2                                              ', &
+     '                  LAPINABO2 + NO --> LAPINABNO3                                                     ', &
+     '                 LAPINABO2 + HO2 --> LAPINABOOH                                                     ', &
+     '                 LAPINABO2 + HO2 --> PINAL + OH + HO2                                               ', &
+     '                       LAPINABO2 --> PINAL + HO2                                                    ', &
+     '                 LAPINABOOH + OH --> 0.35 LAPINABO2 + 0.65 C96CO3                                   ', &
+     '                 LAPINABNO3 + OH --> 0.65 C96CO3 + 0.35 PINAL + NO2                                 ', &
+     '                MENTHEN6ONE + OH --> OHMENTHEN6ONEO2                                                ', &
+     '            OHMENTHEN6ONEO2 + NO --> OH2MENTHEN6ONE + HO2 + NO2                                     ', &
+     '           OHMENTHEN6ONEO2 + HO2 --> OH2MENTHEN6ONE                                                 ', &
+     '                 OHMENTHEN6ONEO2 --> OH2MENTHEN6ONE + HO2                                           ', &
+     '             OH2MENTHEN6ONE + OH --> 1 LCARBON                                                      ', &
+     '                      PINAL + OH --> 0.228 PINALO2 + 0.772 C96CO3                                   ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_51 = (/ &
-     '                     PINAL + NO3 --> RRG40212 + C96CO3 + HNO3                                       ', &
-     '                          C96CO3 --> RRG40213a + CO2 + C96O2                                        ', &
-     '                          C96CO3 --> RRG40213b + PINONIC                                            ', &
-     '                    C96CO3 + HO2 --> RRG40214a + PERPINONIC                                         ', &
-     '                    C96CO3 + HO2 --> RRG40214b + PINONIC + O3                                       ', &
-     '                    C96CO3 + HO2 --> RRG40214c + CO2 + C96O2 + OH                                   ', &
-     '                    C96CO3 + NO2 --> RRG40215 + C10PAN2                                             ', &
-     '                     C96CO3 + NO --> RRG40216 + CO2 + C96O2 + NO2                                   ', &
-     '                    C96CO3 + NO3 --> RRG40217 + CO2 + C96O2 + NO2                                   ', &
-     '                         C10PAN2 --> RRG40218 + C96CO3 + NO2                                        ', &
-     '                    C10PAN2 + OH --> RRG40219 + NORPINAL + CO + NO2                                 ', &
-     '                    PINONIC + OH --> RRG40220 + CO2 + C96O2                                         ', &
-     '                 PERPINONIC + OH --> RRG40221 + C96CO3                                              ', &
-     '                   PINALO2 + HO2 --> RRG40222 + PINALOOH                                            ', &
-     '                    PINALO2 + NO --> RRG40223a + C106O2 + NO2                                       ', &
-     '                    PINALO2 + NO --> RRG40223b + PINALNO3                                           ', &
-     '                         PINALO2 --> RRG40224 + C106O2                                              ', &
-     '                   PINALOOH + OH --> RRG40225 + PINALO2                                             ', &
-     '                   PINALNO3 + OH --> RRG40226 + CO235C6CHO + CH3COCH3 + NO2                         ', &
-     '                    C106O2 + HO2 --> RRG40227 + C106OOH                                             ', &
-     '                     C106O2 + NO --> RRG40228a + C716O2 + CH3COCH3 + NO2                            ', &
-     '                     C106O2 + NO --> RRG40228b + C106NO3                                            ', &
-     '                          C106O2 --> RRG40229 + C716O2 + CH3COCH3                                   ', &
-     '                    C106OOH + OH --> RRG40230 + C106O2                                              ', &
-     '                    C106NO3 + OH --> RRG40231 + CO235C6CHO + CH3COCH3 + NO2                         ', &
-     '                    APINENE + O3 --> RRG40232 + 0.44 C109O2 + 0.08 PINONIC + 0.06 APINAOO ... etc.  ', &
-     '                         APINAOO --> RRG40233 + H2O2 + PINAL                                        ', &
-     '                    APINAOO + CO --> RRG40234 + CO2 + PINAL                                         ', &
-     '                    APINAOO + NO --> RRG40235 + PINAL + NO2                                         ', &
-     '                   APINAOO + NO2 --> RRG40236 + PINAL + NO3                                         ' /)
+     '                     PINAL + NO3 --> C96CO3 + HNO3                                                  ', &
+     '                          C96CO3 --> CO2 + C96O2                                                    ', &
+     '                          C96CO3 --> PINONIC                                                        ', &
+     '                    C96CO3 + HO2 --> PERPINONIC                                                     ', &
+     '                    C96CO3 + HO2 --> PINONIC + O3                                                   ', &
+     '                    C96CO3 + HO2 --> CO2 + C96O2 + OH                                               ', &
+     '                    C96CO3 + NO2 --> C10PAN2                                                        ', &
+     '                     C96CO3 + NO --> CO2 + C96O2 + NO2                                              ', &
+     '                    C96CO3 + NO3 --> CO2 + C96O2 + NO2                                              ', &
+     '                         C10PAN2 --> C96CO3 + NO2                                                   ', &
+     '                    C10PAN2 + OH --> NORPINAL + CO + NO2                                            ', &
+     '                    PINONIC + OH --> CO2 + C96O2                                                    ', &
+     '                 PERPINONIC + OH --> C96CO3                                                         ', &
+     '                   PINALO2 + HO2 --> PINALOOH                                                       ', &
+     '                    PINALO2 + NO --> C106O2 + NO2                                                   ', &
+     '                    PINALO2 + NO --> PINALNO3                                                       ', &
+     '                         PINALO2 --> C106O2                                                         ', &
+     '                   PINALOOH + OH --> PINALO2                                                        ', &
+     '                   PINALNO3 + OH --> CO235C6CHO + CH3COCH3 + NO2                                    ', &
+     '                    C106O2 + HO2 --> C106OOH                                                        ', &
+     '                     C106O2 + NO --> C716O2 + CH3COCH3 + NO2                                        ', &
+     '                     C106O2 + NO --> C106NO3                                                        ', &
+     '                          C106O2 --> C716O2 + CH3COCH3                                              ', &
+     '                    C106OOH + OH --> C106O2                                                         ', &
+     '                    C106NO3 + OH --> CO235C6CHO + CH3COCH3 + NO2                                    ', &
+     '                    APINENE + O3 --> 0.08 PINONIC + 0.44 C109O2 + 0.06 APINAOO + 0.09 APINBOO ... et', &
+     '                         APINAOO --> H2O2 + PINAL                                                   ', &
+     '                    APINAOO + CO --> CO2 + PINAL                                                    ', &
+     '                    APINAOO + NO --> PINAL + NO2                                                    ', &
+     '                   APINAOO + NO2 --> PINAL + NO3                                                    ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_52 = (/ &
-     '                         APINBOO --> RRG40237a + PINONIC                                            ', &
-     '                         APINBOO --> RRG40237b + H2O2 + PINAL                                       ', &
-     '                    APINBOO + CO --> RRG40238 + CO2 + PINAL                                         ', &
-     '                    APINBOO + NO --> RRG40239 + PINAL + NO2                                         ', &
-     '                   APINBOO + NO2 --> RRG40240 + PINAL + NO3                                         ', &
-     '                          C109O2 --> RRG40241 + C89CO3 + HCHO                                       ', &
-     '                     C109O2 + NO --> RRG40242 + C89CO3 + HCHO + NO2                                 ', &
-     '                    C109O2 + HO2 --> RRG40243a + C109OOH                                            ', &
-     '                    C109O2 + HO2 --> RRG40243b + C89CO3 + HCHO + OH                                 ', &
-     '                    C109OOH + OH --> RRG40244 + C109CO + OH                                         ', &
-     '                     C109CO + OH --> RRG40245 + C89CO3 + CO                                         ', &
-     '                   APINENE + NO3 --> RRG40246 + LNAPINABO2                                          ', &
-     '                      LNAPINABO2 --> RRG40247 + PINAL + NO2                                         ', &
-     '                 LNAPINABO2 + NO --> RRG40248 + PINAL + 2 NO2                                       ', &
-     '                LNAPINABO2 + HO2 --> RRG40249 + LNAPINABOOH                                         ', &
-     '                LNAPINABO2 + NO3 --> RRG40250 + PINAL + 2 NO2                                       ', &
-     '                LNAPINABOOH + OH --> RRG40251 + LNAPINABO2                                          ', &
-     '                    BPINENE + OH --> RRG40252a + BPINAO2                                            ', &
-     '                    BPINENE + OH --> RRG40252b + ROO6R1O2                                           ', &
-     '                   BPINAO2 + HO2 --> RRG40253a + BPINAOOH                                           ', &
-     '                   BPINAO2 + HO2 --> RRG40253b + NOPINONE + HCHO + OH + HO2                         ', &
-     '                    BPINAO2 + NO --> RRG40254a + NOPINONE + HCHO + HO2 + NO2                        ', &
-     '                    BPINAO2 + NO --> RRG40254b + BPINANO3                                           ', &
-     '                         BPINAO2 --> RRG40255 + NOPINONE + HCHO + HO2                               ', &
-     '                   BPINAOOH + OH --> RRG40256 + BPINAO2                                             ', &
-     '                   BPINANO3 + OH --> RRG40257 + NOPINONE + HCHO + NO2                               ', &
-     '                   ROO6R1O2 + NO --> RRG40258a + ROO6R3O2 + CH3COCH3 + NO2                          ', &
-     '                   ROO6R1O2 + NO --> RRG40258b + ROO6R1NO3                                          ', &
-     '                  ROO6R1O2 + HO2 --> 1 LCARBON + RRG40259                                           ', &
-     '                        ROO6R1O2 --> RRG40260 + ROO6R3O2 + CH3COCH3                                 ' /)
+     '                         APINBOO --> PINONIC                                                        ', &
+     '                         APINBOO --> H2O2 + PINAL                                                   ', &
+     '                    APINBOO + CO --> CO2 + PINAL                                                    ', &
+     '                    APINBOO + NO --> PINAL + NO2                                                    ', &
+     '                   APINBOO + NO2 --> PINAL + NO3                                                    ', &
+     '                          C109O2 --> C89CO3 + HCHO                                                  ', &
+     '                     C109O2 + NO --> C89CO3 + NO2 + HCHO                                            ', &
+     '                    C109O2 + HO2 --> C109OOH                                                        ', &
+     '                    C109O2 + HO2 --> C89CO3 + OH + HCHO                                             ', &
+     '                    C109OOH + OH --> C109CO + OH                                                    ', &
+     '                     C109CO + OH --> C89CO3 + CO                                                    ', &
+     '                   APINENE + NO3 --> LNAPINABO2                                                     ', &
+     '                      LNAPINABO2 --> PINAL + NO2                                                    ', &
+     '                 LNAPINABO2 + NO --> PINAL + 2 NO2                                                  ', &
+     '                LNAPINABO2 + HO2 --> LNAPINABOOH                                                    ', &
+     '                LNAPINABO2 + NO3 --> PINAL + 2 NO2                                                  ', &
+     '                LNAPINABOOH + OH --> LNAPINABO2                                                     ', &
+     '                    BPINENE + OH --> BPINAO2                                                        ', &
+     '                    BPINENE + OH --> ROO6R1O2                                                       ', &
+     '                   BPINAO2 + HO2 --> BPINAOOH                                                       ', &
+     '                   BPINAO2 + HO2 --> NOPINONE + OH + HO2 + HCHO                                     ', &
+     '                    BPINAO2 + NO --> NOPINONE + HO2 + NO2 + HCHO                                    ', &
+     '                    BPINAO2 + NO --> BPINANO3                                                       ', &
+     '                         BPINAO2 --> NOPINONE + HO2 + HCHO                                          ', &
+     '                   BPINAOOH + OH --> BPINAO2                                                        ', &
+     '                   BPINANO3 + OH --> NOPINONE + NO2 + HCHO                                          ', &
+     '                   ROO6R1O2 + NO --> ROO6R3O2 + CH3COCH3 + NO2                                      ', &
+     '                   ROO6R1O2 + NO --> ROO6R1NO3                                                      ', &
+     '                  ROO6R1O2 + HO2 --> 1 LCARBON                                                      ', &
+     '                        ROO6R1O2 --> ROO6R3O2 + CH3COCH3                                            ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_53 = (/ &
-     '                    RO6R1O2 + NO --> RRG40261a + RO6R3O2 + NO2                                      ', &
-     '                    RO6R1O2 + NO --> RRG40261b + RO6R1NO3                                           ', &
-     '                   RO6R1O2 + HO2 --> 1 LCARBON + RRG40262                                           ', &
-     '                         RO6R1O2 --> RRG40263 + RO6R3O2                                             ', &
-     '                    RO6R3O2 + NO --> 9 LCARBON + RRG40264a + HCHO + HO2 + NO2                       ', &
-     '                    RO6R3O2 + NO --> LNITROGEN + 1 LCARBON + RRG40264b                              ', &
-     '                   RO6R3O2 + HO2 --> 1 LCARBON + RRG40265                                           ', &
-     '                         RO6R3O2 --> 9 LCARBON + RRG40266 + HCHO + HO2                              ', &
-     '                    BPINENE + O3 --> RRG40267a + NOPINONE + 0.37 CH2OO + 0.63 CO + 0.16 OH ... etc. ', &
-     '                    BPINENE + O3 --> RRG40267b + NOPINOO + CO2                                      ', &
-     '                    BPINENE + O3 --> RRG40267c + NOPINDO2 + CO2 + OH                                ', &
-     '                    BPINENE + O3 --> RRG40267d + C8BC + 2 CO2                                       ', &
-     '                   BPINENE + NO3 --> RRG40268 + LNBPINABO2                                          ', &
-     '                LNBPINABO2 + HO2 --> RRG40269 + LNBPINABOOH                                         ', &
-     '                 LNBPINABO2 + NO --> RRG40270 + NOPINONE + HCHO + 2 NO2                             ', &
-     '                LNBPINABO2 + NO3 --> RRG40271 + NOPINONE + HCHO + 2 NO2                             ', &
-     '                      LNBPINABO2 --> RRG40272a + NOPINONE + HCHO + NO2                              ', &
-     '                      LNBPINABO2 --> RRG40272b + BPINANO3                                           ', &
-     '                LNBPINABOOH + OH --> RRG40273 + LNBPINABO2                                          ', &
-     '                  ROO6R1NO3 + OH --> RRG40274 + ROO6R3O2 + CH3COCH3 + NO2                           ', &
-     '                   RO6R1NO3 + OH --> 9 LCARBON + RRG40275 + HCHO + HO2 + NO2                        ', &
-     '                    PINENOL + OH --> RRG40276 + NORPINAL + OH + HCOOH                               ', &
-     '                 PINENOL + HCOOH --> RRG40277 + PINAL + HCOOH                                       ', &
-     '                   PINAL + HCOOH --> RRG40278 + PINENOL + HCOOH                                     ', &
-     '                     CARENE + OH --> RRG40279a + LAPINABO2                                          ', &
-     '                     CARENE + OH --> RRG40279b + MENTHEN6ONE + HO2                                  ', &
-     '                     CARENE + OH --> RRG40279c + ROO6R1O2                                           ', &
-     '                     CARENE + O3 --> RRG40280a + APINBOO                                            ', &
-     '                     CARENE + O3 --> RRG40280b + PINONIC                                            ', &
-     '                     CARENE + O3 --> RRG40280c + NORPINAL + CO + OH + HO2                           ' /)
+     '                    RO6R1O2 + NO --> RO6R3O2 + NO2                                                  ', &
+     '                    RO6R1O2 + NO --> RO6R1NO3                                                       ', &
+     '                   RO6R1O2 + HO2 --> 1 LCARBON                                                      ', &
+     '                         RO6R1O2 --> RO6R3O2                                                        ', &
+     '                    RO6R3O2 + NO --> 9 LCARBON + HO2 + NO2 + HCHO                                   ', &
+     '                    RO6R3O2 + NO --> LNITROGEN + 1 LCARBON                                          ', &
+     '                   RO6R3O2 + HO2 --> 1 LCARBON                                                      ', &
+     '                         RO6R3O2 --> 9 LCARBON + HO2 + HCHO                                         ', &
+     '                    BPINENE + O3 --> NOPINONE + 0.37 CH2OO + 0.63 CO + 0.16 OH + 0.16 HO2 ... etc.  ', &
+     '                    BPINENE + O3 --> CO2 + NOPINOO                                                  ', &
+     '                    BPINENE + O3 --> NOPINDO2 + CO2 + OH                                            ', &
+     '                    BPINENE + O3 --> C8BC + 2 CO2                                                   ', &
+     '                   BPINENE + NO3 --> LNBPINABO2                                                     ', &
+     '                LNBPINABO2 + HO2 --> LNBPINABOOH                                                    ', &
+     '                 LNBPINABO2 + NO --> NOPINONE + 2 NO2 + HCHO                                        ', &
+     '                LNBPINABO2 + NO3 --> NOPINONE + 2 NO2 + HCHO                                        ', &
+     '                      LNBPINABO2 --> NOPINONE + NO2 + HCHO                                          ', &
+     '                      LNBPINABO2 --> BPINANO3                                                       ', &
+     '                LNBPINABOOH + OH --> LNBPINABO2                                                     ', &
+     '                  ROO6R1NO3 + OH --> ROO6R3O2 + CH3COCH3 + NO2                                      ', &
+     '                   RO6R1NO3 + OH --> 9 LCARBON + HO2 + NO2 + HCHO                                   ', &
+     '                    PINENOL + OH --> NORPINAL + OH + HCOOH                                          ', &
+     '                 PINENOL + HCOOH --> PINAL + HCOOH                                                  ', &
+     '                   PINAL + HCOOH --> PINENOL + HCOOH                                                ', &
+     '                     CARENE + OH --> LAPINABO2                                                      ', &
+     '                     CARENE + OH --> MENTHEN6ONE + HO2                                              ', &
+     '                     CARENE + OH --> ROO6R1O2                                                       ', &
+     '                     CARENE + O3 --> APINBOO                                                        ', &
+     '                     CARENE + O3 --> PINONIC                                                        ', &
+     '                     CARENE + O3 --> NORPINAL + CO + OH + HO2                                       ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_54 = (/ &
-     '                     CARENE + O3 --> RRG40280d + APINAOO                                            ', &
-     '                     CARENE + O3 --> RRG40280e + C109O2 + OH                                        ', &
-     '                    CARENE + NO3 --> RRG40281 + LNAPINABO2                                          ', &
-     '                   SABINENE + OH --> RRG40282a + BPINAO2                                            ', &
-     '                   SABINENE + OH --> RRG40282b + ROO6R1O2                                           ', &
-     '                   SABINENE + O3 --> RRG40283a + NOPINONE + 0.37 HOCH2OOH + 0.63 CO + 0.16 OH ... et', &
-     '                   SABINENE + O3 --> RRG40283b + NOPINOO + CO2                                      ', &
-     '                   SABINENE + O3 --> RRG40283c + NOPINDO2 + CO2 + OH                                ', &
-     '                   SABINENE + O3 --> RRG40283d + C8BC + 2 CO2                                       ', &
-     '                  SABINENE + NO3 --> RRG40284 + LNBPINABO2                                          ', &
-     '                   CAMPHENE + OH --> RRG40285a + BPINAO2                                            ', &
-     '                   CAMPHENE + OH --> RRG40285b + ROO6R1O2                                           ', &
-     '                   CAMPHENE + O3 --> RRG40286a + NOPINONE + 0.37 HOCH2OOH + 0.63 CO + 0.16 OH ... et', &
-     '                   CAMPHENE + O3 --> RRG40286b + NOPINOO + CO2                                      ', &
-     '                   CAMPHENE + O3 --> RRG40286c + NOPINDO2 + CO2 + OH                                ', &
-     '                   CAMPHENE + O3 --> RRG40286d + C8BC + 2 CO2                                       ', &
-     '                  CAMPHENE + NO3 --> RRG40287 + LNBPINABO2                                          ', &
-     '                     LHAROM + OH --> 4 LCARBON + RRG40400 + 0.03 C6H5CH2O2 + 0.04 CRESOL ... etc.   ', &
-     '                    LHAROM + NO3 --> 4 LCARBON + RRG40401 + C6H5CH2O2 + HNO3                        ', &
-     '                         O3 + Cl --> RRG6100 + ClO + O2                                             ', &
-     '                           2 ClO --> RRG6102a + Cl2 + O2                                            ', &
-     '                           2 ClO --> RRG6102b + 2 Cl + O2                                           ', &
-     '                           2 ClO --> RRG6102c + OClO + Cl                                           ', &
-     '                           2 ClO --> RRG6102d + Cl2O2                                               ', &
-     '                           Cl2O2 --> RRG6103 + 2 ClO                                                ', &
-     '                      OClO + ClO --> RRG69MS + Cl2O3                                                ', &
-     '                       Cl2O + Cl --> RRG699MS + Cl2 + ClO                                           ', &
-     '                       H2O2 + Cl --> RRG6202 + HCl + HO2                                            ', &
-     '                       ClO + HO2 --> RRG6204 + HOCl + O2                                            ', &
-     '                        HCl + OH --> RRG6205 + H2O + Cl                                             ' /)
+     '                     CARENE + O3 --> APINAOO                                                        ', &
+     '                     CARENE + O3 --> C109O2 + OH                                                    ', &
+     '                    CARENE + NO3 --> LNAPINABO2                                                     ', &
+     '                   SABINENE + OH --> BPINAO2                                                        ', &
+     '                   SABINENE + OH --> ROO6R1O2                                                       ', &
+     '                   SABINENE + O3 --> NOPINONE + 0.37 HOCH2OOH + 0.63 CO + 0.16 OH + 0.16 HO2 ... etc', &
+     '                   SABINENE + O3 --> CO2 + NOPINOO                                                  ', &
+     '                   SABINENE + O3 --> NOPINDO2 + CO2 + OH                                            ', &
+     '                   SABINENE + O3 --> C8BC + 2 CO2                                                   ', &
+     '                  SABINENE + NO3 --> LNBPINABO2                                                     ', &
+     '                   CAMPHENE + OH --> BPINAO2                                                        ', &
+     '                   CAMPHENE + OH --> ROO6R1O2                                                       ', &
+     '                   CAMPHENE + O3 --> NOPINONE + 0.37 HOCH2OOH + 0.63 CO + 0.16 OH + 0.16 HO2 ... etc', &
+     '                   CAMPHENE + O3 --> CO2 + NOPINOO                                                  ', &
+     '                   CAMPHENE + O3 --> NOPINDO2 + CO2 + OH                                            ', &
+     '                   CAMPHENE + O3 --> C8BC + 2 CO2                                                   ', &
+     '                  CAMPHENE + NO3 --> LNBPINABO2                                                     ', &
+     '                     LHAROM + OH --> 4 LCARBON + 0.04 CRESOL + 0.03 C6H5CH2O2 + 0.79 TLBIPERO2 ... e', &
+     '                    LHAROM + NO3 --> 4 LCARBON + C6H5CH2O2 + HNO3                                   ', &
+     '                         O3 + Cl --> ClO + O2                                                       ', &
+     '                           2 ClO --> Cl2 + O2                                                       ', &
+     '                           2 ClO --> 2 Cl + O2                                                      ', &
+     '                           2 ClO --> OClO + Cl                                                      ', &
+     '                           2 ClO --> Cl2O2                                                          ', &
+     '                           Cl2O2 --> 2 ClO                                                          ', &
+     '                      OClO + ClO --> Cl2O3                                                          ', &
+     '                       Cl2O + Cl --> Cl2 + ClO                                                      ', &
+     '                       H2O2 + Cl --> HCl + HO2                                                      ', &
+     '                       ClO + HO2 --> HOCl + O2                                                      ', &
+     '                        HCl + OH --> Cl + H2O                                                       ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_55 = (/ &
-     '                        Cl2 + OH --> RRG67MS + HOCl + Cl                                            ', &
-     '                        ClO + NO --> RRG6300 + Cl + NO2                                             ', &
-     '                       ClO + NO2 --> RRG6301 + ClNO3                                                ', &
-     '                           ClNO3 --> RRG6302 + ClO + NO2                                            ', &
-     '                      ClNO3 + Cl --> RRG6304 + Cl2 + NO3                                            ', &
-     '                         Cl + NO --> RRG63MS + ClNO                                                 ', &
-     '                        Cl + NO2 --> RRG64MS + ClONO                                                ', &
-     '                        Cl + NO2 --> RRG65MS + ClNO2                                                ', &
-     '                        NO3 + Cl --> RRG66MS + ClO + NO2                                            ', &
-     '                      ClNO2 + OH --> RRG68MS + HOCl + NO2                                           ', &
-     '                       OClO + NO --> RRG688MS + ClO + NO2                                           ', &
-     '                        CH4 + Cl --> RRG6400 + HCl + CH3                                            ', &
-     '                       C3H8 + Cl --> RRG6400MS + IC3H7O2 + HCl                                      ', &
-     '                       C3H8 + Cl --> RRG6401MS + NC3H7O2 + HCl                                      ', &
-     '                     IC4H10 + Cl --> RRG6402MS + IC4H9O2 + HCl                                      ', &
-     '                     IC4H10 + Cl --> RRG6403MS + TC4H9O2 + HCl                                      ', &
-     '                     NC4H10 + Cl --> RRG6404MS + LC4H9O2 + HCl                                      ', &
-     '                       HCHO + Cl --> RRG6401 + HCl + CO + HO2                                       ', &
-     '                     CH3OOH + Cl --> RRG6402 + HCl + HCHO + OH                                      ', &
-     '                     ClO + CH3O2 --> RRG6403 + HCHO + HO2 + Cl                                      ', &
-     '                    CH3CCl3 + OH --> 2 LCARBON + RRG6408 + H2O + 3 Cl                               ', &
-     '                       C2H4 + Cl --> RRG6409 + HCl + HOCH2CH2O2                                     ', &
-     '                     CH3CHO + Cl --> RRG6410 + CH3CO + HCl                                          ', &
-     '                       C2H2 + Cl --> LCARBON + RRG6411 + HCl + CH3                                  ', &
-     '                       C2H6 + Cl --> RRG6412 + HCl + C2H5O2                                         ', &
-     '                     CH3NO3 + Cl --> RRG6413 + HCl + HCHO + NO2                                     ', &
-     '                     CH3ONO + Cl --> RRG6414 + HCl + HCHO + NO                                      ', &
-     '                      CH3O2 + Cl --> RRG6415 + 0.5 ClO + 0.5 HCl + 0.5 CH3O + 0.5 CH2OO             ', &
-     '                      CH3CN + Cl --> RRG6416 + NCCH2O2 + HCl                                        ', &
-     '                    BENZENE + Cl --> RRG641MS + C6H5O2 + HCl                                        ' /)
+     '                        Cl2 + OH --> HOCl + Cl                                                      ', &
+     '                        ClO + NO --> Cl + NO2                                                       ', &
+     '                       ClO + NO2 --> ClNO3                                                          ', &
+     '                           ClNO3 --> ClO + NO2                                                      ', &
+     '                      ClNO3 + Cl --> Cl2 + NO3                                                      ', &
+     '                         Cl + NO --> ClNO                                                           ', &
+     '                        Cl + NO2 --> ClONO                                                          ', &
+     '                        Cl + NO2 --> ClNO2                                                          ', &
+     '                        Cl + NO3 --> ClO + NO2                                                      ', &
+     '                      ClNO2 + OH --> HOCl + NO2                                                     ', &
+     '                       OClO + NO --> ClO + NO2                                                      ', &
+     '                        CH4 + Cl --> HCl + CH3                                                      ', &
+     '                       C3H8 + Cl --> IC3H7O2 + HCl                                                  ', &
+     '                       C3H8 + Cl --> NC3H7O2 + HCl                                                  ', &
+     '                     IC4H10 + Cl --> IC4H9O2 + HCl                                                  ', &
+     '                     IC4H10 + Cl --> TC4H9O2 + HCl                                                  ', &
+     '                     NC4H10 + Cl --> LC4H9O2 + HCl                                                  ', &
+     '                       Cl + HCHO --> HCl + CO + HO2                                                 ', &
+     '                     CH3OOH + Cl --> HCl + OH + HCHO                                                ', &
+     '                     ClO + CH3O2 --> Cl + HO2 + HCHO                                                ', &
+     '                    CH3CCl3 + OH --> 2 LCARBON + 3 Cl + H2O                                         ', &
+     '                       C2H4 + Cl --> HCl + HOCH2CH2O2                                               ', &
+     '                     CH3CHO + Cl --> CH3CO + HCl                                                    ', &
+     '                       C2H2 + Cl --> LCARBON + HCl + CH3                                            ', &
+     '                       C2H6 + Cl --> HCl + C2H5O2                                                   ', &
+     '                     CH3NO3 + Cl --> HCl + NO2 + HCHO                                               ', &
+     '                     CH3ONO + Cl --> HCl + NO + HCHO                                                ', &
+     '                      Cl + CH3O2 --> 0.5 HCl + 0.5 ClO + 0.5 CH3O + 0.5 CH2OO                       ', &
+     '                      CH3CN + Cl --> NCCH2O2 + HCl                                                  ', &
+     '                    BENZENE + Cl --> C6H5O2 + HCl                                                   ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_56 = (/ &
-     '                    TOLUENE + Cl --> RRG642MS + C6H5CH2O2 + HCl                                     ', &
-     '                       LXYL + Cl --> LCARBON + RRG692MS + C6H5CH2O2 + HCl                           ', &
-     '                       C5H8 + Cl --> RRG643DT + 0.63 LISOPAB + 0.3 LISOPCD + 0.07 LISOPEFO2 ... etc.', &
-     '                       C5H8 + Cl --> LCHLORINE + RRG644DT + 0.63 LISOPAB + 0.3 LISOPCD + 0.07 LISOPE', &
-     '                      CH3OH + Cl --> RRG645DT + HOCH2O2 + HCl                                       ', &
-     '                     C2H5OH + Cl --> RRG646DT + HCl + HOCH2CH2O2                                    ', &
-     '                     C2H5OH + Cl --> RRG647DT + HCl + C2H5O2                                        ', &
-     '                   HOCH2CHO + Cl --> RRG648DT + HOCHCHO + HCl                                       ', &
-     '                   HOCH2CHO + Cl --> RRG649DT + HCl + HOCH2CO                                       ', &
-     '                      GLYOX + Cl --> RRG650DT + HCOCO + HCl                                         ', &
-     '                     MGLYOX + Cl --> RRG651DT + CH3CO + HCl + CO                                    ', &
-     '                    C2H5CHO + Cl --> RRG652DT + C2H5CO3 + HCl                                       ', &
-     '                   CH3COCH3 + Cl --> RRG653DT + CH3COCH2O2 + HCl                                    ', &
-     '                        MEK + Cl --> RRG654DT + LMEKO2 + HCl                                        ', &
-     '                     BENZAL + Cl --> RRG655MS + C6H5CO3 + HCl                                       ', &
-     '                         O3 + Br --> RRG7100 + BrO + O2                                             ', &
-     '                           2 BrO --> RRG7102a + 2 Br + O2                                           ', &
-     '                           2 BrO --> RRG7102b + Br2 + O2                                            ', &
-     '                        HO2 + Br --> RRG7200 + HBr + O2                                             ', &
-     '                       BrO + HO2 --> RRG7201 + HOBr + O2                                            ', &
-     '                        HBr + OH --> RRG7202 + H2O + Br                                             ', &
-     '                        Br2 + OH --> RRG7204 + HOBr + Br                                            ', &
-     '                      BrNO3 + Br --> RRG7300 + Br2 + NO3                                            ', &
-     '                        BrO + NO --> RRG7301 + Br + NO2                                             ', &
-     '                       BrO + NO2 --> RRG7302 + BrNO3                                                ', &
-     '                           BrNO3 --> RRG7303 + BrO + NO2                                            ', &
-     '                       HCHO + Br --> RRG7400 + HBr + CO + HO2                                       ', &
-     '                     CH3OOH + Br --> RRG7401 + HBr + CH3O2                                          ', &
-     '                     BrO + CH3O2 --> RRG7402 + HOBr + CH2OO                                         ', &
-     '                      CH3Br + OH --> LCARBON + RRG7403 + H2O + Br                                   ' /)
+     '                    TOLUENE + Cl --> C6H5CH2O2 + HCl                                                ', &
+     '                       LXYL + Cl --> LCARBON + C6H5CH2O2 + HCl                                      ', &
+     '                       C5H8 + Cl --> 0.63 LISOPAB + 0.3 LISOPCD + 0.07 LISOPEFO2 + HCl              ', &
+     '                       C5H8 + Cl --> LCHLORINE + 0.63 LISOPAB + 0.3 LISOPCD + 0.07 LISOPEFO2 ... etc', &
+     '                      CH3OH + Cl --> HCl + HOCH2O2                                                  ', &
+     '                     C2H5OH + Cl --> HCl + HOCH2CH2O2                                               ', &
+     '                     C2H5OH + Cl --> HCl + C2H5O2                                                   ', &
+     '                   HOCH2CHO + Cl --> HOCHCHO + HCl                                                  ', &
+     '                   HOCH2CHO + Cl --> HOCH2CO + HCl                                                  ', &
+     '                      GLYOX + Cl --> HCOCO + HCl                                                    ', &
+     '                     MGLYOX + Cl --> CH3CO + HCl + CO                                               ', &
+     '                    C2H5CHO + Cl --> C2H5CO3 + HCl                                                  ', &
+     '                   CH3COCH3 + Cl --> CH3COCH2O2 + HCl                                               ', &
+     '                        MEK + Cl --> LMEKO2 + HCl                                                   ', &
+     '                     BENZAL + Cl --> C6H5CO3 + HCl                                                  ', &
+     '                         O3 + Br --> BrO + O2                                                       ', &
+     '                           2 BrO --> 2 Br + O2                                                      ', &
+     '                           2 BrO --> Br2 + O2                                                       ', &
+     '                        Br + HO2 --> HBr + O2                                                       ', &
+     '                       BrO + HO2 --> HOBr + O2                                                      ', &
+     '                        HBr + OH --> Br + H2O                                                       ', &
+     '                        Br2 + OH --> HOBr + Br                                                      ', &
+     '                      BrNO3 + Br --> Br2 + NO3                                                      ', &
+     '                        BrO + NO --> Br + NO2                                                       ', &
+     '                       BrO + NO2 --> BrNO3                                                          ', &
+     '                           BrNO3 --> BrO + NO2                                                      ', &
+     '                       Br + HCHO --> HBr + CO + HO2                                                 ', &
+     '                     CH3OOH + Br --> HBr + CH3O2                                                    ', &
+     '                     BrO + CH3O2 --> HOBr + CH2OO                                                   ', &
+     '                      CH3Br + OH --> LCARBON + Br + H2O                                             ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_57 = (/ &
-     '                       C2H4 + Br --> RRG7404 + HBr + HOCH2CH2O2                                     ', &
-     '                     CH3CHO + Br --> RRG7405 + HBr + CH3CO                                          ', &
-     '                       C2H2 + Br --> LCARBON + RRG7406 + HBr + CH3O2                                ', &
-     '                      CHBr3 + OH --> LCARBON + RRG7407 + H2O + 3 Br                                 ', &
-     '                     CH2Br2 + OH --> LCARBON + RRG7408 + H2O + 2 Br                                 ', &
-     '                       BrCl + Br --> RRG7600 + Br2 + Cl                                             ', &
-     '                        Cl2 + Br --> RRG7601 + BrCl + Cl                                            ', &
-     '                        Br2 + Cl --> RRG7602 + BrCl + Br                                            ', &
-     '                       ClO + BrO --> RRG7603a + OClO + Br                                           ', &
-     '                       ClO + BrO --> RRG7603b + Br + Cl + O2                                        ', &
-     '                       ClO + BrO --> RRG7603c + BrCl + O2                                           ', &
-     '                       BrCl + Cl --> RRG7604 + Cl2 + Br                                             ', &
-     '                    CHCl2Br + OH --> LCARBON + RRG7605 + H2O + Br + 2 Cl                            ', &
-     '                    CHClBr2 + OH --> LCARBON + RRG7606 + H2O + 2 Br + Cl                            ', &
-     '                    CH2ClBr + OH --> LCARBON + RRG7607 + H2O + Br + Cl                              ', &
-     '                        OH + SO2 --> RRG9200 + H2SO4 + HO2                                          ', &
-     '                        DMS + OH --> RRG9400a + CH3SO2 + HCHO                                       ', &
-     '                        DMS + OH --> RRG9400b + DMSO + HO2                                          ', &
-     '                       DMS + NO3 --> RRG9401 + CH3SO2 + HNO3 + HCHO                                 ', &
-     '                       DMSO + OH --> RRG9402 + 0.4 CH3SO3H + 0.6 CH3 + HCHO + 0.4 HO2 + 0.6 SO2 ... ', &
-     '                          CH3SO2 --> RRG9403 + CH3 + SO2                                            ', &
-     '                     CH3SO2 + O3 --> RRG9404 + CH3SO3                                               ', &
-     '                    CH3SO3 + HO2 --> RRG9405 + CH3SO3H                                              ', &
-     '                     CH2OO + SO2 --> RRG9408 + H2SO4 + HCHO                                         ', &
-     '                   NOPINOO + SO2 --> RRG9409 + H2SO4 + NOPINONE                                     ', &
-     '                   APINAOO + SO2 --> RRG9410 + H2SO4 + PINAL                                        ', &
-     '                   APINBOO + SO2 --> RRG9411 + H2SO4 + PINAL                                        ', &
-     '                     MBOOO + SO2 --> RRG9412 + H2SO4 + IBUTALOH                                     ', &
-     '                        DMS + Cl --> RRG9600 + CH3SO2 + HCl + HCHO                                  ', &
-     '                        DMS + Br --> RRG9700 + CH3SO2 + HBr + HCHO                                  ' /)
+     '                       C2H4 + Br --> HBr + HOCH2CH2O2                                               ', &
+     '                     CH3CHO + Br --> HBr + CH3CO                                                    ', &
+     '                       C2H2 + Br --> LCARBON + HBr + CH3O2                                          ', &
+     '                      CHBr3 + OH --> LCARBON + 3 Br + H2O                                           ', &
+     '                     CH2Br2 + OH --> LCARBON + 2 Br + H2O                                           ', &
+     '                       BrCl + Br --> Br2 + Cl                                                       ', &
+     '                        Cl2 + Br --> BrCl + Cl                                                      ', &
+     '                        Br2 + Cl --> BrCl + Br                                                      ', &
+     '                       ClO + BrO --> OClO + Br                                                      ', &
+     '                       ClO + BrO --> Br + Cl + O2                                                   ', &
+     '                       ClO + BrO --> BrCl + O2                                                      ', &
+     '                       BrCl + Cl --> Cl2 + Br                                                       ', &
+     '                    CHCl2Br + OH --> LCARBON + Br + 2 Cl + H2O                                      ', &
+     '                    CHClBr2 + OH --> LCARBON + 2 Br + Cl + H2O                                      ', &
+     '                    CH2ClBr + OH --> LCARBON + Br + Cl + H2O                                        ', &
+     '                        OH + SO2 --> H2SO4 + HO2                                                    ', &
+     '                        DMS + OH --> CH3SO2 + HCHO                                                  ', &
+     '                        DMS + OH --> DMSO + HO2                                                     ', &
+     '                       DMS + NO3 --> CH3SO2 + HNO3 + HCHO                                           ', &
+     '                       DMSO + OH --> 0.4 CH3SO3H + 0.6 CH3 + 0.4 HO2 + 0.6 SO2 + HCHO               ', &
+     '                          CH3SO2 --> CH3 + SO2                                                      ', &
+     '                     CH3SO2 + O3 --> CH3SO3                                                         ', &
+     '                    CH3SO3 + HO2 --> CH3SO3H                                                        ', &
+     '                     CH2OO + SO2 --> H2SO4 + HCHO                                                   ', &
+     '                   NOPINOO + SO2 --> H2SO4 + NOPINONE                                               ', &
+     '                   APINAOO + SO2 --> H2SO4 + PINAL                                                  ', &
+     '                   APINBOO + SO2 --> H2SO4 + PINAL                                                  ', &
+     '                     MBOOO + SO2 --> H2SO4 + IBUTALOH                                               ', &
+     '                        DMS + Cl --> CH3SO2 + HCl + HCHO                                            ', &
+     '                        DMS + Br --> CH3SO2 + HBr + HCHO                                            ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_58 = (/ &
-     '                       DMS + BrO --> RRG9701 + DMSO + Br                                            ', &
-     '                              O2 --> RRJ1000a + 2 O3P                                               ', &
-     '                              O3 --> RRJ1001a + O1D + O2                                            ', &
-     '                              O3 --> RRJ1001b + O3P + O2                                            ', &
-     '                            H2O2 --> RRJ2101 + 2 OH                                                 ', &
-     '                             NO2 --> RRJ3101 + O3P + NO                                             ', &
-     '                             NO3 --> RRJ3103a + O3P + NO2                                           ', &
-     '                             NO3 --> RRJ3103b + O2 + NO                                             ', &
-     '                            N2O5 --> RRJ3104 + NO3 + NO2                                            ', &
-     '                            HONO --> RRJ3200 + OH + NO                                              ', &
-     '                            HNO3 --> RRJ3201 + OH + NO2                                             ', &
-     '                            HNO4 --> RRJ3202 + 0.333 OH + 0.667 HO2 + 0.333 NO3 + 0.667 NO2 ... etc.', &
-     '                          CH3OOH --> RRJ41000 + CH3O + OH                                           ', &
-     '                            HCHO --> RRJ41001a + H2 + CO                                            ', &
-     '                            HCHO --> RRJ41001b + H + CO + HO2                                       ', &
-     '                          CH3ONO --> RRJ41004 + CH3O + NO                                           ', &
-     '                          CH3NO3 --> RRJ41005 + CH3O + NO2                                          ', &
-     '                        CH3O2NO2 --> RRJ41006 + 0.333 CH3O + 0.333 NO3 + 0.667 CH3O2 + 0.667 NO2 ...', &
-     '                        HOCH2OOH --> RRJ41007 + OH + HO2 + HCOOH                                    ', &
-     '                           CH3O2 --> RRJ41008 + HCHO + OH                                           ', &
-     '                           HCOOH --> RRJ41009 + CO + OH + HO2                                       ', &
-     '                      HOCH2O2NO2 --> RRJ41010 + 0.667 HOCH2O2 + 0.333 HO2 + 0.333 NO3 + 0.333 HCOOH ', &
-     '                         C2H5OOH --> RRJ42000 + CH3CHO + OH + HO2                                   ', &
-     '                          CH3CHO --> RRJ42001a + CH3 + CO + HO2                                     ', &
-     '                          CH3CHO --> RRJ42001b + CH2CHOH                                            ', &
-     '                         CH3CO3H --> RRJ42002 + CO2 + CH3 + OH                                      ', &
-     '                             PAN --> RRJ42004 + 0.3 CO2 + 0.7 CH3CO + 0.3 CH3 + 0.3 NO3 + 0.7 NO2 ..', &
-     '                        HOCH2CHO --> RRJ42005a + CO + HCHO + 2 HO2                                  ', &
-     '                        HOCH2CHO --> RRJ42005b + HCOCH2O2 + OH                                      ', &
-     '                        HOCH2CHO --> RRJ42005c + CH3OH + CO                                         ' /)
+     '                       DMS + BrO --> DMSO + Br                                                      ', &
+     '                              O2 --> 2 O3P                                                          ', &
+     '                              O3 --> O1D + O2                                                       ', &
+     '                              O3 --> O3P + O2                                                       ', &
+     '                            H2O2 --> 2 OH                                                           ', &
+     '                             NO2 --> O3P + NO                                                       ', &
+     '                             NO3 --> O3P + NO2                                                      ', &
+     '                             NO3 --> NO + O2                                                        ', &
+     '                            N2O5 --> NO2 + NO3                                                      ', &
+     '                            HONO --> OH + NO                                                        ', &
+     '                            HNO3 --> OH + NO2                                                       ', &
+     '                            HNO4 --> 0.333 OH + 0.667 HO2 + 0.667 NO2 + 0.333 NO3                   ', &
+     '                          CH3OOH --> CH3O + OH                                                      ', &
+     '                            HCHO --> H2 + CO                                                        ', &
+     '                            HCHO --> H + CO + HO2                                                   ', &
+     '                          CH3ONO --> CH3O + NO                                                      ', &
+     '                          CH3NO3 --> CH3O + NO2                                                     ', &
+     '                        CH3O2NO2 --> 0.333 CH3O + 0.667 CH3O2 + 0.667 NO2 + 0.333 NO3               ', &
+     '                        HOCH2OOH --> OH + HO2 + HCOOH                                               ', &
+     '                           CH3O2 --> OH + HCHO                                                      ', &
+     '                           HCOOH --> CO + OH + HO2                                                  ', &
+     '                      HOCH2O2NO2 --> 0.667 HOCH2O2 + 0.333 HO2 + 0.667 NO2 + 0.333 NO3 + 0.333 HCOOH', &
+     '                         C2H5OOH --> CH3CHO + OH + HO2                                              ', &
+     '                          CH3CHO --> CH3 + CO + HO2                                                 ', &
+     '                          CH3CHO --> CH2CHOH                                                        ', &
+     '                         CH3CO3H --> CO2 + CH3 + OH                                                 ', &
+     '                             PAN --> 0.3 CO2 + 0.7 CH3CO + 0.3 CH3 + 0.7 NO2 + 0.3 NO3              ', &
+     '                        HOCH2CHO --> CO + 2 HO2 + HCHO                                              ', &
+     '                        HOCH2CHO --> HCOCH2O2 + OH                                                  ', &
+     '                        HOCH2CHO --> CH3OH + CO                                                     ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_59 = (/ &
-     '                       HOCH2CO3H --> RRJ42006 + CO2 + HCHO + OH + HO2                               ', &
-     '                            PHAN --> RRJ42007 + 0.3 CO2 + 0.7 HOCH2CO + 0.3 HCHO + 0.3 HO2 ... etc. ', &
-     '                           GLYOX --> RRJ42008 + 2 CO + 2 HO2                                        ', &
-     '                         HCOCO2H --> RRJ42009 + CO2 + CO + 2 HO2                                    ', &
-     '                         HCOCO3H --> RRJ42010 + CO2 + CO + OH + HO2                                 ', &
-     '                        HYETHO2H --> RRJ42011 + HOCH2CH2O + OH                                      ', &
-     '                        ETHOHNO3 --> RRJ42012 + 2 HCHO + HO2 + NO2                                  ', &
-     '                      HOOCH2CO3H --> RRJ42013 + CO2 + HCHO + 2 OH                                   ', &
-     '                      HOOCH2CO2H --> RRJ42014 + CO2 + HCHO + OH + HO2                               ', &
-     '                           CH2CO --> RRJ42015 + 0.8 H + 0.4 CO2 + 0.16 O3P + 1.34 CO + 0.16 HCHO ...', &
-     '                      CH3CHOHOOH --> RRJ42016 + CH3 + OH + HCOOH                                    ', &
-     '                       NO3CH2CHO --> RRJ42017 + CO + HCHO + HO2 + NO2                               ', &
-     '                       HOOCH2CHO --> RRJ42018 + CO + HCHO + OH + HO2                                ', &
-     '                         C2H5NO3 --> RRJ42019 + CH3CHO + HO2 + NO2                                  ', &
-     '                       NO3CH2PAN --> RRJ42020 + 0.7 NO3CH2CO3 + 0.3 CO2 + 0.3 HCHO + 0.3 NO3 ... etc', &
-     '                       C2H5O2NO2 --> RRJ42021 + 0.667 C2H5O2 + 0.333 CH3CHO + 0.333 HO2 + 0.333 NO3 ', &
-     '                        HOOCCOOH --> RRJ42022 + CO2 + 0.28 H2O + 0.28 CO + 0.72 HCOOH               ', &
-     '                        IC3H7OOH --> RRJ43000 + CH3COCH3 + OH + HO2                                 ', &
-     '                        CH3COCH3 --> RRJ43001 + CH3CO + CH3                                         ', &
-     '                          ACETOL --> RRJ43002 + 0.5 CH3CO + 0.5 HOCH2CO + 0.5 CH3 + 0.5 HCHO ... etc', &
-     '                          MGLYOX --> RRJ43003 + CH3CO + CO + HO2                                    ', &
-     '                       HYPERACET --> RRJ43004 + CH3CO + HCHO + OH                                   ', &
-     '                   HOCH2COCH2OOH --> RRJ43005 + HOCH2CO + HCHO + OH                                 ', &
-     '                        IC3H7NO3 --> RRJ43006 + CH3COCH3 + HO2 + NO2                                ', &
-     '                             NOA --> RRJ43007 + CH3CO + HCHO + NO2                                  ', &
-     '                       HYPROPO2H --> RRJ43009 + CH3CHO + HCHO + OH + HO2                            ', &
-     '                       PR2O2HNO3 --> RRJ43010 + NOA + OH + HO2                                      ', &
-     '                      HOCH2COCHO --> RRJ43011 + HOCH2CO + CO + HO2                                  ', &
-     '                      ALCOCH2OOH --> RRJ43012 + HCOCO + HCHO + OH                                   ', &
-     '                      ALCOCH2OOH --> RRJ43013 + HOOCH2CO3 + CO + HO2                                ' /)
+     '                       HOCH2CO3H --> CO2 + OH + HO2 + HCHO                                          ', &
+     '                            PHAN --> 0.3 CO2 + 0.7 HOCH2CO + 0.3 HO2 + 0.7 NO2 + 0.3 NO3 ... etc.   ', &
+     '                           GLYOX --> 2 CO + 2 HO2                                                   ', &
+     '                         HCOCO2H --> CO2 + CO + 2 HO2                                               ', &
+     '                         HCOCO3H --> CO2 + CO + OH + HO2                                            ', &
+     '                        HYETHO2H --> HOCH2CH2O + OH                                                 ', &
+     '                        ETHOHNO3 --> HO2 + NO2 + 2 HCHO                                             ', &
+     '                      HOOCH2CO3H --> CO2 + 2 OH + HCHO                                              ', &
+     '                      HOOCH2CO2H --> CO2 + OH + HO2 + HCHO                                          ', &
+     '                           CH2CO --> 0.8 H + 0.4 CO2 + 0.16 O3P + 1.34 CO + 0.34 OH + 0.34 HO2 ... e', &
+     '                      CH3CHOHOOH --> CH3 + OH + HCOOH                                               ', &
+     '                       NO3CH2CHO --> CO + HO2 + NO2 + HCHO                                          ', &
+     '                       HOOCH2CHO --> CO + OH + HO2 + HCHO                                           ', &
+     '                         C2H5NO3 --> CH3CHO + HO2 + NO2                                             ', &
+     '                       NO3CH2PAN --> 0.7 NO3CH2CO3 + 0.3 CO2 + NO2 + 0.3 NO3 + 0.3 HCHO             ', &
+     '                       C2H5O2NO2 --> 0.667 C2H5O2 + 0.333 CH3CHO + 0.333 HO2 + 0.667 NO2 ... etc.   ', &
+     '                        HOOCCOOH --> CO2 + 0.28 CO + 0.28 H2O + 0.72 HCOOH                          ', &
+     '                        IC3H7OOH --> CH3COCH3 + OH + HO2                                            ', &
+     '                        CH3COCH3 --> CH3CO + CH3                                                    ', &
+     '                          ACETOL --> 0.5 HOCH2CO + 0.5 CH3CO + 0.5 CH3 + 0.5 HO2 + 0.5 HCHO ... etc.', &
+     '                          MGLYOX --> CH3CO + CO + HO2                                               ', &
+     '                       HYPERACET --> CH3CO + OH + HCHO                                              ', &
+     '                   HOCH2COCH2OOH --> HOCH2CO + OH + HCHO                                            ', &
+     '                        IC3H7NO3 --> CH3COCH3 + HO2 + NO2                                           ', &
+     '                             NOA --> CH3CO + NO2 + HCHO                                             ', &
+     '                       HYPROPO2H --> CH3CHO + OH + HO2 + HCHO                                       ', &
+     '                       PR2O2HNO3 --> NOA + OH + HO2                                                 ', &
+     '                      HOCH2COCHO --> HOCH2CO + CO + HO2                                             ', &
+     '                      ALCOCH2OOH --> HCOCO + OH + HCHO                                              ', &
+     '                      ALCOCH2OOH --> HOOCH2CO3 + CO + HO2                                           ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_60 = (/ &
-     '                       HCOCH2CHO --> RRJ43014 + HCOCH2O2 + CO + HO2                                 ', &
-     '                      HCOCH2CO2H --> RRJ43015 + CO2 + HCOCH2O2 + HO2                                ', &
-     '                      HOC2H4CO3H --> RRJ43016 + CO2 + HOCH2CH2O2 + OH                               ', &
-     '                           C33CO --> RRJ43017 + HCOCO + CO + HO2                                    ', &
-     '                       CH3COCO2H --> RRJ43018 + 0.16 CH2CHOH + 0.07 CH3CO2H + 0.92 CO2 + 0.43 CH3CO ', &
-     '                       CH3COCO3H --> RRJ43019 + CO2 + CH3CO + OH                                    ', &
-     '                         CH3CHCO --> RRJ43020 + C2H4 + CO                                           ', &
-     '                       PROPOLNO3 --> RRJ43021 + HOCH2CHO + HCHO + HO2 + NO2                         ', &
-     '                   CH3COCH2O2NO2 --> RRJ43022 + CH3CO + HCHO + NO3                                  ', &
-     '                        NC3H7OOH --> RRJ43023 + C2H5CHO + OH + HO2                                  ', &
-     '                        NC3H7NO3 --> RRJ43024 + C2H5CHO + HO2 + NO2                                 ', &
-     '                         C2H5CHO --> RRJ43025a + C2H5O2 + CO + HO2                                  ', &
-     '                         C2H5CHO --> RRJ43025b + PROPENOL                                           ', &
-     '                             PPN --> RRJ43026 + 0.7 C2H5CO3 + 0.3 CO2 + 0.3 C2H5O2 + 0.3 NO3 ... etc', &
-     '                      PERPROACID --> RRJ43027 + CO2 + C2H5O2 + OH                                   ', &
-     '                     HCOCOCH2OOH --> RRJ43028a + HOOCH2CO3 + CO + HO2                               ', &
-     '                     HCOCOCH2OOH --> RRJ43028b + HCOCO + HCHO + OH                                  ', &
-     '                      HCOCH2CO3H --> RRJ43200 + CO2 + HCOCH2O2 + OH                                 ', &
-     '                       C3DIALOOH --> RRJ43400 + GLYOX + CO + OH + HO2                               ', &
-     '                       C32OH13CO --> RRJ43401 + GLYOX + CO + 2 HO2                                  ', &
-     '                      HCOCOHCO3H --> RRJ43402 + CO2 + GLYOX + OH + HO2                              ', &
-     '                        LC4H9OOH --> RRJ44000a + C3H7CHO + OH + HO2                                 ', &
-     '                        LC4H9OOH --> RRJ44000b + 0.636 MEK + 0.364 C2H5O2 + 0.364 CH3CHO ... etc.   ', &
-     '                             MVK --> RRJ44001 + 0.5 C3H6 + 0.5 CH3CO + CO + 0.5 HCHO + 0.5 HO2 ... e', &
-     '                             MEK --> RRJ44002 + CH3CO + C2H5O2                                      ', &
-     '                         LMEKOOH --> RRJ44003 + 0.38 CO2 + 0.62 CH3CO + 0.38 HOCH2CH2O2 + 0.62 CH3CH', &
-     '                          BIACET --> RRJ44004 + 2 CH3CO                                             ', &
-     '                        LC4H9NO3 --> RRJ44005a + C3H7CHO + HO2 + NO2                                ', &
-     '                        LC4H9NO3 --> RRJ44005b + MEK + HO2 + NO2                                    ', &
-     '                            MPAN --> RRJ44006 + 0.3 MACO2 + 0.7 MACO3 + 0.3 NO3 + 0.7 NO2 ... etc.  ' /)
+     '                       HCOCH2CHO --> HCOCH2O2 + CO + HO2                                            ', &
+     '                      HCOCH2CO2H --> CO2 + HCOCH2O2 + HO2                                           ', &
+     '                      HOC2H4CO3H --> CO2 + HOCH2CH2O2 + OH                                          ', &
+     '                           C33CO --> HCOCO + CO + HO2                                               ', &
+     '                       CH3COCO2H --> 0.16 CH2CHOH + 0.92 CO2 + 0.43 CH3CO + 0.07 CH3CO2H ... etc.   ', &
+     '                       CH3COCO3H --> CO2 + CH3CO + OH                                               ', &
+     '                         CH3CHCO --> C2H4 + CO                                                      ', &
+     '                       PROPOLNO3 --> HOCH2CHO + HO2 + NO2 + HCHO                                    ', &
+     '                   CH3COCH2O2NO2 --> CH3CO + NO3 + HCHO                                             ', &
+     '                        NC3H7OOH --> C2H5CHO + OH + HO2                                             ', &
+     '                        NC3H7NO3 --> C2H5CHO + HO2 + NO2                                            ', &
+     '                         C2H5CHO --> C2H5O2 + CO + HO2                                              ', &
+     '                         C2H5CHO --> PROPENOL                                                       ', &
+     '                             PPN --> 0.7 C2H5CO3 + 0.3 CO2 + 0.3 C2H5O2 + 0.7 NO2 + 0.3 NO3 ... etc.', &
+     '                      PERPROACID --> CO2 + C2H5O2 + OH                                              ', &
+     '                     HCOCOCH2OOH --> HOOCH2CO3 + CO + HO2                                           ', &
+     '                     HCOCOCH2OOH --> HCOCO + OH + HCHO                                              ', &
+     '                      HCOCH2CO3H --> CO2 + HCOCH2O2 + OH                                            ', &
+     '                       C3DIALOOH --> GLYOX + CO + OH + HO2                                          ', &
+     '                       C32OH13CO --> GLYOX + CO + 2 HO2                                             ', &
+     '                      HCOCOHCO3H --> CO2 + GLYOX + OH + HO2                                         ', &
+     '                        LC4H9OOH --> C3H7CHO + OH + HO2                                             ', &
+     '                        LC4H9OOH --> 0.636 MEK + 0.364 C2H5O2 + 0.364 CH3CHO + OH + 0.636 HO2 ... et', &
+     '                             MVK --> 0.5 C3H6 + 0.5 CH3CO + CO + 0.5 HO2 + 0.5 HCHO                 ', &
+     '                             MEK --> CH3CO + C2H5O2                                                 ', &
+     '                         LMEKOOH --> 0.38 CO2 + 0.62 CH3CO + 0.38 HOCH2CH2O2 + 0.62 CH3CHO ... etc. ', &
+     '                          BIACET --> 2 CH3CO                                                        ', &
+     '                        LC4H9NO3 --> C3H7CHO + HO2 + NO2                                            ', &
+     '                        LC4H9NO3 --> MEK + HO2 + NO2                                                ', &
+     '                            MPAN --> 0.3 MACO2 + 0.7 MACO3 + 0.7 NO2 + 0.3 NO3                      ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_61 = (/ &
-     '                       CO2H3CO3H --> RRJ44007a + CO2 + MGLYOX + OH + HO2                            ', &
-     '                       CO2H3CO3H --> RRJ44007b + HCOCO3H + CH3CO + HO2                              ', &
-     '                            MACR --> RRJ44008 + 0.5 MACO3 + 0.5 CH3CO + 0.5 CO + 0.5 HCHO ... etc.  ', &
-     '                         MACROOH --> RRJ44009 + MACRO + OH                                          ', &
-     '                          MACROH --> RRJ44010 + ACETOL + CO + 2 HO2                                 ', &
-     '                          MACO3H --> RRJ44011 + MACO2 + OH                                          ', &
-     '                      LHMVKABOOH --> RRJ44012 + 0.88 CH3CO + 0.12 MGLYOX + 0.88 HOCH2CHO ... etc.   ', &
-     '                        CO2H3CHO --> RRJ44013 + MGLYOX + CO + 2 HO2                                 ', &
-     '                       HO12CO3C4 --> RRJ44014 + CH3CO + HOCH2CHO + HO2                              ', &
-     '                        BIACETOH --> RRJ44015 + CH3CO + HOCH2CO                                     ', &
-     '                       HCOCCH3CO --> RRJ44016 + 0.5 CH3CHCO + 0.5 CH3CHO + 1.5 CO + 0.5 OH ... etc. ', &
-     '                       CH3COCHCO --> RRJ44017a + 0.2 CO2 + 0.1848 H2O2 + 0.56 CH3CO + 0.0192 CH3COCO', &
-     '                       CH3COCHCO --> RRJ44017b + CH3CHCO + CO                                       ', &
-     '                       CO23C3CHO --> RRJ44018a + CH3CO + 2 CO + HO2                                 ', &
-     '                       CO23C3CHO --> RRJ44018b + HCOCO + CH3CO                                      ', &
-     '                     CH3COCOCO2H --> RRJ44019 + CO2 + CH3CO + CO + HO2                              ', &
-     '                       BIACETOOH --> RRJ44020a + CH3CO + CO + HCHO + OH                             ', &
-     '                       BIACETOOH --> RRJ44020b + HCOCO + CH3CO                                      ', &
-     '                          C44OOH --> RRJ44021 + HCOCH2CHO + CO2 + OH + HO2                          ', &
-     '                       C413COOOH --> RRJ44022 + HCOCH2CO3 + HCHO + OH                               ', &
-     '                        C4CODIAL --> RRJ44023a + CHOCOCH2O2 + CO + HO2                              ', &
-     '                        C4CODIAL --> RRJ44023b + HCOCH2CO3 + CO + HO2                               ', &
-     '                      C312COCO3H --> RRJ44024 + CO2 + CHOCOCH2O2 + OH                               ', &
-     '                         LMEKNO3 --> RRJ44025 + 0.38 CO2 + 0.62 CH3CO + 0.38 HOCH2CH2O2 + 0.62 CH3CH', &
-     '                          MVKNO3 --> RRJ44026 + CH3CO + HOCH2CHO + NO2                              ', &
-     '                         MACRNO3 --> RRJ44027 + ACETOL + CO + HO2 + NO2                             ', &
-     '                        TC4H9NO3 --> RRJ44028 + CH3COCH3 + CH3 + NO2                                ', &
-     '                        TC4H9OOH --> RRJ44029 + CH3COCH3 + CH3 + OH                                 ', &
-     '                      IBUTOLBNO3 --> RRJ44030 + CH3COCH3 + HCHO + HO2 + NO2                         ', &
-     '                      IBUTOLBOOH --> RRJ44031 + CH3COCH3 + HCHO + OH + HO2                          ' /)
+     '                       CO2H3CO3H --> CO2 + MGLYOX + OH + HO2                                        ', &
+     '                       CO2H3CO3H --> HCOCO3H + CH3CO + HO2                                          ', &
+     '                            MACR --> 0.5 MACO3 + 0.5 CH3CO + 0.5 CO + HO2 + 0.5 HCHO                ', &
+     '                         MACROOH --> MACRO + OH                                                     ', &
+     '                          MACROH --> ACETOL + CO + 2 HO2                                            ', &
+     '                          MACO3H --> MACO2 + OH                                                     ', &
+     '                      LHMVKABOOH --> 0.88 CH3CO + 0.12 MGLYOX + 0.88 HOCH2CHO + OH + 0.12 HO2 ... et', &
+     '                        CO2H3CHO --> MGLYOX + CO + 2 HO2                                            ', &
+     '                       HO12CO3C4 --> CH3CO + HOCH2CHO + HO2                                         ', &
+     '                        BIACETOH --> HOCH2CO + CH3CO                                                ', &
+     '                       HCOCCH3CO --> 0.5 CH3CHCO + 0.5 CH3CHO + 1.5 CO + 0.5 OH                     ', &
+     '                       CH3COCHCO --> 0.2 CO2 + 0.1848 H2O2 + 0.56 CH3CO + 0.0192 CH3COCO2H ... etc. ', &
+     '                       CH3COCHCO --> CH3CHCO + CO                                                   ', &
+     '                       CO23C3CHO --> CH3CO + 2 CO + HO2                                             ', &
+     '                       CO23C3CHO --> HCOCO + CH3CO                                                  ', &
+     '                     CH3COCOCO2H --> CO2 + CH3CO + CO + HO2                                         ', &
+     '                       BIACETOOH --> CH3CO + CO + OH + HCHO                                         ', &
+     '                       BIACETOOH --> HCOCO + CH3CO                                                  ', &
+     '                          C44OOH --> HCOCH2CHO + CO2 + OH + HO2                                     ', &
+     '                       C413COOOH --> HCOCH2CO3 + OH + HCHO                                          ', &
+     '                        C4CODIAL --> CHOCOCH2O2 + CO + HO2                                          ', &
+     '                        C4CODIAL --> HCOCH2CO3 + CO + HO2                                           ', &
+     '                      C312COCO3H --> CO2 + CHOCOCH2O2 + OH                                          ', &
+     '                         LMEKNO3 --> 0.38 CO2 + 0.62 CH3CO + 0.38 HOCH2CH2O2 + 0.62 CH3CHO ... etc. ', &
+     '                          MVKNO3 --> CH3CO + HOCH2CHO + NO2                                         ', &
+     '                         MACRNO3 --> ACETOL + CO + HO2 + NO2                                        ', &
+     '                        TC4H9NO3 --> CH3COCH3 + CH3 + NO2                                           ', &
+     '                        TC4H9OOH --> CH3COCH3 + CH3 + OH                                            ', &
+     '                      IBUTOLBNO3 --> CH3COCH3 + HO2 + NO2 + HCHO                                    ', &
+     '                      IBUTOLBOOH --> CH3COCH3 + OH + HO2 + HCHO                                     ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_62 = (/ &
-     '                      LBUT1ENOOH --> RRJ44032 + C2H5CHO + HCHO + OH + HO2                           ', &
-     '                      LBUT1ENNO3 --> RRJ44033 + C2H5CHO + HCHO + HO2 + NO2                          ', &
-     '                       BUT2OLOOH --> RRJ44034 + 2 CH3CHO + OH + HO2                                 ', &
-     '                       BUT2OLNO3 --> RRJ44035 + 2 CH3CHO + HO2 + NO2                                ', &
-     '                         BUT2OLO --> RRJ44036 + CH3CO + HOCH2CO                                     ', &
-     '                         C3H7CHO --> RRJ44037a + NC3H7O2 + CO + HO2                                 ', &
-     '                         C3H7CHO --> RRJ44037b + CH2CHOH + C2H4                                     ', &
-     '                          IPRCHO --> RRJ44038 + IC3H7O2 + CO + HO2                                  ', &
-     '                        IC4H9NO3 --> RRJ44039 + IPRCHO + NO2                                        ', &
-     '                        IC4H9OOH --> RRJ44040 + IPRCHO + OH + HO2                                   ', &
-     '                      PERIBUACID --> RRJ44041 + IC3H7O2 + CO2 + OH                                  ', &
-     '                            PIPN --> RRJ44042 + 0.7 IPRCO3 + 0.3 IC3H7O2 + 0.3 CO2 + 0.3 NO3 ... etc', &
-     '                            HVMK --> RRJ44043 + MGLYOX + CO + 2 OH                                  ', &
-     '                            HMAC --> RRJ44044 + HCOCCH3CO + 2 OH                                    ', &
-     '                        CO2C3CHO --> RRJ44045a + CH3COCH2O2 + CO + HO2                              ', &
-     '                        CO2C3CHO --> RRJ44045b + HVMK                                               ', &
-     '                        IBUTDIAL --> RRJ44046a + CO2 + CH3CHO + H2O + CO + HO2                      ', &
-     '                        IBUTDIAL --> RRJ44046b + HMAC                                               ', &
-     '                        IBUTALOH --> RRJ44200 + CH3COCH3 + CO + 2 HO2                               ', &
-     '                       IPRHOCO3H --> RRJ44201 + CO2 + CH3COCH3 + OH + HO2                           ', &
-     '                      MALDIALOOH --> RRJ44400a + C32OH13CO + CO + OH + HO2                          ', &
-     '                      MALDIALOOH --> RRJ44400b + 2 GLYOX + OH + HO2                                 ', &
-     '                         BZFUOOH --> RRJ44401 + CO14O3CHO + OH + HO2                                ', &
-     '                      HOCOC4DIAL --> RRJ44402 + HCOCOHCO3 + CO + HO2                                ', &
-     '                        NBZFUOOH --> RRJ44403 + 0.5 NBZFUONE + 0.5 CO14O3CHO + OH + 0.5 HO2 ... etc.', &
-     '                      MALDALCO3H --> RRJ44404a + HCOCO3H + 2 CO + 2 HO2                             ', &
-     '                      MALDALCO3H --> RRJ44404b + 0.6 MALANHY + 0.4 CO2 + 0.4 GLYOX + 0.4 CO ... etc.', &
-     '                       EPXDLCO2H --> RRJ44405 + C3DIALO2 + CO2 + HO2                                ', &
-     '                         MALDIAL --> RRJ44406 + 0.4 BZFUONE + 0.6 MALDIALCO3 + 0.6 HO2              ', &
-     '                      MALANHYOOH --> RRJ44407 + HCOCOHCO3 + CO2 + OH                                ' /)
+     '                      LBUT1ENOOH --> C2H5CHO + OH + HO2 + HCHO                                      ', &
+     '                      LBUT1ENNO3 --> C2H5CHO + HO2 + NO2 + HCHO                                     ', &
+     '                       BUT2OLOOH --> 2 CH3CHO + OH + HO2                                            ', &
+     '                       BUT2OLNO3 --> 2 CH3CHO + HO2 + NO2                                           ', &
+     '                         BUT2OLO --> HOCH2CO + CH3CO                                                ', &
+     '                         C3H7CHO --> NC3H7O2 + CO + HO2                                             ', &
+     '                         C3H7CHO --> CH2CHOH + C2H4                                                 ', &
+     '                          IPRCHO --> IC3H7O2 + CO + HO2                                             ', &
+     '                        IC4H9NO3 --> IPRCHO + NO2                                                   ', &
+     '                        IC4H9OOH --> IPRCHO + OH + HO2                                              ', &
+     '                      PERIBUACID --> CO2 + IC3H7O2 + OH                                             ', &
+     '                            PIPN --> 0.7 IPRCO3 + 0.3 CO2 + 0.3 IC3H7O2 + 0.7 NO2 + 0.3 NO3 ... etc.', &
+     '                            HVMK --> MGLYOX + CO + 2 OH                                             ', &
+     '                            HMAC --> HCOCCH3CO + 2 OH                                               ', &
+     '                        CO2C3CHO --> CH3COCH2O2 + CO + HO2                                          ', &
+     '                        CO2C3CHO --> HVMK                                                           ', &
+     '                        IBUTDIAL --> CO2 + CH3CHO + CO + HO2 + H2O                                  ', &
+     '                        IBUTDIAL --> HMAC                                                           ', &
+     '                        IBUTALOH --> CH3COCH3 + CO + 2 HO2                                          ', &
+     '                       IPRHOCO3H --> CO2 + CH3COCH3 + OH + HO2                                      ', &
+     '                      MALDIALOOH --> C32OH13CO + CO + OH + HO2                                      ', &
+     '                      MALDIALOOH --> 2 GLYOX + OH + HO2                                             ', &
+     '                         BZFUOOH --> CO14O3CHO + OH + HO2                                           ', &
+     '                      HOCOC4DIAL --> HCOCOHCO3 + CO + HO2                                           ', &
+     '                        NBZFUOOH --> 0.5 NBZFUONE + 0.5 CO14O3CHO + OH + 0.5 HO2 + 0.5 NO2 ... etc. ', &
+     '                      MALDALCO3H --> HCOCO3H + 2 CO + 2 HO2                                         ', &
+     '                      MALDALCO3H --> 0.6 MALANHY + 0.4 CO2 + 0.4 GLYOX + 0.4 CO + OH + HO2 ... etc. ', &
+     '                       EPXDLCO2H --> C3DIALO2 + CO2 + HO2                                           ', &
+     '                         MALDIAL --> 0.4 BZFUONE + 0.6 MALDIALCO3 + 0.6 HO2                         ', &
+     '                      MALANHYOOH --> HCOCOHCO3 + CO2 + OH                                           ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_63 = (/ &
-     '                       EPXDLCO3H --> RRJ44408 + C3DIALO2 + CO2 + OH                                 ', &
-     '                       CO2C4DIAL --> RRJ44409 + 4 CO + 2 HO2                                        ', &
-     '                      MALDALCO2H --> RRJ44410 + HCOCO2H + 2 CO + 2 HO2                              ', &
-     '                       EPXC4DIAL --> RRJ44411 + C3DIALO2 + CO + HO2                                 ', &
-     '                       CO14O3CHO --> RRJ44412 + CO2 + HCOCH2O2 + CO + HO2                           ', &
-     '                      MECOACEOOH --> RRJ44414 + CO2 + CH3CO + HCHO + OH                             ', &
-     '                      LISOPACOOH --> RRJ45002 + LISOPACO + OH                                       ', &
-     '                      LISOPACNO3 --> RRJ45003 + LISOPACO + NO2                                      ', &
-     '                        ISOPBOOH --> RRJ45004 + MVK + HCHO + OH + HO2                               ', &
-     '                        ISOPBNO3 --> RRJ45005 + MVK + HCHO + HO2 + NO2                              ', &
-     '                        ISOPDOOH --> RRJ45006 + MACR + HCHO + OH + HO2                              ', &
-     '                        ISOPDNO3 --> RRJ45007 + MACR + HCHO + HO2 + NO2                             ', &
-     '                        NISOPOOH --> RRJ45008 + NC4CHO + OH + HO2                                   ', &
-     '                          NC4CHO --> RRJ45009 + LHC4ACCO3 + NO2                                     ', &
-     '                         LNISOOH --> RRJ45010 + 0.5 HOCHCHO + NOA + 0.5 CO2 + 0.5 CO + OH ... etc.  ', &
-     '                       LHC4ACCHO --> RRJ45011 + 0.5 LHC4ACCO3 + 0.25 LHMVKABO2 + 0.25 MACRO2 ... etc', &
-     '                        LC578OOH --> RRJ45012 + 0.25 HOCHCHO + 0.75 MGLYOX + 0.25 ACETOL ... etc.   ', &
-     '                      LHC4ACCO3H --> RRJ45013 + CO2 + 0.5 LHMVKABO2 + 0.5 MACRO2 + 2 OH             ', &
-     '                      LC5PAN1719 --> RRJ45014 + 0.3 CO2 + 0.7 LHC4ACCO3 + 0.15 LHMVKABO2 ... etc.   ', &
-     '                           HCOC5 --> RRJ45015 + 0.35 CH3COCH2O2 + HOCH2CO + 0.65 CH3 + 0.65 CO ... e', &
-     '                          C59OOH --> RRJ45016 + HOCH2CO + ACETOL + OH                               ', &
-     '                         C511OOH --> RRJ45017 + HCOCH2CHO + CH3CO + OH                              ', &
-     '                       CO23C4CHO --> RRJ45018a + BIACETO2 + CO + HO2                                ', &
-     '                       CO23C4CHO --> RRJ45018b + HCOCH2CO3 + CH3CO                                  ', &
-     '                      CO23C4CO3H --> RRJ45019 + BIACETO2 + CO2 + OH                                 ', &
-     '                         C512OOH --> RRJ45020 + C513O2 + OH                                         ', &
-     '                       CO13C4CHO --> RRJ45021 + CHOC3COO2 + CO + HO2                                ', &
-     '                         C513OOH --> RRJ45022 + HOC2H4CO3 + GLYOX + OH                              ', &
-     '                          C513CO --> RRJ45023 + HOC2H4CO3 + 2 CO + HO2                              ', &
-     '                         C514OOH --> RRJ45024 + CO13C4CHO + OH + HO2                                ' /)
+     '                       EPXDLCO3H --> C3DIALO2 + CO2 + OH                                            ', &
+     '                       CO2C4DIAL --> 4 CO + 2 HO2                                                   ', &
+     '                      MALDALCO2H --> HCOCO2H + 2 CO + 2 HO2                                         ', &
+     '                       EPXC4DIAL --> C3DIALO2 + CO + HO2                                            ', &
+     '                       CO14O3CHO --> CO2 + HCOCH2O2 + CO + HO2                                      ', &
+     '                      MECOACEOOH --> CO2 + CH3CO + OH + HCHO                                        ', &
+     '                      LISOPACOOH --> LISOPACO + OH                                                  ', &
+     '                      LISOPACNO3 --> LISOPACO + NO2                                                 ', &
+     '                        ISOPBOOH --> MVK + OH + HO2 + HCHO                                          ', &
+     '                        ISOPBNO3 --> MVK + HO2 + NO2 + HCHO                                         ', &
+     '                        ISOPDOOH --> MACR + OH + HO2 + HCHO                                         ', &
+     '                        ISOPDNO3 --> MACR + HO2 + NO2 + HCHO                                        ', &
+     '                        NISOPOOH --> NC4CHO + OH + HO2                                              ', &
+     '                          NC4CHO --> LHC4ACCO3 + NO2                                                ', &
+     '                         LNISOOH --> 0.5 HOCHCHO + NOA + 0.5 CO2 + 0.5 CO + OH + 0.5 HO2 ... etc.   ', &
+     '                       LHC4ACCHO --> 0.5 LHC4ACCO3 + 0.25 MACRO2 + 0.25 LHMVKABO2 + 0.5 CO ... etc. ', &
+     '                        LC578OOH --> 0.25 HOCHCHO + 0.25 ACETOL + 0.75 MGLYOX + 0.75 HOCH2CHO ... et', &
+     '                      LHC4ACCO3H --> CO2 + 0.5 MACRO2 + 0.5 LHMVKABO2 + 2 OH                        ', &
+     '                      LC5PAN1719 --> 0.3 CO2 + 0.7 LHC4ACCO3 + 0.15 MACRO2 + 0.15 LHMVKABO2 ... etc.', &
+     '                           HCOC5 --> HOCH2CO + 0.35 CH3COCH2O2 + 0.65 CH3 + 0.65 CO + 0.35 OH ... et', &
+     '                          C59OOH --> HOCH2CO + ACETOL + OH                                          ', &
+     '                         C511OOH --> HCOCH2CHO + CH3CO + OH                                         ', &
+     '                       CO23C4CHO --> BIACETO2 + CO + HO2                                            ', &
+     '                       CO23C4CHO --> HCOCH2CO3 + CH3CO                                              ', &
+     '                      CO23C4CO3H --> BIACETO2 + CO2 + OH                                            ', &
+     '                         C512OOH --> C513O2 + OH                                                    ', &
+     '                       CO13C4CHO --> CHOC3COO2 + CO + HO2                                           ', &
+     '                         C513OOH --> HOC2H4CO3 + GLYOX + OH                                         ', &
+     '                          C513CO --> HOC2H4CO3 + 2 CO + HO2                                         ', &
+     '                         C514OOH --> CO13C4CHO + OH + HO2                                           ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_64 = (/ &
-     '                         C514NO3 --> RRJ45025 + CO13C4CHO + HO2 + NO2                               ', &
-     '                  LZCODC23DBCOOH --> RRJ45026a + HVMK + CO + 2 OH                                   ', &
-     '                  LZCODC23DBCOOH --> RRJ45026b + CH3CO + HOCH2CHO + CO + OH                         ', &
-     '                  LZCODC23DBCOOH --> RRJ45026c + HMAC + CO + 2 OH                                   ', &
-     '                  LZCODC23DBCOOH --> RRJ45026d + ACETOL + 2 CO + OH + HO2                           ', &
-     '                  LZCO3HC23DBCOD --> RRJ45027 + 0.38 EZCHOCCH3CHO2 + 0.62 EZCH3CO2CHCHO + CO2 ... et', &
-     '                  C1OOHC2OOHC4OD --> RRJ45028a + HYPERACET + 2 CO + OH + HO2                        ', &
-     '                  C1OOHC2OOHC4OD --> RRJ45028b + 0.5 HOCHCHO + 0.5 HYPERACET + 0.5 CO2H3CHO ... etc.', &
-     '                          DB1OOH --> RRJ45029 + DB1O + OH                                           ', &
-     '                          DB2OOH --> RRJ45030 + 0.52 MGLYOX + 0.48 ACETOL + 0.48 GLYOX + 0.52 HOCH2C', &
-     '                   C1ODC2OOHC4OD --> RRJ45031a + HOCHCHO + MGLYOX + OH                              ', &
-     '                   C1ODC2OOHC4OD --> RRJ45031b + CO2H3CHO + CO + OH + HO2                           ', &
-     '                         C4MDIAL --> RRJ45032 + 0.5 CH3COCHCO + 0.5 HCOCCH3CO + CO + OH + HO2 ... et', &
-     '                          DB1NO3 --> RRJ45033 + DB1O + NO2                                          ', &
-     '                      CHOC3COOOH --> RRJ45034 + CHOC3COO2 + CO2 + OH                                ', &
-     '                       LMBOABOOH --> RRJ45200a + CH3COCH3 + HOCH2CHO + OH + HO2                     ', &
-     '                       LMBOABOOH --> RRJ45200b + IBUTALOH + HCHO + OH + HO2                         ', &
-     '                          MBOACO --> RRJ45201 + IPRHOCO3 + HCHO + HO2                               ', &
-     '                         MBOCOCO --> RRJ45202 + IPRHOCO3 + CO + HO2                                 ', &
-     '                      LNMBOABOOH --> RRJ45203a + NO3CH2CHO + CH3COCH3 + OH + HO2                    ', &
-     '                      LNMBOABOOH --> RRJ45203b + IBUTALOH + HCHO + OH + NO2                         ', &
-     '                       NC4OHCO3H --> RRJ45204 + IBUTALOH + CO2 + OH + NO2                           ', &
-     '                           C54CO --> RRJ45400 + CH3CO + 3 CO + HO2                                  ', &
-     '                      C5134CO2OH --> RRJ45401 + CO23C3CHO + CO + 2 HO2                              ', &
-     '                       C5DIALOOH --> RRJ45402 + MALDIAL + CO + OH + HO2                             ', &
-     '                        C5CO14OH --> RRJ45406 + CH3CO + HCOCO2H + CO + HO2                          ', &
-     '                        C5DICARB --> RRJ45407 + 0.6 C5CO14O2 + 0.4 TLFUONE + 0.6 HO2                ', &
-     '                      MC3ODBCO2H --> RRJ45408 + CH3COCO2H + 2 CO + 2 HO2                            ', &
-     '                       ACCOMECHO --> RRJ45409 + MECOACETO2 + CO + HO2                               ', &
-     '                      MMALNHYOOH --> RRJ45410 + CO2H3CO3 + CO2 + OH                                 ' /)
+     '                         C514NO3 --> CO13C4CHO + HO2 + NO2                                          ', &
+     '                  LZCODC23DBCOOH --> HVMK + CO + 2 OH                                               ', &
+     '                  LZCODC23DBCOOH --> CH3CO + HOCH2CHO + CO + OH                                     ', &
+     '                  LZCODC23DBCOOH --> HMAC + CO + 2 OH                                               ', &
+     '                  LZCODC23DBCOOH --> ACETOL + 2 CO + OH + HO2                                       ', &
+     '                  LZCO3HC23DBCOD --> 0.38 EZCHOCCH3CHO2 + CO2 + 0.62 EZCH3CO2CHCHO + OH             ', &
+     '                  C1OOHC2OOHC4OD --> HYPERACET + 2 CO + OH + HO2                                    ', &
+     '                  C1OOHC2OOHC4OD --> 0.5 HOCHCHO + 0.5 HYPERACET + 0.5 CO2H3CHO + 1.5 OH ... etc.   ', &
+     '                          DB1OOH --> DB1O + OH                                                      ', &
+     '                          DB2OOH --> 0.48 GLYOX + 0.48 ACETOL + 0.52 MGLYOX + 0.52 HOCH2CHO ... etc.', &
+     '                   C1ODC2OOHC4OD --> HOCHCHO + MGLYOX + OH                                          ', &
+     '                   C1ODC2OOHC4OD --> CO2H3CHO + CO + OH + HO2                                       ', &
+     '                         C4MDIAL --> 0.5 CH3COCHCO + 0.5 HCOCCH3CO + CO + OH + HO2                  ', &
+     '                          DB1NO3 --> DB1O + NO2                                                     ', &
+     '                      CHOC3COOOH --> CHOC3COO2 + CO2 + OH                                           ', &
+     '                       LMBOABOOH --> CH3COCH3 + HOCH2CHO + OH + HO2                                 ', &
+     '                       LMBOABOOH --> IBUTALOH + OH + HO2 + HCHO                                     ', &
+     '                          MBOACO --> IPRHOCO3 + HO2 + HCHO                                          ', &
+     '                         MBOCOCO --> IPRHOCO3 + CO + HO2                                            ', &
+     '                      LNMBOABOOH --> NO3CH2CHO + CH3COCH3 + OH + HO2                                ', &
+     '                      LNMBOABOOH --> IBUTALOH + OH + NO2 + HCHO                                     ', &
+     '                       NC4OHCO3H --> IBUTALOH + CO2 + OH + NO2                                      ', &
+     '                           C54CO --> CH3CO + 3 CO + HO2                                             ', &
+     '                      C5134CO2OH --> CO23C3CHO + CO + 2 HO2                                         ', &
+     '                       C5DIALOOH --> MALDIAL + CO + OH + HO2                                        ', &
+     '                        C5CO14OH --> CH3CO + HCOCO2H + CO + HO2                                     ', &
+     '                        C5DICARB --> 0.4 TLFUONE + 0.6 C5CO14O2 + 0.6 HO2                           ', &
+     '                      MC3ODBCO2H --> CH3COCO2H + 2 CO + 2 HO2                                       ', &
+     '                       ACCOMECHO --> MECOACETO2 + CO + HO2                                          ', &
+     '                      MMALNHYOOH --> CO2 + CO2H3CO3 + OH                                            ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_65 = (/ &
-     '                      C5DICAROOH --> RRJ45411 + MGLYOX + GLYOX + OH + HO2                           ', &
-     '                        NTLFUOOH --> RRJ45412 + ACCOMECHO + OH + NO2                                ', &
-     '                       C5CO14OOH --> RRJ45414 + 0.83 MALANHY + 0.17 CO2 + 0.17 MGLYOX + 0.83 CH3 ...', &
-     '                         TLFUOOH --> RRJ45415 + ACCOMECHO + OH + HO2                                ', &
-     '                      ACCOMECO3H --> RRJ45417 + MECOACETO2 + CO2 + OH                               ', &
-     '                        C5DIALCO --> RRJ45418 + MALDIALCO3 + CO + HO2                               ', &
-     '                         C614NO3 --> RRJ46200 + CO23C4CHO + HCHO + HO2 + NO2                        ', &
-     '                         C614OOH --> RRJ46201 + CO23C4CHO + HCHO + OH + HO2                         ', &
-     '                      CO235C5CHO --> RRJ46202 + CO23C4CO3 + CO + HO2                                ', &
-     '                      CO235C6OOH --> RRJ46203 + CO23C4CO3 + HCHO + OH                               ', &
-     '                         PHENOOH --> RRJ46400 + 0.29 PBZQONE + 0.71 MALDALCO2H + 0.71 GLYOX ... etc.', &
-     '                         C6CO4DB --> RRJ46401 + C4CO2DBCO3 + CO + HO2                               ', &
-     '                      C5CO2DCO3H --> RRJ46402 + C33CO + CO2 + CH3CO + OH                            ', &
-     '                      NDNPHENOOH --> RRJ46403 + NC4DCO2H + HNO3 + 2 CO + OH + NO2                   ', &
-     '                      BZBIPERNO3 --> RRJ46404 + BZFUONE + GLYOX + HO2 + NO2                         ', &
-     '                       HOC6H4NO2 --> RRJ46405 + CPDKETENE + HONO                                    ', &
-     '                       CPDKETENE --> RRJ46406 + CO2 + MALDIAL + CO + 2 HO2                          ', &
-     '                      C5COOHCO3H --> RRJ46407 + HOCOC4DIAL + CO2 + CO + OH + HO2                    ', &
-     '                       BZEPOXMUC --> RRJ46408 + 0.5 C5DIALO2 + 0.5 MALDIAL + 1.5 CO + 1.5 HO2 ... et', &
-     '                       NPHEN1OOH --> RRJ46409 + NPHEN1O + OH                                        ', &
-     '                        BZEMUCCO --> RRJ46410 + C3DIALO2 + HCOCOHCO3                                ', &
-     '                      BZEMUCCO2H --> RRJ46411 + C5DIALO2 + CO2 + HO2                                ', &
-     '                      NNCATECOOH --> RRJ46412 + NC4DCO2H + HCOCO2H + OH + NO2                       ', &
-     '                      C615CO2OOH --> RRJ46413 + C5DICARB + CO + OH + HO2                            ', &
-     '                        NPHENOOH --> RRJ46414 + MALDALCO2H + GLYOX + OH + NO2                       ', &
-     '                       NCATECOOH --> RRJ46415 + NC4DCO2H + HCOCO2H + OH + HO2                       ', &
-     '                         PBZQOOH --> RRJ46416 + C5CO2OHCO3 + OH                                     ', &
-     '                      BZOBIPEROH --> RRJ46417 + MALDIALCO3 + GLYOX + HO2                            ', &
-     '                      BZBIPEROOH --> RRJ46418 + BZFUONE + GLYOX + OH + HO2                          ', &
-     '                         NBZQOOH --> RRJ46419 + C6CO4DB + OH + NO2                                  ' /)
+     '                      C5DICAROOH --> GLYOX + MGLYOX + OH + HO2                                      ', &
+     '                        NTLFUOOH --> ACCOMECHO + OH + NO2                                           ', &
+     '                       C5CO14OOH --> 0.83 MALANHY + 0.17 CO2 + 0.83 CH3 + 0.17 MGLYOX + 0.17 CO ... ', &
+     '                         TLFUOOH --> ACCOMECHO + OH + HO2                                           ', &
+     '                      ACCOMECO3H --> MECOACETO2 + CO2 + OH                                          ', &
+     '                        C5DIALCO --> MALDIALCO3 + CO + HO2                                          ', &
+     '                         C614NO3 --> CO23C4CHO + HO2 + NO2 + HCHO                                   ', &
+     '                         C614OOH --> CO23C4CHO + OH + HO2 + HCHO                                    ', &
+     '                      CO235C5CHO --> CO23C4CO3 + CO + HO2                                           ', &
+     '                      CO235C6OOH --> CO23C4CO3 + OH + HCHO                                          ', &
+     '                         PHENOOH --> 0.29 PBZQONE + 0.71 MALDALCO2H + 0.71 GLYOX + OH + HO2 ... etc.', &
+     '                         C6CO4DB --> C4CO2DBCO3 + CO + HO2                                          ', &
+     '                      C5CO2DCO3H --> C33CO + CO2 + CH3CO + OH                                       ', &
+     '                      NDNPHENOOH --> NC4DCO2H + HNO3 + 2 CO + OH + NO2                              ', &
+     '                      BZBIPERNO3 --> BZFUONE + GLYOX + HO2 + NO2                                    ', &
+     '                       HOC6H4NO2 --> CPDKETENE + HONO                                               ', &
+     '                       CPDKETENE --> CO2 + MALDIAL + CO + 2 HO2                                     ', &
+     '                      C5COOHCO3H --> HOCOC4DIAL + CO2 + CO + OH + HO2                               ', &
+     '                       BZEPOXMUC --> 0.5 C5DIALO2 + 0.5 MALDIAL + 1.5 CO + 1.5 HO2                  ', &
+     '                       NPHEN1OOH --> NPHEN1O + OH                                                   ', &
+     '                        BZEMUCCO --> C3DIALO2 + HCOCOHCO3                                           ', &
+     '                      BZEMUCCO2H --> C5DIALO2 + CO2 + HO2                                           ', &
+     '                      NNCATECOOH --> NC4DCO2H + HCOCO2H + OH + NO2                                  ', &
+     '                      C615CO2OOH --> C5DICARB + CO + OH + HO2                                       ', &
+     '                        NPHENOOH --> MALDALCO2H + GLYOX + OH + NO2                                  ', &
+     '                       NCATECOOH --> NC4DCO2H + HCOCO2H + OH + HO2                                  ', &
+     '                         PBZQOOH --> C5CO2OHCO3 + OH                                                ', &
+     '                      BZOBIPEROH --> MALDIALCO3 + GLYOX + HO2                                       ', &
+     '                      BZBIPEROOH --> BZFUONE + GLYOX + OH + HO2                                     ', &
+     '                         NBZQOOH --> C6CO4DB + OH + NO2                                             ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_66 = (/ &
-     '                       CATEC1OOH --> RRJ46420 + CATEC1O + OH                                        ', &
-     '                         C6125CO --> RRJ46421 + C5CO14O2 + CO + HO2                                 ', &
-     '                       DNPHENOOH --> RRJ46422 + NC4DCO2H + HCOCO2H + OH + NO2                       ', &
-     '                      BZEMUCCO3H --> RRJ46423 + C5DIALO2 + CO2 + OH                                 ', &
-     '                         C6H5OOH --> RRJ46424 + C6H5O + OH                                          ', &
-     '                       BZEMUCOOH --> RRJ46425 + 0.5 C32OH13CO + 0.5 C3DIALO2 + 0.5 EPXC4DIAL ... etc', &
-     '                       BZEMUCNO3 --> RRJ46427 + EPXC4DIAL + GLYOX + HO2 + NO2                       ', &
-     '                          DNPHEN --> RRJ46428 + NCPDKETENE + HONO                                   ', &
-     '                      NCPDKETENE --> RRJ46429 + NC4DCO2H + CO2 + CO + 2 HO2                         ', &
-     '                      CO235C6CHO --> RRJ47200 + CHOC3COCO3 + CH3CO                                  ', &
-     '                      C235C6CO3H --> RRJ47201 + CO235C6O2 + CO2 + OH                                ', &
-     '                         C716OOH --> RRJ47202 + CO13C4CHO + CH3CO + OH                              ', &
-     '                         C721OOH --> RRJ47203 + C722O2 + OH                                         ', &
-     '                         C722OOH --> RRJ47204 + C44O2 + CH3COCH3 + OH                               ', &
-     '                       TLEPOXMUC --> RRJ47400 + 0.5 C615CO2O2 + 0.5 EPXC4DIAL + 0.5 CH3CO ... etc.  ', &
-     '                      C6H5CH2OOH --> RRJ47401 + BENZAL + OH + HO2                                   ', &
-     '                      C6H5CH2NO3 --> RRJ47402 + BENZAL + HO2 + NO2                                  ', &
-     '                          BENZAL --> RRJ47403 + C6H5O2 + CO + HO2                                   ', &
-     '                      TLBIPEROOH --> RRJ47404 + 0.2 BZFUONE + 0.2 TLFUONE + 0.2 MALDIAL + 0.2 C5DICA', &
-     '                      TLBIPERNO3 --> RRJ47405 + 0.2 BZFUONE + 0.2 TLFUONE + 0.2 MALDIAL + 0.2 C5DICA', &
-     '                      TLOBIPEROH --> RRJ47406 + C5CO14O2 + GLYOX + HO2                              ', &
-     '                         CRESOOH --> RRJ47407 + 0.32 PTLQONE + 0.68 C5CO14OH + 0.68 GLYOX ... etc.  ', &
-     '                        NCRESOOH --> RRJ47408a + 0.32 PTLQONE + 0.68 C5CO14OH + 0.68 GLYOX ... etc. ', &
-     '                        NCRESOOH --> RRJ47408b + C5CO14OH + GLYOX + OH + NO2                        ', &
-     '                       TOL1OHNO2 --> RRJ47409 + MCPDKETENE + HONO                                   ', &
-     '                      TLEMUCCO2H --> RRJ47410 + C615CO2O2 + CO2 + HO2                               ', &
-     '                      TLEMUCCO3H --> RRJ47411 + C615CO2O2 + CO2 + OH                                ', &
-     '                       TLEMUCOOH --> RRJ47412 + 0.5 C3DIALO2 + 0.5 EPXC4DIAL + 0.5 CO2H3CHO ... etc.', &
-     '                       TLEMUCNO3 --> RRJ47413 + EPXC4DIAL + CH3CO + CO + HO2 + NO2                  ', &
-     '                        TLEMUCCO --> RRJ47414 + EPXC4DIAL + CH3CO + CO + HO2                        ' /)
+     '                       CATEC1OOH --> CATEC1O + OH                                                   ', &
+     '                         C6125CO --> C5CO14O2 + CO + HO2                                            ', &
+     '                       DNPHENOOH --> NC4DCO2H + HCOCO2H + OH + NO2                                  ', &
+     '                      BZEMUCCO3H --> C5DIALO2 + CO2 + OH                                            ', &
+     '                         C6H5OOH --> C6H5O + OH                                                     ', &
+     '                       BZEMUCOOH --> 0.5 C32OH13CO + 0.5 EPXC4DIAL + 0.5 C3DIALO2 + 0.5 GLYOX ... et', &
+     '                       BZEMUCNO3 --> EPXC4DIAL + GLYOX + HO2 + NO2                                  ', &
+     '                          DNPHEN --> NCPDKETENE + HONO                                              ', &
+     '                      NCPDKETENE --> NC4DCO2H + CO2 + CO + 2 HO2                                    ', &
+     '                      CO235C6CHO --> CHOC3COCO3 + CH3CO                                             ', &
+     '                      C235C6CO3H --> CO235C6O2 + CO2 + OH                                           ', &
+     '                         C716OOH --> CO13C4CHO + CH3CO + OH                                         ', &
+     '                         C721OOH --> C722O2 + OH                                                    ', &
+     '                         C722OOH --> C44O2 + CH3COCH3 + OH                                          ', &
+     '                       TLEPOXMUC --> 0.5 C615CO2O2 + 0.5 EPXC4DIAL + 0.5 CH3CO + CO + HO2 ... etc.  ', &
+     '                      C6H5CH2OOH --> BENZAL + OH + HO2                                              ', &
+     '                      C6H5CH2NO3 --> BENZAL + HO2 + NO2                                             ', &
+     '                          BENZAL --> C6H5O2 + CO + HO2                                              ', &
+     '                      TLBIPEROOH --> 0.2 BZFUONE + 0.2 TLFUONE + 0.2 MALDIAL + 0.2 C5DICARB ... etc.', &
+     '                      TLBIPERNO3 --> 0.2 BZFUONE + 0.2 TLFUONE + 0.2 MALDIAL + 0.2 C5DICARB ... etc.', &
+     '                      TLOBIPEROH --> C5CO14O2 + GLYOX + HO2                                         ', &
+     '                         CRESOOH --> 0.32 PTLQONE + 0.68 C5CO14OH + 0.68 GLYOX + OH + HO2 ... etc.  ', &
+     '                        NCRESOOH --> 0.32 PTLQONE + 0.68 C5CO14OH + 0.68 GLYOX + OH + HO2 ... etc.  ', &
+     '                        NCRESOOH --> C5CO14OH + GLYOX + OH + NO2                                    ', &
+     '                       TOL1OHNO2 --> MCPDKETENE + HONO                                              ', &
+     '                      TLEMUCCO2H --> C615CO2O2 + CO2 + HO2                                          ', &
+     '                      TLEMUCCO3H --> C615CO2O2 + CO2 + OH                                           ', &
+     '                       TLEMUCOOH --> 0.5 EPXC4DIAL + 0.5 C3DIALO2 + 0.5 CO2H3CHO + 0.5 MGLYOX ... et', &
+     '                       TLEMUCNO3 --> EPXC4DIAL + CH3CO + CO + HO2 + NO2                             ', &
+     '                        TLEMUCCO --> EPXC4DIAL + CH3CO + CO + HO2                                   ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_67 = (/ &
-     '                        C6H5CO3H --> RRJ47415 + C6H5O2 + CO2 + OH                                   ', &
-     '                        OXYL1OOH --> RRJ47416 + TOL1O + OH                                          ', &
-     '                        MNCATECH --> RRJ47417 + MCPDKETENE + HONO                                   ', &
-     '                      MCPDKETENE --> RRJ47418 + CO2 + C4MDIAL + CO + 2 HO2                          ', &
-     '                          DNCRES --> RRJ47419 + MNCPDKETENE + HONO                                  ', &
-     '                     MNCPDKETENE --> RRJ47420 + NC4MDCO2H + CO2 + CO + 2 HO2                        ', &
-     '                      MCATEC1OOH --> RRJ47421 + MCATEC1O + OH                                       ', &
-     '                        NPTLQOOH --> RRJ47422 + C7CO4DB + OH + NO2                                  ', &
-     '                         PTLQOOH --> RRJ47423 + C6CO2OHCO3 + OH                                     ', &
-     '                       NCRES1OOH --> RRJ47424 + NCRES1O + OH                                        ', &
-     '                      MNNCATCOOH --> RRJ47425 + NC4MDCO2H + HCOCO2H + OH + NO2                      ', &
-     '                      MNCATECOOH --> RRJ47426 + NC4MDCO2H + HCOCO2H + OH + HO2                      ', &
-     '                         C7CO4DB --> RRJ47427 + C5CO2DBCO3 + CO + HO2                               ', &
-     '                      NDNCRESOOH --> RRJ47428 + NC4MDCO2H + HNO3 + 2 CO + OH + NO2                  ', &
-     '                       DNCRESOOH --> RRJ47429 + NC4MDCO2H + HCOCO2H + OH + NO2                      ', &
-     '                      C6COOHCO3H --> RRJ47430 + C5134CO2OH + CO2 + CO + OH + HO2                    ', &
-     '                          C86OOH --> RRJ48200 + C511O2 + CH3COCH3 + OH                              ', &
-     '                         C812OOH --> RRJ48201 + C813O2 + OH                                         ', &
-     '                         C813OOH --> RRJ48202 + C512O2 + CH3COCH3 + OH                              ', &
-     '                         C721CHO --> RRJ48203 + C721O2 + CO + HO2                                   ', &
-     '                        C721CO3H --> RRJ48204 + C721O2 + CO2 + OH                                   ', &
-     '                         C8BCOOH --> RRJ48205 + C89O2 + OH                                          ', &
-     '                          C89OOH --> RRJ48206 + C810O2 + OH                                         ', &
-     '                          C89NO3 --> RRJ48207 + C810O2 + NO2                                        ', &
-     '                         C810OOH --> RRJ48208 + C514O2 + CH3COCH3 + OH                              ', &
-     '                         C810NO3 --> RRJ48209 + C514O2 + CH3COCH3 + NO2                             ', &
-     '                         C8BCNO3 --> RRJ48210 + C89O2 + NO2                                         ', &
-     '                          C85OOH --> RRJ48211 + C86O2 + OH                                          ', &
-     '                       STYRENOOH --> RRJ48400 + BENZAL + HCHO + OH + HO2                            ', &
-     '                          C96OOH --> RRJ49200 + C97O2 + OH                                          ' /)
+     '                        C6H5CO3H --> C6H5O2 + CO2 + OH                                              ', &
+     '                        OXYL1OOH --> TOL1O + OH                                                     ', &
+     '                        MNCATECH --> MCPDKETENE + HONO                                              ', &
+     '                      MCPDKETENE --> CO2 + C4MDIAL + CO + 2 HO2                                     ', &
+     '                          DNCRES --> MNCPDKETENE + HONO                                             ', &
+     '                     MNCPDKETENE --> NC4MDCO2H + CO2 + CO + 2 HO2                                   ', &
+     '                      MCATEC1OOH --> MCATEC1O + OH                                                  ', &
+     '                        NPTLQOOH --> C7CO4DB + OH + NO2                                             ', &
+     '                         PTLQOOH --> C6CO2OHCO3 + OH                                                ', &
+     '                       NCRES1OOH --> NCRES1O + OH                                                   ', &
+     '                      MNNCATCOOH --> NC4MDCO2H + HCOCO2H + OH + NO2                                 ', &
+     '                      MNCATECOOH --> NC4MDCO2H + HCOCO2H + OH + HO2                                 ', &
+     '                         C7CO4DB --> C5CO2DBCO3 + CO + HO2                                          ', &
+     '                      NDNCRESOOH --> NC4MDCO2H + HNO3 + 2 CO + OH + NO2                             ', &
+     '                       DNCRESOOH --> NC4MDCO2H + HCOCO2H + OH + NO2                                 ', &
+     '                      C6COOHCO3H --> C5134CO2OH + CO2 + CO + OH + HO2                               ', &
+     '                          C86OOH --> C511O2 + CH3COCH3 + OH                                         ', &
+     '                         C812OOH --> C813O2 + OH                                                    ', &
+     '                         C813OOH --> C512O2 + CH3COCH3 + OH                                         ', &
+     '                         C721CHO --> C721O2 + CO + HO2                                              ', &
+     '                        C721CO3H --> C721O2 + CO2 + OH                                              ', &
+     '                         C8BCOOH --> C89O2 + OH                                                     ', &
+     '                          C89OOH --> C810O2 + OH                                                    ', &
+     '                          C89NO3 --> C810O2 + NO2                                                   ', &
+     '                         C810OOH --> C514O2 + CH3COCH3 + OH                                         ', &
+     '                         C810NO3 --> C514O2 + CH3COCH3 + NO2                                        ', &
+     '                         C8BCNO3 --> C89O2 + NO2                                                    ', &
+     '                          C85OOH --> C86O2 + OH                                                     ', &
+     '                       STYRENOOH --> BENZAL + OH + HO2 + HCHO                                       ', &
+     '                          C96OOH --> C97O2 + OH                                                     ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_68 = (/ &
-     '                          C97OOH --> RRJ49201 + C98O2 + OH                                          ', &
-     '                          C98OOH --> RRJ49202 + C614O2 + CH3COCH3 + OH                              ', &
-     '                        NORPINAL --> RRJ49203a + C85O2 + CO + HO2                                   ', &
-     '                        NORPINAL --> RRJ49203b + NORPINENOL                                         ', &
-     '                         C85CO3H --> RRJ49204 + C85O2 + CO2 + OH                                    ', &
-     '                         C89CO2H --> RRJ49205 + 0.2 C89O2 + 0.8 C811CO3 + 0.2 CO2 + HO2             ', &
-     '                         C89CO3H --> RRJ49206 + 0.2 C89O2 + 0.8 C811CO3 + 0.2 CO2 + OH              ', &
-     '                        C811CO3H --> RRJ49207 + C811O2 + CO2 + OH                                   ', &
-     '                       NOPINDOOH --> RRJ49208 + C89CO3 + OH                                         ', &
-     '                      LAPINABOOH --> RRJ40200 + PINAL + OH + HO2                                    ', &
-     '                     MENTHEN6ONE --> RRJ40201 + RO6R1O2 + OH                                        ', &
-     '                  OH2MENTHEN6ONE --> 1 LCARBON + RRJ40202 + OH                                      ', &
-     '                           PINAL --> RRJ40203a + C96O2 + CO + HO2                                   ', &
-     '                           PINAL --> RRJ40203b + PINENOL                                            ', &
-     '                      PERPINONIC --> RRJ40204 + CO2 + C96O2 + OH                                    ', &
-     '                        PINALOOH --> RRJ40205 + C106O2 + OH                                         ', &
-     '                        PINALNO3 --> RRJ40206 + C106O2 + NO2                                        ', &
-     '                         C106OOH --> RRJ40207 + C716O2 + CH3COCH3 + OH                              ', &
-     '                         C106NO3 --> RRJ40208 + C716O2 + CH3COCH3 + NO2                             ', &
-     '                         C109OOH --> RRJ40209 + C89CO3 + HCHO + OH                                  ', &
-     '                          C109CO --> RRJ40210 + C89CO3 + CO + HO2                                   ', &
-     '                     LNAPINABOOH --> RRJ40211 + PINAL + OH + NO2                                    ', &
-     '                        BPINAOOH --> RRJ40212 + NOPINONE + HCHO + OH + HO2                          ', &
-     '                     LNBPINABOOH --> RRJ40213 + NOPINONE + HCHO + OH + NO2                          ', &
-     '                       ROO6R1NO3 --> RRJ40214 + ROO6R3O2 + CH3COCH3 + NO2                           ', &
-     '                        RO6R1NO3 --> 9 LCARBON + RRJ40215 + HCHO + HO2 + NO2                        ', &
-     '                             Cl2 --> RRJ6000 + 2 Cl                                                 ', &
-     '                           Cl2O2 --> RRJ6100 + 2 Cl                                                 ', &
-     '                            OClO --> RRJ6101 + ClO + O3P                                            ', &
-     '                             ClO --> RRJ61MS + O3P + Cl                                             ' /)
+     '                          C97OOH --> C98O2 + OH                                                     ', &
+     '                          C98OOH --> C614O2 + CH3COCH3 + OH                                         ', &
+     '                        NORPINAL --> C85O2 + CO + HO2                                               ', &
+     '                        NORPINAL --> NORPINENOL                                                     ', &
+     '                         C85CO3H --> C85O2 + CO2 + OH                                               ', &
+     '                         C89CO2H --> 0.2 C89O2 + 0.8 C811CO3 + 0.2 CO2 + HO2                        ', &
+     '                         C89CO3H --> 0.2 C89O2 + 0.8 C811CO3 + 0.2 CO2 + OH                         ', &
+     '                        C811CO3H --> C811O2 + CO2 + OH                                              ', &
+     '                       NOPINDOOH --> C89CO3 + OH                                                    ', &
+     '                      LAPINABOOH --> PINAL + OH + HO2                                               ', &
+     '                     MENTHEN6ONE --> RO6R1O2 + OH                                                   ', &
+     '                  OH2MENTHEN6ONE --> 1 LCARBON + OH                                                 ', &
+     '                           PINAL --> C96O2 + CO + HO2                                               ', &
+     '                           PINAL --> PINENOL                                                        ', &
+     '                      PERPINONIC --> CO2 + C96O2 + OH                                               ', &
+     '                        PINALOOH --> C106O2 + OH                                                    ', &
+     '                        PINALNO3 --> C106O2 + NO2                                                   ', &
+     '                         C106OOH --> C716O2 + CH3COCH3 + OH                                         ', &
+     '                         C106NO3 --> C716O2 + CH3COCH3 + NO2                                        ', &
+     '                         C109OOH --> C89CO3 + OH + HCHO                                             ', &
+     '                          C109CO --> C89CO3 + CO + HO2                                              ', &
+     '                     LNAPINABOOH --> PINAL + OH + NO2                                               ', &
+     '                        BPINAOOH --> NOPINONE + OH + HO2 + HCHO                                     ', &
+     '                     LNBPINABOOH --> NOPINONE + OH + NO2 + HCHO                                     ', &
+     '                       ROO6R1NO3 --> ROO6R3O2 + CH3COCH3 + NO2                                      ', &
+     '                        RO6R1NO3 --> 9 LCARBON + HO2 + NO2 + HCHO                                   ', &
+     '                             Cl2 --> 2 Cl                                                           ', &
+     '                           Cl2O2 --> 2 Cl                                                           ', &
+     '                            OClO --> ClO + O3P                                                      ', &
+     '                             ClO --> O3P + Cl                                                       ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_69 = (/ &
-     '                            Cl2O --> RRJ62MS + ClO + Cl                                             ', &
-     '                           Cl2O3 --> ClO2 + RRJ63MS + ClO                                           ', &
-     '                            HOCl --> RRJ6201 + OH + Cl                                              ', &
-     '                           ClNO2 --> RRJ6300 + Cl + NO2                                             ', &
-     '                           ClNO3 --> RRJ6301a + NO3 + Cl                                            ', &
-     '                           ClNO3 --> RRJ6301b + ClO + NO2                                           ', &
-     '                            ClNO --> RRJ64MS + Cl + NO                                              ', &
-     '                           ClONO --> RRJ65MS + Cl + NO2                                             ', &
-     '                             Br2 --> RRJ7000 + 2 Br                                                 ', &
-     '                             BrO --> RRJ7100 + O3P + Br                                             ', &
-     '                            HOBr --> RRJ7200 + OH + Br                                              ', &
-     '                           BrNO2 --> RRJ7300 + Br + NO2                                             ', &
-     '                           BrNO3 --> RRJ7301 + 0.15 BrO + 0.85 Br + 0.85 NO3 + 0.15 NO2             ', &
-     '                          CH2Br2 --> LCARBON + RRJ7401 + 2 Br                                       ', &
-     '                           CHBr3 --> LCARBON + RRJ7402 + 3 Br                                       ', &
-     '                            BrCl --> RRJ7600 + Br + Cl                                              ', &
-     '                         CH2ClBr --> LCARBON + RRJ7602 + Br + Cl                                    ', &
-     '                         CHCl2Br --> LCARBON + RRJ7603 + Br + 2 Cl                                  ', &
-     '                         CHClBr2 --> LCARBON + RRJ7604 + 2 Br + Cl                                  ', &
-     '                O3_a01 + O2m_a01 --> RRA10000_a01 + O3m_a01 + O2_a01                                ', &
-     '                OH_a01 + O2m_a01 --> RRA21000_a01 + OHm_a01                                         ', &
-     '                        2 OH_a01 --> RRA21001_a01 + H2O2_a01                                        ', &
-     '               O2m_a01 + HO2_a01 --> RRA21002_a01 + OHm_a01 + H2O2_a01                              ', &
-     '                OH_a01 + HO2_a01 --> RRA21003_a01 + H2O_a01                                         ', &
-     '                       2 HO2_a01 --> RRA21004_a01 + H2O2_a01                                        ', &
-     '               OH_a01 + H2O2_a01 --> RRA21005_a01 + HO2_a01                                         ', &
-     '                 O3_a01 + OH_a01 --> RRA21006_a01 + HO4_a01                                         ', &
-     '                OHm_a01 + O3_a01 --> RRA21007_a01 + O2m_a01 + HO2_a01                               ', &
-     '                         HO3_a01 --> RRA21008_a01 + O2_a01 + OH_a01                                 ', &
-     '                         HO4_a01 --> RRA21009_a01 + O2_a01 + HO2_a01                                ' /)
+     '                            Cl2O --> ClO + Cl                                                       ', &
+     '                           Cl2O3 --> ClO2 + ClO                                                     ', &
+     '                            HOCl --> Cl + OH                                                        ', &
+     '                           ClNO2 --> Cl + NO2                                                       ', &
+     '                           ClNO3 --> Cl + NO3                                                       ', &
+     '                           ClNO3 --> ClO + NO2                                                      ', &
+     '                            ClNO --> Cl + NO                                                        ', &
+     '                           ClONO --> Cl + NO2                                                       ', &
+     '                             Br2 --> 2 Br                                                           ', &
+     '                             BrO --> O3P + Br                                                       ', &
+     '                            HOBr --> Br + OH                                                        ', &
+     '                           BrNO2 --> Br + NO2                                                       ', &
+     '                           BrNO3 --> 0.15 BrO + 0.85 Br + 0.15 NO2 + 0.85 NO3                       ', &
+     '                          CH2Br2 --> LCARBON + 2 Br                                                 ', &
+     '                           CHBr3 --> LCARBON + 3 Br                                                 ', &
+     '                            BrCl --> Br + Cl                                                        ', &
+     '                         CH2ClBr --> LCARBON + Br + Cl                                              ', &
+     '                         CHCl2Br --> LCARBON + Br + 2 Cl                                            ', &
+     '                         CHClBr2 --> LCARBON + 2 Br + Cl                                            ', &
+     '                O2m_a01 + O3_a01 --> O3m_a01 + O2_a01                                               ', &
+     '                O2m_a01 + OH_a01 --> OHm_a01                                                        ', &
+     '                        2 OH_a01 --> H2O2_a01                                                       ', &
+     '               O2m_a01 + HO2_a01 --> OHm_a01 + H2O2_a01                                             ', &
+     '                HO2_a01 + OH_a01 --> H2O_a01                                                        ', &
+     '                       2 HO2_a01 --> H2O2_a01                                                       ', &
+     '               H2O2_a01 + OH_a01 --> HO2_a01                                                        ', &
+     '                 O3_a01 + OH_a01 --> HO4_a01                                                        ', &
+     '                OHm_a01 + O3_a01 --> O2m_a01 + HO2_a01                                              ', &
+     '                         HO3_a01 --> O2_a01 + OH_a01                                                ', &
+     '                         HO4_a01 --> O2_a01 + HO2_a01                                               ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_70 = (/ &
-     '                       2 HO4_a01 --> RRA21010_a01 + 2 O3_a01 + H2O2_a01                             ', &
-     '               HO4_a01 + HO3_a01 --> RRA21011_a01 + O2_a01 + O3_a01 + H2O2_a01                      ', &
-     '               NO2m_a01 + O3_a01 --> RRA31000_a01 + NO3m_a01                                        ', &
-     '                       2 NO2_a01 --> RRA31001_a01 + HNO3_a01 + HONO_a01                             ', &
-     '                        NO4m_a01 --> RRA31002_a01 + NO2m_a01                                        ', &
-     '                        N2O5_a01 --> RRA310MS_a01 + NO3m_a01 + NO2p_a01                             ', &
-     '             NO3m_a01 + NO2p_a01 --> RRA311MS_a01 + N2O5_a01                                        ', &
-     '               NO2_a01 + HO2_a01 --> RRA32000_a01 + HNO4_a01                                        ', &
-     '               NO2m_a01 + OH_a01 --> RRA32001_a01 + NO2_a01 + OHm_a01                               ', &
-     '               OHm_a01 + NO3_a01 --> RRA32002_a01 + NO3m_a01 + OH_a01                               ', &
-     '               HONO_a01 + OH_a01 --> RRA32003_a01 + NO2_a01                                         ', &
-     '    HONO_a01 + Hp_a01 + H2O2_a01 --> RRA32004_a01 + HNO3_a01 + Hp_a01                               ', &
-     '              NO2p_a01 + H2O_a01 --> RRA320MS_a01 + HNO3_a01 + Hp_a01                               ', &
-     '               HNO3_a01 + Hp_a01 --> RRA321MS_a01 + NO2p_a01 + H2O_a01                              ', &
-     '              CO3m_a01 + O2m_a01 --> RRA41000_a01 + HCO3m_a01 + OHm_a01                             ', &
-     '             CO3m_a01 + H2O2_a01 --> RRA41001_a01 + HCO3m_a01 + HO2_a01                             ', &
-     '            CO3m_a01 + HCOOm_a01 --> RRA41002_a01 + 2 HCO3m_a01 + HO2_a01                           ', &
-     '              OH_a01 + HCOOm_a01 --> RRA41003_a01 + O2m_a01 + CO2_a01 + H2O_a01                     ', &
-     '             HCOOm_a01 + NO3_a01 --> RRA41004_a01 + NO3m_a01 + Hp_a01 + O2m_a01 + CO2_a01 ... etc.  ', &
-     '              O3_a01 + HCOOm_a01 --> RRA41005_a01 + OH_a01 + O2m_a01 + CO2_a01                      ', &
-     '              HCO3m_a01 + OH_a01 --> RRA41006_a01 + CO3m_a01                                        ', &
-     '               HCHO_a01 + OH_a01 --> RRA41007_a01 + HCOOH_a01 + HO2_a01                             ', &
-     '              HCOOH_a01 + OH_a01 --> RRA41008_a01 + CO2_a01 + HO2_a01                               ', &
-     '             HCOOH_a01 + NO3_a01 --> RRA41009_a01 + NO3m_a01 + Hp_a01 + CO2_a01 + HO2_a01 ... etc.  ', &
-     '             CH3O2_a01 + HO2_a01 --> RRA41010_a01 + CH3OOH_a01                                      ', &
-     '             CH3O2_a01 + O2m_a01 --> RRA41011_a01 + CH3OOH_a01 + OHm_a01                            ', &
-     '                     2 CH3O2_a01 --> RRA41012a_a01 + 2 HCHO_a01 + H2O2_a01                          ', &
-     '                     2 CH3O2_a01 --> RRA41012b_a01 + 2 HOCH2O2_a01                                  ', &
-     '              OH_a01 + CH3OH_a01 --> RRA41013a_a01 + HOCH2O2_a01 + H2O_a01                          ', &
-     '              OH_a01 + CH3OH_a01 --> RRA41013b_a01 + HCHO_a01 + HO2_a01 + H2O_a01                   ' /)
+     '                       2 HO4_a01 --> H2O2_a01 + 2 O3_a01                                            ', &
+     '               HO4_a01 + HO3_a01 --> O2_a01 + H2O2_a01 + O3_a01                                     ', &
+     '               NO2m_a01 + O3_a01 --> NO3m_a01                                                       ', &
+     '                       2 NO2_a01 --> HNO3_a01 + HONO_a01                                            ', &
+     '                        NO4m_a01 --> NO2m_a01                                                       ', &
+     '                        N2O5_a01 --> NO3m_a01 + NO2p_a01                                            ', &
+     '             NO3m_a01 + NO2p_a01 --> N2O5_a01                                                       ', &
+     '               NO2_a01 + HO2_a01 --> HNO4_a01                                                       ', &
+     '               NO2m_a01 + OH_a01 --> NO2_a01 + OHm_a01                                              ', &
+     '               OHm_a01 + NO3_a01 --> NO3m_a01 + OH_a01                                              ', &
+     '               HONO_a01 + OH_a01 --> NO2_a01                                                        ', &
+     '    HONO_a01 + Hp_a01 + H2O2_a01 --> HNO3_a01 + Hp_a01                                              ', &
+     '              NO2p_a01 + H2O_a01 --> HNO3_a01 + Hp_a01                                              ', &
+     '               HNO3_a01 + Hp_a01 --> NO2p_a01 + H2O_a01                                             ', &
+     '              O2m_a01 + CO3m_a01 --> HCO3m_a01 + OHm_a01                                            ', &
+     '             CO3m_a01 + H2O2_a01 --> HCO3m_a01 + HO2_a01                                            ', &
+     '            HCOOm_a01 + CO3m_a01 --> 2 HCO3m_a01 + HO2_a01                                          ', &
+     '              HCOOm_a01 + OH_a01 --> CO2_a01 + O2m_a01 + H2O_a01                                    ', &
+     '             HCOOm_a01 + NO3_a01 --> CO2_a01 + NO3m_a01 + O2m_a01 + Hp_a01                          ', &
+     '              HCOOm_a01 + O3_a01 --> CO2_a01 + O2m_a01 + OH_a01                                     ', &
+     '              HCO3m_a01 + OH_a01 --> CO3m_a01                                                       ', &
+     '               HCHO_a01 + OH_a01 --> HCOOH_a01 + HO2_a01                                            ', &
+     '              HCOOH_a01 + OH_a01 --> CO2_a01 + HO2_a01                                              ', &
+     '             HCOOH_a01 + NO3_a01 --> CO2_a01 + NO3m_a01 + Hp_a01 + HO2_a01                          ', &
+     '             CH3O2_a01 + HO2_a01 --> CH3OOH_a01                                                     ', &
+     '             CH3O2_a01 + O2m_a01 --> OHm_a01 + CH3OOH_a01                                           ', &
+     '                     2 CH3O2_a01 --> 2 HCHO_a01 + H2O2_a01                                          ', &
+     '                     2 CH3O2_a01 --> 2 HOCH2O2_a01                                                  ', &
+     '              OH_a01 + CH3OH_a01 --> HOCH2O2_a01 + H2O_a01                                          ', &
+     '              OH_a01 + CH3OH_a01 --> HCHO_a01 + HO2_a01 + H2O_a01                                   ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_71 = (/ &
-     '             NO3_a01 + CH3OH_a01 --> RRA41014_a01 + HOCH2O2_a01 + NO3m_a01 + Hp_a01                 ', &
-     '            CO3m_a01 + CH3OH_a01 --> RRA41015_a01 + HCO3m_a01 + HOCH2O2_a01                         ', &
-     '             CH3OOH_a01 + OH_a01 --> RRA41016a_a01 + CH3O2_a01 + H2O_a01                            ', &
-     '             CH3OOH_a01 + OH_a01 --> RRA41016b_a01 + HCHO_a01 + OH_a01 + H2O_a01                    ', &
-     '            CH3OOH_a01 + NO3_a01 --> RRA41017a_a01 + CH3O2_a01 + NO3m_a01 + Hp_a01                  ', &
-     '            CH3OOH_a01 + NO3_a01 --> RRA41017b_a01 + HCHO_a01 + NO3m_a01 + Hp_a01 + HO2_a01 ... etc.', &
-     '           CO3m_a01 + CH3OOH_a01 --> RRA41018a_a01 + HCO3m_a01 + CH3O2_a01                          ', &
-     '           CO3m_a01 + CH3OOH_a01 --> RRA41018b_a01 + HCO3m_a01 + HCHO_a01 + HO2_a01                 ', &
-     '           OH_a01 + HOCH2OOH_a01 --> RRA41019a_a01 + HOCH2O2_a01 + H2O_a01                          ', &
-     '           OH_a01 + HOCH2OOH_a01 --> RRA41019b_a01 + CHOOOH_a01 + HO2_a01 + H2O_a01                 ', &
-     '          NO3_a01 + HOCH2OOH_a01 --> RRA41020a_a01 + HOCH2O2_a01 + NO3m_a01 + Hp_a01                ', &
-     '          NO3_a01 + HOCH2OOH_a01 --> RRA41020b_a01 + CHOOOH_a01 + NO3m_a01 + Hp_a01 + HO2_a01 ... et', &
-     '                     HOCH2O2_a01 --> RRA41021_a01 + HCHO_a01 + HO2_a01                              ', &
-     '           HOCH2O2_a01 + HO2_a01 --> RRA41022_a01 + O2_a01 + HOCH2OOH_a01                           ', &
-     '           HOCH2O2_a01 + O2m_a01 --> RRA41023_a01 + O2_a01 + OHm_a01 + HOCH2OOH_a01                 ', &
-     '                   2 HOCH2O2_a01 --> RRA41024_a01 + 2 HCOOH_a01 + H2O2_a01                          ', &
-     '   HCOOH_a01 + Hp_a01 + H2O2_a01 --> RRA41025_a01 + CHOOOH_a01 + Hp_a01 + H2O_a01                   ', &
-     '             CHOOOH_a01 + Hp_a01 --> RRA41026a_a01 + HCOOH_a01 + Hp_a01 + H2O2_a01                  ', &
-     '             CHOOOH_a01 + Hp_a01 --> RRA41026b_a01 + Hp_a01 + CO2_a01 + H2O_a01                     ', &
-     '            OH_a01 + HOCH2OH_a01 --> RRA41027_a01 + CHOHOHO2_a01 + H2O_a01                          ', &
-     '          CO3m_a01 + HOCH2OH_a01 --> RRA41028_a01 + CHOHOHO2_a01 + HCO3m_a01                        ', &
-     '           HOCH2OH_a01 + NO3_a01 --> RRA41029_a01 + CHOHOHO2_a01 + NO3m_a01 + Hp_a01                ', &
-     '                    CHOHOHO2_a01 --> RRA41030_a01 + HCOOH_a01 + HO2_a01                             ', &
-     '            NO2p_a01 + HCOOm_a01 --> RRA41030DT_a01 + NO3m_a01 + 2 Hp_a01 + HCOOm_a01               ', &
-     '            NO2p_a01 + CH3OH_a01 --> RRA41030MS_a01 + CH3NO3_a01 + Hp_a01                           ', &
-     '             C2H5OH_a01 + OH_a01 --> RRA42000a_a01 + CH3CHO_a01 + HO2_a01 + H2O_a01                 ', &
-     '             C2H5OH_a01 + OH_a01 --> RRA42000b_a01 + HOCH2CH2O2_a01 + H2O_a01                       ', &
-     '            C2H5OH_a01 + NO3_a01 --> RRA42001a_a01 + CH3CHO_a01 + NO3m_a01 + Hp_a01 + HO2_a01 ... et', &
-     '            C2H5OH_a01 + NO3_a01 --> RRA42001b_a01 + HOCH2CH2O2_a01 + NO3m_a01 + Hp_a01             ', &
-     '                2 HOCH2CH2O2_a01 --> RRA42002a_a01 + 2 HOCH2CHO_a01 + H2O2_a01                      ' /)
+     '             NO3_a01 + CH3OH_a01 --> HOCH2O2_a01 + NO3m_a01 + Hp_a01                                ', &
+     '            CO3m_a01 + CH3OH_a01 --> HCO3m_a01 + HOCH2O2_a01                                        ', &
+     '             OH_a01 + CH3OOH_a01 --> CH3O2_a01 + H2O_a01                                            ', &
+     '             OH_a01 + CH3OOH_a01 --> HCHO_a01 + OH_a01 + H2O_a01                                    ', &
+     '            NO3_a01 + CH3OOH_a01 --> CH3O2_a01 + NO3m_a01 + Hp_a01                                  ', &
+     '            NO3_a01 + CH3OOH_a01 --> HCHO_a01 + NO3m_a01 + Hp_a01 + HO2_a01                         ', &
+     '           CO3m_a01 + CH3OOH_a01 --> HCO3m_a01 + CH3O2_a01                                          ', &
+     '           CO3m_a01 + CH3OOH_a01 --> HCO3m_a01 + HCHO_a01 + HO2_a01                                 ', &
+     '           HOCH2OOH_a01 + OH_a01 --> HOCH2O2_a01 + H2O_a01                                          ', &
+     '           HOCH2OOH_a01 + OH_a01 --> CHOOOH_a01 + HO2_a01 + H2O_a01                                 ', &
+     '          HOCH2OOH_a01 + NO3_a01 --> HOCH2O2_a01 + NO3m_a01 + Hp_a01                                ', &
+     '          HOCH2OOH_a01 + NO3_a01 --> CHOOOH_a01 + NO3m_a01 + Hp_a01 + HO2_a01                       ', &
+     '                     HOCH2O2_a01 --> HCHO_a01 + HO2_a01                                             ', &
+     '           HOCH2O2_a01 + HO2_a01 --> O2_a01 + HOCH2OOH_a01                                          ', &
+     '           HOCH2O2_a01 + O2m_a01 --> O2_a01 + HOCH2OOH_a01 + OHm_a01                                ', &
+     '                   2 HOCH2O2_a01 --> 2 HCOOH_a01 + H2O2_a01                                         ', &
+     '   HCOOH_a01 + Hp_a01 + H2O2_a01 --> CHOOOH_a01 + Hp_a01 + H2O_a01                                  ', &
+     '             CHOOOH_a01 + Hp_a01 --> HCOOH_a01 + Hp_a01 + H2O2_a01                                  ', &
+     '             CHOOOH_a01 + Hp_a01 --> CO2_a01 + Hp_a01 + H2O_a01                                     ', &
+     '            HOCH2OH_a01 + OH_a01 --> CHOHOHO2_a01 + H2O_a01                                         ', &
+     '          HOCH2OH_a01 + CO3m_a01 --> CHOHOHO2_a01 + HCO3m_a01                                       ', &
+     '           HOCH2OH_a01 + NO3_a01 --> CHOHOHO2_a01 + NO3m_a01 + Hp_a01                               ', &
+     '                    CHOHOHO2_a01 --> HCOOH_a01 + HO2_a01                                            ', &
+     '            HCOOm_a01 + NO2p_a01 --> HCOOm_a01 + NO3m_a01 + 2 Hp_a01                                ', &
+     '            NO2p_a01 + CH3OH_a01 --> CH3NO3_a01 + Hp_a01                                            ', &
+     '             C2H5OH_a01 + OH_a01 --> CH3CHO_a01 + HO2_a01 + H2O_a01                                 ', &
+     '             C2H5OH_a01 + OH_a01 --> HOCH2CH2O2_a01 + H2O_a01                                       ', &
+     '            C2H5OH_a01 + NO3_a01 --> CH3CHO_a01 + NO3m_a01 + Hp_a01 + HO2_a01                       ', &
+     '            C2H5OH_a01 + NO3_a01 --> HOCH2CH2O2_a01 + NO3m_a01 + Hp_a01                             ', &
+     '                2 HOCH2CH2O2_a01 --> 2 HOCH2CHO_a01 + H2O2_a01                                      ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_72 = (/ &
-     '                2 HOCH2CH2O2_a01 --> RRA42002b_a01 + ETHGLY_a01 + HOCH2CHO_a01                      ', &
-     '                2 HOCH2CH2O2_a01 --> RRA42002c_a01 + 2 HOCH2O2_a01 + 2 HCHO_a01                     ', &
-     '        HOCH2CH2O2_a01 + O2m_a01 --> RRA42003_a01 + HYETHO2H_a01 + OHm_a01                          ', &
-     '        HOCH2CH2O2_a01 + HO2_a01 --> RRA42004_a01 + HYETHO2H_a01                                    ', &
-     '           HYETHO2H_a01 + OH_a01 --> RRA42005_a01 + HOCH2CHO_a01                                    ', &
-     '             ETHGLY_a01 + OH_a01 --> RRA42006_a01 + HOCH2CHO_a01 + HO2_a01 + H2O_a01                ', &
-     '            ETHGLY_a01 + NO3_a01 --> RRA42007_a01 + HOCH2CHO_a01 + NO3m_a01 + Hp_a01 + HO2_a01 ... e', &
-     '             CH3CHO_a01 + OH_a01 --> RRA42008_a01 + CH3CO3_a01 + H2O_a01                            ', &
-     '            CH3CHO_a01 + NO3_a01 --> RRA42009_a01 + CH3CO3_a01 + NO3m_a01 + Hp_a01                  ', &
-     '                    2 CH3CO3_a01 --> RRA42010_a01 + 2 CH3O2_a01 + 2 CO2_a01                         ', &
-     '            CH3CO3_a01 + O2m_a01 --> RRA42011_a01 + CH3CO3m_a01 + O2_a01                            ', &
-     '          CH3CHOHOH_a01 + OH_a01 --> RRA42012_a01 + CH3COHOHO2_a01 + H2O_a01                        ', &
-     '         CH3CHOHOH_a01 + NO3_a01 --> RRA42013_a01 + CH3COHOHO2_a01 + NO3m_a01 + Hp_a01              ', &
-     '                  CH3COHOHO2_a01 --> RRA42014_a01 + CH3CO2H_a01 + HO2_a01                           ', &
-     '           HOCH2CHO_a01 + OH_a01 --> RRA42015a_a01 + HOCH2CO3_a01 + H2O_a01                         ', &
-     '           HOCH2CHO_a01 + OH_a01 --> RRA42015b_a01 + CHOHO2CHO_a01 + H2O_a01                        ', &
-     '          HOCH2CHO_a01 + NO3_a01 --> RRA42016a_a01 + HOCH2CO3_a01 + NO3m_a01 + Hp_a01               ', &
-     '          HOCH2CHO_a01 + NO3_a01 --> RRA42016b_a01 + CHOHO2CHO_a01 + NO3m_a01 + Hp_a01              ', &
-     '          HOCH2CO3_a01 + O2m_a01 --> RRA42017_a01 + HOCH2CO3m_a01                                   ', &
-     '                HOCH2COHOHO2_a01 --> RRA42018_a01 + HOCH2CO2H_a01 + HO2_a01                         ', &
-     '                   CHOHO2CHO_a01 --> RRA42019_a01 + GLYOX_a01 + HO2_a01                             ', &
-     '                CHOHO2CHOHOH_a01 --> RRA42020_a01 + CHOCHOHOH_a01 + HO2_a01                         ', &
-     '        HOCH2CHOHOH_a01 + OH_a01 --> RRA42021a_a01 + HOCH2COHOHO2_a01 + H2O_a01                     ', &
-     '        HOCH2CHOHOH_a01 + OH_a01 --> RRA42021b_a01 + CHOHO2CHOHOH_a01 + H2O_a01                     ', &
-     '        HOCH2CHOHOH_a01 + OH_a01 --> RRA42021c_a01 + HOCH2O2_a01 + HCOOH_a01 + H2O_a01              ', &
-     '       HOCH2CHOHOH_a01 + NO3_a01 --> RRA42022a_a01 + HOCH2COHOHO2_a01 + NO3m_a01 + Hp_a01 ... etc.  ', &
-     '       HOCH2CHOHOH_a01 + NO3_a01 --> RRA42022b_a01 + CHOHO2CHOHOH_a01 + NO3m_a01 + Hp_a01 ... etc.  ', &
-     '       HOCH2CHOHOH_a01 + NO3_a01 --> RRA42022c_a01 + HOCH2O2_a01 + HCOOH_a01 + NO3m_a01 + Hp_a01 ...', &
-     '       CHOHOHCHOHOH_a01 + OH_a01 --> RRA42023a_a01 + CHOHOHCOHOHO2_a01 + H2O_a01                    ', &
-     '       CHOHOHCHOHOH_a01 + OH_a01 --> RRA42023b_a01 + CHOHOHO2_a01 + HCOOH_a01 + HO2_a01 + H2O_a01 ..' /)
+     '                2 HOCH2CH2O2_a01 --> ETHGLY_a01 + HOCH2CHO_a01                                      ', &
+     '                2 HOCH2CH2O2_a01 --> 2 HOCH2O2_a01 + 2 HCHO_a01                                     ', &
+     '        HOCH2CH2O2_a01 + O2m_a01 --> HYETHO2H_a01 + OHm_a01                                         ', &
+     '        HOCH2CH2O2_a01 + HO2_a01 --> HYETHO2H_a01                                                   ', &
+     '           HYETHO2H_a01 + OH_a01 --> HOCH2CHO_a01                                                   ', &
+     '             ETHGLY_a01 + OH_a01 --> HOCH2CHO_a01 + HO2_a01 + H2O_a01                               ', &
+     '            ETHGLY_a01 + NO3_a01 --> HOCH2CHO_a01 + NO3m_a01 + Hp_a01 + HO2_a01                     ', &
+     '             CH3CHO_a01 + OH_a01 --> CH3CO3_a01 + H2O_a01                                           ', &
+     '            CH3CHO_a01 + NO3_a01 --> CH3CO3_a01 + NO3m_a01 + Hp_a01                                 ', &
+     '                    2 CH3CO3_a01 --> 2 CO2_a01 + 2 CH3O2_a01                                        ', &
+     '            CH3CO3_a01 + O2m_a01 --> CH3CO3m_a01 + O2_a01                                           ', &
+     '          CH3CHOHOH_a01 + OH_a01 --> CH3COHOHO2_a01 + H2O_a01                                       ', &
+     '         CH3CHOHOH_a01 + NO3_a01 --> CH3COHOHO2_a01 + NO3m_a01 + Hp_a01                             ', &
+     '                  CH3COHOHO2_a01 --> CH3CO2H_a01 + HO2_a01                                          ', &
+     '           HOCH2CHO_a01 + OH_a01 --> HOCH2CO3_a01 + H2O_a01                                         ', &
+     '           HOCH2CHO_a01 + OH_a01 --> CHOHO2CHO_a01 + H2O_a01                                        ', &
+     '          HOCH2CHO_a01 + NO3_a01 --> HOCH2CO3_a01 + NO3m_a01 + Hp_a01                               ', &
+     '          HOCH2CHO_a01 + NO3_a01 --> CHOHO2CHO_a01 + NO3m_a01 + Hp_a01                              ', &
+     '          HOCH2CO3_a01 + O2m_a01 --> HOCH2CO3m_a01                                                  ', &
+     '                HOCH2COHOHO2_a01 --> HOCH2CO2H_a01 + HO2_a01                                        ', &
+     '                   CHOHO2CHO_a01 --> GLYOX_a01 + HO2_a01                                            ', &
+     '                CHOHO2CHOHOH_a01 --> CHOCHOHOH_a01 + HO2_a01                                        ', &
+     '        HOCH2CHOHOH_a01 + OH_a01 --> HOCH2COHOHO2_a01 + H2O_a01                                     ', &
+     '        HOCH2CHOHOH_a01 + OH_a01 --> CHOHO2CHOHOH_a01 + H2O_a01                                     ', &
+     '        HOCH2CHOHOH_a01 + OH_a01 --> HOCH2O2_a01 + HCOOH_a01 + H2O_a01                              ', &
+     '       HOCH2CHOHOH_a01 + NO3_a01 --> HOCH2COHOHO2_a01 + NO3m_a01 + Hp_a01                           ', &
+     '       HOCH2CHOHOH_a01 + NO3_a01 --> CHOHO2CHOHOH_a01 + NO3m_a01 + Hp_a01                           ', &
+     '       HOCH2CHOHOH_a01 + NO3_a01 --> HOCH2O2_a01 + HCOOH_a01 + NO3m_a01 + Hp_a01                    ', &
+     '       CHOHOHCHOHOH_a01 + OH_a01 --> CHOHOHCOHOHO2_a01 + H2O_a01                                    ', &
+     '       CHOHOHCHOHOH_a01 + OH_a01 --> CHOHOHO2_a01 + HCOOH_a01 + HO2_a01 + H2O_a01                   ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_73 = (/ &
-     '      CHOHOHCHOHOH_a01 + NO3_a01 --> RRA42024a_a01 + CHOHOHCOHOHO2_a01 + NO3m_a01 + Hp_a01 ... etc. ', &
-     '      CHOHOHCHOHOH_a01 + NO3_a01 --> RRA42024b_a01 + CHOHOHO2_a01 + HCOOH_a01 + NO3m_a01 ... etc.   ', &
-     '               CHOHOHCOHOHO2_a01 --> RRA42025_a01 + CHOHOHCOOH_a01 + HO2_a01                        ', &
-     '            CH3CO2H_a01 + OH_a01 --> RRA42026_a01 + CH2OOCOOH_a01 + H2O_a01                         ', &
-     '           CH3CO2H_a01 + NO3_a01 --> RRA42027_a01 + CH2OOCOOH_a01 + NO3m_a01 + Hp_a01               ', &
-     '            CH3COOm_a01 + OH_a01 --> RRA42028_a01 + CH2OOCO2m_a01 + H2O_a01                         ', &
-     '           CH3COOm_a01 + NO3_a01 --> RRA42029_a01 + CH2OOCO2m_a01 + NO3m_a01 + Hp_a01               ', &
-     '          CH3COOm_a01 + NO2p_a01 --> RRA42030DT_a01 + CH3COOm_a01 + NO3m_a01 + 2 Hp_a01             ', &
-     '            C2H5OOH_a01 + OH_a01 --> RRA42030a_a01 + C2H5O2_a01 + H2O_a01                           ', &
-     '            C2H5OOH_a01 + OH_a01 --> RRA42030b_a01 + CH3CO2H_a01 + HO2_a01 + H2O_a01                ', &
-     '                    2 C2H5O2_a01 --> RRA42031a_a01 + 2 CH3CHO_a01 + H2O2_a01                        ', &
-     '                    2 C2H5O2_a01 --> RRA42031b_a01 + 2 CH3CHO_a01 + 2 HO2_a01                       ', &
-     '            C2H5O2_a01 + O2m_a01 --> RRA42032_a01 + C2H5OOH_a01 + OHm_a01                           ', &
-     '            C2H5O2_a01 + HO2_a01 --> RRA42033_a01 + C2H5OOH_a01                                     ', &
-     '         CH2OOCOOH_a01 + HO2_a01 --> RRA42034_a01 + HOOCH2CO2H_a01                                  ', &
-     'CH2OOCOOH_a01 + Hp_a01 + O2m_a01 --> RRA42035_a01 + HOOCH2CO2H_a01                                  ', &
-     '                 2 CH2OOCOOH_a01 --> RRA42036a_a01 + 2 HCOCO2H_a01 + H2O2_a01                       ', &
-     '                 2 CH2OOCOOH_a01 --> RRA42036b_a01 + 2 HCHO_a01 + 2 CO2_a01 + H2O2_a01              ', &
-     '                 2 CH2OOCOOH_a01 --> RRA42036c_a01 + HCOCO2H_a01 + HOCH2CO2H_a01                    ', &
-     '                 2 CH2OOCOOH_a01 --> RRA42036d_a01 + 2 CHOHOOCOOH_a01                               ', &
-     '         CH2OOCO2m_a01 + HO2_a01 --> RRA42037_a01 + O2_a01 + CH2OOHCO2m_a01                         ', &
-     'CH2OOCO2m_a01 + Hp_a01 + O2m_a01 --> RRA42038_a01 + CH2OOHCO2m_a01                                  ', &
-     '                 2 CH2OOCO2m_a01 --> RRA42039a_a01 + 2 CHOCO2m_a01 + H2O2_a01                       ', &
-     '                 2 CH2OOCO2m_a01 --> RRA42039b_a01 + 2 HCHO_a01 + 2 OHm_a01 + 2 CO2_a01 + H2O2_a01 .', &
-     '                 2 CH2OOCO2m_a01 --> RRA42039c_a01 + CHOCO2m_a01 + HOCH2CO2m_a01                    ', &
-     '                 2 CH2OOCO2m_a01 --> RRA42039d_a01 + 2 CHOHOOCO2m_a01                               ', &
-     '          CH2OOCO2m_a01 + O3_a01 --> RRA42040_a01 + O3m_a01 + HOCH2OOH_a01 + CO2_a01                ', &
-     '           HOOCCO2m_a01 + OH_a01 --> RRA42141_a01 + C2O4m_a01 + H2O_a01                             ', &
-     '           CO2CO2mm_a01 + OH_a01 --> RRA42142_a01 + C2O4m_a01 + OHm_a01                             ', &
-     '              C2O4m_a01 + O2_a01 --> RRA42143_a01 + O2m_a01 + 2 CO2_a01                             ' /)
+     '      CHOHOHCHOHOH_a01 + NO3_a01 --> CHOHOHCOHOHO2_a01 + NO3m_a01 + Hp_a01                          ', &
+     '      CHOHOHCHOHOH_a01 + NO3_a01 --> CHOHOHO2_a01 + HCOOH_a01 + NO3m_a01 + Hp_a01 + HO2_a01 ... etc.', &
+     '               CHOHOHCOHOHO2_a01 --> CHOHOHCOOH_a01 + HO2_a01                                       ', &
+     '            CH3CO2H_a01 + OH_a01 --> CH2OOCOOH_a01 + H2O_a01                                        ', &
+     '           CH3CO2H_a01 + NO3_a01 --> CH2OOCOOH_a01 + NO3m_a01 + Hp_a01                              ', &
+     '            CH3COOm_a01 + OH_a01 --> CH2OOCO2m_a01 + H2O_a01                                        ', &
+     '           CH3COOm_a01 + NO3_a01 --> CH2OOCO2m_a01 + NO3m_a01 + Hp_a01                              ', &
+     '          CH3COOm_a01 + NO2p_a01 --> CH3COOm_a01 + NO3m_a01 + 2 Hp_a01                              ', &
+     '            C2H5OOH_a01 + OH_a01 --> C2H5O2_a01 + H2O_a01                                           ', &
+     '            C2H5OOH_a01 + OH_a01 --> CH3CO2H_a01 + HO2_a01 + H2O_a01                                ', &
+     '                    2 C2H5O2_a01 --> 2 CH3CHO_a01 + H2O2_a01                                        ', &
+     '                    2 C2H5O2_a01 --> 2 CH3CHO_a01 + 2 HO2_a01                                       ', &
+     '            C2H5O2_a01 + O2m_a01 --> C2H5OOH_a01 + OHm_a01                                          ', &
+     '            C2H5O2_a01 + HO2_a01 --> C2H5OOH_a01                                                    ', &
+     '         CH2OOCOOH_a01 + HO2_a01 --> HOOCH2CO2H_a01                                                 ', &
+     'CH2OOCOOH_a01 + O2m_a01 + Hp_a01 --> HOOCH2CO2H_a01                                                 ', &
+     '                 2 CH2OOCOOH_a01 --> 2 HCOCO2H_a01 + H2O2_a01                                       ', &
+     '                 2 CH2OOCOOH_a01 --> 2 CO2_a01 + 2 HCHO_a01 + H2O2_a01                              ', &
+     '                 2 CH2OOCOOH_a01 --> HCOCO2H_a01 + HOCH2CO2H_a01                                    ', &
+     '                 2 CH2OOCOOH_a01 --> 2 CHOHOOCOOH_a01                                               ', &
+     '         CH2OOCO2m_a01 + HO2_a01 --> O2_a01 + CH2OOHCO2m_a01                                        ', &
+     'CH2OOCO2m_a01 + O2m_a01 + Hp_a01 --> CH2OOHCO2m_a01                                                 ', &
+     '                 2 CH2OOCO2m_a01 --> 2 CHOCO2m_a01 + H2O2_a01                                       ', &
+     '                 2 CH2OOCO2m_a01 --> 2 CO2_a01 + 2 OHm_a01 + 2 HCHO_a01 + H2O2_a01                  ', &
+     '                 2 CH2OOCO2m_a01 --> CHOCO2m_a01 + HOCH2CO2m_a01                                    ', &
+     '                 2 CH2OOCO2m_a01 --> 2 CHOHOOCO2m_a01                                               ', &
+     '          CH2OOCO2m_a01 + O3_a01 --> O3m_a01 + CO2_a01 + HOCH2OOH_a01                               ', &
+     '           HOOCCO2m_a01 + OH_a01 --> C2O4m_a01 + H2O_a01                                            ', &
+     '           CO2CO2mm_a01 + OH_a01 --> C2O4m_a01 + OHm_a01                                            ', &
+     '              C2O4m_a01 + O2_a01 --> 2 CO2_a01 + O2m_a01                                            ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_74 = (/ &
-     '         HOOCH2CO2H_a01 + OH_a01 --> RRA42144a_a01 + CH2OOCOOH_a01 + H2O_a01                        ', &
-     '         HOOCH2CO2H_a01 + OH_a01 --> RRA42144b_a01 + CHOOHOOCOOH_a01 + H2O_a01                      ', &
-     '        HOOCH2CO2H_a01 + NO3_a01 --> RRA42145a_a01 + CH2OOCOOH_a01 + NO3m_a01 + Hp_a01              ', &
-     '        HOOCH2CO2H_a01 + NO3_a01 --> RRA42145b_a01 + CHOOHOOCOOH_a01 + NO3m_a01 + Hp_a01 ... etc.   ', &
-     '         CH2OOHCO2m_a01 + OH_a01 --> RRA42146a_a01 + CH2OOCO2m_a01 + H2O_a01                        ', &
-     '         CH2OOHCO2m_a01 + OH_a01 --> RRA42146b_a01 + CHOOHOOCO2m_a01 + H2O_a01                      ', &
-     '        CH2OOHCO2m_a01 + NO3_a01 --> RRA42147a_a01 + CH2OOCO2m_a01 + NO3m_a01 + Hp_a01              ', &
-     '        CH2OOHCO2m_a01 + NO3_a01 --> RRA42147b_a01 + CHOOHOOCO2m_a01 + NO3m_a01 + Hp_a01 ... etc.   ', &
-     '                 CHOOHOOCOOH_a01 --> RRA42148_a01 + HOOCCOOH_a01 + HO2_a01                          ', &
-     '                 CHOOHOOCO2m_a01 --> RRA42149_a01 + HOOCCO2m_a01 + HO2_a01                          ', &
-     '          HOCH2CO2H_a01 + OH_a01 --> RRA42150a_a01 + CHOHOOCOOH_a01 + H2O_a01                       ', &
-     '          HOCH2CO2H_a01 + OH_a01 --> RRA42150b_a01 + HCHO_a01 + CO2_a01 + HO2_a01 + H2O_a01 ... etc.', &
-     '         HOCH2CO2H_a01 + NO3_a01 --> RRA42151a_a01 + CHOHOOCOOH_a01 + NO3m_a01 + Hp_a01             ', &
-     '         HOCH2CO2H_a01 + NO3_a01 --> RRA42151b_a01 + HCHO_a01 + NO3m_a01 + Hp_a01 + CO2_a01 ... etc.', &
-     '                  CHOHOOCOOH_a01 --> RRA42152_a01 + HCOCO2H_a01 + HO2_a01                           ', &
-     '          HOCH2CO2m_a01 + OH_a01 --> RRA42153a_a01 + CHOHOOCO2m_a01 + H2O_a01                       ', &
-     '          HOCH2CO2m_a01 + OH_a01 --> RRA42153b_a01 + HCHO_a01 + O2m_a01 + CO2_a01 + H2O_a01 ... etc.', &
-     '          HOCH2CO2m_a01 + OH_a01 --> RRA42153c_a01 + HOCH2O2_a01 + OHm_a01 + CO2_a01                ', &
-     '         HOCH2CO2m_a01 + NO3_a01 --> RRA42154a_a01 + CHOHOOCO2m_a01 + NO3m_a01 + Hp_a01             ', &
-     '         HOCH2CO2m_a01 + NO3_a01 --> RRA42154b_a01 + HCHO_a01 + NO3m_a01 + Hp_a01 + O2m_a01 ... etc.', &
-     '                  CHOHOOCO2m_a01 --> RRA42155_a01 + CHOCO2m_a01 + HO2_a01                           ', &
-     '         CHOHOHCOOH_a01 + OH_a01 --> RRA42156a_a01 + COOHCOHOHO2_a01 + H2O_a01                      ', &
-     '         CHOHOHCOOH_a01 + OH_a01 --> RRA42156b_a01 + HCOOH_a01 + CO2_a01 + HO2_a01 + H2O_a01 ... etc', &
-     '        CHOHOHCOOH_a01 + NO3_a01 --> RRA42157a_a01 + COOHCOHOHO2_a01 + NO3m_a01 + Hp_a01 ... etc.   ', &
-     '        CHOHOHCOOH_a01 + NO3_a01 --> RRA42157b_a01 + HCOOH_a01 + NO3m_a01 + Hp_a01 + CO2_a01 ... etc', &
-     '         CHOHOHCO2m_a01 + OH_a01 --> RRA42158a_a01 + CO2COHOHO2m_a01 + H2O_a01                      ', &
-     '         CHOHOHCO2m_a01 + OH_a01 --> RRA42158b_a01 + HCOOH_a01 + O2m_a01 + CO2_a01 + H2O_a01 ... etc', &
-     '        CHOHOHCO2m_a01 + NO3_a01 --> RRA42159a_a01 + CO2COHOHO2m_a01 + NO3m_a01 + Hp_a01 ... etc.   ', &
-     '        CHOHOHCO2m_a01 + NO3_a01 --> RRA42159b_a01 + HCOOH_a01 + NO3m_a01 + Hp_a01 + O2m_a01 ... etc', &
-     '       CHOHOHCO2m_a01 + H2O2_a01 --> RRA42160_a01 + HCOOm_a01 + CO2_a01 + 2 H2O_a01                 ' /)
+     '         HOOCH2CO2H_a01 + OH_a01 --> CH2OOCOOH_a01 + H2O_a01                                        ', &
+     '         HOOCH2CO2H_a01 + OH_a01 --> CHOOHOOCOOH_a01 + H2O_a01                                      ', &
+     '        HOOCH2CO2H_a01 + NO3_a01 --> CH2OOCOOH_a01 + NO3m_a01 + Hp_a01                              ', &
+     '        HOOCH2CO2H_a01 + NO3_a01 --> CHOOHOOCOOH_a01 + NO3m_a01 + Hp_a01                            ', &
+     '         CH2OOHCO2m_a01 + OH_a01 --> CH2OOCO2m_a01 + H2O_a01                                        ', &
+     '         CH2OOHCO2m_a01 + OH_a01 --> CHOOHOOCO2m_a01 + H2O_a01                                      ', &
+     '        CH2OOHCO2m_a01 + NO3_a01 --> CH2OOCO2m_a01 + NO3m_a01 + Hp_a01                              ', &
+     '        CH2OOHCO2m_a01 + NO3_a01 --> CHOOHOOCO2m_a01 + NO3m_a01 + Hp_a01                            ', &
+     '                 CHOOHOOCOOH_a01 --> HOOCCOOH_a01 + HO2_a01                                         ', &
+     '                 CHOOHOOCO2m_a01 --> HOOCCO2m_a01 + HO2_a01                                         ', &
+     '          HOCH2CO2H_a01 + OH_a01 --> CHOHOOCOOH_a01 + H2O_a01                                       ', &
+     '          HOCH2CO2H_a01 + OH_a01 --> CO2_a01 + HCHO_a01 + HO2_a01 + H2O_a01                         ', &
+     '         HOCH2CO2H_a01 + NO3_a01 --> CHOHOOCOOH_a01 + NO3m_a01 + Hp_a01                             ', &
+     '         HOCH2CO2H_a01 + NO3_a01 --> CO2_a01 + HCHO_a01 + NO3m_a01 + Hp_a01 + HO2_a01               ', &
+     '                  CHOHOOCOOH_a01 --> HCOCO2H_a01 + HO2_a01                                          ', &
+     '          HOCH2CO2m_a01 + OH_a01 --> CHOHOOCO2m_a01 + H2O_a01                                       ', &
+     '          HOCH2CO2m_a01 + OH_a01 --> CO2_a01 + HCHO_a01 + O2m_a01 + H2O_a01                         ', &
+     '          HOCH2CO2m_a01 + OH_a01 --> HOCH2O2_a01 + CO2_a01 + OHm_a01                                ', &
+     '         HOCH2CO2m_a01 + NO3_a01 --> CHOHOOCO2m_a01 + NO3m_a01 + Hp_a01                             ', &
+     '         HOCH2CO2m_a01 + NO3_a01 --> CO2_a01 + HCHO_a01 + NO3m_a01 + O2m_a01 + Hp_a01               ', &
+     '                  CHOHOOCO2m_a01 --> CHOCO2m_a01 + HO2_a01                                          ', &
+     '         CHOHOHCOOH_a01 + OH_a01 --> COOHCOHOHO2_a01 + H2O_a01                                      ', &
+     '         CHOHOHCOOH_a01 + OH_a01 --> CO2_a01 + HCOOH_a01 + HO2_a01 + H2O_a01                        ', &
+     '        CHOHOHCOOH_a01 + NO3_a01 --> COOHCOHOHO2_a01 + NO3m_a01 + Hp_a01                            ', &
+     '        CHOHOHCOOH_a01 + NO3_a01 --> CO2_a01 + HCOOH_a01 + NO3m_a01 + Hp_a01 + HO2_a01              ', &
+     '         CHOHOHCO2m_a01 + OH_a01 --> CO2COHOHO2m_a01 + H2O_a01                                      ', &
+     '         CHOHOHCO2m_a01 + OH_a01 --> CO2_a01 + HCOOH_a01 + O2m_a01 + H2O_a01                        ', &
+     '        CHOHOHCO2m_a01 + NO3_a01 --> CO2COHOHO2m_a01 + NO3m_a01 + Hp_a01                            ', &
+     '        CHOHOHCO2m_a01 + NO3_a01 --> CO2_a01 + HCOOH_a01 + NO3m_a01 + O2m_a01 + Hp_a01              ', &
+     '       CHOHOHCO2m_a01 + H2O2_a01 --> HCOOm_a01 + CO2_a01 + 2 H2O_a01                                ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_75 = (/ &
-     '                 COOHCOHOHO2_a01 --> RRA42161_a01 + HOOCCOOH_a01 + HO2_a01                          ', &
-     '                 CO2COHOHO2m_a01 --> RRA42162_a01 + HOOCCO2m_a01 + HO2_a01                          ', &
-     '          HOOCH2CHO_a01 + OH_a01 --> RRA42163a_a01 + CO_a01 + HCHO_a01 + OH_a01 + H2O_a01 ... etc.  ', &
-     '          HOOCH2CHO_a01 + OH_a01 --> RRA42163b_a01 + GLYOX_a01 + HO2_a01 + H2O_a01                  ', &
-     '         HOOCH2CHO_a01 + NO3_a01 --> RRA42164a_a01 + CO_a01 + HCHO_a01 + NO3_a01 + H2O_a01 ... etc. ', &
-     '         HOOCH2CHO_a01 + NO3_a01 --> RRA42164b_a01 + GLYOX_a01 + NO3m_a01 + Hp_a01 + H2O_a01 ... etc', &
-     '       HOOCH2CHOHOH_a01 + OH_a01 --> RRA42165a_a01 + HOOCH2CO2H_a01 + HO2_a01 + H2O_a01             ', &
-     '       HOOCH2CHOHOH_a01 + OH_a01 --> RRA42165b_a01 + CHOCHOHOH_a01 + OH_a01 + H2O_a01               ', &
-     '       HOOCH2CHOHOH_a01 + OH_a01 --> RRA42165c_a01 + HCHO_a01 + HCOOH_a01 + OH_a01 + H2O_a01 ... etc', &
-     '      HOOCH2CHOHOH_a01 + NO3_a01 --> RRA42166a_a01 + HOOCH2CO2H_a01 + NO3m_a01 + Hp_a01 + H2O_a01 ..', &
-     '      HOOCH2CHOHOH_a01 + NO3_a01 --> RRA42166b_a01 + CHOCHOHOH_a01 + NO3_a01 + H2O_a01              ', &
-     '      HOOCH2CHOHOH_a01 + NO3_a01 --> RRA42166c_a01 + HCHO_a01 + HCOOH_a01 + NO3_a01 + H2O_a01 ... et', &
-     '                   2 HOCH2OH_a01 --> RRA42167_a01 + MG2_a01 + H2O_a01                               ', &
-     '               MG2_a01 + H2O_a01 --> RRA42168_a01 + 2 HOCH2OH_a01                                   ', &
-     '                MG2_a01 + OH_a01 --> HMF_a01 + RRA42169_a01 + HO2_a01                               ', &
-     '            CH3CO3_a01 + H2O_a01 --> RRA42470_a01 + CH3CO2H_a01 + HO2_a01                           ', &
-     '          HOCH2CO3_a01 + H2O_a01 --> RRA42471_a01 + HOCH2CO2H_a01 + HO2_a01                         ', &
-     '            CHOCO3_a01 + H2O_a01 --> RRA42472_a01 + HCOCO2H_a01 + HO2_a01                           ', &
-     '           COOHCO3_a01 + H2O_a01 --> RRA42473_a01 + HOOCCOOH_a01 + HO2_a01                          ', &
-     '        CH3COCHOHOH_a01 + OH_a01 --> RRA43000a_a01 + CH3COCO2H_a01 + HO2_a01                        ', &
-     '        CH3COCHOHOH_a01 + OH_a01 --> RRA43000b_a01 + CH3CO3_a01 + HCOOH_a01                         ', &
-     '       CH3COCHOHOH_a01 + NO3_a01 --> RRA43001_a01 + CH3COCO2H_a01 + NO3m_a01 + Hp_a01               ', &
-     '          CH3COCO2H_a01 + OH_a01 --> RRA43002_a01 + CH3CO2H_a01 + CO2_a01 + HO2_a01                 ', &
-     '         CH3COCO2H_a01 + NO3_a01 --> RRA43003_a01 + CH3CO2H_a01 + NO3m_a01 + Hp_a01 + CO2_a01 ... et', &
-     '          CH3COCO2m_a01 + OH_a01 --> RRA43004_a01 + CH3COOm_a01 + CO2_a01 + HO2_a01                 ', &
-     '         CH3COCO2m_a01 + NO3_a01 --> RRA43005_a01 + CH3COOm_a01 + NO3m_a01 + Hp_a01 + CO2_a01 ... et', &
-     '           CH3COCH3_a01 + OH_a01 --> RRA43006_a01 + CH3COCH2O2_a01                                  ', &
-     '          CH3COCH3_a01 + NO3_a01 --> RRA43007_a01 + CH3COCH2O2_a01 + NO3m_a01 + Hp_a01              ', &
-     '                2 CH3COCH2O2_a01 --> RRA43008a_a01 + MGLYOX_a01 + ACETOL_a01                        ', &
-     '                2 CH3COCH2O2_a01 --> RRA43008b_a01 + 2 MGLYOX_a01 + H2O2_a01                        ' /)
+     '                 COOHCOHOHO2_a01 --> HOOCCOOH_a01 + HO2_a01                                         ', &
+     '                 CO2COHOHO2m_a01 --> HOOCCO2m_a01 + HO2_a01                                         ', &
+     '          HOOCH2CHO_a01 + OH_a01 --> CO_a01 + HCHO_a01 + OH_a01 + H2O_a01                           ', &
+     '          HOOCH2CHO_a01 + OH_a01 --> GLYOX_a01 + HO2_a01 + H2O_a01                                  ', &
+     '         HOOCH2CHO_a01 + NO3_a01 --> CO_a01 + HCHO_a01 + NO3_a01 + H2O_a01                          ', &
+     '         HOOCH2CHO_a01 + NO3_a01 --> GLYOX_a01 + NO3m_a01 + Hp_a01 + H2O_a01                        ', &
+     '       HOOCH2CHOHOH_a01 + OH_a01 --> HOOCH2CO2H_a01 + HO2_a01 + H2O_a01                             ', &
+     '       HOOCH2CHOHOH_a01 + OH_a01 --> CHOCHOHOH_a01 + OH_a01 + H2O_a01                               ', &
+     '       HOOCH2CHOHOH_a01 + OH_a01 --> HCOOH_a01 + HCHO_a01 + OH_a01 + H2O_a01                        ', &
+     '      HOOCH2CHOHOH_a01 + NO3_a01 --> HOOCH2CO2H_a01 + NO3m_a01 + Hp_a01 + H2O_a01                   ', &
+     '      HOOCH2CHOHOH_a01 + NO3_a01 --> CHOCHOHOH_a01 + NO3_a01 + H2O_a01                              ', &
+     '      HOOCH2CHOHOH_a01 + NO3_a01 --> HCOOH_a01 + HCHO_a01 + NO3_a01 + H2O_a01                       ', &
+     '                   2 HOCH2OH_a01 --> MG2_a01 + H2O_a01                                              ', &
+     '               MG2_a01 + H2O_a01 --> 2 HOCH2OH_a01                                                  ', &
+     '                MG2_a01 + OH_a01 --> HMF_a01 + HO2_a01                                              ', &
+     '            CH3CO3_a01 + H2O_a01 --> CH3CO2H_a01 + HO2_a01                                          ', &
+     '          HOCH2CO3_a01 + H2O_a01 --> HOCH2CO2H_a01 + HO2_a01                                        ', &
+     '            CHOCO3_a01 + H2O_a01 --> HCOCO2H_a01 + HO2_a01                                          ', &
+     '           COOHCO3_a01 + H2O_a01 --> HOOCCOOH_a01 + HO2_a01                                         ', &
+     '        CH3COCHOHOH_a01 + OH_a01 --> CH3COCO2H_a01 + HO2_a01                                        ', &
+     '        CH3COCHOHOH_a01 + OH_a01 --> CH3CO3_a01 + HCOOH_a01                                         ', &
+     '       CH3COCHOHOH_a01 + NO3_a01 --> CH3COCO2H_a01 + NO3m_a01 + Hp_a01                              ', &
+     '          CH3COCO2H_a01 + OH_a01 --> CH3CO2H_a01 + CO2_a01 + HO2_a01                                ', &
+     '         CH3COCO2H_a01 + NO3_a01 --> CH3CO2H_a01 + CO2_a01 + NO3m_a01 + Hp_a01                      ', &
+     '          CH3COCO2m_a01 + OH_a01 --> CH3COOm_a01 + CO2_a01 + HO2_a01                                ', &
+     '         CH3COCO2m_a01 + NO3_a01 --> CH3COOm_a01 + CO2_a01 + NO3m_a01 + Hp_a01                      ', &
+     '           CH3COCH3_a01 + OH_a01 --> CH3COCH2O2_a01                                                 ', &
+     '          CH3COCH3_a01 + NO3_a01 --> CH3COCH2O2_a01 + NO3m_a01 + Hp_a01                             ', &
+     '                2 CH3COCH2O2_a01 --> MGLYOX_a01 + ACETOL_a01                                        ', &
+     '                2 CH3COCH2O2_a01 --> 2 MGLYOX_a01 + H2O2_a01                                        ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_76 = (/ &
-     '                2 CH3COCH2O2_a01 --> RRA43009c_a01 + 2 CH3CO3_a01 + 2 HCHO_a01                      ', &
-     '                2 CH3COCH2O2_a01 --> RRA43009d_a01 + 2 MGLYOX_a01 + 2 HO2_a01                       ', &
-     '             ACETOL_a01 + OH_a01 --> RRA43010a_a01 + CH3COCHOHO2_a01                                ', &
-     '             ACETOL_a01 + OH_a01 --> RRA43010b_a01 + CH3CO3_a01 + HCHO_a01                          ', &
-     '            ACETOL_a01 + NO3_a01 --> RRA43011_a01 + CH3COCHOHO2_a01 + NO3m_a01 + Hp_a01             ', &
-     '                 CH3COCHOHO2_a01 --> RRA43012_a01 + MGLYOX_a01 + HO2_a01                            ', &
-     '            IPROPOL_a01 + OH_a01 --> RRA43013_a01 + CH3COCH3_a01 + HO2_a01                          ', &
-     '           IPROPOL_a01 + NO3_a01 --> RRA43014_a01 + CH3COCH3_a01 + NO3m_a01 + Hp_a01 + HO2_a01 ... e', &
-     '          HYPERACET_a01 + OH_a01 --> RRA43015a_a01 + MGLYOX_a01 + OH_a01                            ', &
-     '          HYPERACET_a01 + OH_a01 --> RRA43015b_a01 + CH3COCH2O2_a01                                 ', &
-     '         HYPERACET_a01 + NO3_a01 --> RRA43016_a01 + CH3COCH2O2_a01 + NO3m_a01 + Hp_a01              ', &
-     '        CH3COCH2O2_a01 + HO2_a01 --> RRA43017_a01 + HYPERACET_a01                                   ', &
-     '        CH3COCH2O2_a01 + O2m_a01 --> RRA43018_a01 + O2_a01 + HYPERACET_a01 + OHm_a01                ', &
-     '           IC3H7OOH_a01 + OH_a01 --> RRA43019a_a01 + CH3COCH3_a01 + OH_a01                          ', &
-     '           IC3H7OOH_a01 + OH_a01 --> RRA43019b_a01 + IC3H7O2_a01                                    ', &
-     '          IC3H7OOH_a01 + NO3_a01 --> RRA43020_a01 + IC3H7O2_a01 + NO3m_a01 + Hp_a01                 ', &
-     '           IC3H7O2_a01 + HO2_a01 --> RRA43021_a01 + IC3H7OOH_a01                                    ', &
-     '           IC3H7O2_a01 + O2m_a01 --> RRA43022_a01 + O2_a01 + IC3H7OOH_a01 + OHm_a01                 ', &
-     '           MG2_a01 + HOCH2OH_a01 --> RRA43023_a01 + MG3_a01 + H2O_a01                               ', &
-     '               MG3_a01 + H2O_a01 --> RRA43024_a01 + MG2_a01 + HOCH2OH_a01                           ', &
-     '                MG3_a01 + OH_a01 --> HM2F_a01 + RRA43025_a01 + HO2_a01                              ', &
-     '               MACR_a01 + OH_a01 --> RRA44000_a01 + CH2OHCO2CH3CHO_a01                              ', &
-     '            2 CH2OHCO2CH3CHO_a01 --> RRA44001_a01 + CHOHOHO2_a01 + MGLYOX_a01 + ACETOL_a01 ... etc. ', &
-     '                MVK_a01 + OH_a01 --> RRA44002_a01 + CH3COCHO2CH2OH_a01                              ', &
-     '            2 CH3COCHO2CH2OH_a01 --> 1.1 CH3COCOCH2OH_a01 + 0.2 CH2OHCHOHCOCH3_a01 + RRA44003_a01 ..', &
-     '       GLYOX_a01 + CHOCHOHOH_a01 --> RRA44004_a01 + GOLIG1_a01 + H2O_a01                            ', &
-     '            GOLIG1_a01 + H2O_a01 --> RRA44005_a01 + GLYOX_a01 + CHOCHOHOH_a01                       ', &
-     '                 2 CHOCHOHOH_a01 --> RRA44006_a01 + GOLIG2_a01 + H2O_a01                            ', &
-     '            GOLIG2_a01 + H2O_a01 --> RRA44007_a01 + 2 CHOCHOHOH_a01                                 ', &
-     'CHOCHOHOH_a01 + CHOHOHCHOHOH_a01 --> RRA44008_a01 + GOLIG3_a01 + H2O_a01                            ' /)
+     '                2 CH3COCH2O2_a01 --> 2 CH3CO3_a01 + 2 HCHO_a01                                      ', &
+     '                2 CH3COCH2O2_a01 --> 2 MGLYOX_a01 + 2 HO2_a01                                       ', &
+     '             ACETOL_a01 + OH_a01 --> CH3COCHOHO2_a01                                                ', &
+     '             ACETOL_a01 + OH_a01 --> CH3CO3_a01 + HCHO_a01                                          ', &
+     '            ACETOL_a01 + NO3_a01 --> CH3COCHOHO2_a01 + NO3m_a01 + Hp_a01                            ', &
+     '                 CH3COCHOHO2_a01 --> MGLYOX_a01 + HO2_a01                                           ', &
+     '            IPROPOL_a01 + OH_a01 --> CH3COCH3_a01 + HO2_a01                                         ', &
+     '           IPROPOL_a01 + NO3_a01 --> CH3COCH3_a01 + NO3m_a01 + Hp_a01 + HO2_a01                     ', &
+     '          HYPERACET_a01 + OH_a01 --> MGLYOX_a01 + OH_a01                                            ', &
+     '          HYPERACET_a01 + OH_a01 --> CH3COCH2O2_a01                                                 ', &
+     '         HYPERACET_a01 + NO3_a01 --> CH3COCH2O2_a01 + NO3m_a01 + Hp_a01                             ', &
+     '        CH3COCH2O2_a01 + HO2_a01 --> HYPERACET_a01                                                  ', &
+     '        CH3COCH2O2_a01 + O2m_a01 --> O2_a01 + HYPERACET_a01 + OHm_a01                               ', &
+     '           IC3H7OOH_a01 + OH_a01 --> CH3COCH3_a01 + OH_a01                                          ', &
+     '           IC3H7OOH_a01 + OH_a01 --> IC3H7O2_a01                                                    ', &
+     '          IC3H7OOH_a01 + NO3_a01 --> IC3H7O2_a01 + NO3m_a01 + Hp_a01                                ', &
+     '           IC3H7O2_a01 + HO2_a01 --> IC3H7OOH_a01                                                   ', &
+     '           IC3H7O2_a01 + O2m_a01 --> O2_a01 + IC3H7OOH_a01 + OHm_a01                                ', &
+     '           MG2_a01 + HOCH2OH_a01 --> MG3_a01 + H2O_a01                                              ', &
+     '               MG3_a01 + H2O_a01 --> MG2_a01 + HOCH2OH_a01                                          ', &
+     '                MG3_a01 + OH_a01 --> HM2F_a01 + HO2_a01                                             ', &
+     '               MACR_a01 + OH_a01 --> CH2OHCO2CH3CHO_a01                                             ', &
+     '            2 CH2OHCO2CH3CHO_a01 --> CHOHOHO2_a01 + MGLYOX_a01 + ACETOL_a01 + HOCH2O2_a01 ... etc.  ', &
+     '                MVK_a01 + OH_a01 --> CH3COCHO2CH2OH_a01                                             ', &
+     '            2 CH3COCHO2CH2OH_a01 --> 1.1 CH3COCOCH2OH_a01 + 0.2 CH2OHCHOHCOCH3_a01 + 0.35 MGLYOX_a01', &
+     '       GLYOX_a01 + CHOCHOHOH_a01 --> GOLIG1_a01 + H2O_a01                                           ', &
+     '            GOLIG1_a01 + H2O_a01 --> GLYOX_a01 + CHOCHOHOH_a01                                      ', &
+     '                 2 CHOCHOHOH_a01 --> GOLIG2_a01 + H2O_a01                                           ', &
+     '            GOLIG2_a01 + H2O_a01 --> 2 CHOCHOHOH_a01                                                ', &
+     'CHOCHOHOH_a01 + CHOHOHCHOHOH_a01 --> GOLIG3_a01 + H2O_a01                                           ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_77 = (/ &
-     '            GOLIG3_a01 + H2O_a01 --> RRA44009_a01 + CHOCHOHOH_a01 + CHOHOHCHOHOH_a01                ', &
-     '             GOLIG1_a01 + OH_a01 --> HGO1_a01 + RRA44010_a01 + HO2_a01                              ', &
-     '             GOLIG2_a01 + OH_a01 --> HGO2_a01 + RRA44011_a01 + HO2_a01                              ', &
-     '             GOLIG3_a01 + OH_a01 --> HGO3_a01 + RRA44012_a01 + HO2_a01                              ', &
-     '    MGLYOX_a01 + CH3COCHOHOH_a01 --> RRA46000_a01 + MGLYOXDA_a01 + H2O_a01                          ', &
-     '          MGLYOXDA_a01 + H2O_a01 --> RRA46001_a01 + MGLYOX_a01 + CH3COCHOHOH_a01                    ', &
-     '           MGLYOXDA_a01 + OH_a01 --> MGLYFA_a01 + RRA46002_a01 + HO2_a01                            ', &
-     '               2 CH3COCHOHOH_a01 --> RRA46003_a01 + MGLYOXDB_a01 + H2O_a01                          ', &
-     '          MGLYOXDB_a01 + H2O_a01 --> RRA46004_a01 + 2 CH3COCHOHOH_a01                               ', &
-     '           MGLYOXDB_a01 + OH_a01 --> MGLYFB_a01 + RRA46005_a01 + HO2_a01                            ', &
-     '           PHENOL_a01 + NO2p_a01 --> RRA460MS_a01 + HOC6H4NO2_a01 + Hp_a01                          ', &
-     '                        2 Cl_a01 --> RRA60000_a01 + Cl2_a01                                         ', &
-     '                      2 Cl2m_a01 --> RRA60001_a01 + Cl2_a01 + 2 Clm_a01                             ', &
-     '                O3_a01 + Clm_a01 --> RRA61000_a01 + ClOm_a01                                        ', &
-     '               Cl2_a01 + O2m_a01 --> RRA61001_a01 + Cl2m_a01                                        ', &
-     '              Cl2m_a01 + O2m_a01 --> RRA61002_a01 + 2 Clm_a01                                       ', &
-     '                          Cl_a01 --> RRA62000_a01 + ClOHm_a01 + Hp_a01                              ', &
-     '               Cl_a01 + H2O2_a01 --> RRA62001_a01 + Hp_a01 + Clm_a01 + HO2_a01                      ', &
-     '                OH_a01 + Clm_a01 --> RRA62002_a01 + ClOHm_a01                                       ', &
-     '               Cl2_a01 + HO2_a01 --> RRA62003_a01 + Hp_a01 + Cl2m_a01                               ', &
-     '                         Cl2_a01 --> RRA62004_a01 + HOCl_a01 + Hp_a01 + Clm_a01                     ', &
-     '              Cl2m_a01 + HO2_a01 --> RRA62005_a01 + Hp_a01 + 2 Clm_a01                              ', &
-     '              HOCl_a01 + O2m_a01 --> RRA62006_a01 + Cl_a01 + OHm_a01                                ', &
-     '              HOCl_a01 + HO2_a01 --> RRA62007_a01 + Cl_a01                                          ', &
-     '     HOCl_a01 + Hp_a01 + Clm_a01 --> RRA62008_a01 + Cl2_a01                                         ', &
-     '                       ClOHm_a01 --> RRA62009_a01 + OH_a01 + Clm_a01                                ', &
-     '              ClOHm_a01 + Hp_a01 --> RRA62010_a01 + Cl_a01                                          ', &
-     '                     2 ClOHm_a01 --> RRA620MS_a01 + Cl2_a01 + 2 OHm_a01                             ', &
-     '             ClOHm_a01 + Clm_a01 --> RRA621MS_a01 + OHm_a01 + Cl2m_a01                              ', &
-     '              OHm_a01 + Cl2m_a01 --> RRA622MS_a01 + ClOHm_a01 + Clm_a01                             ' /)
+     '            GOLIG3_a01 + H2O_a01 --> CHOCHOHOH_a01 + CHOHOHCHOHOH_a01                               ', &
+     '             GOLIG1_a01 + OH_a01 --> HGO1_a01 + HO2_a01                                             ', &
+     '             GOLIG2_a01 + OH_a01 --> HGO2_a01 + HO2_a01                                             ', &
+     '             GOLIG3_a01 + OH_a01 --> HGO3_a01 + HO2_a01                                             ', &
+     '    MGLYOX_a01 + CH3COCHOHOH_a01 --> MGLYOXDA_a01 + H2O_a01                                         ', &
+     '          MGLYOXDA_a01 + H2O_a01 --> MGLYOX_a01 + CH3COCHOHOH_a01                                   ', &
+     '           MGLYOXDA_a01 + OH_a01 --> MGLYFA_a01 + HO2_a01                                           ', &
+     '               2 CH3COCHOHOH_a01 --> MGLYOXDB_a01 + H2O_a01                                         ', &
+     '          MGLYOXDB_a01 + H2O_a01 --> 2 CH3COCHOHOH_a01                                              ', &
+     '           MGLYOXDB_a01 + OH_a01 --> MGLYFB_a01 + HO2_a01                                           ', &
+     '           PHENOL_a01 + NO2p_a01 --> HOC6H4NO2_a01 + Hp_a01                                         ', &
+     '                        2 Cl_a01 --> Cl2_a01                                                        ', &
+     '                      2 Cl2m_a01 --> Cl2_a01 + 2 Clm_a01                                            ', &
+     '                Clm_a01 + O3_a01 --> ClOm_a01                                                       ', &
+     '               Cl2_a01 + O2m_a01 --> Cl2m_a01                                                       ', &
+     '              Cl2m_a01 + O2m_a01 --> 2 Clm_a01                                                      ', &
+     '                          Cl_a01 --> ClOHm_a01 + Hp_a01                                             ', &
+     '               Cl_a01 + H2O2_a01 --> Clm_a01 + Hp_a01 + HO2_a01                                     ', &
+     '                Clm_a01 + OH_a01 --> ClOHm_a01                                                      ', &
+     '               Cl2_a01 + HO2_a01 --> Cl2m_a01 + Hp_a01                                              ', &
+     '                         Cl2_a01 --> HOCl_a01 + Clm_a01 + Hp_a01                                    ', &
+     '              Cl2m_a01 + HO2_a01 --> 2 Clm_a01 + Hp_a01                                             ', &
+     '              HOCl_a01 + O2m_a01 --> Cl_a01 + OHm_a01                                               ', &
+     '              HOCl_a01 + HO2_a01 --> Cl_a01                                                         ', &
+     '     HOCl_a01 + Clm_a01 + Hp_a01 --> Cl2_a01                                                        ', &
+     '                       ClOHm_a01 --> Clm_a01 + OH_a01                                               ', &
+     '              ClOHm_a01 + Hp_a01 --> Cl_a01                                                         ', &
+     '                     2 ClOHm_a01 --> Cl2_a01 + 2 OHm_a01                                            ', &
+     '             ClOHm_a01 + Clm_a01 --> OHm_a01 + Cl2m_a01                                             ', &
+     '              OHm_a01 + Cl2m_a01 --> ClOHm_a01 + Clm_a01                                            ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_78 = (/ &
-     '               Cl_a01 + NO3m_a01 --> RRA63000_a01 + NO3_a01 + Clm_a01                               ', &
-     '               NO3_a01 + Clm_a01 --> RRA63001_a01 + Cl_a01 + NO3m_a01                               ', &
-     '             NO2m_a01 + Cl2m_a01 --> RRA63002_a01 + NO2_a01 + 2 Clm_a01                             ', &
-     '                       ClNO2_a01 --> RRA630MS_a01 + NO2p_a01 + Clm_a01                              ', &
-     '              NO2p_a01 + Clm_a01 --> RRA631MS_a01 + ClNO2_a01                                       ', &
-     '             ClNO2_a01 + Clm_a01 --> RRA632MS_a01 + NO2m_a01 + Cl2_a01                              ', &
-     '           CH3OOH_a01 + Cl2m_a01 --> RRA64000_a01 + CH3O2_a01 + Hp_a01 + 2 Clm_a01                  ', &
-     '                      2 Br2m_a01 --> RRA70000_a01 + Br2_a01 + 2 Brm_a01                             ', &
-     '                O3_a01 + Brm_a01 --> RRA71000_a01 + BrOm_a01                                        ', &
-     '               Br2_a01 + O2m_a01 --> RRA71001_a01 + Br2m_a01                                        ', &
-     '              O2m_a01 + Br2m_a01 --> RRA71002_a01 + 2 Brm_a01                                       ', &
-     '                OH_a01 + Brm_a01 --> RRA72000_a01 + BrOHm_a01                                       ', &
-     '               Br2_a01 + HO2_a01 --> RRA72001_a01 + Hp_a01 + Br2m_a01                               ', &
-     '                         Br2_a01 --> RRA72002_a01 + HOBr_a01 + Hp_a01 + Brm_a01                     ', &
-     '              Br2m_a01 + HO2_a01 --> RRA72003_a01 + Br2_a01 + OHm_a01 + H2O2_a01                    ', &
-     '             Br2m_a01 + H2O2_a01 --> RRA72004_a01 + Hp_a01 + HO2_a01 + 2 Brm_a01                    ', &
-     '              HOBr_a01 + O2m_a01 --> RRA72005_a01 + Br_a01 + OHm_a01                                ', &
-     '              HOBr_a01 + HO2_a01 --> RRA72006_a01 + Br_a01                                          ', &
-     '             HOBr_a01 + H2O2_a01 --> RRA72007_a01 + Hp_a01 + Brm_a01                                ', &
-     '     HOBr_a01 + Hp_a01 + Brm_a01 --> RRA72008_a01 + Br2_a01                                         ', &
-     '                       BrOHm_a01 --> RRA72009a_a01 + OH_a01 + Brm_a01                               ', &
-     '                       BrOHm_a01 --> RRA72009b_a01 + Br_a01 + OHm_a01                               ', &
-     '              BrOHm_a01 + Hp_a01 --> RRA72010_a01 + Br_a01                                          ', &
-     '               NO3_a01 + Brm_a01 --> RRA73000_a01 + Br_a01 + NO3m_a01                               ', &
-     '             NO2m_a01 + Br2m_a01 --> RRA73001_a01 + NO2_a01 + 2 Brm_a01                             ', &
-     '           CH3OOH_a01 + Br2m_a01 --> RRA74000_a01 + CH3O2_a01 + Hp_a01 + 2 Brm_a01                  ', &
-     '     ClOm_a01 + Hp_a01 + Brm_a01 --> RRA76001_a01 + BrCl_a01 + OHm_a01                              ', &
-     '     HOCl_a01 + Hp_a01 + Brm_a01 --> RRA76002_a01 + BrCl_a01                                        ', &
-     '     HOBr_a01 + Hp_a01 + Clm_a01 --> RRA76003_a01 + BrCl_a01                                        ', &
-     '                        BrCl_a01 --> RRA76004_a01 + HOBr_a01 + Hp_a01 + Clm_a01                     ' /)
+     '               Cl_a01 + NO3m_a01 --> Clm_a01 + NO3_a01                                              ', &
+     '               Clm_a01 + NO3_a01 --> Cl_a01 + NO3m_a01                                              ', &
+     '             NO2m_a01 + Cl2m_a01 --> NO2_a01 + 2 Clm_a01                                            ', &
+     '                       ClNO2_a01 --> NO2p_a01 + Clm_a01                                             ', &
+     '              NO2p_a01 + Clm_a01 --> ClNO2_a01                                                      ', &
+     '             ClNO2_a01 + Clm_a01 --> NO2m_a01 + Cl2_a01                                             ', &
+     '           Cl2m_a01 + CH3OOH_a01 --> CH3O2_a01 + 2 Clm_a01 + Hp_a01                                 ', &
+     '                      2 Br2m_a01 --> Br2_a01 + 2 Brm_a01                                            ', &
+     '                Brm_a01 + O3_a01 --> BrOm_a01                                                       ', &
+     '               Br2_a01 + O2m_a01 --> Br2m_a01                                                       ', &
+     '              O2m_a01 + Br2m_a01 --> 2 Brm_a01                                                      ', &
+     '                Brm_a01 + OH_a01 --> BrOHm_a01                                                      ', &
+     '               Br2_a01 + HO2_a01 --> Hp_a01 + Br2m_a01                                              ', &
+     '                         Br2_a01 --> HOBr_a01 + Hp_a01 + Brm_a01                                    ', &
+     '              Br2m_a01 + HO2_a01 --> Br2_a01 + OHm_a01 + H2O2_a01                                   ', &
+     '             Br2m_a01 + H2O2_a01 --> Hp_a01 + 2 Brm_a01 + HO2_a01                                   ', &
+     '              HOBr_a01 + O2m_a01 --> Br_a01 + OHm_a01                                               ', &
+     '              HOBr_a01 + HO2_a01 --> Br_a01                                                         ', &
+     '             HOBr_a01 + H2O2_a01 --> Hp_a01 + Brm_a01                                               ', &
+     '     HOBr_a01 + Hp_a01 + Brm_a01 --> Br2_a01                                                        ', &
+     '                       BrOHm_a01 --> Brm_a01 + OH_a01                                               ', &
+     '                       BrOHm_a01 --> Br_a01 + OHm_a01                                               ', &
+     '              BrOHm_a01 + Hp_a01 --> Br_a01                                                         ', &
+     '               NO3_a01 + Brm_a01 --> Br_a01 + NO3m_a01                                              ', &
+     '             NO2m_a01 + Br2m_a01 --> NO2_a01 + 2 Brm_a01                                            ', &
+     '           Br2m_a01 + CH3OOH_a01 --> CH3O2_a01 + Hp_a01 + 2 Brm_a01                                 ', &
+     '     ClOm_a01 + Hp_a01 + Brm_a01 --> BrCl_a01 + OHm_a01                                             ', &
+     '     HOCl_a01 + Hp_a01 + Brm_a01 --> BrCl_a01                                                       ', &
+     '     HOBr_a01 + Clm_a01 + Hp_a01 --> BrCl_a01                                                       ', &
+     '                        BrCl_a01 --> HOBr_a01 + Clm_a01 + Hp_a01                                    ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_79 = (/ &
-     '               O2_a01 + SO3m_a01 --> RRA91000_a01 + SO5m_a01                                        ', &
-     '              O3_a01 + SO3mm_a01 --> RRA91001_a01 + SO4mm_a01                                       ', &
-     '              SO4m_a01 + O2m_a01 --> RRA91002_a01 + SO4mm_a01                                       ', &
-     '            SO4m_a01 + SO3mm_a01 --> RRA91003_a01 + SO3m_a01 + SO4mm_a01                            ', &
-     '              SO5m_a01 + O2m_a01 --> RRA91004_a01 + HSO5m_a01 + OHm_a01                             ', &
-     '            SO5m_a01 + SO3mm_a01 --> RRA91005_a01 + 0.28 HSO5m_a01 + 0.28 SO3m_a01 + 0.72 SO4mm_a01 ', &
-     '                      2 SO5m_a01 --> LSULFUR + RRA91006_a01 + O2_a01 + SO4mm_a01                    ', &
-     '              OH_a01 + SO3mm_a01 --> RRA92000_a01 + SO3m_a01 + OHm_a01                              ', &
-     '               OH_a01 + SO4m_a01 --> RRA92001_a01 + HSO5m_a01                                       ', &
-     '              SO4m_a01 + HO2_a01 --> RRA92002_a01 + SO4mm_a01 + Hp_a01                              ', &
-     '              SO4m_a01 + H2O_a01 --> RRA92003_a01 + SO4mm_a01 + OH_a01 + Hp_a01                     ', &
-     '             SO4m_a01 + H2O2_a01 --> RRA92004_a01 + SO4mm_a01 + Hp_a01 + HO2_a01                    ', &
-     '             HSO3m_a01 + O2m_a01 --> RRA92005_a01 + SO4mm_a01 + OH_a01                              ', &
-     '              O3_a01 + HSO3m_a01 --> RRA92006_a01 + SO4mm_a01 + Hp_a01                              ', &
-     '              OH_a01 + HSO3m_a01 --> RRA92007_a01 + SO3m_a01                                        ', &
-     '             HSO3m_a01 + HO2_a01 --> RRA92008_a01 + SO4mm_a01 + OH_a01 + Hp_a01                     ', &
-     '            HSO3m_a01 + H2O2_a01 --> RRA92009_a01 + SO4mm_a01 + Hp_a01                              ', &
-     '            HSO3m_a01 + SO4m_a01 --> RRA92010_a01 + SO3m_a01 + SO4mm_a01 + Hp_a01                   ', &
-     '            SO5m_a01 + HSO3m_a01 --> RRA92011_a01 + 0.25 HSO5m_a01 + 0.25 SO3m_a01 + 0.75 SO4mm_a01 ', &
-     '  HSO5m_a01 + Hp_a01 + HSO3m_a01 --> RRA92012_a01 + 2 HSO4m_a01 + Hp_a01                            ', &
-     '             NO3m_a01 + SO4m_a01 --> RRA93001_a01 + SO4mm_a01 + NO3_a01                             ', &
-     '             SO4mm_a01 + NO3_a01 --> RRA93002_a01 + NO3m_a01 + SO4m_a01                             ', &
-     '             NO3_a01 + HSO3m_a01 --> RRA93004_a01 + SO3m_a01 + NO3m_a01 + Hp_a01                    ', &
-     '            HNO4_a01 + HSO3m_a01 --> RRA93005_a01 + HSO4m_a01 + NO3m_a01 + Hp_a01                   ', &
-     '            SO4mm_a01 + NO2p_a01 --> RRA930MS_a01 + SO4mm_a01 + NO3m_a01 + 2 Hp_a01                 ', &
-     '            HCHO_a01 + SO3mm_a01 --> RRA94100_a01 + CH2OHSO3m_a01 + OHm_a01                         ', &
-     ' CH3OOH_a01 + Hp_a01 + SO3mm_a01 --> RRA94101_a01 + SO4mm_a01 + Hp_a01 + CH3OH_a01                  ', &
-     '            HCHO_a01 + HSO3m_a01 --> RRA94102_a01 + CH2OHSO3m_a01                                   ', &
-     ' CH3OOH_a01 + Hp_a01 + HSO3m_a01 --> RRA94103_a01 + HSO4m_a01 + Hp_a01 + CH3OH_a01                  ', &
-     '           CH3O2_a01 + HSO3m_a01 --> RRA94104_a01 + SO3m_a01 + CH3OOH_a01                           ' /)
+     '               O2_a01 + SO3m_a01 --> SO5m_a01                                                       ', &
+     '              SO3mm_a01 + O3_a01 --> SO4mm_a01                                                      ', &
+     '              O2m_a01 + SO4m_a01 --> SO4mm_a01                                                      ', &
+     '            SO3mm_a01 + SO4m_a01 --> SO3m_a01 + SO4mm_a01                                           ', &
+     '              SO5m_a01 + O2m_a01 --> HSO5m_a01 + OHm_a01                                            ', &
+     '            SO3mm_a01 + SO5m_a01 --> 0.28 HSO5m_a01 + 0.28 SO3m_a01 + 0.72 SO4mm_a01 + 0.28 OHm_a01 ', &
+     '                      2 SO5m_a01 --> LSULFUR + O2_a01 + SO4mm_a01                                   ', &
+     '              SO3mm_a01 + OH_a01 --> SO3m_a01 + OHm_a01                                             ', &
+     '               SO4m_a01 + OH_a01 --> HSO5m_a01                                                      ', &
+     '              SO4m_a01 + HO2_a01 --> SO4mm_a01 + Hp_a01                                             ', &
+     '              SO4m_a01 + H2O_a01 --> SO4mm_a01 + Hp_a01 + OH_a01                                    ', &
+     '             SO4m_a01 + H2O2_a01 --> SO4mm_a01 + Hp_a01 + HO2_a01                                   ', &
+     '             O2m_a01 + HSO3m_a01 --> SO4mm_a01 + OH_a01                                             ', &
+     '              O3_a01 + HSO3m_a01 --> SO4mm_a01 + Hp_a01                                             ', &
+     '              OH_a01 + HSO3m_a01 --> SO3m_a01                                                       ', &
+     '             HO2_a01 + HSO3m_a01 --> SO4mm_a01 + Hp_a01 + OH_a01                                    ', &
+     '            H2O2_a01 + HSO3m_a01 --> SO4mm_a01 + Hp_a01                                             ', &
+     '            SO4m_a01 + HSO3m_a01 --> SO3m_a01 + SO4mm_a01 + Hp_a01                                  ', &
+     '            SO5m_a01 + HSO3m_a01 --> 0.25 HSO5m_a01 + 0.25 SO3m_a01 + 0.75 SO4mm_a01 + 0.75 Hp_a01 .', &
+     '  HSO5m_a01 + Hp_a01 + HSO3m_a01 --> 2 HSO4m_a01 + Hp_a01                                           ', &
+     '             NO3m_a01 + SO4m_a01 --> SO4mm_a01 + NO3_a01                                            ', &
+     '             SO4mm_a01 + NO3_a01 --> NO3m_a01 + SO4m_a01                                            ', &
+     '             NO3_a01 + HSO3m_a01 --> SO3m_a01 + NO3m_a01 + Hp_a01                                   ', &
+     '            HNO4_a01 + HSO3m_a01 --> HSO4m_a01 + NO3m_a01 + Hp_a01                                  ', &
+     '            SO4mm_a01 + NO2p_a01 --> SO4mm_a01 + NO3m_a01 + 2 Hp_a01                                ', &
+     '            SO3mm_a01 + HCHO_a01 --> CH2OHSO3m_a01 + OHm_a01                                        ', &
+     ' SO3mm_a01 + Hp_a01 + CH3OOH_a01 --> SO4mm_a01 + Hp_a01 + CH3OH_a01                                 ', &
+     '            HCHO_a01 + HSO3m_a01 --> CH2OHSO3m_a01                                                  ', &
+     ' Hp_a01 + CH3OOH_a01 + HSO3m_a01 --> HSO4m_a01 + Hp_a01 + CH3OH_a01                                 ', &
+     '           CH3O2_a01 + HSO3m_a01 --> SO3m_a01 + CH3OOH_a01                                          ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_80 = (/ &
-     '            HCOOm_a01 + SO4m_a01 --> RRA94105_a01 + SO4mm_a01 + CO2_a01 + HO2_a01                   ', &
-     '            HCOOH_a01 + SO4m_a01 --> RRA94106_a01 + SO4mm_a01 + Hp_a01 + CO2_a01 + HO2_a01 ... etc. ', &
-     '            CH3OH_a01 + SO4m_a01 --> RRA94107_a01 + HOCH2O2_a01 + SO4mm_a01 + Hp_a01                ', &
-     '           CH3OOH_a01 + SO4m_a01 --> RRA94108a_a01 + CH3O2_a01 + SO4mm_a01 + Hp_a01                 ', &
-     '           CH3OOH_a01 + SO4m_a01 --> RRA94108b_a01 + HCHO_a01 + SO4mm_a01 + Hp_a01 + HO2_a01 ... etc', &
-     '          HOCH2OH_a01 + SO4m_a01 --> RRA94109_a01 + CHOHOHO2_a01 + SO4mm_a01 + Hp_a01               ', &
-     '            SO5m_a01 + HCOOm_a01 --> RRA94110_a01 + HSO5m_a01 + O2m_a01 + CO2_a01                   ', &
-     '         CH2OHSO3m_a01 + OHm_a01 --> RRA94111_a01 + HCHO_a01 + SO3mm_a01                            ', &
-     '       CH2OOCOOH_a01 + HSO3m_a01 --> RRA94200_a01 + HOOCH2CO2H_a01 + SO3m_a01                       ', &
-     '       CH2OOCO2m_a01 + HSO3m_a01 --> RRA94201_a01 + CH2OOHCO2m_a01 + SO3m_a01                       ', &
-     '           C2H5OH_a01 + SO4m_a01 --> RRA94202a_a01 + CH3CHO_a01 + SO4mm_a01 + Hp_a01 + HO2_a01 ... e', &
-     '           C2H5OH_a01 + SO4m_a01 --> RRA94202b_a01 + HOCH2CH2O2_a01 + SO4mm_a01 + Hp_a01 ... etc.   ', &
-     '     CHOHOHCHOHOH_a01 + SO4m_a01 --> RRA94203a_a01 + CHOHOHCOHOHO2_a01 + SO4mm_a01 + Hp_a01 ... etc.', &
-     '     CHOHOHCHOHOH_a01 + SO4m_a01 --> RRA94203b_a01 + CHOHOHO2_a01 + HCOOH_a01 + SO4mm_a01 ... etc.  ', &
-     '          CH3COOm_a01 + SO4m_a01 --> RRA94204_a01 + CH2OOCO2m_a01 + SO4mm_a01 + Hp_a01              ', &
-     '         HOOCCO2m_a01 + SO4m_a01 --> RRA94205_a01 + C2O4m_a01 + SO4mm_a01 + Hp_a01                  ', &
-     '         CO2CO2mm_a01 + SO4m_a01 --> RRA94206_a01 + C2O4m_a01 + SO4mm_a01                           ', &
-     '            Cl2m_a01 + SO3mm_a01 --> RRA96000_a01 + SO3m_a01 + 2 Clm_a01                            ', &
-     '            HOCl_a01 + SO3mm_a01 --> RRA96001_a01 + HSO4m_a01 + Clm_a01                             ', &
-     '              Clm_a01 + SO4m_a01 --> RRA96002_a01 + Cl_a01 + SO4mm_a01                              ', &
-     '              Cl_a01 + SO4mm_a01 --> RRA96003_a01 + Clm_a01 + SO4m_a01                              ', &
-     '            HSO3m_a01 + Cl2m_a01 --> RRA96004_a01 + SO3m_a01 + Hp_a01 + 2 Clm_a01                   ', &
-     '            HOCl_a01 + HSO3m_a01 --> RRA96005_a01 + HSO4m_a01 + Hp_a01 + Clm_a01                    ', &
-     '             HSO5m_a01 + Clm_a01 --> RRA96006_a01 + HOCl_a01 + SO4mm_a01                            ', &
-     '            SO3mm_a01 + Br2m_a01 --> RRA97000_a01 + SO3m_a01 + 2 Brm_a01                            ', &
-     '            BrOm_a01 + SO3mm_a01 --> RRA97001_a01 + SO4mm_a01 + Brm_a01                             ', &
-     '            HOBr_a01 + SO3mm_a01 --> RRA97002_a01 + HSO4m_a01 + Brm_a01                             ', &
-     '              SO4m_a01 + Brm_a01 --> RRA97003_a01 + Br_a01 + SO4mm_a01                              ', &
-     '            HSO3m_a01 + Br2m_a01 --> RRA97004_a01 + SO3m_a01 + Hp_a01 + 2 Brm_a01                   ', &
-     '            HOBr_a01 + HSO3m_a01 --> RRA97005_a01 + HSO4m_a01 + Hp_a01 + Brm_a01                    ' /)
+     '            HCOOm_a01 + SO4m_a01 --> CO2_a01 + SO4mm_a01 + HO2_a01                                  ', &
+     '            HCOOH_a01 + SO4m_a01 --> CO2_a01 + SO4mm_a01 + Hp_a01 + HO2_a01                         ', &
+     '            SO4m_a01 + CH3OH_a01 --> HOCH2O2_a01 + SO4mm_a01 + Hp_a01                               ', &
+     '           SO4m_a01 + CH3OOH_a01 --> CH3O2_a01 + SO4mm_a01 + Hp_a01                                 ', &
+     '           SO4m_a01 + CH3OOH_a01 --> SO4mm_a01 + HCHO_a01 + Hp_a01 + HO2_a01                        ', &
+     '          HOCH2OH_a01 + SO4m_a01 --> CHOHOHO2_a01 + SO4mm_a01 + Hp_a01                              ', &
+     '            HCOOm_a01 + SO5m_a01 --> HSO5m_a01 + CO2_a01 + O2m_a01                                  ', &
+     '         CH2OHSO3m_a01 + OHm_a01 --> SO3mm_a01 + HCHO_a01                                           ', &
+     '       CH2OOCOOH_a01 + HSO3m_a01 --> HOOCH2CO2H_a01 + SO3m_a01                                      ', &
+     '       CH2OOCO2m_a01 + HSO3m_a01 --> CH2OOHCO2m_a01 + SO3m_a01                                      ', &
+     '           C2H5OH_a01 + SO4m_a01 --> CH3CHO_a01 + SO4mm_a01 + Hp_a01 + HO2_a01                      ', &
+     '           C2H5OH_a01 + SO4m_a01 --> HOCH2CH2O2_a01 + SO4mm_a01 + Hp_a01                            ', &
+     '     CHOHOHCHOHOH_a01 + SO4m_a01 --> CHOHOHCOHOHO2_a01 + SO4mm_a01 + Hp_a01                         ', &
+     '     CHOHOHCHOHOH_a01 + SO4m_a01 --> CHOHOHO2_a01 + HCOOH_a01 + SO4mm_a01 + Hp_a01 + HO2_a01 ... etc', &
+     '          CH3COOm_a01 + SO4m_a01 --> CH2OOCO2m_a01 + SO4mm_a01 + Hp_a01                             ', &
+     '         HOOCCO2m_a01 + SO4m_a01 --> C2O4m_a01 + SO4mm_a01 + Hp_a01                                 ', &
+     '         CO2CO2mm_a01 + SO4m_a01 --> C2O4m_a01 + SO4mm_a01                                          ', &
+     '            SO3mm_a01 + Cl2m_a01 --> SO3m_a01 + 2 Clm_a01                                           ', &
+     '            SO3mm_a01 + HOCl_a01 --> HSO4m_a01 + Clm_a01                                            ', &
+     '              Clm_a01 + SO4m_a01 --> Cl_a01 + SO4mm_a01                                             ', &
+     '              Cl_a01 + SO4mm_a01 --> Clm_a01 + SO4m_a01                                             ', &
+     '            Cl2m_a01 + HSO3m_a01 --> SO3m_a01 + 2 Clm_a01 + Hp_a01                                  ', &
+     '            HOCl_a01 + HSO3m_a01 --> HSO4m_a01 + Clm_a01 + Hp_a01                                   ', &
+     '             HSO5m_a01 + Clm_a01 --> SO4mm_a01 + HOCl_a01                                           ', &
+     '            SO3mm_a01 + Br2m_a01 --> SO3m_a01 + 2 Brm_a01                                           ', &
+     '            BrOm_a01 + SO3mm_a01 --> SO4mm_a01 + Brm_a01                                            ', &
+     '            SO3mm_a01 + HOBr_a01 --> HSO4m_a01 + Brm_a01                                            ', &
+     '              SO4m_a01 + Brm_a01 --> Br_a01 + SO4mm_a01                                             ', &
+     '            Br2m_a01 + HSO3m_a01 --> SO3m_a01 + Hp_a01 + 2 Brm_a01                                  ', &
+     '            HOBr_a01 + HSO3m_a01 --> HSO4m_a01 + Hp_a01 + Brm_a01                                   ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_81 = (/ &
-     '             HSO5m_a01 + Brm_a01 --> RRA97006_a01 + HOBr_a01 + SO4mm_a01                            ', &
-     '              Fepp_a01 + O2m_a01 --> HO2m_a01 + RRA111001_a01 + Feppp_a01 + OHm_a01                 ', &
-     '             Feppp_a01 + O2m_a01 --> RRA111002_a01 + O2_a01 + Fepp_a01                              ', &
-     '               Fepp_a01 + O3_a01 --> RRA111003_a01 + O2_a01 + FeOpp_a01                             ', &
-     '               Fepp_a01 + OH_a01 --> RRA112001a_a01 + Feppp_a01 + OHm_a01                           ', &
-     '              FeOHp_a01 + OH_a01 --> RRA112001b_a01 + Feppp_a01 + 2 OHm_a01                         ', &
-     '             Fepp_a01 + H2O2_a01 --> RRA112002a_a01 + Feppp_a01 + OHm_a01 + OH_a01                  ', &
-     '            FeOHp_a01 + H2O2_a01 --> RRA112002b_a01 + Feppp_a01 + 2 OHm_a01 + OH_a01                ', &
-     '                     FeHO2pp_a01 --> RRA112003_a01 + Fepp_a01 + HO2_a01                             ', &
-     '                    FeOHHO2p_a01 --> RRA112004_a01 + Fepp_a01 + OHm_a01 + HO2_a01                   ', &
-     '              Fepp_a01 + HO2_a01 --> HO2m_a01 + RRA112006_a01 + Feppp_a01                           ', &
-     '            FeOHpp_a01 + O2m_a01 --> RRA112008a_a01 + O2_a01 + Fepp_a01 + OHm_a01                   ', &
-     '            FeOH2p_a01 + O2m_a01 --> RRA112008b_a01 + O2_a01 + Fepp_a01 + 2 OHm_a01                 ', &
-     '              Fepp_a01 + O2m_a01 --> RRA112009_a01 + Feppp_a01 + 2 OHm_a01 + H2O2_a01               ', &
-     '               Fepp_a01 + OH_a01 --> RRA112010_a01 + FeOHpp_a01                                     ', &
-     '            FeOpp_a01 + H2O2_a01 --> RRA112011_a01 + Feppp_a01 + OHm_a01 + HO2_a01                  ', &
-     '                       FeOpp_a01 --> RRA112012_a01 + Feppp_a01 + OHm_a01 + OH_a01                   ', &
-     '             FeOpp_a01 + HO2_a01 --> RRA112013_a01 + O2_a01 + Feppp_a01 + OHm_a01                   ', &
-     '              FeOpp_a01 + OH_a01 --> HO2m_a01 + RRA112014_a01 + Feppp_a01                           ', &
-     '            Fepp_a01 + FeOpp_a01 --> RRA112015_a01 + 2 Feppp_a01 + 2 OHm_a01                        ', &
-     '            Fepp_a01 + FeOpp_a01 --> RRA112016_a01 + FeOH2Fepppp_a01                                ', &
-     '        FeOH2Fepppp_a01 + Hp_a01 --> RRA112017_a01 + 2 Feppp_a01 + OHm_a01                          ', &
-     '                 FeOH2Fepppp_a01 --> RRA112018_a01 + 2 Feppp_a01 + 2 OHm_a01                        ', &
-     '            FeOpp_a01 + HONO_a01 --> RRA113001_a01 + NO2_a01 + Feppp_a01 + OHm_a01                  ', &
-     '              Fepp_a01 + NO3_a01 --> RRA113002_a01 + Feppp_a01 + NO3m_a01                           ', &
-     '               Cl_a01 + Fepp_a01 --> RRA116001_a01 + Feppp_a01 + Clm_a01                            ', &
-     '             Fepp_a01 + Cl2m_a01 --> RRA116002a_a01 + Feppp_a01 + 2 Clm_a01                         ', &
-     '             Fepp_a01 + Cl2m_a01 --> RRA116002b_a01 + FeClpp_a01 + Clm_a01                          ', &
-     '             FeClp_a01 + HO2_a01 --> HO2m_a01 + RRA116003a_a01 + Feppp_a01 + Clm_a01                ', &
-     '             FeClp_a01 + O2m_a01 --> HO2m_a01 + RRA116003b_a01 + Feppp_a01 + OHm_a01 + Clm_a01 ... e' /)
+     '             HSO5m_a01 + Brm_a01 --> SO4mm_a01 + HOBr_a01                                           ', &
+     '              Fepp_a01 + O2m_a01 --> HO2m_a01 + Feppp_a01 + OHm_a01                                 ', &
+     '             Feppp_a01 + O2m_a01 --> O2_a01 + Fepp_a01                                              ', &
+     '               Fepp_a01 + O3_a01 --> O2_a01 + FeOpp_a01                                             ', &
+     '               Fepp_a01 + OH_a01 --> Feppp_a01 + OHm_a01                                            ', &
+     '              FeOHp_a01 + OH_a01 --> Feppp_a01 + 2 OHm_a01                                          ', &
+     '             Fepp_a01 + H2O2_a01 --> Feppp_a01 + OHm_a01 + OH_a01                                   ', &
+     '            FeOHp_a01 + H2O2_a01 --> Feppp_a01 + 2 OHm_a01 + OH_a01                                 ', &
+     '                     FeHO2pp_a01 --> Fepp_a01 + HO2_a01                                             ', &
+     '                    FeOHHO2p_a01 --> Fepp_a01 + OHm_a01 + HO2_a01                                   ', &
+     '              Fepp_a01 + HO2_a01 --> HO2m_a01 + Feppp_a01                                           ', &
+     '            FeOHpp_a01 + O2m_a01 --> O2_a01 + Fepp_a01 + OHm_a01                                    ', &
+     '            FeOH2p_a01 + O2m_a01 --> O2_a01 + Fepp_a01 + 2 OHm_a01                                  ', &
+     '              Fepp_a01 + O2m_a01 --> Feppp_a01 + 2 OHm_a01 + H2O2_a01                               ', &
+     '               Fepp_a01 + OH_a01 --> FeOHpp_a01                                                     ', &
+     '            FeOpp_a01 + H2O2_a01 --> Feppp_a01 + OHm_a01 + HO2_a01                                  ', &
+     '                       FeOpp_a01 --> Feppp_a01 + OHm_a01 + OH_a01                                   ', &
+     '             FeOpp_a01 + HO2_a01 --> O2_a01 + Feppp_a01 + OHm_a01                                   ', &
+     '              FeOpp_a01 + OH_a01 --> HO2m_a01 + Feppp_a01                                           ', &
+     '            Fepp_a01 + FeOpp_a01 --> 2 Feppp_a01 + 2 OHm_a01                                        ', &
+     '            Fepp_a01 + FeOpp_a01 --> FeOH2Fepppp_a01                                                ', &
+     '        FeOH2Fepppp_a01 + Hp_a01 --> 2 Feppp_a01 + OHm_a01                                          ', &
+     '                 FeOH2Fepppp_a01 --> 2 Feppp_a01 + 2 OHm_a01                                        ', &
+     '            HONO_a01 + FeOpp_a01 --> NO2_a01 + Feppp_a01 + OHm_a01                                  ', &
+     '              Fepp_a01 + NO3_a01 --> Feppp_a01 + NO3m_a01                                           ', &
+     '               Cl_a01 + Fepp_a01 --> Feppp_a01 + Clm_a01                                            ', &
+     '             Fepp_a01 + Cl2m_a01 --> Feppp_a01 + 2 Clm_a01                                          ', &
+     '             Fepp_a01 + Cl2m_a01 --> FeClpp_a01 + Clm_a01                                           ', &
+     '             FeClp_a01 + HO2_a01 --> HO2m_a01 + Feppp_a01 + Clm_a01                                 ', &
+     '             FeClp_a01 + O2m_a01 --> HO2m_a01 + Feppp_a01 + OHm_a01 + Clm_a01                       ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_82 = (/ &
-     '            FeClpp_a01 + HO2_a01 --> RRA116004a_a01 + O2_a01 + Fepp_a01 + Hp_a01 + Clm_a01 ... etc. ', &
-     '            FeCl2p_a01 + HO2_a01 --> RRA116004b_a01 + O2_a01 + Fepp_a01 + Hp_a01 + 2 Clm_a01 ... etc', &
-     '            FeClpp_a01 + O2m_a01 --> RRA116004c_a01 + O2_a01 + Fepp_a01 + Clm_a01                   ', &
-     '            FeCl2p_a01 + O2m_a01 --> RRA116004d_a01 + O2_a01 + Fepp_a01 + 2 Clm_a01                 ', &
-     '             FeOpp_a01 + Clm_a01 --> RRA116005_a01 + Cl_a01 + Feppp_a01 + 2 OHm_a01                 ', &
-     '             Fepp_a01 + Br2m_a01 --> RRA117001_a01 + Feppp_a01 + 2 Brm_a01                          ', &
-     '             SO2_a01 + FeOpp_a01 --> RRA119001_a01 + Feppp_a01 + SO3m_a01                           ', &
-     '           FeOpp_a01 + HSO3m_a01 --> RRA119002_a01 + Feppp_a01 + SO3m_a01 + OHm_a01                 ', &
-     '          FeOHpp_a01 + HSO3m_a01 --> RRA119003_a01 + SO3m_a01 + Fepp_a01 + H2O_a01                  ', &
-     '             SO5m_a01 + Fepp_a01 --> RRA119004_a01 + HSO5m_a01 + FeOHpp_a01                         ', &
-     '            HSO5m_a01 + Fepp_a01 --> RRA119005_a01 + FeOHpp_a01 + SO4m_a01                          ', &
-     '             Fepp_a01 + SO4m_a01 --> RRA119006_a01 + FeSO4p_a01                                     ', &
-     '           FeOHpp_a01 + SO3m_a01 --> RRA119007_a01 + HSO4m_a01 + Fepp_a01                           ', &
-     '           FeSO3p_a01 + SO3m_a01 --> RRA119008_a01 + SO2_a01 + Fepp_a01 + SO4mm_a01                 ', &
-     '                              O2 --> RRH10000f_a01 + O2_a01                                         ', &
-     '                          O2_a01 --> RRH10000b_a01 + O2                                             ', &
-     '                              O3 --> RRH10001f_a01 + O3_a01                                         ', &
-     '                          O3_a01 --> RRH10001b_a01 + O3                                             ', &
-     '                              OH --> RRH21000f_a01 + OH_a01                                         ', &
-     '                          OH_a01 --> RRH21000b_a01 + OH                                             ', &
-     '                             HO2 --> RRH21001f_a01 + HO2_a01                                        ', &
-     '                         HO2_a01 --> RRH21001b_a01 + HO2                                            ', &
-     '                            H2O2 --> RRH21002f_a01 + H2O2_a01                                       ', &
-     '                        H2O2_a01 --> RRH21002b_a01 + H2O2                                           ', &
-     '                              NO --> NO_a01 + RRH31000f_a01                                         ', &
-     '                          NO_a01 --> RRH31000b_a01 + NO                                             ', &
-     '                             NO2 --> RRH31001f_a01 + NO2_a01                                        ', &
-     '                         NO2_a01 --> RRH31001b_a01 + NO2                                            ', &
-     '                             NO3 --> RRH31002f_a01 + NO3_a01                                        ', &
-     '                         NO3_a01 --> RRH31002b_a01 + NO3                                            ' /)
+     '            FeClpp_a01 + HO2_a01 --> O2_a01 + Fepp_a01 + Clm_a01 + Hp_a01                           ', &
+     '            FeCl2p_a01 + HO2_a01 --> O2_a01 + Fepp_a01 + 2 Clm_a01 + Hp_a01                         ', &
+     '            FeClpp_a01 + O2m_a01 --> O2_a01 + Fepp_a01 + Clm_a01                                    ', &
+     '            FeCl2p_a01 + O2m_a01 --> O2_a01 + Fepp_a01 + 2 Clm_a01                                  ', &
+     '             FeOpp_a01 + Clm_a01 --> Cl_a01 + Feppp_a01 + 2 OHm_a01                                 ', &
+     '             Fepp_a01 + Br2m_a01 --> Feppp_a01 + 2 Brm_a01                                          ', &
+     '             SO2_a01 + FeOpp_a01 --> Feppp_a01 + SO3m_a01                                           ', &
+     '           FeOpp_a01 + HSO3m_a01 --> Feppp_a01 + SO3m_a01 + OHm_a01                                 ', &
+     '          FeOHpp_a01 + HSO3m_a01 --> SO3m_a01 + Fepp_a01 + H2O_a01                                  ', &
+     '             Fepp_a01 + SO5m_a01 --> HSO5m_a01 + FeOHpp_a01                                         ', &
+     '            HSO5m_a01 + Fepp_a01 --> FeOHpp_a01 + SO4m_a01                                          ', &
+     '             Fepp_a01 + SO4m_a01 --> FeSO4p_a01                                                     ', &
+     '           FeOHpp_a01 + SO3m_a01 --> HSO4m_a01 + Fepp_a01                                           ', &
+     '           FeSO3p_a01 + SO3m_a01 --> SO2_a01 + SO4mm_a01 + Fepp_a01                                 ', &
+     '                              O2 --> O2_a01                                                         ', &
+     '                          O2_a01 --> O2                                                             ', &
+     '                              O3 --> O3_a01                                                         ', &
+     '                          O3_a01 --> O3                                                             ', &
+     '                              OH --> OH_a01                                                         ', &
+     '                          OH_a01 --> OH                                                             ', &
+     '                             HO2 --> HO2_a01                                                        ', &
+     '                         HO2_a01 --> HO2                                                            ', &
+     '                            H2O2 --> H2O2_a01                                                       ', &
+     '                        H2O2_a01 --> H2O2                                                           ', &
+     '                              NO --> NO_a01                                                         ', &
+     '                          NO_a01 --> NO                                                             ', &
+     '                             NO2 --> NO2_a01                                                        ', &
+     '                         NO2_a01 --> NO2                                                            ', &
+     '                             NO3 --> NO3_a01                                                        ', &
+     '                         NO3_a01 --> NO3                                                            ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_83 = (/ &
-     '                             NH3 --> RRH32000f_a01 + NH3_a01                                        ', &
-     '                         NH3_a01 --> RRH32000b_a01 + NH3                                            ', &
-     '                            HONO --> RRH32002f_a01 + HONO_a01                                       ', &
-     '                        HONO_a01 --> RRH32002b_a01 + HONO                                           ', &
-     '                            HNO3 --> RRH32003f_a01 + HNO3_a01                                       ', &
-     '                        HNO3_a01 --> RRH32003b_a01 + HNO3                                           ', &
-     '                            HNO4 --> RRH32004f_a01 + HNO4_a01                                       ', &
-     '                        HNO4_a01 --> RRH32004b_a01 + HNO4                                           ', &
-     '                            N2O5 --> RRH320MSf_a01 + N2O5_a01                                       ', &
-     '                        N2O5_a01 --> RRH320MSb_a01 + N2O5                                           ', &
-     '                             CO2 --> RRH41000f_a01 + CO2_a01                                        ', &
-     '                         CO2_a01 --> RRH41000b_a01 + CO2                                            ', &
-     '                            HCHO --> RRH41001f_a01 + HCHO_a01                                       ', &
-     '                        HCHO_a01 --> RRH41001b_a01 + HCHO                                           ', &
-     '                           CH3O2 --> RRH41002f_a01 + CH3O2_a01                                      ', &
-     '                       CH3O2_a01 --> RRH41002b_a01 + CH3O2                                          ', &
-     '                           HCOOH --> RRH41003f_a01 + HCOOH_a01                                      ', &
-     '                       HCOOH_a01 --> RRH41003b_a01 + HCOOH                                          ', &
-     '                          CH3OOH --> RRH41004f_a01 + CH3OOH_a01                                     ', &
-     '                      CH3OOH_a01 --> RRH41004b_a01 + CH3OOH                                         ', &
-     '                           CH3OH --> RRH41005f_a01 + CH3OH_a01                                      ', &
-     '                       CH3OH_a01 --> RRH41005b_a01 + CH3OH                                          ', &
-     '                         HOCH2OH --> RRH41006f_a01 + HOCH2OH_a01                                    ', &
-     '                     HOCH2OH_a01 --> RRH41006b_a01 + HOCH2OH                                        ', &
-     '                        HOCH2OOH --> RRH41007f_a01 + HOCH2OOH_a01                                   ', &
-     '                    HOCH2OOH_a01 --> RRH41007b_a01 + HOCH2OOH                                       ', &
-     '                              CO --> RRH41008f_a01 + CO_a01                                         ', &
-     '                          CO_a01 --> RRH41008b_a01 + CO                                             ', &
-     '                          CH3NO3 --> RRH41009MSf_a01 + CH3NO3_a01                                   ', &
-     '                      CH3NO3_a01 --> RRH41010MSb_a01 + CH3NO3                                       ' /)
+     '                             NH3 --> NH3_a01                                                        ', &
+     '                         NH3_a01 --> NH3                                                            ', &
+     '                            HONO --> HONO_a01                                                       ', &
+     '                        HONO_a01 --> HONO                                                           ', &
+     '                            HNO3 --> HNO3_a01                                                       ', &
+     '                        HNO3_a01 --> HNO3                                                           ', &
+     '                            HNO4 --> HNO4_a01                                                       ', &
+     '                        HNO4_a01 --> HNO4                                                           ', &
+     '                            N2O5 --> N2O5_a01                                                       ', &
+     '                        N2O5_a01 --> N2O5                                                           ', &
+     '                             CO2 --> CO2_a01                                                        ', &
+     '                         CO2_a01 --> CO2                                                            ', &
+     '                            HCHO --> HCHO_a01                                                       ', &
+     '                        HCHO_a01 --> HCHO                                                           ', &
+     '                           CH3O2 --> CH3O2_a01                                                      ', &
+     '                       CH3O2_a01 --> CH3O2                                                          ', &
+     '                           HCOOH --> HCOOH_a01                                                      ', &
+     '                       HCOOH_a01 --> HCOOH                                                          ', &
+     '                          CH3OOH --> CH3OOH_a01                                                     ', &
+     '                      CH3OOH_a01 --> CH3OOH                                                         ', &
+     '                           CH3OH --> CH3OH_a01                                                      ', &
+     '                       CH3OH_a01 --> CH3OH                                                          ', &
+     '                         HOCH2OH --> HOCH2OH_a01                                                    ', &
+     '                     HOCH2OH_a01 --> HOCH2OH                                                        ', &
+     '                        HOCH2OOH --> HOCH2OOH_a01                                                   ', &
+     '                    HOCH2OOH_a01 --> HOCH2OOH                                                       ', &
+     '                              CO --> CO_a01                                                         ', &
+     '                          CO_a01 --> CO                                                             ', &
+     '                          CH3NO3 --> CH3NO3_a01                                                     ', &
+     '                      CH3NO3_a01 --> CH3NO3                                                         ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_84 = (/ &
-     '                         CH3CO2H --> RRH42000f_a01 + CH3CO2H_a01                                    ', &
-     '                     CH3CO2H_a01 --> RRH42000b_a01 + CH3CO2H                                        ', &
-     '                          CH3CHO --> RRH42001f_a01 + CH3CHO_a01                                     ', &
-     '                      CH3CHO_a01 --> RRH42001b_a01 + CH3CHO                                         ', &
-     '                             PAN --> RRH42002f_a01 + PAN_a01                                        ', &
-     '                         PAN_a01 --> RRH42002b_a01 + PAN                                            ', &
-     '                          C2H5OH --> RRH42003f_a01 + C2H5OH_a01                                     ', &
-     '                      C2H5OH_a01 --> RRH42003b_a01 + C2H5OH                                         ', &
-     '                          ETHGLY --> RRH42004f_a01 + ETHGLY_a01                                     ', &
-     '                      ETHGLY_a01 --> RRH42004b_a01 + ETHGLY                                         ', &
-     '                          CH3CO3 --> RRH42006f_a01 + CH3CO3_a01                                     ', &
-     '                      CH3CO3_a01 --> RRH42006b_a01 + CH3CO3                                         ', &
-     '                        HOCH2CHO --> RRH42007f_a01 + HOCH2CHO_a01                                   ', &
-     '                    HOCH2CHO_a01 --> RRH42007b_a01 + HOCH2CHO                                       ', &
-     '                           GLYOX --> RRH42008f_a01 + GLYOX_a01                                      ', &
-     '                       GLYOX_a01 --> RRH42008b_a01 + GLYOX                                          ', &
-     '                         CH3CO3H --> RRH42009f_a01 + CH3CO3H_a01                                    ', &
-     '                     CH3CO3H_a01 --> RRH42009b_a01 + CH3CO3H                                        ', &
-     '                       HOCH2CO3H --> RRH42010f_a01 + HOCH2CO3H_a01                                  ', &
-     '                   HOCH2CO3H_a01 --> RRH42010b_a01 + HOCH2CO3H                                      ', &
-     '                         C2H5OOH --> RRH42011f_a01 + C2H5OOH_a01                                    ', &
-     '                     C2H5OOH_a01 --> RRH42011b_a01 + C2H5OOH                                        ', &
-     '                        HOOCCOOH --> RRH42012f_a01 + HOOCCOOH_a01                                   ', &
-     '                    HOOCCOOH_a01 --> RRH42012b_a01 + HOOCCOOH                                       ', &
-     '                      HOOCH2CO2H --> RRH42013f_a01 + HOOCH2CO2H_a01                                 ', &
-     '                  HOOCH2CO2H_a01 --> RRH42013b_a01 + HOOCH2CO2H                                     ', &
-     '                       HOCH2CO2H --> RRH42014f_a01 + HOCH2CO2H_a01                                  ', &
-     '                   HOCH2CO2H_a01 --> RRH42014b_a01 + HOCH2CO2H                                      ', &
-     '                         HCOCO2H --> RRH42015f_a01 + HCOCO2H_a01                                    ', &
-     '                     HCOCO2H_a01 --> RRH42015b_a01 + HCOCO2H                                        ' /)
+     '                         CH3CO2H --> CH3CO2H_a01                                                    ', &
+     '                     CH3CO2H_a01 --> CH3CO2H                                                        ', &
+     '                          CH3CHO --> CH3CHO_a01                                                     ', &
+     '                      CH3CHO_a01 --> CH3CHO                                                         ', &
+     '                             PAN --> PAN_a01                                                        ', &
+     '                         PAN_a01 --> PAN                                                            ', &
+     '                          C2H5OH --> C2H5OH_a01                                                     ', &
+     '                      C2H5OH_a01 --> C2H5OH                                                         ', &
+     '                          ETHGLY --> ETHGLY_a01                                                     ', &
+     '                      ETHGLY_a01 --> ETHGLY                                                         ', &
+     '                          CH3CO3 --> CH3CO3_a01                                                     ', &
+     '                      CH3CO3_a01 --> CH3CO3                                                         ', &
+     '                        HOCH2CHO --> HOCH2CHO_a01                                                   ', &
+     '                    HOCH2CHO_a01 --> HOCH2CHO                                                       ', &
+     '                           GLYOX --> GLYOX_a01                                                      ', &
+     '                       GLYOX_a01 --> GLYOX                                                          ', &
+     '                         CH3CO3H --> CH3CO3H_a01                                                    ', &
+     '                     CH3CO3H_a01 --> CH3CO3H                                                        ', &
+     '                       HOCH2CO3H --> HOCH2CO3H_a01                                                  ', &
+     '                   HOCH2CO3H_a01 --> HOCH2CO3H                                                      ', &
+     '                         C2H5OOH --> C2H5OOH_a01                                                    ', &
+     '                     C2H5OOH_a01 --> C2H5OOH                                                        ', &
+     '                        HOOCCOOH --> HOOCCOOH_a01                                                   ', &
+     '                    HOOCCOOH_a01 --> HOOCCOOH                                                       ', &
+     '                      HOOCH2CO2H --> HOOCH2CO2H_a01                                                 ', &
+     '                  HOOCH2CO2H_a01 --> HOOCH2CO2H                                                     ', &
+     '                       HOCH2CO2H --> HOCH2CO2H_a01                                                  ', &
+     '                   HOCH2CO2H_a01 --> HOCH2CO2H                                                      ', &
+     '                         HCOCO2H --> HCOCO2H_a01                                                    ', &
+     '                     HCOCO2H_a01 --> HCOCO2H                                                        ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_85 = (/ &
-     '                         C2H5NO3 --> RRH42017f_a01 + C2H5NO3_a01                                    ', &
-     '                     C2H5NO3_a01 --> RRH42017b_a01 + C2H5NO3                                        ', &
-     '                           CH3CN --> RRH42018f_a01 + CH3CN_a01                                      ', &
-     '                       CH3CN_a01 --> RRH42018b_a01 + CH3CN                                          ', &
-     '                     HOCH2CHOHOH --> RRH42019f_a01 + HOCH2CHOHOH_a01                                ', &
-     '                 HOCH2CHOHOH_a01 --> RRH42019b_a01 + HOCH2CHOHOH                                    ', &
-     '                       CH3CHOHOH --> RRH42020f_a01 + CH3CHOHOH_a01                                  ', &
-     '                   CH3CHOHOH_a01 --> RRH42020b_a01 + CH3CHOHOH                                      ', &
-     '                      CHOHOHCOOH --> RRH42021f_a01 + CHOHOHCOOH_a01                                 ', &
-     '                  CHOHOHCOOH_a01 --> RRH42021b_a01 + CHOHOHCOOH                                     ', &
-     '                    CHOHOHCHOHOH --> RRH42022f_a01 + CHOHOHCHOHOH_a01                               ', &
-     '                CHOHOHCHOHOH_a01 --> RRH42022b_a01 + CHOHOHCHOHOH                                   ', &
-     '                       HOOCH2CHO --> RRH42023f_a01 + HOOCH2CHO_a01                                  ', &
-     '                   HOOCH2CHO_a01 --> RRH42023b_a01 + HOOCH2CHO                                      ', &
-     '                       CHOCHOHOH --> RRH42024f_a01 + CHOCHOHOH_a01                                  ', &
-     '                   CHOCHOHOH_a01 --> RRH42024b_a01 + CHOCHOHOH                                      ', &
-     '                    HOOCH2CHOHOH --> RRH42025f_a01 + HOOCH2CHOHOH_a01                               ', &
-     '                HOOCH2CHOHOH_a01 --> RRH42025b_a01 + HOOCH2CHOHOH                                   ', &
-     '                           CH2CO --> RRH42026f_a01 + CH2CO_a01                                      ', &
-     '                       CH2CO_a01 --> RRH42026b_a01 + CH2CO                                          ', &
-     '                      CH3CHOHOOH --> RRH42027f_a01 + CH3CHOHOOH_a01                                 ', &
-     '                  CH3CHOHOOH_a01 --> RRH42027b_a01 + CH3CHOHOOH                                     ', &
-     '                        ETHOHNO3 --> RRH42028f_a01 + ETHOHNO3_a01                                   ', &
-     '                    ETHOHNO3_a01 --> RRH42028b_a01 + ETHOHNO3                                       ', &
-     '                         HCOCO3H --> RRH42029f_a01 + HCOCO3H_a01                                    ', &
-     '                     HCOCO3H_a01 --> RRH42029b_a01 + HCOCO3H                                        ', &
-     '                      HOOCH2CO3H --> RRH42030f_a01 + HOOCH2CO3H_a01                                 ', &
-     '                  HOOCH2CO3H_a01 --> RRH42030b_a01 + HOOCH2CO3H                                     ', &
-     '                        HYETHO2H --> RRH42031f_a01 + HYETHO2H_a01                                   ', &
-     '                    HYETHO2H_a01 --> RRH42031b_a01 + HYETHO2H                                       ' /)
+     '                         C2H5NO3 --> C2H5NO3_a01                                                    ', &
+     '                     C2H5NO3_a01 --> C2H5NO3                                                        ', &
+     '                           CH3CN --> CH3CN_a01                                                      ', &
+     '                       CH3CN_a01 --> CH3CN                                                          ', &
+     '                     HOCH2CHOHOH --> HOCH2CHOHOH_a01                                                ', &
+     '                 HOCH2CHOHOH_a01 --> HOCH2CHOHOH                                                    ', &
+     '                       CH3CHOHOH --> CH3CHOHOH_a01                                                  ', &
+     '                   CH3CHOHOH_a01 --> CH3CHOHOH                                                      ', &
+     '                      CHOHOHCOOH --> CHOHOHCOOH_a01                                                 ', &
+     '                  CHOHOHCOOH_a01 --> CHOHOHCOOH                                                     ', &
+     '                    CHOHOHCHOHOH --> CHOHOHCHOHOH_a01                                               ', &
+     '                CHOHOHCHOHOH_a01 --> CHOHOHCHOHOH                                                   ', &
+     '                       HOOCH2CHO --> HOOCH2CHO_a01                                                  ', &
+     '                   HOOCH2CHO_a01 --> HOOCH2CHO                                                      ', &
+     '                       CHOCHOHOH --> CHOCHOHOH_a01                                                  ', &
+     '                   CHOCHOHOH_a01 --> CHOCHOHOH                                                      ', &
+     '                    HOOCH2CHOHOH --> HOOCH2CHOHOH_a01                                               ', &
+     '                HOOCH2CHOHOH_a01 --> HOOCH2CHOHOH                                                   ', &
+     '                           CH2CO --> CH2CO_a01                                                      ', &
+     '                       CH2CO_a01 --> CH2CO                                                          ', &
+     '                      CH3CHOHOOH --> CH3CHOHOOH_a01                                                 ', &
+     '                  CH3CHOHOOH_a01 --> CH3CHOHOOH                                                     ', &
+     '                        ETHOHNO3 --> ETHOHNO3_a01                                                   ', &
+     '                    ETHOHNO3_a01 --> ETHOHNO3                                                       ', &
+     '                         HCOCO3H --> HCOCO3H_a01                                                    ', &
+     '                     HCOCO3H_a01 --> HCOCO3H                                                        ', &
+     '                      HOOCH2CO3H --> HOOCH2CO3H_a01                                                 ', &
+     '                  HOOCH2CO3H_a01 --> HOOCH2CO3H                                                     ', &
+     '                        HYETHO2H --> HYETHO2H_a01                                                   ', &
+     '                    HYETHO2H_a01 --> HYETHO2H                                                       ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_86 = (/ &
-     '                            PHAN --> RRH42032f_a01 + PHAN_a01                                       ', &
-     '                        PHAN_a01 --> RRH42032b_a01 + PHAN                                           ', &
-     '                        CH3COCH3 --> RRH43000f_a01 + CH3COCH3_a01                                   ', &
-     '                    CH3COCH3_a01 --> RRH43000b_a01 + CH3COCH3                                       ', &
-     '                          MGLYOX --> RRH43001f_a01 + MGLYOX_a01                                     ', &
-     '                      MGLYOX_a01 --> RRH43001b_a01 + MGLYOX                                         ', &
-     '                       CH3COCO2H --> RRH43002f_a01 + CH3COCO2H_a01                                  ', &
-     '                   CH3COCO2H_a01 --> RRH43002b_a01 + CH3COCO2H                                      ', &
-     '                     CH3COCHOHOH --> RRH43003f_a01 + CH3COCHOHOH_a01                                ', &
-     '                 CH3COCHOHOH_a01 --> RRH43003b_a01 + CH3COCHOHOH                                    ', &
-     '                         IPROPOL --> RRH43005f_a01 + IPROPOL_a01                                    ', &
-     '                     IPROPOL_a01 --> RRH43005b_a01 + IPROPOL                                        ', &
-     '                       HYPERACET --> RRH43006f_a01 + HYPERACET_a01                                  ', &
-     '                   HYPERACET_a01 --> RRH43006b_a01 + HYPERACET                                      ', &
-     '                        IC3H7OOH --> RRH43007f_a01 + IC3H7OOH_a01                                   ', &
-     '                    IC3H7OOH_a01 --> RRH43007b_a01 + IC3H7OOH                                       ', &
-     '                      ALCOCH2OOH --> RRH43008f_a01 + ALCOCH2OOH_a01                                 ', &
-     '                  ALCOCH2OOH_a01 --> RRH43008b_a01 + ALCOCH2OOH                                     ', &
-     '                       C32OH13CO --> RRH43009f_a01 + C32OH13CO_a01                                  ', &
-     '                   C32OH13CO_a01 --> RRH43009b_a01 + C32OH13CO                                      ', &
-     '                           C33CO --> RRH43010f_a01 + C33CO_a01                                      ', &
-     '                       C33CO_a01 --> RRH43010b_a01 + C33CO                                          ', &
-     '                       C3DIALOOH --> RRH43011f_a01 + C3DIALOOH_a01                                  ', &
-     '                   C3DIALOOH_a01 --> RRH43011b_a01 + C3DIALOOH                                      ', &
-     '                          C3PAN1 --> RRH43012f_a01 + C3PAN1_a01                                     ', &
-     '                      C3PAN1_a01 --> RRH43012b_a01 + C3PAN1                                         ', &
-     '                          C3PAN2 --> RRH43013f_a01 + C3PAN2_a01                                     ', &
-     '                      C3PAN2_a01 --> RRH43013b_a01 + C3PAN2                                         ', &
-     '                         CH3CHCO --> RRH43014f_a01 + CH3CHCO_a01                                    ', &
-     '                     CH3CHCO_a01 --> RRH43014b_a01 + CH3CHCO                                        ' /)
+     '                            PHAN --> PHAN_a01                                                       ', &
+     '                        PHAN_a01 --> PHAN                                                           ', &
+     '                        CH3COCH3 --> CH3COCH3_a01                                                   ', &
+     '                    CH3COCH3_a01 --> CH3COCH3                                                       ', &
+     '                          MGLYOX --> MGLYOX_a01                                                     ', &
+     '                      MGLYOX_a01 --> MGLYOX                                                         ', &
+     '                       CH3COCO2H --> CH3COCO2H_a01                                                  ', &
+     '                   CH3COCO2H_a01 --> CH3COCO2H                                                      ', &
+     '                     CH3COCHOHOH --> CH3COCHOHOH_a01                                                ', &
+     '                 CH3COCHOHOH_a01 --> CH3COCHOHOH                                                    ', &
+     '                         IPROPOL --> IPROPOL_a01                                                    ', &
+     '                     IPROPOL_a01 --> IPROPOL                                                        ', &
+     '                       HYPERACET --> HYPERACET_a01                                                  ', &
+     '                   HYPERACET_a01 --> HYPERACET                                                      ', &
+     '                        IC3H7OOH --> IC3H7OOH_a01                                                   ', &
+     '                    IC3H7OOH_a01 --> IC3H7OOH                                                       ', &
+     '                      ALCOCH2OOH --> ALCOCH2OOH_a01                                                 ', &
+     '                  ALCOCH2OOH_a01 --> ALCOCH2OOH                                                     ', &
+     '                       C32OH13CO --> C32OH13CO_a01                                                  ', &
+     '                   C32OH13CO_a01 --> C32OH13CO                                                      ', &
+     '                           C33CO --> C33CO_a01                                                      ', &
+     '                       C33CO_a01 --> C33CO                                                          ', &
+     '                       C3DIALOOH --> C3DIALOOH_a01                                                  ', &
+     '                   C3DIALOOH_a01 --> C3DIALOOH                                                      ', &
+     '                          C3PAN1 --> C3PAN1_a01                                                     ', &
+     '                      C3PAN1_a01 --> C3PAN1                                                         ', &
+     '                          C3PAN2 --> C3PAN2_a01                                                     ', &
+     '                      C3PAN2_a01 --> C3PAN2                                                         ', &
+     '                         CH3CHCO --> CH3CHCO_a01                                                    ', &
+     '                     CH3CHCO_a01 --> CH3CHCO                                                        ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_87 = (/ &
-     '                   CH3COCH2O2NO2 --> RRH43015f_a01 + CH3COCH2O2NO2_a01                              ', &
-     '               CH3COCH2O2NO2_a01 --> RRH43015b_a01 + CH3COCH2O2NO2                                  ', &
-     '                       CH3COCO3H --> RRH43016f_a01 + CH3COCO3H_a01                                  ', &
-     '                   CH3COCO3H_a01 --> RRH43016b_a01 + CH3COCO3H                                      ', &
-     '                       HCOCH2CHO --> RRH43017f_a01 + HCOCH2CHO_a01                                  ', &
-     '                   HCOCH2CHO_a01 --> RRH43017b_a01 + HCOCH2CHO                                      ', &
-     '                      HCOCH2CO2H --> RRH43018f_a01 + HCOCH2CO2H_a01                                 ', &
-     '                  HCOCH2CO2H_a01 --> RRH43018b_a01 + HCOCH2CO2H                                     ', &
-     '                      HCOCH2CO3H --> RRH43019f_a01 + HCOCH2CO3H_a01                                 ', &
-     '                  HCOCH2CO3H_a01 --> RRH43019b_a01 + HCOCH2CO3H                                     ', &
-     '                     HCOCOCH2OOH --> RRH43020f_a01 + HCOCOCH2OOH_a01                                ', &
-     '                 HCOCOCH2OOH_a01 --> RRH43020b_a01 + HCOCOCH2OOH                                    ', &
-     '                      HCOCOHCO3H --> RRH43021f_a01 + HCOCOHCO3H_a01                                 ', &
-     '                  HCOCOHCO3H_a01 --> RRH43021b_a01 + HCOCOHCO3H                                     ', &
-     '                       HCOCOHPAN --> RRH43022f_a01 + HCOCOHPAN_a01                                  ', &
-     '                   HCOCOHPAN_a01 --> RRH43022b_a01 + HCOCOHPAN                                      ', &
-     '                      HOC2H4CO2H --> RRH43023f_a01 + HOC2H4CO2H_a01                                 ', &
-     '                  HOC2H4CO2H_a01 --> RRH43023b_a01 + HOC2H4CO2H                                     ', &
-     '                      HOC2H4CO3H --> RRH43024f_a01 + HOC2H4CO3H_a01                                 ', &
-     '                  HOC2H4CO3H_a01 --> RRH43024b_a01 + HOC2H4CO3H                                     ', &
-     '                   HOCH2COCH2OOH --> RRH43025f_a01 + HOCH2COCH2OOH_a01                              ', &
-     '               HOCH2COCH2OOH_a01 --> RRH43025b_a01 + HOCH2COCH2OOH                                  ', &
-     '                      HOCH2COCHO --> RRH43026f_a01 + HOCH2COCHO_a01                                 ', &
-     '                  HOCH2COCHO_a01 --> RRH43026b_a01 + HOCH2COCHO                                     ', &
-     '                       HYPROPO2H --> RRH43027f_a01 + HYPROPO2H_a01                                  ', &
-     '                   HYPROPO2H_a01 --> RRH43027b_a01 + HYPROPO2H                                      ', &
-     '                       METACETHO --> RRH43028f_a01 + METACETHO_a01                                  ', &
-     '                   METACETHO_a01 --> RRH43028b_a01 + METACETHO                                      ', &
-     '                             NOA --> RRH43029f_a01 + NOA_a01                                        ', &
-     '                         NOA_a01 --> RRH43029b_a01 + NOA                                            ' /)
+     '                   CH3COCH2O2NO2 --> CH3COCH2O2NO2_a01                                              ', &
+     '               CH3COCH2O2NO2_a01 --> CH3COCH2O2NO2                                                  ', &
+     '                       CH3COCO3H --> CH3COCO3H_a01                                                  ', &
+     '                   CH3COCO3H_a01 --> CH3COCO3H                                                      ', &
+     '                       HCOCH2CHO --> HCOCH2CHO_a01                                                  ', &
+     '                   HCOCH2CHO_a01 --> HCOCH2CHO                                                      ', &
+     '                      HCOCH2CO2H --> HCOCH2CO2H_a01                                                 ', &
+     '                  HCOCH2CO2H_a01 --> HCOCH2CO2H                                                     ', &
+     '                      HCOCH2CO3H --> HCOCH2CO3H_a01                                                 ', &
+     '                  HCOCH2CO3H_a01 --> HCOCH2CO3H                                                     ', &
+     '                     HCOCOCH2OOH --> HCOCOCH2OOH_a01                                                ', &
+     '                 HCOCOCH2OOH_a01 --> HCOCOCH2OOH                                                    ', &
+     '                      HCOCOHCO3H --> HCOCOHCO3H_a01                                                 ', &
+     '                  HCOCOHCO3H_a01 --> HCOCOHCO3H                                                     ', &
+     '                       HCOCOHPAN --> HCOCOHPAN_a01                                                  ', &
+     '                   HCOCOHPAN_a01 --> HCOCOHPAN                                                      ', &
+     '                      HOC2H4CO2H --> HOC2H4CO2H_a01                                                 ', &
+     '                  HOC2H4CO2H_a01 --> HOC2H4CO2H                                                     ', &
+     '                      HOC2H4CO3H --> HOC2H4CO3H_a01                                                 ', &
+     '                  HOC2H4CO3H_a01 --> HOC2H4CO3H                                                     ', &
+     '                   HOCH2COCH2OOH --> HOCH2COCH2OOH_a01                                              ', &
+     '               HOCH2COCH2OOH_a01 --> HOCH2COCH2OOH                                                  ', &
+     '                      HOCH2COCHO --> HOCH2COCHO_a01                                                 ', &
+     '                  HOCH2COCHO_a01 --> HOCH2COCHO                                                     ', &
+     '                       HYPROPO2H --> HYPROPO2H_a01                                                  ', &
+     '                   HYPROPO2H_a01 --> HYPROPO2H                                                      ', &
+     '                       METACETHO --> METACETHO_a01                                                  ', &
+     '                   METACETHO_a01 --> METACETHO                                                      ', &
+     '                             NOA --> NOA_a01                                                        ', &
+     '                         NOA_a01 --> NOA                                                            ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_88 = (/ &
-     '                       PR2O2HNO3 --> RRH43030f_a01 + PR2O2HNO3_a01                                  ', &
-     '                   PR2O2HNO3_a01 --> RRH43030b_a01 + PR2O2HNO3                                      ', &
-     '                       PROPOLNO3 --> RRH43031f_a01 + PROPOLNO3_a01                                  ', &
-     '                   PROPOLNO3_a01 --> RRH43031b_a01 + PROPOLNO3                                      ', &
-     '                          ACETOL --> RRH43032f_a01 + ACETOL_a01                                     ', &
-     '                      ACETOL_a01 --> RRH43032b_a01 + ACETOL                                         ', &
-     '                            MACR --> RRH44000f_a01 + MACR_a01                                       ', &
-     '                        MACR_a01 --> RRH44000b_a01 + MACR                                           ', &
-     '                             MVK --> RRH44001f_a01 + MVK_a01                                        ', &
-     '                         MVK_a01 --> RRH44001b_a01 + MVK                                            ', &
-     '                        BIACETO2 --> RRH44002f_a01 + BIACETO2_a01                                   ', &
-     '                    BIACETO2_a01 --> RRH44002b_a01 + BIACETO2                                       ', &
-     '                        BIACETOH --> RRH44003f_a01 + BIACETOH_a01                                   ', &
-     '                    BIACETOH_a01 --> RRH44003b_a01 + BIACETOH                                       ', &
-     '                       BIACETOOH --> RRH44004f_a01 + BIACETOOH_a01                                  ', &
-     '                   BIACETOOH_a01 --> RRH44004b_a01 + BIACETOOH                                      ', &
-     '                         BUT2OLO --> RRH44005f_a01 + BUT2OLO_a01                                    ', &
-     '                     BUT2OLO_a01 --> RRH44005b_a01 + BUT2OLO                                        ', &
-     '                       BUT2OLOOH --> RRH44006f_a01 + BUT2OLOOH_a01                                  ', &
-     '                   BUT2OLOOH_a01 --> RRH44006b_a01 + BUT2OLOOH                                      ', &
-     '                          BZFUCO --> RRH44007f_a01 + BZFUCO_a01                                     ', &
-     '                      BZFUCO_a01 --> RRH44007b_a01 + BZFUCO                                         ', &
-     '                         BZFUOOH --> RRH44008f_a01 + BZFUOOH_a01                                    ', &
-     '                     BZFUOOH_a01 --> RRH44008b_a01 + BZFUOOH                                        ', &
-     '                      C312COCO3H --> RRH44009f_a01 + C312COCO3H_a01                                 ', &
-     '                  C312COCO3H_a01 --> RRH44009b_a01 + C312COCO3H                                     ', &
-     '                       C312COPAN --> RRH44010f_a01 + C312COPAN_a01                                  ', &
-     '                   C312COPAN_a01 --> RRH44010b_a01 + C312COPAN                                      ', &
-     '                       C413COOOH --> RRH44011f_a01 + C413COOOH_a01                                  ', &
-     '                   C413COOOH_a01 --> RRH44011b_a01 + C413COOOH                                      ' /)
+     '                       PR2O2HNO3 --> PR2O2HNO3_a01                                                  ', &
+     '                   PR2O2HNO3_a01 --> PR2O2HNO3                                                      ', &
+     '                       PROPOLNO3 --> PROPOLNO3_a01                                                  ', &
+     '                   PROPOLNO3_a01 --> PROPOLNO3                                                      ', &
+     '                          ACETOL --> ACETOL_a01                                                     ', &
+     '                      ACETOL_a01 --> ACETOL                                                         ', &
+     '                            MACR --> MACR_a01                                                       ', &
+     '                        MACR_a01 --> MACR                                                           ', &
+     '                             MVK --> MVK_a01                                                        ', &
+     '                         MVK_a01 --> MVK                                                            ', &
+     '                        BIACETO2 --> BIACETO2_a01                                                   ', &
+     '                    BIACETO2_a01 --> BIACETO2                                                       ', &
+     '                        BIACETOH --> BIACETOH_a01                                                   ', &
+     '                    BIACETOH_a01 --> BIACETOH                                                       ', &
+     '                       BIACETOOH --> BIACETOOH_a01                                                  ', &
+     '                   BIACETOOH_a01 --> BIACETOOH                                                      ', &
+     '                         BUT2OLO --> BUT2OLO_a01                                                    ', &
+     '                     BUT2OLO_a01 --> BUT2OLO                                                        ', &
+     '                       BUT2OLOOH --> BUT2OLOOH_a01                                                  ', &
+     '                   BUT2OLOOH_a01 --> BUT2OLOOH                                                      ', &
+     '                          BZFUCO --> BZFUCO_a01                                                     ', &
+     '                      BZFUCO_a01 --> BZFUCO                                                         ', &
+     '                         BZFUOOH --> BZFUOOH_a01                                                    ', &
+     '                     BZFUOOH_a01 --> BZFUOOH                                                        ', &
+     '                      C312COCO3H --> C312COCO3H_a01                                                 ', &
+     '                  C312COCO3H_a01 --> C312COCO3H                                                     ', &
+     '                       C312COPAN --> C312COPAN_a01                                                  ', &
+     '                   C312COPAN_a01 --> C312COPAN                                                      ', &
+     '                       C413COOOH --> C413COOOH_a01                                                  ', &
+     '                   C413COOOH_a01 --> C413COOOH                                                      ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_89 = (/ &
-     '                          C44OOH --> RRH44012f_a01 + C44OOH_a01                                     ', &
-     '                      C44OOH_a01 --> RRH44012b_a01 + C44OOH                                         ', &
-     '                        C4CODIAL --> RRH44013f_a01 + C4CODIAL_a01                                   ', &
-     '                    C4CODIAL_a01 --> RRH44013b_a01 + C4CODIAL                                       ', &
-     '                          C4PAN5 --> RRH44014f_a01 + C4PAN5_a01                                     ', &
-     '                      C4PAN5_a01 --> RRH44014b_a01 + C4PAN5                                         ', &
-     '                       CH3COCHCO --> RRH44015f_a01 + CH3COCHCO_a01                                  ', &
-     '                   CH3COCHCO_a01 --> RRH44015b_a01 + CH3COCHCO                                      ', &
-     '                     CH3COCOCO2H --> RRH44016f_a01 + CH3COCOCO2H_a01                                ', &
-     '                 CH3COCOCO2H_a01 --> RRH44016b_a01 + CH3COCOCO2H                                    ', &
-     '                    CH3COOHCHCHO --> RRH44017f_a01 + CH3COOHCHCHO_a01                               ', &
-     '                CH3COOHCHCHO_a01 --> RRH44017b_a01 + CH3COOHCHCHO                                   ', &
-     '                       CHOC3COO2 --> RRH44018f_a01 + CHOC3COO2_a01                                  ', &
-     '                   CHOC3COO2_a01 --> RRH44018b_a01 + CHOC3COO2                                      ', &
-     '                       CO14O3CHO --> RRH44019f_a01 + CO14O3CHO_a01                                  ', &
-     '                   CO14O3CHO_a01 --> RRH44019b_a01 + CO14O3CHO                                      ', &
-     '                      CO14O3CO2H --> RRH44020f_a01 + CO14O3CO2H_a01                                 ', &
-     '                  CO14O3CO2H_a01 --> RRH44020b_a01 + CO14O3CO2H                                     ', &
-     '                       CO23C3CHO --> RRH44021f_a01 + CO23C3CHO_a01                                  ', &
-     '                   CO23C3CHO_a01 --> RRH44021b_a01 + CO23C3CHO                                      ', &
-     '                        CO2C3CHO --> RRH44022f_a01 + CO2C3CHO_a01                                   ', &
-     '                    CO2C3CHO_a01 --> RRH44022b_a01 + CO2C3CHO                                       ', &
-     '                       CO2C4DIAL --> RRH44023f_a01 + CO2C4DIAL_a01                                  ', &
-     '                   CO2C4DIAL_a01 --> RRH44023b_a01 + CO2C4DIAL                                      ', &
-     '                        CO2H3CHO --> RRH44024f_a01 + CO2H3CHO_a01                                   ', &
-     '                    CO2H3CHO_a01 --> RRH44024b_a01 + CO2H3CHO                                       ', &
-     '                       CO2H3CO2H --> RRH44025f_a01 + CO2H3CO2H_a01                                  ', &
-     '                   CO2H3CO2H_a01 --> RRH44025b_a01 + CO2H3CO2H                                      ', &
-     '                       CO2H3CO3H --> RRH44026f_a01 + CO2H3CO3H_a01                                  ', &
-     '                   CO2H3CO3H_a01 --> RRH44026b_a01 + CO2H3CO3H                                      ' /)
+     '                          C44OOH --> C44OOH_a01                                                     ', &
+     '                      C44OOH_a01 --> C44OOH                                                         ', &
+     '                        C4CODIAL --> C4CODIAL_a01                                                   ', &
+     '                    C4CODIAL_a01 --> C4CODIAL                                                       ', &
+     '                          C4PAN5 --> C4PAN5_a01                                                     ', &
+     '                      C4PAN5_a01 --> C4PAN5                                                         ', &
+     '                       CH3COCHCO --> CH3COCHCO_a01                                                  ', &
+     '                   CH3COCHCO_a01 --> CH3COCHCO                                                      ', &
+     '                     CH3COCOCO2H --> CH3COCOCO2H_a01                                                ', &
+     '                 CH3COCOCO2H_a01 --> CH3COCOCO2H                                                    ', &
+     '                    CH3COOHCHCHO --> CH3COOHCHCHO_a01                                               ', &
+     '                CH3COOHCHCHO_a01 --> CH3COOHCHCHO                                                   ', &
+     '                       CHOC3COO2 --> CHOC3COO2_a01                                                  ', &
+     '                   CHOC3COO2_a01 --> CHOC3COO2                                                      ', &
+     '                       CO14O3CHO --> CO14O3CHO_a01                                                  ', &
+     '                   CO14O3CHO_a01 --> CO14O3CHO                                                      ', &
+     '                      CO14O3CO2H --> CO14O3CO2H_a01                                                 ', &
+     '                  CO14O3CO2H_a01 --> CO14O3CO2H                                                     ', &
+     '                       CO23C3CHO --> CO23C3CHO_a01                                                  ', &
+     '                   CO23C3CHO_a01 --> CO23C3CHO                                                      ', &
+     '                        CO2C3CHO --> CO2C3CHO_a01                                                   ', &
+     '                    CO2C3CHO_a01 --> CO2C3CHO                                                       ', &
+     '                       CO2C4DIAL --> CO2C4DIAL_a01                                                  ', &
+     '                   CO2C4DIAL_a01 --> CO2C4DIAL                                                      ', &
+     '                        CO2H3CHO --> CO2H3CHO_a01                                                   ', &
+     '                    CO2H3CHO_a01 --> CO2H3CHO                                                       ', &
+     '                       CO2H3CO2H --> CO2H3CO2H_a01                                                  ', &
+     '                   CO2H3CO2H_a01 --> CO2H3CO2H                                                      ', &
+     '                       CO2H3CO3H --> CO2H3CO3H_a01                                                  ', &
+     '                   CO2H3CO3H_a01 --> CO2H3CO3H                                                      ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_90 = (/ &
-     '                       EPXC4DIAL --> RRH44027f_a01 + EPXC4DIAL_a01                                  ', &
-     '                   EPXC4DIAL_a01 --> RRH44027b_a01 + EPXC4DIAL                                      ', &
-     '                       EPXDLCO2H --> RRH44028f_a01 + EPXDLCO2H_a01                                  ', &
-     '                   EPXDLCO2H_a01 --> RRH44028b_a01 + EPXDLCO2H                                      ', &
-     '                       EPXDLCO3H --> RRH44029f_a01 + EPXDLCO3H_a01                                  ', &
-     '                   EPXDLCO3H_a01 --> RRH44029b_a01 + EPXDLCO3H                                      ', &
-     '                    HCOCCH3CHOOH --> RRH44030f_a01 + HCOCCH3CHOOH_a01                               ', &
-     '                HCOCCH3CHOOH_a01 --> RRH44030b_a01 + HCOCCH3CHOOH                                   ', &
-     '                       HCOCCH3CO --> RRH44031f_a01 + HCOCCH3CO_a01                                  ', &
-     '                   HCOCCH3CO_a01 --> RRH44031b_a01 + HCOCCH3CO                                      ', &
-     '                            HMAC --> RRH44032f_a01 + HMAC_a01                                       ', &
-     '                        HMAC_a01 --> RRH44032b_a01 + HMAC                                           ', &
-     '                       HO12CO3C4 --> RRH44033f_a01 + HO12CO3C4_a01                                  ', &
-     '                   HO12CO3C4_a01 --> RRH44033b_a01 + HO12CO3C4                                      ', &
-     '                      HOCOC4DIAL --> RRH44034f_a01 + HOCOC4DIAL_a01                                 ', &
-     '                  HOCOC4DIAL_a01 --> RRH44034b_a01 + HOCOC4DIAL                                     ', &
-     '                            HVMK --> RRH44035f_a01 + HVMK_a01                                       ', &
-     '                        HVMK_a01 --> RRH44035b_a01 + HVMK                                           ', &
-     '                        IBUTALOH --> RRH44036f_a01 + IBUTALOH_a01                                   ', &
-     '                    IBUTALOH_a01 --> RRH44036b_a01 + IBUTALOH                                       ', &
-     '                        IBUTDIAL --> RRH44037f_a01 + IBUTDIAL_a01                                   ', &
-     '                    IBUTDIAL_a01 --> RRH44037b_a01 + IBUTDIAL                                       ', &
-     '                      IBUTOLBOOH --> RRH44038f_a01 + IBUTOLBOOH_a01                                 ', &
-     '                  IBUTOLBOOH_a01 --> RRH44038b_a01 + IBUTOLBOOH                                     ', &
-     '                       IPRHOCO2H --> RRH44039f_a01 + IPRHOCO2H_a01                                  ', &
-     '                   IPRHOCO2H_a01 --> RRH44039b_a01 + IPRHOCO2H                                      ', &
-     '                       IPRHOCO3H --> RRH44040f_a01 + IPRHOCO3H_a01                                  ', &
-     '                   IPRHOCO3H_a01 --> RRH44040b_a01 + IPRHOCO3H                                      ', &
-     '                      LBUT1ENOOH --> RRH44041f_a01 + LBUT1ENOOH_a01                                 ', &
-     '                  LBUT1ENOOH_a01 --> RRH44041b_a01 + LBUT1ENOOH                                     ' /)
+     '                       EPXC4DIAL --> EPXC4DIAL_a01                                                  ', &
+     '                   EPXC4DIAL_a01 --> EPXC4DIAL                                                      ', &
+     '                       EPXDLCO2H --> EPXDLCO2H_a01                                                  ', &
+     '                   EPXDLCO2H_a01 --> EPXDLCO2H                                                      ', &
+     '                       EPXDLCO3H --> EPXDLCO3H_a01                                                  ', &
+     '                   EPXDLCO3H_a01 --> EPXDLCO3H                                                      ', &
+     '                    HCOCCH3CHOOH --> HCOCCH3CHOOH_a01                                               ', &
+     '                HCOCCH3CHOOH_a01 --> HCOCCH3CHOOH                                                   ', &
+     '                       HCOCCH3CO --> HCOCCH3CO_a01                                                  ', &
+     '                   HCOCCH3CO_a01 --> HCOCCH3CO                                                      ', &
+     '                            HMAC --> HMAC_a01                                                       ', &
+     '                        HMAC_a01 --> HMAC                                                           ', &
+     '                       HO12CO3C4 --> HO12CO3C4_a01                                                  ', &
+     '                   HO12CO3C4_a01 --> HO12CO3C4                                                      ', &
+     '                      HOCOC4DIAL --> HOCOC4DIAL_a01                                                 ', &
+     '                  HOCOC4DIAL_a01 --> HOCOC4DIAL                                                     ', &
+     '                            HVMK --> HVMK_a01                                                       ', &
+     '                        HVMK_a01 --> HVMK                                                           ', &
+     '                        IBUTALOH --> IBUTALOH_a01                                                   ', &
+     '                    IBUTALOH_a01 --> IBUTALOH                                                       ', &
+     '                        IBUTDIAL --> IBUTDIAL_a01                                                   ', &
+     '                    IBUTDIAL_a01 --> IBUTDIAL                                                       ', &
+     '                      IBUTOLBOOH --> IBUTOLBOOH_a01                                                 ', &
+     '                  IBUTOLBOOH_a01 --> IBUTOLBOOH                                                     ', &
+     '                       IPRHOCO2H --> IPRHOCO2H_a01                                                  ', &
+     '                   IPRHOCO2H_a01 --> IPRHOCO2H                                                      ', &
+     '                       IPRHOCO3H --> IPRHOCO3H_a01                                                  ', &
+     '                   IPRHOCO3H_a01 --> IPRHOCO3H                                                      ', &
+     '                      LBUT1ENOOH --> LBUT1ENOOH_a01                                                 ', &
+     '                  LBUT1ENOOH_a01 --> LBUT1ENOOH                                                     ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_91 = (/ &
-     '                      LHMVKABOOH --> RRH44042f_a01 + LHMVKABOOH_a01                                 ', &
-     '                  LHMVKABOOH_a01 --> RRH44042b_a01 + LHMVKABOOH                                     ', &
-     '                         LMEKOOH --> RRH44043f_a01 + LMEKOOH_a01                                    ', &
-     '                     LMEKOOH_a01 --> RRH44043b_a01 + LMEKOOH                                        ', &
-     '                          MACO2H --> RRH44044f_a01 + MACO2H_a01                                     ', &
-     '                      MACO2H_a01 --> RRH44044b_a01 + MACO2H                                         ', &
-     '                          MACO3H --> RRH44045f_a01 + MACO3H_a01                                     ', &
-     '                      MACO3H_a01 --> RRH44045b_a01 + MACO3H                                         ', &
-     '                          MACROH --> RRH44046f_a01 + MACROH_a01                                     ', &
-     '                      MACROH_a01 --> RRH44046b_a01 + MACROH                                         ', &
-     '                         MACROOH --> RRH44047f_a01 + MACROOH_a01                                    ', &
-     '                     MACROOH_a01 --> RRH44047b_a01 + MACROOH                                        ', &
-     '                      MALANHYOOH --> RRH44048f_a01 + MALANHYOOH_a01                                 ', &
-     '                  MALANHYOOH_a01 --> RRH44048b_a01 + MALANHYOOH                                     ', &
-     '                      MALDALCO2H --> RRH44049f_a01 + MALDALCO2H_a01                                 ', &
-     '                  MALDALCO2H_a01 --> RRH44049b_a01 + MALDALCO2H                                     ', &
-     '                      MALDALCO3H --> RRH44050f_a01 + MALDALCO3H_a01                                 ', &
-     '                  MALDALCO3H_a01 --> RRH44050b_a01 + MALDALCO3H                                     ', &
-     '                         MALDIAL --> RRH44051f_a01 + MALDIAL_a01                                    ', &
-     '                     MALDIAL_a01 --> RRH44051b_a01 + MALDIAL                                        ', &
-     '                      MALDIALOOH --> RRH44052f_a01 + MALDIALOOH_a01                                 ', &
-     '                  MALDIALOOH_a01 --> RRH44052b_a01 + MALDIALOOH                                     ', &
-     '                      MALNHYOHCO --> RRH44053f_a01 + MALNHYOHCO_a01                                 ', &
-     '                  MALNHYOHCO_a01 --> RRH44053b_a01 + MALNHYOHCO                                     ', &
-     '                      MECOACEOOH --> RRH44054f_a01 + MECOACEOOH_a01                                 ', &
-     '                  MECOACEOOH_a01 --> RRH44054b_a01 + MECOACEOOH                                     ', &
-     '                          MVKNO3 --> RRH44055f_a01 + MVKNO3_a01                                     ', &
-     '                      MVKNO3_a01 --> RRH44055b_a01 + MVKNO3                                         ', &
-     '                        NBZFUOOH --> RRH44056f_a01 + NBZFUOOH_a01                                   ', &
-     '                    NBZFUOOH_a01 --> RRH44056b_a01 + NBZFUOOH                                       ' /)
+     '                      LHMVKABOOH --> LHMVKABOOH_a01                                                 ', &
+     '                  LHMVKABOOH_a01 --> LHMVKABOOH                                                     ', &
+     '                         LMEKOOH --> LMEKOOH_a01                                                    ', &
+     '                     LMEKOOH_a01 --> LMEKOOH                                                        ', &
+     '                          MACO2H --> MACO2H_a01                                                     ', &
+     '                      MACO2H_a01 --> MACO2H                                                         ', &
+     '                          MACO3H --> MACO3H_a01                                                     ', &
+     '                      MACO3H_a01 --> MACO3H                                                         ', &
+     '                          MACROH --> MACROH_a01                                                     ', &
+     '                      MACROH_a01 --> MACROH                                                         ', &
+     '                         MACROOH --> MACROOH_a01                                                    ', &
+     '                     MACROOH_a01 --> MACROOH                                                        ', &
+     '                      MALANHYOOH --> MALANHYOOH_a01                                                 ', &
+     '                  MALANHYOOH_a01 --> MALANHYOOH                                                     ', &
+     '                      MALDALCO2H --> MALDALCO2H_a01                                                 ', &
+     '                  MALDALCO2H_a01 --> MALDALCO2H                                                     ', &
+     '                      MALDALCO3H --> MALDALCO3H_a01                                                 ', &
+     '                  MALDALCO3H_a01 --> MALDALCO3H                                                     ', &
+     '                         MALDIAL --> MALDIAL_a01                                                    ', &
+     '                     MALDIAL_a01 --> MALDIAL                                                        ', &
+     '                      MALDIALOOH --> MALDIALOOH_a01                                                 ', &
+     '                  MALDIALOOH_a01 --> MALDIALOOH                                                     ', &
+     '                      MALNHYOHCO --> MALNHYOHCO_a01                                                 ', &
+     '                  MALNHYOHCO_a01 --> MALNHYOHCO                                                     ', &
+     '                      MECOACEOOH --> MECOACEOOH_a01                                                 ', &
+     '                  MECOACEOOH_a01 --> MECOACEOOH                                                     ', &
+     '                          MVKNO3 --> MVKNO3_a01                                                     ', &
+     '                      MVKNO3_a01 --> MVKNO3                                                         ', &
+     '                        NBZFUOOH --> NBZFUOOH_a01                                                   ', &
+     '                    NBZFUOOH_a01 --> NBZFUOOH                                                       ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_92 = (/ &
-     '                        NC4DCO2H --> RRH44057f_a01 + NC4DCO2H_a01                                   ', &
-     '                    NC4DCO2H_a01 --> RRH44057b_a01 + NC4DCO2H                                       ', &
-     '                       ACCOMECHO --> RRH45000f_a01 + ACCOMECHO_a01                                  ', &
-     '                   ACCOMECHO_a01 --> RRH45000b_a01 + ACCOMECHO                                      ', &
-     '                      ACCOMECO3H --> RRH45001f_a01 + ACCOMECO3H_a01                                 ', &
-     '                  ACCOMECO3H_a01 --> RRH45001b_a01 + ACCOMECO3H                                     ', &
-     '                   C1ODC2O2C4OOH --> RRH45002f_a01 + C1ODC2O2C4OOH_a01                              ', &
-     '               C1ODC2O2C4OOH_a01 --> RRH45002b_a01 + C1ODC2O2C4OOH                                  ', &
-     '                   C1ODC2OOHC4OD --> RRH45003f_a01 + C1ODC2OOHC4OD_a01                              ', &
-     '               C1ODC2OOHC4OD_a01 --> RRH45003b_a01 + C1ODC2OOHC4OD                                  ', &
-     '                   C1ODC3O2C4OOH --> RRH45004f_a01 + C1ODC3O2C4OOH_a01                              ', &
-     '               C1ODC3O2C4OOH_a01 --> RRH45004b_a01 + C1ODC3O2C4OOH                                  ', &
-     '                  C1OOHC2OOHC4OD --> RRH45005f_a01 + C1OOHC2OOHC4OD_a01                             ', &
-     '              C1OOHC2OOHC4OD_a01 --> RRH45005b_a01 + C1OOHC2OOHC4OD                                 ', &
-     '                      C24O3CCO2H --> RRH45006f_a01 + C24O3CCO2H_a01                                 ', &
-     '                  C24O3CCO2H_a01 --> RRH45006b_a01 + C24O3CCO2H                                     ', &
-     '                      C4CO2DBCO3 --> RRH45007f_a01 + C4CO2DBCO3_a01                                 ', &
-     '                  C4CO2DBCO3_a01 --> RRH45007b_a01 + C4CO2DBCO3                                     ', &
-     '                      C4CO2DBPAN --> RRH45008f_a01 + C4CO2DBPAN_a01                                 ', &
-     '                  C4CO2DBPAN_a01 --> RRH45008b_a01 + C4CO2DBPAN                                     ', &
-     '                      C4CO2DCO3H --> RRH45009f_a01 + C4CO2DCO3H_a01                                 ', &
-     '                  C4CO2DCO3H_a01 --> RRH45009b_a01 + C4CO2DCO3H                                     ', &
-     '                      C4MCONO3OH --> RRH45010f_a01 + C4MCONO3OH_a01                                 ', &
-     '                  C4MCONO3OH_a01 --> RRH45010b_a01 + C4MCONO3OH                                     ', &
-     '                         C511OOH --> RRH45011f_a01 + C511OOH_a01                                    ', &
-     '                     C511OOH_a01 --> RRH45011b_a01 + C511OOH                                        ', &
-     '                         C512OOH --> RRH45012f_a01 + C512OOH_a01                                    ', &
-     '                     C512OOH_a01 --> RRH45012b_a01 + C512OOH                                        ', &
-     '                      C5134CO2OH --> RRH45013f_a01 + C5134CO2OH_a01                                 ', &
-     '                  C5134CO2OH_a01 --> RRH45013b_a01 + C5134CO2OH                                     ' /)
+     '                        NC4DCO2H --> NC4DCO2H_a01                                                   ', &
+     '                    NC4DCO2H_a01 --> NC4DCO2H                                                       ', &
+     '                       ACCOMECHO --> ACCOMECHO_a01                                                  ', &
+     '                   ACCOMECHO_a01 --> ACCOMECHO                                                      ', &
+     '                      ACCOMECO3H --> ACCOMECO3H_a01                                                 ', &
+     '                  ACCOMECO3H_a01 --> ACCOMECO3H                                                     ', &
+     '                   C1ODC2O2C4OOH --> C1ODC2O2C4OOH_a01                                              ', &
+     '               C1ODC2O2C4OOH_a01 --> C1ODC2O2C4OOH                                                  ', &
+     '                   C1ODC2OOHC4OD --> C1ODC2OOHC4OD_a01                                              ', &
+     '               C1ODC2OOHC4OD_a01 --> C1ODC2OOHC4OD                                                  ', &
+     '                   C1ODC3O2C4OOH --> C1ODC3O2C4OOH_a01                                              ', &
+     '               C1ODC3O2C4OOH_a01 --> C1ODC3O2C4OOH                                                  ', &
+     '                  C1OOHC2OOHC4OD --> C1OOHC2OOHC4OD_a01                                             ', &
+     '              C1OOHC2OOHC4OD_a01 --> C1OOHC2OOHC4OD                                                 ', &
+     '                      C24O3CCO2H --> C24O3CCO2H_a01                                                 ', &
+     '                  C24O3CCO2H_a01 --> C24O3CCO2H                                                     ', &
+     '                      C4CO2DBCO3 --> C4CO2DBCO3_a01                                                 ', &
+     '                  C4CO2DBCO3_a01 --> C4CO2DBCO3                                                     ', &
+     '                      C4CO2DBPAN --> C4CO2DBPAN_a01                                                 ', &
+     '                  C4CO2DBPAN_a01 --> C4CO2DBPAN                                                     ', &
+     '                      C4CO2DCO3H --> C4CO2DCO3H_a01                                                 ', &
+     '                  C4CO2DCO3H_a01 --> C4CO2DCO3H                                                     ', &
+     '                      C4MCONO3OH --> C4MCONO3OH_a01                                                 ', &
+     '                  C4MCONO3OH_a01 --> C4MCONO3OH                                                     ', &
+     '                         C511OOH --> C511OOH_a01                                                    ', &
+     '                     C511OOH_a01 --> C511OOH                                                        ', &
+     '                         C512OOH --> C512OOH_a01                                                    ', &
+     '                     C512OOH_a01 --> C512OOH                                                        ', &
+     '                      C5134CO2OH --> C5134CO2OH_a01                                                 ', &
+     '                  C5134CO2OH_a01 --> C5134CO2OH                                                     ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_93 = (/ &
-     '                          C513CO --> RRH45014f_a01 + C513CO_a01                                     ', &
-     '                      C513CO_a01 --> RRH45014b_a01 + C513CO                                         ', &
-     '                         C513OOH --> RRH45015f_a01 + C513OOH_a01                                    ', &
-     '                     C513OOH_a01 --> RRH45015b_a01 + C513OOH                                        ', &
-     '                         C514NO3 --> RRH45016f_a01 + C514NO3_a01                                    ', &
-     '                     C514NO3_a01 --> RRH45016b_a01 + C514NO3                                        ', &
-     '                         C514OOH --> RRH45017f_a01 + C514OOH_a01                                    ', &
-     '                     C514OOH_a01 --> RRH45017b_a01 + C514OOH                                        ', &
-     '                           C54CO --> RRH45018f_a01 + C54CO_a01                                      ', &
-     '                       C54CO_a01 --> RRH45018b_a01 + C54CO                                          ', &
-     '                          C59OOH --> RRH45019f_a01 + C59OOH_a01                                     ', &
-     '                      C59OOH_a01 --> RRH45019b_a01 + C59OOH                                         ', &
-     '                        C5CO14OH --> RRH45020f_a01 + C5CO14OH_a01                                   ', &
-     '                    C5CO14OH_a01 --> RRH45020b_a01 + C5CO14OH                                       ', &
-     '                       C5CO14OOH --> RRH45021f_a01 + C5CO14OOH_a01                                  ', &
-     '                   C5CO14OOH_a01 --> RRH45021b_a01 + C5CO14OOH                                      ', &
-     '                        C5DIALCO --> RRH45022f_a01 + C5DIALCO_a01                                   ', &
-     '                    C5DIALCO_a01 --> RRH45022b_a01 + C5DIALCO                                       ', &
-     '                       C5DIALOOH --> RRH45023f_a01 + C5DIALOOH_a01                                  ', &
-     '                   C5DIALOOH_a01 --> RRH45023b_a01 + C5DIALOOH                                      ', &
-     '                        C5DICARB --> RRH45024f_a01 + C5DICARB_a01                                   ', &
-     '                    C5DICARB_a01 --> RRH45024b_a01 + C5DICARB                                       ', &
-     '                      C5DICAROOH --> RRH45025f_a01 + C5DICAROOH_a01                                 ', &
-     '                  C5DICAROOH_a01 --> RRH45025b_a01 + C5DICAROOH                                     ', &
-     '                          C5PAN9 --> RRH45026f_a01 + C5PAN9_a01                                     ', &
-     '                      C5PAN9_a01 --> RRH45026b_a01 + C5PAN9                                         ', &
-     '                      CHOC3COOOH --> RRH45027f_a01 + CHOC3COOOH_a01                                 ', &
-     '                  CHOC3COOOH_a01 --> RRH45027b_a01 + CHOC3COOOH                                     ', &
-     '                      CHOC3COPAN --> RRH45028f_a01 + CHOC3COPAN_a01                                 ', &
-     '                  CHOC3COPAN_a01 --> RRH45028b_a01 + CHOC3COPAN                                     ' /)
+     '                          C513CO --> C513CO_a01                                                     ', &
+     '                      C513CO_a01 --> C513CO                                                         ', &
+     '                         C513OOH --> C513OOH_a01                                                    ', &
+     '                     C513OOH_a01 --> C513OOH                                                        ', &
+     '                         C514NO3 --> C514NO3_a01                                                    ', &
+     '                     C514NO3_a01 --> C514NO3                                                        ', &
+     '                         C514OOH --> C514OOH_a01                                                    ', &
+     '                     C514OOH_a01 --> C514OOH                                                        ', &
+     '                           C54CO --> C54CO_a01                                                      ', &
+     '                       C54CO_a01 --> C54CO                                                          ', &
+     '                          C59OOH --> C59OOH_a01                                                     ', &
+     '                      C59OOH_a01 --> C59OOH                                                         ', &
+     '                        C5CO14OH --> C5CO14OH_a01                                                   ', &
+     '                    C5CO14OH_a01 --> C5CO14OH                                                       ', &
+     '                       C5CO14OOH --> C5CO14OOH_a01                                                  ', &
+     '                   C5CO14OOH_a01 --> C5CO14OOH                                                      ', &
+     '                        C5DIALCO --> C5DIALCO_a01                                                   ', &
+     '                    C5DIALCO_a01 --> C5DIALCO                                                       ', &
+     '                       C5DIALOOH --> C5DIALOOH_a01                                                  ', &
+     '                   C5DIALOOH_a01 --> C5DIALOOH                                                      ', &
+     '                        C5DICARB --> C5DICARB_a01                                                   ', &
+     '                    C5DICARB_a01 --> C5DICARB                                                       ', &
+     '                      C5DICAROOH --> C5DICAROOH_a01                                                 ', &
+     '                  C5DICAROOH_a01 --> C5DICAROOH                                                     ', &
+     '                          C5PAN9 --> C5PAN9_a01                                                     ', &
+     '                      C5PAN9_a01 --> C5PAN9                                                         ', &
+     '                      CHOC3COOOH --> CHOC3COOOH_a01                                                 ', &
+     '                  CHOC3COOOH_a01 --> CHOC3COOOH                                                     ', &
+     '                      CHOC3COPAN --> CHOC3COPAN_a01                                                 ', &
+     '                  CHOC3COPAN_a01 --> CHOC3COPAN                                                     ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_94 = (/ &
-     '                       CO13C4CHO --> RRH45029f_a01 + CO13C4CHO_a01                                  ', &
-     '                   CO13C4CHO_a01 --> RRH45029b_a01 + CO13C4CHO                                      ', &
-     '                       CO23C4CHO --> RRH45030f_a01 + CO23C4CHO_a01                                  ', &
-     '                   CO23C4CHO_a01 --> RRH45030b_a01 + CO23C4CHO                                      ', &
-     '                      CO23C4CO3H --> RRH45031f_a01 + CO23C4CO3H_a01                                 ', &
-     '                  CO23C4CO3H_a01 --> RRH45031b_a01 + CO23C4CO3H                                     ', &
-     '                          DB1NO3 --> RRH45032f_a01 + DB1NO3_a01                                     ', &
-     '                      DB1NO3_a01 --> RRH45032b_a01 + DB1NO3                                         ', &
-     '                          DB1OOH --> RRH45033f_a01 + DB1OOH_a01                                     ', &
-     '                      DB1OOH_a01 --> RRH45033b_a01 + DB1OOH                                         ', &
-     '                          DB2OOH --> RRH45034f_a01 + DB2OOH_a01                                     ', &
-     '                      DB2OOH_a01 --> RRH45034b_a01 + DB2OOH                                         ', &
-     '                         ISOPAOH --> RRH45035f_a01 + ISOPAOH_a01                                    ', &
-     '                     ISOPAOH_a01 --> RRH45035b_a01 + ISOPAOH                                        ', &
-     '                        ISOPBNO3 --> RRH45036f_a01 + ISOPBNO3_a01                                   ', &
-     '                    ISOPBNO3_a01 --> RRH45036b_a01 + ISOPBNO3                                       ', &
-     '                         ISOPBOH --> RRH45037f_a01 + ISOPBOH_a01                                    ', &
-     '                     ISOPBOH_a01 --> RRH45037b_a01 + ISOPBOH                                        ', &
-     '                        ISOPBOOH --> RRH45038f_a01 + ISOPBOOH_a01                                   ', &
-     '                    ISOPBOOH_a01 --> RRH45038b_a01 + ISOPBOOH                                       ', &
-     '                        ISOPDNO3 --> RRH45039f_a01 + ISOPDNO3_a01                                   ', &
-     '                    ISOPDNO3_a01 --> RRH45039b_a01 + ISOPDNO3                                       ', &
-     '                         ISOPDOH --> RRH45040f_a01 + ISOPDOH_a01                                    ', &
-     '                     ISOPDOH_a01 --> RRH45040b_a01 + ISOPDOH                                        ', &
-     '                        ISOPDOOH --> RRH45041f_a01 + ISOPDOOH_a01                                   ', &
-     '                    ISOPDOOH_a01 --> RRH45041b_a01 + ISOPDOOH                                       ', &
-     '                        LC578OOH --> RRH45042f_a01 + LC578OOH_a01                                   ', &
-     '                    LC578OOH_a01 --> RRH45042b_a01 + LC578OOH                                       ', &
-     '                      LC5PAN1719 --> RRH45043f_a01 + LC5PAN1719_a01                                 ', &
-     '                  LC5PAN1719_a01 --> RRH45043b_a01 + LC5PAN1719                                     ' /)
+     '                       CO13C4CHO --> CO13C4CHO_a01                                                  ', &
+     '                   CO13C4CHO_a01 --> CO13C4CHO                                                      ', &
+     '                       CO23C4CHO --> CO23C4CHO_a01                                                  ', &
+     '                   CO23C4CHO_a01 --> CO23C4CHO                                                      ', &
+     '                      CO23C4CO3H --> CO23C4CO3H_a01                                                 ', &
+     '                  CO23C4CO3H_a01 --> CO23C4CO3H                                                     ', &
+     '                          DB1NO3 --> DB1NO3_a01                                                     ', &
+     '                      DB1NO3_a01 --> DB1NO3                                                         ', &
+     '                          DB1OOH --> DB1OOH_a01                                                     ', &
+     '                      DB1OOH_a01 --> DB1OOH                                                         ', &
+     '                          DB2OOH --> DB2OOH_a01                                                     ', &
+     '                      DB2OOH_a01 --> DB2OOH                                                         ', &
+     '                         ISOPAOH --> ISOPAOH_a01                                                    ', &
+     '                     ISOPAOH_a01 --> ISOPAOH                                                        ', &
+     '                        ISOPBNO3 --> ISOPBNO3_a01                                                   ', &
+     '                    ISOPBNO3_a01 --> ISOPBNO3                                                       ', &
+     '                         ISOPBOH --> ISOPBOH_a01                                                    ', &
+     '                     ISOPBOH_a01 --> ISOPBOH                                                        ', &
+     '                        ISOPBOOH --> ISOPBOOH_a01                                                   ', &
+     '                    ISOPBOOH_a01 --> ISOPBOOH                                                       ', &
+     '                        ISOPDNO3 --> ISOPDNO3_a01                                                   ', &
+     '                    ISOPDNO3_a01 --> ISOPDNO3                                                       ', &
+     '                         ISOPDOH --> ISOPDOH_a01                                                    ', &
+     '                     ISOPDOH_a01 --> ISOPDOH                                                        ', &
+     '                        ISOPDOOH --> ISOPDOOH_a01                                                   ', &
+     '                    ISOPDOOH_a01 --> ISOPDOOH                                                       ', &
+     '                        LC578OOH --> LC578OOH_a01                                                   ', &
+     '                    LC578OOH_a01 --> LC578OOH                                                       ', &
+     '                      LC5PAN1719 --> LC5PAN1719_a01                                                 ', &
+     '                  LC5PAN1719_a01 --> LC5PAN1719                                                     ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_95 = (/ &
-     '                       LHC4ACCHO --> RRH45044f_a01 + LHC4ACCHO_a01                                  ', &
-     '                   LHC4ACCHO_a01 --> RRH45044b_a01 + LHC4ACCHO                                      ', &
-     '                      LHC4ACCO2H --> RRH45045f_a01 + LHC4ACCO2H_a01                                 ', &
-     '                  LHC4ACCO2H_a01 --> RRH45045b_a01 + LHC4ACCO2H                                     ', &
-     '                      LHC4ACCO3H --> RRH45046f_a01 + LHC4ACCO3H_a01                                 ', &
-     '                  LHC4ACCO3H_a01 --> RRH45046b_a01 + LHC4ACCO3H                                     ', &
-     '                          LIEPOX --> RRH45047f_a01 + LIEPOX_a01                                     ', &
-     '                      LIEPOX_a01 --> RRH45047b_a01 + LIEPOX                                         ', &
-     '                      LISOPACNO3 --> RRH45048f_a01 + LISOPACNO3_a01                                 ', &
-     '                  LISOPACNO3_a01 --> RRH45048b_a01 + LISOPACNO3                                     ', &
-     '                      LISOPACOOH --> RRH45049f_a01 + LISOPACOOH_a01                                 ', &
-     '                  LISOPACOOH_a01 --> RRH45049b_a01 + LISOPACOOH                                     ', &
-     '                       LMBOABNO3 --> RRH45050f_a01 + LMBOABNO3_a01                                  ', &
-     '                   LMBOABNO3_a01 --> RRH45050b_a01 + LMBOABNO3                                      ', &
-     '                       LMBOABOOH --> RRH45051f_a01 + LMBOABOOH_a01                                  ', &
-     '                   LMBOABOOH_a01 --> RRH45051b_a01 + LMBOABOOH                                      ', &
-     '                      LNMBOABOOH --> RRH45052f_a01 + LNMBOABOOH_a01                                 ', &
-     '                  LNMBOABOOH_a01 --> RRH45052b_a01 + LNMBOABOOH                                     ', &
-     '                             MBO --> RRH45053f_a01 + MBO_a01                                        ', &
-     '                         MBO_a01 --> RRH45053b_a01 + MBO                                            ', &
-     '                          MBOACO --> RRH45054f_a01 + MBOACO_a01                                     ', &
-     '                      MBOACO_a01 --> RRH45054b_a01 + MBOACO                                         ', &
-     '                         MBOCOCO --> RRH45055f_a01 + MBOCOCO_a01                                    ', &
-     '                     MBOCOCO_a01 --> RRH45055b_a01 + MBOCOCO                                        ', &
-     '                      MC3ODBCO2H --> RRH45056f_a01 + MC3ODBCO2H_a01                                 ', &
-     '                  MC3ODBCO2H_a01 --> RRH45056b_a01 + MC3ODBCO2H                                     ', &
-     '                        ME3FURAN --> RRH45057f_a01 + ME3FURAN_a01                                   ', &
-     '                    ME3FURAN_a01 --> RRH45057b_a01 + ME3FURAN                                       ', &
-     '                      MMALNHYOOH --> RRH45058f_a01 + MMALNHYOOH_a01                                 ', &
-     '                  MMALNHYOOH_a01 --> RRH45058b_a01 + MMALNHYOOH                                     ' /)
+     '                       LHC4ACCHO --> LHC4ACCHO_a01                                                  ', &
+     '                   LHC4ACCHO_a01 --> LHC4ACCHO                                                      ', &
+     '                      LHC4ACCO2H --> LHC4ACCO2H_a01                                                 ', &
+     '                  LHC4ACCO2H_a01 --> LHC4ACCO2H                                                     ', &
+     '                      LHC4ACCO3H --> LHC4ACCO3H_a01                                                 ', &
+     '                  LHC4ACCO3H_a01 --> LHC4ACCO3H                                                     ', &
+     '                          LIEPOX --> LIEPOX_a01                                                     ', &
+     '                      LIEPOX_a01 --> LIEPOX                                                         ', &
+     '                      LISOPACNO3 --> LISOPACNO3_a01                                                 ', &
+     '                  LISOPACNO3_a01 --> LISOPACNO3                                                     ', &
+     '                      LISOPACOOH --> LISOPACOOH_a01                                                 ', &
+     '                  LISOPACOOH_a01 --> LISOPACOOH                                                     ', &
+     '                       LMBOABNO3 --> LMBOABNO3_a01                                                  ', &
+     '                   LMBOABNO3_a01 --> LMBOABNO3                                                      ', &
+     '                       LMBOABOOH --> LMBOABOOH_a01                                                  ', &
+     '                   LMBOABOOH_a01 --> LMBOABOOH                                                      ', &
+     '                      LNMBOABOOH --> LNMBOABOOH_a01                                                 ', &
+     '                  LNMBOABOOH_a01 --> LNMBOABOOH                                                     ', &
+     '                             MBO --> MBO_a01                                                        ', &
+     '                         MBO_a01 --> MBO                                                            ', &
+     '                          MBOACO --> MBOACO_a01                                                     ', &
+     '                      MBOACO_a01 --> MBOACO                                                         ', &
+     '                         MBOCOCO --> MBOCOCO_a01                                                    ', &
+     '                     MBOCOCO_a01 --> MBOCOCO                                                        ', &
+     '                      MC3ODBCO2H --> MC3ODBCO2H_a01                                                 ', &
+     '                  MC3ODBCO2H_a01 --> MC3ODBCO2H                                                     ', &
+     '                        ME3FURAN --> ME3FURAN_a01                                                   ', &
+     '                    ME3FURAN_a01 --> ME3FURAN                                                       ', &
+     '                      MMALNHYOOH --> MMALNHYOOH_a01                                                 ', &
+     '                  MMALNHYOOH_a01 --> MMALNHYOOH                                                     ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_96 = (/ &
-     '                       NC4MDCO2H --> RRH45059f_a01 + NC4MDCO2H_a01                                  ', &
-     '                   NC4MDCO2H_a01 --> RRH45059b_a01 + NC4MDCO2H                                      ', &
-     '                       NC4OHCO3H --> RRH45060f_a01 + NC4OHCO3H_a01                                  ', &
-     '                   NC4OHCO3H_a01 --> RRH45060b_a01 + NC4OHCO3H                                      ', &
-     '                       NC4OHCPAN --> RRH45061f_a01 + NC4OHCPAN_a01                                  ', &
-     '                   NC4OHCPAN_a01 --> RRH45061b_a01 + NC4OHCPAN                                      ', &
-     '                        NISOPOOH --> RRH45062f_a01 + NISOPOOH_a01                                   ', &
-     '                    NISOPOOH_a01 --> RRH45062b_a01 + NISOPOOH                                       ', &
-     '                         NMBOBCO --> RRH45063f_a01 + NMBOBCO_a01                                    ', &
-     '                     NMBOBCO_a01 --> RRH45063b_a01 + NMBOBCO                                        ', &
-     '                        NTLFUOOH --> RRH45064f_a01 + NTLFUOOH_a01                                   ', &
-     '                    NTLFUOOH_a01 --> RRH45064b_a01 + NTLFUOOH                                       ', &
-     '                         TLFUOOH --> RRH45065f_a01 + TLFUOOH_a01                                    ', &
-     '                     TLFUOOH_a01 --> RRH45065b_a01 + TLFUOOH                                        ', &
-     '                  LZCO3HC23DBCOD --> RRH45066f_a01 + LZCO3HC23DBCOD_a01                             ', &
-     '              LZCO3HC23DBCOD_a01 --> RRH45066b_a01 + LZCO3HC23DBCOD                                 ', &
-     '                         C4MDIAL --> RRH45067f_a01 + C4MDIAL_a01                                    ', &
-     '                     C4MDIAL_a01 --> RRH45067b_a01 + C4MDIAL                                        ', &
-     '                      BZBIPERNO3 --> RRH46000f_a01 + BZBIPERNO3_a01                                 ', &
-     '                  BZBIPERNO3_a01 --> RRH46000b_a01 + BZBIPERNO3                                     ', &
-     '                      BZBIPEROOH --> RRH46001f_a01 + BZBIPEROOH_a01                                 ', &
-     '                  BZBIPEROOH_a01 --> RRH46001b_a01 + BZBIPEROOH                                     ', &
-     '                        BZEMUCCO --> RRH46002f_a01 + BZEMUCCO_a01                                   ', &
-     '                    BZEMUCCO_a01 --> RRH46002b_a01 + BZEMUCCO                                       ', &
-     '                      BZEMUCCO2H --> RRH46003f_a01 + BZEMUCCO2H_a01                                 ', &
-     '                  BZEMUCCO2H_a01 --> RRH46003b_a01 + BZEMUCCO2H                                     ', &
-     '                      BZEMUCCO3H --> RRH46004f_a01 + BZEMUCCO3H_a01                                 ', &
-     '                  BZEMUCCO3H_a01 --> RRH46004b_a01 + BZEMUCCO3H                                     ', &
-     '                       BZEMUCNO3 --> RRH46005f_a01 + BZEMUCNO3_a01                                  ', &
-     '                   BZEMUCNO3_a01 --> RRH46005b_a01 + BZEMUCNO3                                      ' /)
+     '                       NC4MDCO2H --> NC4MDCO2H_a01                                                  ', &
+     '                   NC4MDCO2H_a01 --> NC4MDCO2H                                                      ', &
+     '                       NC4OHCO3H --> NC4OHCO3H_a01                                                  ', &
+     '                   NC4OHCO3H_a01 --> NC4OHCO3H                                                      ', &
+     '                       NC4OHCPAN --> NC4OHCPAN_a01                                                  ', &
+     '                   NC4OHCPAN_a01 --> NC4OHCPAN                                                      ', &
+     '                        NISOPOOH --> NISOPOOH_a01                                                   ', &
+     '                    NISOPOOH_a01 --> NISOPOOH                                                       ', &
+     '                         NMBOBCO --> NMBOBCO_a01                                                    ', &
+     '                     NMBOBCO_a01 --> NMBOBCO                                                        ', &
+     '                        NTLFUOOH --> NTLFUOOH_a01                                                   ', &
+     '                    NTLFUOOH_a01 --> NTLFUOOH                                                       ', &
+     '                         TLFUOOH --> TLFUOOH_a01                                                    ', &
+     '                     TLFUOOH_a01 --> TLFUOOH                                                        ', &
+     '                  LZCO3HC23DBCOD --> LZCO3HC23DBCOD_a01                                             ', &
+     '              LZCO3HC23DBCOD_a01 --> LZCO3HC23DBCOD                                                 ', &
+     '                         C4MDIAL --> C4MDIAL_a01                                                    ', &
+     '                     C4MDIAL_a01 --> C4MDIAL                                                        ', &
+     '                      BZBIPERNO3 --> BZBIPERNO3_a01                                                 ', &
+     '                  BZBIPERNO3_a01 --> BZBIPERNO3                                                     ', &
+     '                      BZBIPEROOH --> BZBIPEROOH_a01                                                 ', &
+     '                  BZBIPEROOH_a01 --> BZBIPEROOH                                                     ', &
+     '                        BZEMUCCO --> BZEMUCCO_a01                                                   ', &
+     '                    BZEMUCCO_a01 --> BZEMUCCO                                                       ', &
+     '                      BZEMUCCO2H --> BZEMUCCO2H_a01                                                 ', &
+     '                  BZEMUCCO2H_a01 --> BZEMUCCO2H                                                     ', &
+     '                      BZEMUCCO3H --> BZEMUCCO3H_a01                                                 ', &
+     '                  BZEMUCCO3H_a01 --> BZEMUCCO3H                                                     ', &
+     '                       BZEMUCNO3 --> BZEMUCNO3_a01                                                  ', &
+     '                   BZEMUCNO3_a01 --> BZEMUCNO3                                                      ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_97 = (/ &
-     '                       BZEMUCOOH --> RRH46006f_a01 + BZEMUCOOH_a01                                  ', &
-     '                   BZEMUCOOH_a01 --> RRH46006b_a01 + BZEMUCOOH                                      ', &
-     '                       BZEPOXMUC --> RRH46007f_a01 + BZEPOXMUC_a01                                  ', &
-     '                   BZEPOXMUC_a01 --> RRH46007b_a01 + BZEPOXMUC                                      ', &
-     '                      BZOBIPEROH --> RRH46008f_a01 + BZOBIPEROH_a01                                 ', &
-     '                  BZOBIPEROH_a01 --> RRH46008b_a01 + BZOBIPEROH                                     ', &
-     '                      C5CO2DBPAN --> RRH46009f_a01 + C5CO2DBPAN_a01                                 ', &
-     '                  C5CO2DBPAN_a01 --> RRH46009b_a01 + C5CO2DBPAN                                     ', &
-     '                      C5CO2DCO3H --> RRH46010f_a01 + C5CO2DCO3H_a01                                 ', &
-     '                  C5CO2DCO3H_a01 --> RRH46010b_a01 + C5CO2DCO3H                                     ', &
-     '                      C5CO2OHPAN --> RRH46011f_a01 + C5CO2OHPAN_a01                                 ', &
-     '                  C5CO2OHPAN_a01 --> RRH46011b_a01 + C5CO2OHPAN                                     ', &
-     '                      C5COOHCO3H --> RRH46012f_a01 + C5COOHCO3H_a01                                 ', &
-     '                  C5COOHCO3H_a01 --> RRH46012b_a01 + C5COOHCO3H                                     ', &
-     '                         C6125CO --> RRH46013f_a01 + C6125CO_a01                                    ', &
-     '                     C6125CO_a01 --> RRH46013b_a01 + C6125CO                                        ', &
-     '                          C614CO --> RRH46014f_a01 + C614CO_a01                                     ', &
-     '                      C614CO_a01 --> RRH46014b_a01 + C614CO                                         ', &
-     '                         C614NO3 --> RRH46015f_a01 + C614NO3_a01                                    ', &
-     '                     C614NO3_a01 --> RRH46015b_a01 + C614NO3                                        ', &
-     '                         C614OOH --> RRH46016f_a01 + C614OOH_a01                                    ', &
-     '                     C614OOH_a01 --> RRH46016b_a01 + C614OOH                                        ', &
-     '                      C615CO2OOH --> RRH46017f_a01 + C615CO2OOH_a01                                 ', &
-     '                  C615CO2OOH_a01 --> RRH46017b_a01 + C615CO2OOH                                     ', &
-     '                         C6CO4DB --> RRH46018f_a01 + C6CO4DB_a01                                    ', &
-     '                     C6CO4DB_a01 --> RRH46018b_a01 + C6CO4DB                                        ', &
-     '                           C6H5O --> RRH46019f_a01 + C6H5O_a01                                      ', &
-     '                       C6H5O_a01 --> RRH46019b_a01 + C6H5O                                          ', &
-     '                         C6H5OOH --> RRH46020f_a01 + C6H5OOH_a01                                    ', &
-     '                     C6H5OOH_a01 --> RRH46020b_a01 + C6H5OOH                                        ' /)
+     '                       BZEMUCOOH --> BZEMUCOOH_a01                                                  ', &
+     '                   BZEMUCOOH_a01 --> BZEMUCOOH                                                      ', &
+     '                       BZEPOXMUC --> BZEPOXMUC_a01                                                  ', &
+     '                   BZEPOXMUC_a01 --> BZEPOXMUC                                                      ', &
+     '                      BZOBIPEROH --> BZOBIPEROH_a01                                                 ', &
+     '                  BZOBIPEROH_a01 --> BZOBIPEROH                                                     ', &
+     '                      C5CO2DBPAN --> C5CO2DBPAN_a01                                                 ', &
+     '                  C5CO2DBPAN_a01 --> C5CO2DBPAN                                                     ', &
+     '                      C5CO2DCO3H --> C5CO2DCO3H_a01                                                 ', &
+     '                  C5CO2DCO3H_a01 --> C5CO2DCO3H                                                     ', &
+     '                      C5CO2OHPAN --> C5CO2OHPAN_a01                                                 ', &
+     '                  C5CO2OHPAN_a01 --> C5CO2OHPAN                                                     ', &
+     '                      C5COOHCO3H --> C5COOHCO3H_a01                                                 ', &
+     '                  C5COOHCO3H_a01 --> C5COOHCO3H                                                     ', &
+     '                         C6125CO --> C6125CO_a01                                                    ', &
+     '                     C6125CO_a01 --> C6125CO                                                        ', &
+     '                          C614CO --> C614CO_a01                                                     ', &
+     '                      C614CO_a01 --> C614CO                                                         ', &
+     '                         C614NO3 --> C614NO3_a01                                                    ', &
+     '                     C614NO3_a01 --> C614NO3                                                        ', &
+     '                         C614OOH --> C614OOH_a01                                                    ', &
+     '                     C614OOH_a01 --> C614OOH                                                        ', &
+     '                      C615CO2OOH --> C615CO2OOH_a01                                                 ', &
+     '                  C615CO2OOH_a01 --> C615CO2OOH                                                     ', &
+     '                         C6CO4DB --> C6CO4DB_a01                                                    ', &
+     '                     C6CO4DB_a01 --> C6CO4DB                                                        ', &
+     '                           C6H5O --> C6H5O_a01                                                      ', &
+     '                       C6H5O_a01 --> C6H5O                                                          ', &
+     '                         C6H5OOH --> C6H5OOH_a01                                                    ', &
+     '                     C6H5OOH_a01 --> C6H5OOH                                                        ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_98 = (/ &
-     '                         CATEC1O --> RRH46021f_a01 + CATEC1O_a01                                    ', &
-     '                     CATEC1O_a01 --> RRH46021b_a01 + CATEC1O                                        ', &
-     '                       CATEC1OOH --> RRH46022f_a01 + CATEC1OOH_a01                                  ', &
-     '                   CATEC1OOH_a01 --> RRH46022b_a01 + CATEC1OOH                                      ', &
-     '                        CATECHOL --> RRH46023f_a01 + CATECHOL_a01                                   ', &
-     '                    CATECHOL_a01 --> RRH46023b_a01 + CATECHOL                                       ', &
-     '                      CO235C5CHO --> RRH46024f_a01 + CO235C5CHO_a01                                 ', &
-     '                  CO235C5CHO_a01 --> RRH46024b_a01 + CO235C5CHO                                     ', &
-     '                      CO235C6OOH --> RRH46025f_a01 + CO235C6OOH_a01                                 ', &
-     '                  CO235C6OOH_a01 --> RRH46025b_a01 + CO235C6OOH                                     ', &
-     '                          DNPHEN --> RRH46026f_a01 + DNPHEN_a01                                     ', &
-     '                      DNPHEN_a01 --> RRH46026b_a01 + DNPHEN                                         ', &
-     '                       DNPHENOOH --> RRH46027f_a01 + DNPHENOOH_a01                                  ', &
-     '                   DNPHENOOH_a01 --> RRH46027b_a01 + DNPHENOOH                                      ', &
-     '                         NBZQOOH --> RRH46028f_a01 + NBZQOOH_a01                                    ', &
-     '                     NBZQOOH_a01 --> RRH46028b_a01 + NBZQOOH                                        ', &
-     '                       NCATECHOL --> RRH46029f_a01 + NCATECHOL_a01                                  ', &
-     '                   NCATECHOL_a01 --> RRH46029b_a01 + NCATECHOL                                      ', &
-     '                       NCATECOOH --> RRH46030f_a01 + NCATECOOH_a01                                  ', &
-     '                   NCATECOOH_a01 --> RRH46030b_a01 + NCATECOOH                                      ', &
-     '                      NDNPHENOOH --> RRH46031f_a01 + NDNPHENOOH_a01                                 ', &
-     '                  NDNPHENOOH_a01 --> RRH46031b_a01 + NDNPHENOOH                                     ', &
-     '                      NNCATECOOH --> RRH46032f_a01 + NNCATECOOH_a01                                 ', &
-     '                  NNCATECOOH_a01 --> RRH46032b_a01 + NNCATECOOH                                     ', &
-     '                        NPHENOOH --> RRH46033f_a01 + NPHENOOH_a01                                   ', &
-     '                    NPHENOOH_a01 --> RRH46033b_a01 + NPHENOOH                                       ', &
-     '                          PBZQCO --> RRH46034f_a01 + PBZQCO_a01                                     ', &
-     '                      PBZQCO_a01 --> RRH46034b_a01 + PBZQCO                                         ', &
-     '                         PBZQOOH --> RRH46035f_a01 + PBZQOOH_a01                                    ', &
-     '                     PBZQOOH_a01 --> RRH46035b_a01 + PBZQOOH                                        ' /)
+     '                         CATEC1O --> CATEC1O_a01                                                    ', &
+     '                     CATEC1O_a01 --> CATEC1O                                                        ', &
+     '                       CATEC1OOH --> CATEC1OOH_a01                                                  ', &
+     '                   CATEC1OOH_a01 --> CATEC1OOH                                                      ', &
+     '                        CATECHOL --> CATECHOL_a01                                                   ', &
+     '                    CATECHOL_a01 --> CATECHOL                                                       ', &
+     '                      CO235C5CHO --> CO235C5CHO_a01                                                 ', &
+     '                  CO235C5CHO_a01 --> CO235C5CHO                                                     ', &
+     '                      CO235C6OOH --> CO235C6OOH_a01                                                 ', &
+     '                  CO235C6OOH_a01 --> CO235C6OOH                                                     ', &
+     '                          DNPHEN --> DNPHEN_a01                                                     ', &
+     '                      DNPHEN_a01 --> DNPHEN                                                         ', &
+     '                       DNPHENOOH --> DNPHENOOH_a01                                                  ', &
+     '                   DNPHENOOH_a01 --> DNPHENOOH                                                      ', &
+     '                         NBZQOOH --> NBZQOOH_a01                                                    ', &
+     '                     NBZQOOH_a01 --> NBZQOOH                                                        ', &
+     '                       NCATECHOL --> NCATECHOL_a01                                                  ', &
+     '                   NCATECHOL_a01 --> NCATECHOL                                                      ', &
+     '                       NCATECOOH --> NCATECOOH_a01                                                  ', &
+     '                   NCATECOOH_a01 --> NCATECOOH                                                      ', &
+     '                      NDNPHENOOH --> NDNPHENOOH_a01                                                 ', &
+     '                  NDNPHENOOH_a01 --> NDNPHENOOH                                                     ', &
+     '                      NNCATECOOH --> NNCATECOOH_a01                                                 ', &
+     '                  NNCATECOOH_a01 --> NNCATECOOH                                                     ', &
+     '                        NPHENOOH --> NPHENOOH_a01                                                   ', &
+     '                    NPHENOOH_a01 --> NPHENOOH                                                       ', &
+     '                          PBZQCO --> PBZQCO_a01                                                     ', &
+     '                      PBZQCO_a01 --> PBZQCO                                                         ', &
+     '                         PBZQOOH --> PBZQOOH_a01                                                    ', &
+     '                     PBZQOOH_a01 --> PBZQOOH                                                        ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_99 = (/ &
-     '                          PHENOL --> RRH46036f_a01 + PHENOL_a01                                     ', &
-     '                      PHENOL_a01 --> RRH46036b_a01 + PHENOL                                         ', &
-     '                         PHENOOH --> RRH46037f_a01 + PHENOOH_a01                                    ', &
-     '                     PHENOOH_a01 --> RRH46037b_a01 + PHENOOH                                        ', &
-     '                       HOC6H4NO2 --> RRH460MSf_a01 + HOC6H4NO2_a01                                  ', &
-     '                   HOC6H4NO2_a01 --> RRH461MSb_a01 + HOC6H4NO2                                      ', &
-     '                      C235C6CO3H --> RRH47000f_a01 + C235C6CO3H_a01                                 ', &
-     '                  C235C6CO3H_a01 --> RRH47000b_a01 + C235C6CO3H                                     ', &
-     '                      C6CO2OHPAN --> RRH47001f_a01 + C6CO2OHPAN_a01                                 ', &
-     '                  C6CO2OHPAN_a01 --> RRH47001b_a01 + C6CO2OHPAN                                     ', &
-     '                      C6COOHCO3H --> RRH47002f_a01 + C6COOHCO3H_a01                                 ', &
-     '                  C6COOHCO3H_a01 --> RRH47002b_a01 + C6COOHCO3H                                     ', &
-     '                      C6H5CH2OOH --> RRH47003f_a01 + C6H5CH2OOH_a01                                 ', &
-     '                  C6H5CH2OOH_a01 --> RRH47003b_a01 + C6H5CH2OOH                                     ', &
-     '                        C6H5CO3H --> RRH47004f_a01 + C6H5CO3H_a01                                   ', &
-     '                    C6H5CO3H_a01 --> RRH47004b_a01 + C6H5CO3H                                       ', &
-     '                         C716OOH --> RRH47005f_a01 + C716OOH_a01                                    ', &
-     '                     C716OOH_a01 --> RRH47005b_a01 + C716OOH                                        ', &
-     '                         C721OOH --> RRH47006f_a01 + C721OOH_a01                                    ', &
-     '                     C721OOH_a01 --> RRH47006b_a01 + C721OOH                                        ', &
-     '                         C722OOH --> RRH47007f_a01 + C722OOH_a01                                    ', &
-     '                     C722OOH_a01 --> RRH47007b_a01 + C722OOH                                        ', &
-     '                         C7CO4DB --> RRH47008f_a01 + C7CO4DB_a01                                    ', &
-     '                     C7CO4DB_a01 --> RRH47008b_a01 + C7CO4DB                                        ', &
-     '                          C7PAN3 --> RRH47009f_a01 + C7PAN3_a01                                     ', &
-     '                      C7PAN3_a01 --> RRH47009b_a01 + C7PAN3                                         ', &
-     '                      CO235C6CHO --> RRH47010f_a01 + CO235C6CHO_a01                                 ', &
-     '                  CO235C6CHO_a01 --> RRH47010b_a01 + CO235C6CHO                                     ', &
-     '                          CRESOL --> RRH47011f_a01 + CRESOL_a01                                     ', &
-     '                      CRESOL_a01 --> RRH47011b_a01 + CRESOL                                         ' /)
+     '                          PHENOL --> PHENOL_a01                                                     ', &
+     '                      PHENOL_a01 --> PHENOL                                                         ', &
+     '                         PHENOOH --> PHENOOH_a01                                                    ', &
+     '                     PHENOOH_a01 --> PHENOOH                                                        ', &
+     '                       HOC6H4NO2 --> HOC6H4NO2_a01                                                  ', &
+     '                   HOC6H4NO2_a01 --> HOC6H4NO2                                                      ', &
+     '                      C235C6CO3H --> C235C6CO3H_a01                                                 ', &
+     '                  C235C6CO3H_a01 --> C235C6CO3H                                                     ', &
+     '                      C6CO2OHPAN --> C6CO2OHPAN_a01                                                 ', &
+     '                  C6CO2OHPAN_a01 --> C6CO2OHPAN                                                     ', &
+     '                      C6COOHCO3H --> C6COOHCO3H_a01                                                 ', &
+     '                  C6COOHCO3H_a01 --> C6COOHCO3H                                                     ', &
+     '                      C6H5CH2OOH --> C6H5CH2OOH_a01                                                 ', &
+     '                  C6H5CH2OOH_a01 --> C6H5CH2OOH                                                     ', &
+     '                        C6H5CO3H --> C6H5CO3H_a01                                                   ', &
+     '                    C6H5CO3H_a01 --> C6H5CO3H                                                       ', &
+     '                         C716OOH --> C716OOH_a01                                                    ', &
+     '                     C716OOH_a01 --> C716OOH                                                        ', &
+     '                         C721OOH --> C721OOH_a01                                                    ', &
+     '                     C721OOH_a01 --> C721OOH                                                        ', &
+     '                         C722OOH --> C722OOH_a01                                                    ', &
+     '                     C722OOH_a01 --> C722OOH                                                        ', &
+     '                         C7CO4DB --> C7CO4DB_a01                                                    ', &
+     '                     C7CO4DB_a01 --> C7CO4DB                                                        ', &
+     '                          C7PAN3 --> C7PAN3_a01                                                     ', &
+     '                      C7PAN3_a01 --> C7PAN3                                                         ', &
+     '                      CO235C6CHO --> CO235C6CHO_a01                                                 ', &
+     '                  CO235C6CHO_a01 --> CO235C6CHO                                                     ', &
+     '                          CRESOL --> CRESOL_a01                                                     ', &
+     '                      CRESOL_a01 --> CRESOL                                                         ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_100 = (/ &
-     '                         CRESOOH --> RRH47012f_a01 + CRESOOH_a01                                    ', &
-     '                     CRESOOH_a01 --> RRH47012b_a01 + CRESOOH                                        ', &
-     '                          DNCRES --> RRH47013f_a01 + DNCRES_a01                                     ', &
-     '                      DNCRES_a01 --> RRH47013b_a01 + DNCRES                                         ', &
-     '                       DNCRESOOH --> RRH47014f_a01 + DNCRESOOH_a01                                  ', &
-     '                   DNCRESOOH_a01 --> RRH47014b_a01 + DNCRESOOH                                      ', &
-     '                        MCATEC1O --> RRH47015f_a01 + MCATEC1O_a01                                   ', &
-     '                    MCATEC1O_a01 --> RRH47015b_a01 + MCATEC1O                                       ', &
-     '                      MCATEC1OOH --> RRH47016f_a01 + MCATEC1OOH_a01                                 ', &
-     '                  MCATEC1OOH_a01 --> RRH47016b_a01 + MCATEC1OOH                                     ', &
-     '                       MCATECHOL --> RRH47017f_a01 + MCATECHOL_a01                                  ', &
-     '                   MCATECHOL_a01 --> RRH47017b_a01 + MCATECHOL                                      ', &
-     '                        MNCATECH --> RRH47018f_a01 + MNCATECH_a01                                   ', &
-     '                    MNCATECH_a01 --> RRH47018b_a01 + MNCATECH                                       ', &
-     '                      MNCATECOOH --> RRH47019f_a01 + MNCATECOOH_a01                                 ', &
-     '                  MNCATECOOH_a01 --> RRH47019b_a01 + MNCATECOOH                                     ', &
-     '                      MNNCATCOOH --> RRH47020f_a01 + MNNCATCOOH_a01                                 ', &
-     '                  MNNCATCOOH_a01 --> RRH47020b_a01 + MNNCATCOOH                                     ', &
-     '                        NCRESOOH --> RRH47021f_a01 + NCRESOOH_a01                                   ', &
-     '                    NCRESOOH_a01 --> RRH47021b_a01 + NCRESOOH                                       ', &
-     '                      NDNCRESOOH --> RRH47022f_a01 + NDNCRESOOH_a01                                 ', &
-     '                  NDNCRESOOH_a01 --> RRH47022b_a01 + NDNCRESOOH                                     ', &
-     '                        OXYL1OOH --> RRH47023f_a01 + OXYL1OOH_a01                                   ', &
-     '                    OXYL1OOH_a01 --> RRH47023b_a01 + OXYL1OOH                                       ', &
-     '                          PHCOOH --> RRH47024f_a01 + PHCOOH_a01                                     ', &
-     '                      PHCOOH_a01 --> RRH47024b_a01 + PHCOOH                                         ', &
-     '                      TLBIPEROOH --> RRH47025f_a01 + TLBIPEROOH_a01                                 ', &
-     '                  TLBIPEROOH_a01 --> RRH47025b_a01 + TLBIPEROOH                                     ', &
-     '                        TLEMUCCO --> RRH47026f_a01 + TLEMUCCO_a01                                   ', &
-     '                    TLEMUCCO_a01 --> RRH47026b_a01 + TLEMUCCO                                       ' /)
+     '                         CRESOOH --> CRESOOH_a01                                                    ', &
+     '                     CRESOOH_a01 --> CRESOOH                                                        ', &
+     '                          DNCRES --> DNCRES_a01                                                     ', &
+     '                      DNCRES_a01 --> DNCRES                                                         ', &
+     '                       DNCRESOOH --> DNCRESOOH_a01                                                  ', &
+     '                   DNCRESOOH_a01 --> DNCRESOOH                                                      ', &
+     '                        MCATEC1O --> MCATEC1O_a01                                                   ', &
+     '                    MCATEC1O_a01 --> MCATEC1O                                                       ', &
+     '                      MCATEC1OOH --> MCATEC1OOH_a01                                                 ', &
+     '                  MCATEC1OOH_a01 --> MCATEC1OOH                                                     ', &
+     '                       MCATECHOL --> MCATECHOL_a01                                                  ', &
+     '                   MCATECHOL_a01 --> MCATECHOL                                                      ', &
+     '                        MNCATECH --> MNCATECH_a01                                                   ', &
+     '                    MNCATECH_a01 --> MNCATECH                                                       ', &
+     '                      MNCATECOOH --> MNCATECOOH_a01                                                 ', &
+     '                  MNCATECOOH_a01 --> MNCATECOOH                                                     ', &
+     '                      MNNCATCOOH --> MNNCATCOOH_a01                                                 ', &
+     '                  MNNCATCOOH_a01 --> MNNCATCOOH                                                     ', &
+     '                        NCRESOOH --> NCRESOOH_a01                                                   ', &
+     '                    NCRESOOH_a01 --> NCRESOOH                                                       ', &
+     '                      NDNCRESOOH --> NDNCRESOOH_a01                                                 ', &
+     '                  NDNCRESOOH_a01 --> NDNCRESOOH                                                     ', &
+     '                        OXYL1OOH --> OXYL1OOH_a01                                                   ', &
+     '                    OXYL1OOH_a01 --> OXYL1OOH                                                       ', &
+     '                          PHCOOH --> PHCOOH_a01                                                     ', &
+     '                      PHCOOH_a01 --> PHCOOH                                                         ', &
+     '                      TLBIPEROOH --> TLBIPEROOH_a01                                                 ', &
+     '                  TLBIPEROOH_a01 --> TLBIPEROOH                                                     ', &
+     '                        TLEMUCCO --> TLEMUCCO_a01                                                   ', &
+     '                    TLEMUCCO_a01 --> TLEMUCCO                                                       ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_101 = (/ &
-     '                      TLEMUCCO2H --> RRH47027f_a01 + TLEMUCCO2H_a01                                 ', &
-     '                  TLEMUCCO2H_a01 --> RRH47027b_a01 + TLEMUCCO2H                                     ', &
-     '                      TLEMUCCO3H --> RRH47028f_a01 + TLEMUCCO3H_a01                                 ', &
-     '                  TLEMUCCO3H_a01 --> RRH47028b_a01 + TLEMUCCO3H                                     ', &
-     '                       TLEMUCNO3 --> RRH47029f_a01 + TLEMUCNO3_a01                                  ', &
-     '                   TLEMUCNO3_a01 --> RRH47029b_a01 + TLEMUCNO3                                      ', &
-     '                       TLEMUCOOH --> RRH47030f_a01 + TLEMUCOOH_a01                                  ', &
-     '                   TLEMUCOOH_a01 --> RRH47030b_a01 + TLEMUCOOH                                      ', &
-     '                      TLOBIPEROH --> RRH47031f_a01 + TLOBIPEROH_a01                                 ', &
-     '                  TLOBIPEROH_a01 --> RRH47031b_a01 + TLOBIPEROH                                     ', &
-     '                           TOL1O --> RRH47032f_a01 + TOL1O_a01                                      ', &
-     '                       TOL1O_a01 --> RRH47032b_a01 + TOL1O                                          ', &
-     '                         C721CHO --> RRH48000f_a01 + C721CHO_a01                                    ', &
-     '                     C721CHO_a01 --> RRH48000b_a01 + C721CHO                                        ', &
-     '                        C721CO3H --> RRH48001f_a01 + C721CO3H_a01                                   ', &
-     '                    C721CO3H_a01 --> RRH48001b_a01 + C721CO3H                                       ', &
-     '                         C721PAN --> RRH48002f_a01 + C721PAN_a01                                    ', &
-     '                     C721PAN_a01 --> RRH48002b_a01 + C721PAN                                        ', &
-     '                         C810NO3 --> RRH48003f_a01 + C810NO3_a01                                    ', &
-     '                     C810NO3_a01 --> RRH48003b_a01 + C810NO3                                        ', &
-     '                         C810OOH --> RRH48004f_a01 + C810OOH_a01                                    ', &
-     '                     C810OOH_a01 --> RRH48004b_a01 + C810OOH                                        ', &
-     '                         C812OOH --> RRH48005f_a01 + C812OOH_a01                                    ', &
-     '                     C812OOH_a01 --> RRH48005b_a01 + C812OOH                                        ', &
-     '                         C813OOH --> RRH48006f_a01 + C813OOH_a01                                    ', &
-     '                     C813OOH_a01 --> RRH48006b_a01 + C813OOH                                        ', &
-     '                          C85OOH --> RRH48007f_a01 + C85OOH_a01                                     ', &
-     '                      C85OOH_a01 --> RRH48007b_a01 + C85OOH                                         ', &
-     '                          C86OOH --> RRH48008f_a01 + C86OOH_a01                                     ', &
-     '                      C86OOH_a01 --> RRH48008b_a01 + C86OOH                                         ' /)
+     '                      TLEMUCCO2H --> TLEMUCCO2H_a01                                                 ', &
+     '                  TLEMUCCO2H_a01 --> TLEMUCCO2H                                                     ', &
+     '                      TLEMUCCO3H --> TLEMUCCO3H_a01                                                 ', &
+     '                  TLEMUCCO3H_a01 --> TLEMUCCO3H                                                     ', &
+     '                       TLEMUCNO3 --> TLEMUCNO3_a01                                                  ', &
+     '                   TLEMUCNO3_a01 --> TLEMUCNO3                                                      ', &
+     '                       TLEMUCOOH --> TLEMUCOOH_a01                                                  ', &
+     '                   TLEMUCOOH_a01 --> TLEMUCOOH                                                      ', &
+     '                      TLOBIPEROH --> TLOBIPEROH_a01                                                 ', &
+     '                  TLOBIPEROH_a01 --> TLOBIPEROH                                                     ', &
+     '                           TOL1O --> TOL1O_a01                                                      ', &
+     '                       TOL1O_a01 --> TOL1O                                                          ', &
+     '                         C721CHO --> C721CHO_a01                                                    ', &
+     '                     C721CHO_a01 --> C721CHO                                                        ', &
+     '                        C721CO3H --> C721CO3H_a01                                                   ', &
+     '                    C721CO3H_a01 --> C721CO3H                                                       ', &
+     '                         C721PAN --> C721PAN_a01                                                    ', &
+     '                     C721PAN_a01 --> C721PAN                                                        ', &
+     '                         C810NO3 --> C810NO3_a01                                                    ', &
+     '                     C810NO3_a01 --> C810NO3                                                        ', &
+     '                         C810OOH --> C810OOH_a01                                                    ', &
+     '                     C810OOH_a01 --> C810OOH                                                        ', &
+     '                         C812OOH --> C812OOH_a01                                                    ', &
+     '                     C812OOH_a01 --> C812OOH                                                        ', &
+     '                         C813OOH --> C813OOH_a01                                                    ', &
+     '                     C813OOH_a01 --> C813OOH                                                        ', &
+     '                          C85OOH --> C85OOH_a01                                                     ', &
+     '                      C85OOH_a01 --> C85OOH                                                         ', &
+     '                          C86OOH --> C86OOH_a01                                                     ', &
+     '                      C86OOH_a01 --> C86OOH                                                         ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_102 = (/ &
-     '                          C89NO3 --> RRH48009f_a01 + C89NO3_a01                                     ', &
-     '                      C89NO3_a01 --> RRH48009b_a01 + C89NO3                                         ', &
-     '                          C89OOH --> RRH48010f_a01 + C89OOH_a01                                     ', &
-     '                      C89OOH_a01 --> RRH48010b_a01 + C89OOH                                         ', &
-     '                            C8BC --> RRH48011f_a01 + C8BC_a01                                       ', &
-     '                        C8BC_a01 --> RRH48011b_a01 + C8BC                                           ', &
-     '                          C8BCCO --> RRH48012f_a01 + C8BCCO_a01                                     ', &
-     '                      C8BCCO_a01 --> RRH48012b_a01 + C8BCCO                                         ', &
-     '                         C8BCNO3 --> RRH48013f_a01 + C8BCNO3_a01                                    ', &
-     '                     C8BCNO3_a01 --> RRH48013b_a01 + C8BCNO3                                        ', &
-     '                         C8BCOOH --> RRH48014f_a01 + C8BCOOH_a01                                    ', &
-     '                     C8BCOOH_a01 --> RRH48014b_a01 + C8BCOOH                                        ', &
-     '                        NORPINIC --> RRH48015f_a01 + NORPINIC_a01                                   ', &
-     '                    NORPINIC_a01 --> RRH48015b_a01 + NORPINIC                                       ', &
-     '                       STYRENOOH --> RRH48016f_a01 + STYRENOOH_a01                                  ', &
-     '                   STYRENOOH_a01 --> RRH48016b_a01 + STYRENOOH                                      ', &
-     '                        C811CO3H --> RRH49000f_a01 + C811CO3H_a01                                   ', &
-     '                    C811CO3H_a01 --> RRH49000b_a01 + C811CO3H                                       ', &
-     '                         C811PAN --> RRH49001f_a01 + C811PAN_a01                                    ', &
-     '                     C811PAN_a01 --> RRH49001b_a01 + C811PAN                                        ', &
-     '                         C85CO3H --> RRH49002f_a01 + C85CO3H_a01                                    ', &
-     '                     C85CO3H_a01 --> RRH49002b_a01 + C85CO3H                                        ', &
-     '                         C89CO2H --> RRH49003f_a01 + C89CO2H_a01                                    ', &
-     '                     C89CO2H_a01 --> RRH49003b_a01 + C89CO2H                                        ', &
-     '                         C89CO3H --> RRH49004f_a01 + C89CO3H_a01                                    ', &
-     '                     C89CO3H_a01 --> RRH49004b_a01 + C89CO3H                                        ', &
-     '                          C89PAN --> RRH49005f_a01 + C89PAN_a01                                     ', &
-     '                      C89PAN_a01 --> RRH49005b_a01 + C89PAN                                         ', &
-     '                          C96NO3 --> RRH49006f_a01 + C96NO3_a01                                     ', &
-     '                      C96NO3_a01 --> RRH49006b_a01 + C96NO3                                         ' /)
+     '                          C89NO3 --> C89NO3_a01                                                     ', &
+     '                      C89NO3_a01 --> C89NO3                                                         ', &
+     '                          C89OOH --> C89OOH_a01                                                     ', &
+     '                      C89OOH_a01 --> C89OOH                                                         ', &
+     '                            C8BC --> C8BC_a01                                                       ', &
+     '                        C8BC_a01 --> C8BC                                                           ', &
+     '                          C8BCCO --> C8BCCO_a01                                                     ', &
+     '                      C8BCCO_a01 --> C8BCCO                                                         ', &
+     '                         C8BCNO3 --> C8BCNO3_a01                                                    ', &
+     '                     C8BCNO3_a01 --> C8BCNO3                                                        ', &
+     '                         C8BCOOH --> C8BCOOH_a01                                                    ', &
+     '                     C8BCOOH_a01 --> C8BCOOH                                                        ', &
+     '                        NORPINIC --> NORPINIC_a01                                                   ', &
+     '                    NORPINIC_a01 --> NORPINIC                                                       ', &
+     '                       STYRENOOH --> STYRENOOH_a01                                                  ', &
+     '                   STYRENOOH_a01 --> STYRENOOH                                                      ', &
+     '                        C811CO3H --> C811CO3H_a01                                                   ', &
+     '                    C811CO3H_a01 --> C811CO3H                                                       ', &
+     '                         C811PAN --> C811PAN_a01                                                    ', &
+     '                     C811PAN_a01 --> C811PAN                                                        ', &
+     '                         C85CO3H --> C85CO3H_a01                                                    ', &
+     '                     C85CO3H_a01 --> C85CO3H                                                        ', &
+     '                         C89CO2H --> C89CO2H_a01                                                    ', &
+     '                     C89CO2H_a01 --> C89CO2H                                                        ', &
+     '                         C89CO3H --> C89CO3H_a01                                                    ', &
+     '                     C89CO3H_a01 --> C89CO3H                                                        ', &
+     '                          C89PAN --> C89PAN_a01                                                     ', &
+     '                      C89PAN_a01 --> C89PAN                                                         ', &
+     '                          C96NO3 --> C96NO3_a01                                                     ', &
+     '                      C96NO3_a01 --> C96NO3                                                         ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_103 = (/ &
-     '                          C96OOH --> RRH49007f_a01 + C96OOH_a01                                     ', &
-     '                      C96OOH_a01 --> RRH49007b_a01 + C96OOH                                         ', &
-     '                          C97OOH --> RRH49008f_a01 + C97OOH_a01                                     ', &
-     '                      C97OOH_a01 --> RRH49008b_a01 + C97OOH                                         ', &
-     '                          C98OOH --> RRH49009f_a01 + C98OOH_a01                                     ', &
-     '                      C98OOH_a01 --> RRH49009b_a01 + C98OOH                                         ', &
-     '                          C9PAN2 --> RRH49010f_a01 + C9PAN2_a01                                     ', &
-     '                      C9PAN2_a01 --> RRH49010b_a01 + C9PAN2                                         ', &
-     '                        NOPINDCO --> RRH49011f_a01 + NOPINDCO_a01                                   ', &
-     '                    NOPINDCO_a01 --> RRH49011b_a01 + NOPINDCO                                       ', &
-     '                       NOPINDOOH --> RRH49012f_a01 + NOPINDOOH_a01                                  ', &
-     '                   NOPINDOOH_a01 --> RRH49012b_a01 + NOPINDOOH                                      ', &
-     '                        NOPINONE --> RRH49013f_a01 + NOPINONE_a01                                   ', &
-     '                    NOPINONE_a01 --> RRH49013b_a01 + NOPINONE                                       ', &
-     '                         NOPINOO --> RRH49014f_a01 + NOPINOO_a01                                    ', &
-     '                     NOPINOO_a01 --> RRH49014b_a01 + NOPINOO                                        ', &
-     '                        NORPINAL --> RRH49015f_a01 + NORPINAL_a01                                   ', &
-     '                    NORPINAL_a01 --> RRH49015b_a01 + NORPINAL                                       ', &
-     '                      NORPINENOL --> RRH49016f_a01 + NORPINENOL_a01                                 ', &
-     '                  NORPINENOL_a01 --> RRH49016b_a01 + NORPINENOL                                     ', &
-     '                           PINIC --> RRH49017f_a01 + PINIC_a01                                      ', &
-     '                       PINIC_a01 --> RRH49017b_a01 + PINIC                                          ', &
-     '                        BPINANO3 --> RRH410000f_a01 + BPINANO3_a01                                  ', &
-     '                    BPINANO3_a01 --> RRH410000b_a01 + BPINANO3                                      ', &
-     '                        BPINAOOH --> RRH410001f_a01 + BPINAOOH_a01                                  ', &
-     '                    BPINAOOH_a01 --> RRH410001b_a01 + BPINAOOH                                      ', &
-     '                         C106NO3 --> RRH410002f_a01 + C106NO3_a01                                   ', &
-     '                     C106NO3_a01 --> RRH410002b_a01 + C106NO3                                       ', &
-     '                         C106OOH --> RRH410003f_a01 + C106OOH_a01                                   ', &
-     '                     C106OOH_a01 --> RRH410003b_a01 + C106OOH                                       ' /)
+     '                          C96OOH --> C96OOH_a01                                                     ', &
+     '                      C96OOH_a01 --> C96OOH                                                         ', &
+     '                          C97OOH --> C97OOH_a01                                                     ', &
+     '                      C97OOH_a01 --> C97OOH                                                         ', &
+     '                          C98OOH --> C98OOH_a01                                                     ', &
+     '                      C98OOH_a01 --> C98OOH                                                         ', &
+     '                          C9PAN2 --> C9PAN2_a01                                                     ', &
+     '                      C9PAN2_a01 --> C9PAN2                                                         ', &
+     '                        NOPINDCO --> NOPINDCO_a01                                                   ', &
+     '                    NOPINDCO_a01 --> NOPINDCO                                                       ', &
+     '                       NOPINDOOH --> NOPINDOOH_a01                                                  ', &
+     '                   NOPINDOOH_a01 --> NOPINDOOH                                                      ', &
+     '                        NOPINONE --> NOPINONE_a01                                                   ', &
+     '                    NOPINONE_a01 --> NOPINONE                                                       ', &
+     '                         NOPINOO --> NOPINOO_a01                                                    ', &
+     '                     NOPINOO_a01 --> NOPINOO                                                        ', &
+     '                        NORPINAL --> NORPINAL_a01                                                   ', &
+     '                    NORPINAL_a01 --> NORPINAL                                                       ', &
+     '                      NORPINENOL --> NORPINENOL_a01                                                 ', &
+     '                  NORPINENOL_a01 --> NORPINENOL                                                     ', &
+     '                           PINIC --> PINIC_a01                                                      ', &
+     '                       PINIC_a01 --> PINIC                                                          ', &
+     '                        BPINANO3 --> BPINANO3_a01                                                   ', &
+     '                    BPINANO3_a01 --> BPINANO3                                                       ', &
+     '                        BPINAOOH --> BPINAOOH_a01                                                   ', &
+     '                    BPINAOOH_a01 --> BPINAOOH                                                       ', &
+     '                         C106NO3 --> C106NO3_a01                                                    ', &
+     '                     C106NO3_a01 --> C106NO3                                                        ', &
+     '                         C106OOH --> C106OOH_a01                                                    ', &
+     '                     C106OOH_a01 --> C106OOH                                                        ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_104 = (/ &
-     '                          C109CO --> RRH410004f_a01 + C109CO_a01                                    ', &
-     '                      C109CO_a01 --> RRH410004b_a01 + C109CO                                        ', &
-     '                         C109OOH --> RRH410005f_a01 + C109OOH_a01                                   ', &
-     '                     C109OOH_a01 --> RRH410005b_a01 + C109OOH                                       ', &
-     '                         C10PAN2 --> RRH410006f_a01 + C10PAN2_a01                                   ', &
-     '                     C10PAN2_a01 --> RRH410006b_a01 + C10PAN2                                       ', &
-     '                      LAPINABNO3 --> RRH410007f_a01 + LAPINABNO3_a01                                ', &
-     '                  LAPINABNO3_a01 --> RRH410007b_a01 + LAPINABNO3                                    ', &
-     '                      LAPINABOOH --> RRH410008f_a01 + LAPINABOOH_a01                                ', &
-     '                  LAPINABOOH_a01 --> RRH410008b_a01 + LAPINABOOH                                    ', &
-     '                     LNAPINABOOH --> RRH410009f_a01 + LNAPINABOOH_a01                               ', &
-     '                 LNAPINABOOH_a01 --> RRH410009b_a01 + LNAPINABOOH                                   ', &
-     '                     LNBPINABOOH --> RRH410010f_a01 + LNBPINABOOH_a01                               ', &
-     '                 LNBPINABOOH_a01 --> RRH410010b_a01 + LNBPINABOOH                                   ', &
-     '                     MENTHEN6ONE --> RRH410011f_a01 + MENTHEN6ONE_a01                               ', &
-     '                 MENTHEN6ONE_a01 --> RRH410011b_a01 + MENTHEN6ONE                                   ', &
-     '                  OH2MENTHEN6ONE --> RRH410012f_a01 + OH2MENTHEN6ONE_a01                            ', &
-     '              OH2MENTHEN6ONE_a01 --> RRH410012b_a01 + OH2MENTHEN6ONE                                ', &
-     '                      PERPINONIC --> RRH410013f_a01 + PERPINONIC_a01                                ', &
-     '                  PERPINONIC_a01 --> RRH410013b_a01 + PERPINONIC                                    ', &
-     '                           PINAL --> RRH410014f_a01 + PINAL_a01                                     ', &
-     '                       PINAL_a01 --> RRH410014b_a01 + PINAL                                         ', &
-     '                        PINALNO3 --> RRH410015f_a01 + PINALNO3_a01                                  ', &
-     '                    PINALNO3_a01 --> RRH410015b_a01 + PINALNO3                                      ', &
-     '                        PINALOOH --> RRH410016f_a01 + PINALOOH_a01                                  ', &
-     '                    PINALOOH_a01 --> RRH410016b_a01 + PINALOOH                                      ', &
-     '                         PINENOL --> RRH410017f_a01 + PINENOL_a01                                   ', &
-     '                     PINENOL_a01 --> RRH410017b_a01 + PINENOL                                       ', &
-     '                         PINONIC --> RRH410018f_a01 + PINONIC_a01                                   ', &
-     '                     PINONIC_a01 --> RRH410018b_a01 + PINONIC                                       ' /)
+     '                          C109CO --> C109CO_a01                                                     ', &
+     '                      C109CO_a01 --> C109CO                                                         ', &
+     '                         C109OOH --> C109OOH_a01                                                    ', &
+     '                     C109OOH_a01 --> C109OOH                                                        ', &
+     '                         C10PAN2 --> C10PAN2_a01                                                    ', &
+     '                     C10PAN2_a01 --> C10PAN2                                                        ', &
+     '                      LAPINABNO3 --> LAPINABNO3_a01                                                 ', &
+     '                  LAPINABNO3_a01 --> LAPINABNO3                                                     ', &
+     '                      LAPINABOOH --> LAPINABOOH_a01                                                 ', &
+     '                  LAPINABOOH_a01 --> LAPINABOOH                                                     ', &
+     '                     LNAPINABOOH --> LNAPINABOOH_a01                                                ', &
+     '                 LNAPINABOOH_a01 --> LNAPINABOOH                                                    ', &
+     '                     LNBPINABOOH --> LNBPINABOOH_a01                                                ', &
+     '                 LNBPINABOOH_a01 --> LNBPINABOOH                                                    ', &
+     '                     MENTHEN6ONE --> MENTHEN6ONE_a01                                                ', &
+     '                 MENTHEN6ONE_a01 --> MENTHEN6ONE                                                    ', &
+     '                  OH2MENTHEN6ONE --> OH2MENTHEN6ONE_a01                                             ', &
+     '              OH2MENTHEN6ONE_a01 --> OH2MENTHEN6ONE                                                 ', &
+     '                      PERPINONIC --> PERPINONIC_a01                                                 ', &
+     '                  PERPINONIC_a01 --> PERPINONIC                                                     ', &
+     '                           PINAL --> PINAL_a01                                                      ', &
+     '                       PINAL_a01 --> PINAL                                                          ', &
+     '                        PINALNO3 --> PINALNO3_a01                                                   ', &
+     '                    PINALNO3_a01 --> PINALNO3                                                       ', &
+     '                        PINALOOH --> PINALOOH_a01                                                   ', &
+     '                    PINALOOH_a01 --> PINALOOH                                                       ', &
+     '                         PINENOL --> PINENOL_a01                                                    ', &
+     '                     PINENOL_a01 --> PINENOL                                                        ', &
+     '                         PINONIC --> PINONIC_a01                                                    ', &
+     '                     PINONIC_a01 --> PINONIC                                                        ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_105 = (/ &
-     '                        RO6R1NO3 --> RRH410019f_a01 + RO6R1NO3_a01                                  ', &
-     '                    RO6R1NO3_a01 --> RRH410019b_a01 + RO6R1NO3                                      ', &
-     '                       ROO6R1NO3 --> RRH410020f_a01 + ROO6R1NO3_a01                                 ', &
-     '                   ROO6R1NO3_a01 --> RRH410020b_a01 + ROO6R1NO3                                     ', &
-     '                             Cl2 --> RRH60000f_a01 + Cl2_a01                                        ', &
-     '                         Cl2_a01 --> RRH60000b_a01 + Cl2                                            ', &
-     '                             HCl --> RRH62000f_a01 + HCl_a01                                        ', &
-     '                         HCl_a01 --> RRH62000b_a01 + HCl                                            ', &
-     '                            HOCl --> RRH62001f_a01 + HOCl_a01                                       ', &
-     '                        HOCl_a01 --> RRH62001b_a01 + HOCl                                           ', &
-     '                           ClNO3 --> RRH63001_a01 + HNO3_a01 + HOCl_a01                             ', &
-     '                 ClNO3 + Clm_a01 --> RRH63002_a01 + Cl2_a01 + NO3m_a01                              ', &
-     '                           ClNO2 --> RRH631MS_a01 + ClNO2_a01                                       ', &
-     '                       ClNO2_a01 --> RRH632MS_a01 + ClNO2                                           ', &
-     '                            ClNO --> RRH633MS_a01 + ClNO_a01                                        ', &
-     '                        ClNO_a01 --> RRH634MS_a01 + ClNO                                            ', &
-     '                             Br2 --> RRH70000f_a01 + Br2_a01                                        ', &
-     '                         Br2_a01 --> RRH70000b_a01 + Br2                                            ', &
-     '                             HBr --> RRH72000f_a01 + HBr_a01                                        ', &
-     '                         HBr_a01 --> RRH72000b_a01 + HBr                                            ', &
-     '                            HOBr --> RRH72001f_a01 + HOBr_a01                                       ', &
-     '                        HOBr_a01 --> RRH72001b_a01 + HOBr                                           ', &
-     '                  N2O5 + Brm_a01 --> RRH73000_a01 + BrNO2 + NO3m_a01                                ', &
-     '                           BrNO3 --> RRH73001_a01 + HNO3_a01 + HOBr_a01                             ', &
-     '                 BrNO3 + Brm_a01 --> RRH73002_a01 + Br2_a01 + NO3m_a01                              ', &
-     '                            BrCl --> RRH76000f_a01 + BrCl_a01                                       ', &
-     '                        BrCl_a01 --> RRH76000b_a01 + BrCl                                           ', &
-     '                 ClNO3 + Brm_a01 --> RRH76001_a01 + BrCl_a01 + NO3m_a01                             ', &
-     '                 BrNO3 + Clm_a01 --> RRH76002_a01 + BrCl_a01 + NO3m_a01                             ', &
-     '                             SO2 --> RRH91000f_a01 + SO2_a01                                        ' /)
+     '                        RO6R1NO3 --> RO6R1NO3_a01                                                   ', &
+     '                    RO6R1NO3_a01 --> RO6R1NO3                                                       ', &
+     '                       ROO6R1NO3 --> ROO6R1NO3_a01                                                  ', &
+     '                   ROO6R1NO3_a01 --> ROO6R1NO3                                                      ', &
+     '                             Cl2 --> Cl2_a01                                                        ', &
+     '                         Cl2_a01 --> Cl2                                                            ', &
+     '                             HCl --> HCl_a01                                                        ', &
+     '                         HCl_a01 --> HCl                                                            ', &
+     '                            HOCl --> HOCl_a01                                                       ', &
+     '                        HOCl_a01 --> HOCl                                                           ', &
+     '                           ClNO3 --> HNO3_a01 + HOCl_a01                                            ', &
+     '                 ClNO3 + Clm_a01 --> Cl2_a01 + NO3m_a01                                             ', &
+     '                           ClNO2 --> ClNO2_a01                                                      ', &
+     '                       ClNO2_a01 --> ClNO2                                                          ', &
+     '                            ClNO --> ClNO_a01                                                       ', &
+     '                        ClNO_a01 --> ClNO                                                           ', &
+     '                             Br2 --> Br2_a01                                                        ', &
+     '                         Br2_a01 --> Br2                                                            ', &
+     '                             HBr --> HBr_a01                                                        ', &
+     '                         HBr_a01 --> HBr                                                            ', &
+     '                            HOBr --> HOBr_a01                                                       ', &
+     '                        HOBr_a01 --> HOBr                                                           ', &
+     '                  N2O5 + Brm_a01 --> BrNO2 + NO3m_a01                                               ', &
+     '                           BrNO3 --> HNO3_a01 + HOBr_a01                                            ', &
+     '                 BrNO3 + Brm_a01 --> Br2_a01 + NO3m_a01                                             ', &
+     '                            BrCl --> BrCl_a01                                                       ', &
+     '                        BrCl_a01 --> BrCl                                                           ', &
+     '                 ClNO3 + Brm_a01 --> BrCl_a01 + NO3m_a01                                            ', &
+     '                 BrNO3 + Clm_a01 --> BrCl_a01 + NO3m_a01                                            ', &
+     '                             SO2 --> SO2_a01                                                        ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_106 = (/ &
-     '                         SO2_a01 --> RRH91000b_a01 + SO2                                            ', &
-     '                           H2SO4 --> RRH92000_a01 + H2SO4_a01                                       ', &
-     '                            DMSO --> RRH94000f_a01 + DMSO_a01                                       ', &
-     '                        DMSO_a01 --> RRH94000b_a01 + DMSO                                           ', &
-     '                         CH3SO3H --> CH3SO3m_a01 + RRH94001_a01 + Hp_a01                            ', &
-     '                             DMS --> RRH94002f_a01 + DMS_a01                                        ', &
-     '                         DMS_a01 --> RRH94002b_a01 + DMS                                            ', &
-     '                         HO2_a01 --> RREQ2100f_a01 + Hp_a01 + O2m_a01                               ', &
-     '                Hp_a01 + O2m_a01 --> RREQ2100b_a01 + HO2_a01                                        ', &
-     '                         H2O_a01 --> RREQ2101f_a01 + OHm_a01 + Hp_a01                               ', &
-     '                OHm_a01 + Hp_a01 --> RREQ2101b_a01 + H2O_a01                                        ', &
-     '                         HO3_a01 --> RREQ2102f_a01 + O3m_a01 + Hp_a01                               ', &
-     '                O3m_a01 + Hp_a01 --> RREQ2102b_a01 + HO3_a01                                        ', &
-     '                        NH4p_a01 --> RREQ3200f_a01 + NH3_a01 + Hp_a01                               ', &
-     '                NH3_a01 + Hp_a01 --> RREQ3200b_a01 + NH4p_a01                                       ', &
-     '                        HONO_a01 --> RREQ3201f_a01 + NO2m_a01 + Hp_a01                              ', &
-     '               NO2m_a01 + Hp_a01 --> RREQ3201b_a01 + HONO_a01                                       ', &
-     '                        HNO3_a01 --> RREQ3202f_a01 + NO3m_a01 + Hp_a01                              ', &
-     '               NO3m_a01 + Hp_a01 --> RREQ3202b_a01 + HNO3_a01                                       ', &
-     '                        HNO4_a01 --> RREQ3203f_a01 + NO4m_a01 + Hp_a01                              ', &
-     '               NO4m_a01 + Hp_a01 --> RREQ3203b_a01 + HNO4_a01                                       ', &
-     '                         CO2_a01 --> RREQ4100f_a01 + HCO3m_a01 + Hp_a01                             ', &
-     '              HCO3m_a01 + Hp_a01 --> RREQ4100b_a01 + CO2_a01                                        ', &
-     '                       HCOOH_a01 --> RREQ4101f_a01 + Hp_a01 + HCOOm_a01                             ', &
-     '              Hp_a01 + HCOOm_a01 --> RREQ4101b_a01 + HCOOH_a01                                      ', &
-     '                        HCHO_a01 --> RREQ4150f_a01 + HOCH2OH_a01                                    ', &
-     '                     HOCH2OH_a01 --> RREQ4150b_a01 + HCHO_a01                                       ', &
-     '                        HCO3_a01 --> RREQ4151f_a01 + CHOHOHO2_a01                                   ', &
-     '                    CHOHOHO2_a01 --> RREQ4151b_a01 + HCO3_a01                                       ', &
-     '                     CH3CO3H_a01 --> RREQ4201f_a01 + CH3CO3m_a01 + Hp_a01                           ' /)
+     '                         SO2_a01 --> SO2                                                            ', &
+     '                           H2SO4 --> H2SO4_a01                                                      ', &
+     '                            DMSO --> DMSO_a01                                                       ', &
+     '                        DMSO_a01 --> DMSO                                                           ', &
+     '                         CH3SO3H --> CH3SO3m_a01 + Hp_a01                                           ', &
+     '                             DMS --> DMS_a01                                                        ', &
+     '                         DMS_a01 --> DMS                                                            ', &
+     '                         HO2_a01 --> O2m_a01 + Hp_a01                                               ', &
+     '                O2m_a01 + Hp_a01 --> HO2_a01                                                        ', &
+     '                         H2O_a01 --> OHm_a01 + Hp_a01                                               ', &
+     '                OHm_a01 + Hp_a01 --> H2O_a01                                                        ', &
+     '                         HO3_a01 --> O3m_a01 + Hp_a01                                               ', &
+     '                O3m_a01 + Hp_a01 --> HO3_a01                                                        ', &
+     '                        NH4p_a01 --> NH3_a01 + Hp_a01                                               ', &
+     '                NH3_a01 + Hp_a01 --> NH4p_a01                                                       ', &
+     '                        HONO_a01 --> NO2m_a01 + Hp_a01                                              ', &
+     '               NO2m_a01 + Hp_a01 --> HONO_a01                                                       ', &
+     '                        HNO3_a01 --> NO3m_a01 + Hp_a01                                              ', &
+     '               NO3m_a01 + Hp_a01 --> HNO3_a01                                                       ', &
+     '                        HNO4_a01 --> NO4m_a01 + Hp_a01                                              ', &
+     '               NO4m_a01 + Hp_a01 --> HNO4_a01                                                       ', &
+     '                         CO2_a01 --> HCO3m_a01 + Hp_a01                                             ', &
+     '              HCO3m_a01 + Hp_a01 --> CO2_a01                                                        ', &
+     '                       HCOOH_a01 --> HCOOm_a01 + Hp_a01                                             ', &
+     '              HCOOm_a01 + Hp_a01 --> HCOOH_a01                                                      ', &
+     '                        HCHO_a01 --> HOCH2OH_a01                                                    ', &
+     '                     HOCH2OH_a01 --> HCHO_a01                                                       ', &
+     '                        HCO3_a01 --> CHOHOHO2_a01                                                   ', &
+     '                    CHOHOHO2_a01 --> HCO3_a01                                                       ', &
+     '                     CH3CO3H_a01 --> CH3CO3m_a01 + Hp_a01                                           ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_107 = (/ &
-     '            CH3CO3m_a01 + Hp_a01 --> RREQ4201b_a01 + CH3CO3H_a01                                    ', &
-     '                   HOCH2CO3H_a01 --> RREQ4202f_a01 + HOCH2CO3m_a01 + Hp_a01                         ', &
-     '          HOCH2CO3m_a01 + Hp_a01 --> RREQ4202b_a01 + HOCH2CO3H_a01                                  ', &
-     '                    HOOCCOOH_a01 --> RREQ4203f_a01 + HOOCCO2m_a01 + Hp_a01                          ', &
-     '           HOOCCO2m_a01 + Hp_a01 --> RREQ4203b_a01 + HOOCCOOH_a01                                   ', &
-     '                    HOOCCO2m_a01 --> RREQ4204f_a01 + CO2CO2mm_a01 + Hp_a01                          ', &
-     '           CO2CO2mm_a01 + Hp_a01 --> RREQ4204b_a01 + HOOCCO2m_a01                                   ', &
-     '                  HOOCH2CO2H_a01 --> RREQ4205f_a01 + CH2OOHCO2m_a01 + Hp_a01                        ', &
-     '         CH2OOHCO2m_a01 + Hp_a01 --> RREQ4205b_a01 + HOOCH2CO2H_a01                                 ', &
-     '                   CH2OOCOOH_a01 --> RREQ4206f_a01 + CH2OOCO2m_a01 + Hp_a01                         ', &
-     '          CH2OOCO2m_a01 + Hp_a01 --> RREQ4206b_a01 + CH2OOCOOH_a01                                  ', &
-     '                 CHOOHOOCOOH_a01 --> RREQ4207f_a01 + CHOOHOOCO2m_a01 + Hp_a01                       ', &
-     '        CHOOHOOCO2m_a01 + Hp_a01 --> RREQ4207b_a01 + CHOOHOOCOOH_a01                                ', &
-     '                   HOCH2CO2H_a01 --> RREQ4208f_a01 + HOCH2CO2m_a01 + Hp_a01                         ', &
-     '          HOCH2CO2m_a01 + Hp_a01 --> RREQ4208b_a01 + HOCH2CO2H_a01                                  ', &
-     '                  CHOHOOCOOH_a01 --> RREQ4209f_a01 + CHOHOOCO2m_a01 + Hp_a01                        ', &
-     '         CHOHOOCO2m_a01 + Hp_a01 --> RREQ4209b_a01 + CHOHOOCOOH_a01                                 ', &
-     '                     HCOCO2H_a01 --> RREQ4210f_a01 + CHOCO2m_a01 + Hp_a01                           ', &
-     '            CHOCO2m_a01 + Hp_a01 --> RREQ4210b_a01 + HCOCO2H_a01                                    ', &
-     '                     COOHCO3_a01 --> RREQ4211f_a01 + CO2CO3m_a01 + Hp_a01                           ', &
-     '            CO2CO3m_a01 + Hp_a01 --> RREQ4211b_a01 + COOHCO3_a01                                    ', &
-     '                      CH3CHO_a01 --> RREQ4250f_a01 + CH3CHOHOH_a01                                  ', &
-     '                   CH3CHOHOH_a01 --> RREQ4250b_a01 + CH3CHO_a01 + H2O_a01                           ', &
-     '                   CHOHO2CHO_a01 --> RREQ4251f_a01 + CHOHO2CHOHOH_a01                               ', &
-     '                CHOHO2CHOHOH_a01 --> RREQ4251b_a01 + CHOHO2CHO_a01 + H2O_a01                        ', &
-     '                    HOCH2CHO_a01 --> RREQ4252f_a01 + HOCH2CHOHOH_a01                                ', &
-     '                 HOCH2CHOHOH_a01 --> RREQ4252b_a01 + HOCH2CHO_a01 + H2O_a01                         ', &
-     '                       GLYOX_a01 --> RREQ4253f_a01 + CHOCHOHOH_a01                                  ', &
-     '                   CHOCHOHOH_a01 --> RREQ4253b_a01 + GLYOX_a01 + H2O_a01                            ', &
-     '                   CHOCHOHOH_a01 --> RREQ4254f_a01 + CHOHOHCHOHOH_a01                               ' /)
+     '            CH3CO3m_a01 + Hp_a01 --> CH3CO3H_a01                                                    ', &
+     '                   HOCH2CO3H_a01 --> HOCH2CO3m_a01 + Hp_a01                                         ', &
+     '          HOCH2CO3m_a01 + Hp_a01 --> HOCH2CO3H_a01                                                  ', &
+     '                    HOOCCOOH_a01 --> HOOCCO2m_a01 + Hp_a01                                          ', &
+     '           HOOCCO2m_a01 + Hp_a01 --> HOOCCOOH_a01                                                   ', &
+     '                    HOOCCO2m_a01 --> CO2CO2mm_a01 + Hp_a01                                          ', &
+     '           CO2CO2mm_a01 + Hp_a01 --> HOOCCO2m_a01                                                   ', &
+     '                  HOOCH2CO2H_a01 --> CH2OOHCO2m_a01 + Hp_a01                                        ', &
+     '         CH2OOHCO2m_a01 + Hp_a01 --> HOOCH2CO2H_a01                                                 ', &
+     '                   CH2OOCOOH_a01 --> CH2OOCO2m_a01 + Hp_a01                                         ', &
+     '          CH2OOCO2m_a01 + Hp_a01 --> CH2OOCOOH_a01                                                  ', &
+     '                 CHOOHOOCOOH_a01 --> CHOOHOOCO2m_a01 + Hp_a01                                       ', &
+     '        CHOOHOOCO2m_a01 + Hp_a01 --> CHOOHOOCOOH_a01                                                ', &
+     '                   HOCH2CO2H_a01 --> HOCH2CO2m_a01 + Hp_a01                                         ', &
+     '          HOCH2CO2m_a01 + Hp_a01 --> HOCH2CO2H_a01                                                  ', &
+     '                  CHOHOOCOOH_a01 --> CHOHOOCO2m_a01 + Hp_a01                                        ', &
+     '         CHOHOOCO2m_a01 + Hp_a01 --> CHOHOOCOOH_a01                                                 ', &
+     '                     HCOCO2H_a01 --> CHOCO2m_a01 + Hp_a01                                           ', &
+     '            CHOCO2m_a01 + Hp_a01 --> HCOCO2H_a01                                                    ', &
+     '                     COOHCO3_a01 --> CO2CO3m_a01 + Hp_a01                                           ', &
+     '            CO2CO3m_a01 + Hp_a01 --> COOHCO3_a01                                                    ', &
+     '                      CH3CHO_a01 --> CH3CHOHOH_a01                                                  ', &
+     '                   CH3CHOHOH_a01 --> CH3CHO_a01 + H2O_a01                                           ', &
+     '                   CHOHO2CHO_a01 --> CHOHO2CHOHOH_a01                                               ', &
+     '                CHOHO2CHOHOH_a01 --> CHOHO2CHO_a01 + H2O_a01                                        ', &
+     '                    HOCH2CHO_a01 --> HOCH2CHOHOH_a01                                                ', &
+     '                 HOCH2CHOHOH_a01 --> HOCH2CHO_a01 + H2O_a01                                         ', &
+     '                       GLYOX_a01 --> CHOCHOHOH_a01                                                  ', &
+     '                   CHOCHOHOH_a01 --> GLYOX_a01 + H2O_a01                                            ', &
+     '                   CHOCHOHOH_a01 --> CHOHOHCHOHOH_a01                                               ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_108 = (/ &
-     '                CHOHOHCHOHOH_a01 --> RREQ4254b_a01 + CHOCHOHOH_a01 + H2O_a01                        ', &
-     '                     HCOCO2H_a01 --> RREQ4255f_a01 + CHOHOHCOOH_a01                                 ', &
-     '                  CHOHOHCOOH_a01 --> RREQ4255b_a01 + HCOCO2H_a01 + H2O_a01                          ', &
-     '                     CHOCO2m_a01 --> RREQ4256f_a01 + CHOHOHCO2m_a01                                 ', &
-     '                  CHOHOHCO2m_a01 --> RREQ4256b_a01 + CHOCO2m_a01 + H2O_a01                          ', &
-     '                     CO2CO3m_a01 --> RREQ4257f_a01 + CO2COHOHO2m_a01                                ', &
-     '                 CO2COHOHO2m_a01 --> RREQ4257b_a01 + CO2CO3m_a01 + H2O_a01                          ', &
-     '                   HOOCH2CHO_a01 --> RREQ4258f_a01 + HOOCH2CHOHOH_a01                               ', &
-     '                HOOCH2CHOHOH_a01 --> RREQ4258b_a01 + HOOCH2CHO_a01 + H2O_a01                        ', &
-     '                   CH3COCO2H_a01 --> RREQ4300f_a01 + CH3COCO2m_a01 + Hp_a01                         ', &
-     '          CH3COCO2m_a01 + Hp_a01 --> RREQ4300b_a01 + CH3COCO2H_a01                                  ', &
-     '                      MGLYOX_a01 --> RREQ4350f_a01 + CH3COCHOHOH_a01                                ', &
-     '                 CH3COCHOHOH_a01 --> RREQ4350b_a01 + MGLYOX_a01                                     ', &
-     '                        Cl2m_a01 --> RREQ6000f_a01 + Cl_a01 + Clm_a01                               ', &
-     '                Cl_a01 + Clm_a01 --> RREQ6000b_a01 + Cl2m_a01                                       ', &
-     '                         HCl_a01 --> RREQ6200f_a01 + Hp_a01 + Clm_a01                               ', &
-     '                Hp_a01 + Clm_a01 --> RREQ6200b_a01 + HCl_a01                                        ', &
-     '                        HOCl_a01 --> RREQ6201f_a01 + ClOm_a01 + Hp_a01                              ', &
-     '               ClOm_a01 + Hp_a01 --> RREQ6201b_a01 + HOCl_a01                                       ', &
-     '                        Br2m_a01 --> RREQ7000f_a01 + Br_a01 + Brm_a01                               ', &
-     '                Br_a01 + Brm_a01 --> RREQ7000b_a01 + Br2m_a01                                       ', &
-     '                         HBr_a01 --> RREQ7200f_a01 + Hp_a01 + Brm_a01                               ', &
-     '                Hp_a01 + Brm_a01 --> RREQ7200b_a01 + HBr_a01                                        ', &
-     '                        HOBr_a01 --> RREQ7201f_a01 + BrOm_a01 + Hp_a01                              ', &
-     '               BrOm_a01 + Hp_a01 --> RREQ7201b_a01 + HOBr_a01                                       ', &
-     '              BrCl_a01 + Clm_a01 --> RREQ7600f_a01 + BrCl2m_a01                                     ', &
-     '                      BrCl2m_a01 --> RREQ7600b_a01 + BrCl_a01 + Clm_a01                             ', &
-     '              BrCl_a01 + Brm_a01 --> RREQ7601f_a01 + Br2Clm_a01                                     ', &
-     '                      Br2Clm_a01 --> RREQ7601b_a01 + BrCl_a01 + Brm_a01                             ', &
-     '               Br2_a01 + Clm_a01 --> RREQ7602f_a01 + Br2Clm_a01                                     ' /)
+     '                CHOHOHCHOHOH_a01 --> CHOCHOHOH_a01 + H2O_a01                                        ', &
+     '                     HCOCO2H_a01 --> CHOHOHCOOH_a01                                                 ', &
+     '                  CHOHOHCOOH_a01 --> HCOCO2H_a01 + H2O_a01                                          ', &
+     '                     CHOCO2m_a01 --> CHOHOHCO2m_a01                                                 ', &
+     '                  CHOHOHCO2m_a01 --> CHOCO2m_a01 + H2O_a01                                          ', &
+     '                     CO2CO3m_a01 --> CO2COHOHO2m_a01                                                ', &
+     '                 CO2COHOHO2m_a01 --> CO2CO3m_a01 + H2O_a01                                          ', &
+     '                   HOOCH2CHO_a01 --> HOOCH2CHOHOH_a01                                               ', &
+     '                HOOCH2CHOHOH_a01 --> HOOCH2CHO_a01 + H2O_a01                                        ', &
+     '                   CH3COCO2H_a01 --> CH3COCO2m_a01 + Hp_a01                                         ', &
+     '          CH3COCO2m_a01 + Hp_a01 --> CH3COCO2H_a01                                                  ', &
+     '                      MGLYOX_a01 --> CH3COCHOHOH_a01                                                ', &
+     '                 CH3COCHOHOH_a01 --> MGLYOX_a01                                                     ', &
+     '                        Cl2m_a01 --> Cl_a01 + Clm_a01                                               ', &
+     '                Cl_a01 + Clm_a01 --> Cl2m_a01                                                       ', &
+     '                         HCl_a01 --> Clm_a01 + Hp_a01                                               ', &
+     '                Clm_a01 + Hp_a01 --> HCl_a01                                                        ', &
+     '                        HOCl_a01 --> ClOm_a01 + Hp_a01                                              ', &
+     '               ClOm_a01 + Hp_a01 --> HOCl_a01                                                       ', &
+     '                        Br2m_a01 --> Br_a01 + Brm_a01                                               ', &
+     '                Br_a01 + Brm_a01 --> Br2m_a01                                                       ', &
+     '                         HBr_a01 --> Hp_a01 + Brm_a01                                               ', &
+     '                Hp_a01 + Brm_a01 --> HBr_a01                                                        ', &
+     '                        HOBr_a01 --> BrOm_a01 + Hp_a01                                              ', &
+     '               BrOm_a01 + Hp_a01 --> HOBr_a01                                                       ', &
+     '              BrCl_a01 + Clm_a01 --> BrCl2m_a01                                                     ', &
+     '                      BrCl2m_a01 --> BrCl_a01 + Clm_a01                                             ', &
+     '              BrCl_a01 + Brm_a01 --> Br2Clm_a01                                                     ', &
+     '                      Br2Clm_a01 --> BrCl_a01 + Brm_a01                                             ', &
+     '               Br2_a01 + Clm_a01 --> Br2Clm_a01                                                     ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(30) :: EQN_NAMES_109 = (/ &
-     '                      Br2Clm_a01 --> RREQ7602b_a01 + Br2_a01 + Clm_a01                              ', &
-     '               Cl2_a01 + Brm_a01 --> RREQ7603f_a01 + BrCl2m_a01                                     ', &
-     '                      BrCl2m_a01 --> RREQ7603b_a01 + Cl2_a01 + Brm_a01                              ', &
-     '                         SO2_a01 --> RREQ9200f_a01 + Hp_a01 + HSO3m_a01                             ', &
-     '              Hp_a01 + HSO3m_a01 --> RREQ9200b_a01 + SO2_a01                                        ', &
-     '                       HSO3m_a01 --> RREQ9201f_a01 + Hp_a01 + SO3mm_a01                             ', &
-     '              Hp_a01 + SO3mm_a01 --> RREQ9201b_a01 + HSO3m_a01                                      ', &
-     '                       HSO4m_a01 --> RREQ9202f_a01 + SO4mm_a01 + Hp_a01                             ', &
-     '              SO4mm_a01 + Hp_a01 --> RREQ9202b_a01 + HSO4m_a01                                      ', &
-     '                       H2SO4_a01 --> RREQ9203f_a01 + HSO4m_a01 + Hp_a01                             ', &
-     '              HSO4m_a01 + Hp_a01 --> RREQ9203b_a01 + H2SO4_a01                                      ', &
-     '                       Feppp_a01 --> RREQ11200f_a01 + FeOHpp_a01 + Hp_a01                           ', &
-     '             FeOHpp_a01 + Hp_a01 --> RREQ11200b_a01 + Feppp_a01 + H2O_a01                           ', &
-     '                      FeOHpp_a01 --> RREQ11201f_a01 + FeOH2p_a01 + Hp_a01                           ', &
-     '             FeOH2p_a01 + Hp_a01 --> RREQ11201b_a01 + FeOHpp_a01 + H2O_a01                          ', &
-     '            Feppp_a01 + H2O2_a01 --> RREQ11202f_a01 + FeHO2pp_a01 + Hp_a01                          ', &
-     '            FeHO2pp_a01 + Hp_a01 --> RREQ11202b_a01 + Feppp_a01 + H2O2_a01                          ', &
-     '           FeOHpp_a01 + H2O2_a01 --> RREQ11203f_a01 + FeOHHO2p_a01 + Hp_a01                         ', &
-     '           FeOHHO2p_a01 + Hp_a01 --> RREQ11203b_a01 + FeOHpp_a01 + H2O2_a01                         ', &
-     '             Feppp_a01 + Clm_a01 --> RREQ11600f_a01 + FeClpp_a01                                    ', &
-     '                      FeClpp_a01 --> RREQ11600b_a01 + Feppp_a01 + Clm_a01                           ', &
-     '            FeClpp_a01 + Clm_a01 --> RREQ11601f_a01 + FeCl2p_a01                                    ', &
-     '                      FeCl2p_a01 --> RREQ11601b_a01 + FeClpp_a01 + Clm_a01                          ', &
-     '           Feppp_a01 + SO4mm_a01 --> RREQ11800f_a01 + FeSO4p_a01                                    ', &
-     '                      FeSO4p_a01 --> RREQ11800b_a01 + Feppp_a01 + SO4mm_a01                         ', &
-     '          FeOHpp_a01 + HSO3m_a01 --> RREQ11801f_a01 + FeSO3p_a01                                    ', &
-     '                      FeSO3p_a01 --> RREQ11801b_a01 + FeOHpp_a01 + HSO3m_a01                        ', &
-     '             SO3m_a01 + Fepp_a01 --> RREQ11802f_a01 + FeSO3p_a01                                    ', &
-     '                      FeSO3p_a01 --> RREQ11802b_a01 + SO3m_a01 + Fepp_a01                           ', &
-     '                        H2O2_a01 --> RRPH2100_a01 + 2 OH_a01                                        ' /)
+     '                      Br2Clm_a01 --> Br2_a01 + Clm_a01                                              ', &
+     '               Cl2_a01 + Brm_a01 --> BrCl2m_a01                                                     ', &
+     '                      BrCl2m_a01 --> Cl2_a01 + Brm_a01                                              ', &
+     '                         SO2_a01 --> Hp_a01 + HSO3m_a01                                             ', &
+     '              Hp_a01 + HSO3m_a01 --> SO2_a01                                                        ', &
+     '                       HSO3m_a01 --> SO3mm_a01 + Hp_a01                                             ', &
+     '              SO3mm_a01 + Hp_a01 --> HSO3m_a01                                                      ', &
+     '                       HSO4m_a01 --> SO4mm_a01 + Hp_a01                                             ', &
+     '              SO4mm_a01 + Hp_a01 --> HSO4m_a01                                                      ', &
+     '                       H2SO4_a01 --> HSO4m_a01 + Hp_a01                                             ', &
+     '              HSO4m_a01 + Hp_a01 --> H2SO4_a01                                                      ', &
+     '                       Feppp_a01 --> FeOHpp_a01 + Hp_a01                                            ', &
+     '             FeOHpp_a01 + Hp_a01 --> Feppp_a01 + H2O_a01                                            ', &
+     '                      FeOHpp_a01 --> FeOH2p_a01 + Hp_a01                                            ', &
+     '             FeOH2p_a01 + Hp_a01 --> FeOHpp_a01 + H2O_a01                                           ', &
+     '            Feppp_a01 + H2O2_a01 --> FeHO2pp_a01 + Hp_a01                                           ', &
+     '            FeHO2pp_a01 + Hp_a01 --> Feppp_a01 + H2O2_a01                                           ', &
+     '           FeOHpp_a01 + H2O2_a01 --> FeOHHO2p_a01 + Hp_a01                                          ', &
+     '           FeOHHO2p_a01 + Hp_a01 --> FeOHpp_a01 + H2O2_a01                                          ', &
+     '             Feppp_a01 + Clm_a01 --> FeClpp_a01                                                     ', &
+     '                      FeClpp_a01 --> Feppp_a01 + Clm_a01                                            ', &
+     '            FeClpp_a01 + Clm_a01 --> FeCl2p_a01                                                     ', &
+     '                      FeCl2p_a01 --> FeClpp_a01 + Clm_a01                                           ', &
+     '           Feppp_a01 + SO4mm_a01 --> FeSO4p_a01                                                     ', &
+     '                      FeSO4p_a01 --> Feppp_a01 + SO4mm_a01                                          ', &
+     '          FeOHpp_a01 + HSO3m_a01 --> FeSO3p_a01                                                     ', &
+     '                      FeSO3p_a01 --> FeOHpp_a01 + HSO3m_a01                                         ', &
+     '             SO3m_a01 + Fepp_a01 --> FeSO3p_a01                                                     ', &
+     '                      FeSO3p_a01 --> SO3m_a01 + Fepp_a01                                            ', &
+     '                        H2O2_a01 --> 2 OH_a01                                                       ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(26) :: EQN_NAMES_110 = (/ &
-     '                        NO3m_a01 --> RRPH3200_a01 + NO2_a01 + OHm_a01 + OH_a01                      ', &
-     '                    HOCH2OOH_a01 --> RRPH4100_a01 + HCOOH_a01 + OH_a01 + HO2_a01                    ', &
-     '                      CH3OOH_a01 --> RRPH4101_a01 + HCHO_a01 + OH_a01 + HO2_a01                     ', &
-     '                     C2H5OOH_a01 --> RRPH4200_a01 + CH3CHO_a01 + OH_a01 + HO2_a01                   ', &
-     '                  HOOCH2CO2H_a01 --> RRPH4201_a01 + HCHO_a01 + OH_a01 + CO2_a01 + HO2_a01 ... etc.  ', &
-     '                  CH2OOHCO2m_a01 --> RRPH4202_a01 + CHOHOOCO2m_a01 + OH_a01                         ', &
-     '                     CH3CO3H_a01 --> RRPH4203_a01 + CH3O2_a01 + OH_a01 + CO2_a01                    ', &
-     '                   HOCH2CO3H_a01 --> RRPH4204_a01 + HCHO_a01 + OH_a01 + CO2_a01 + HO2_a01 ... etc.  ', &
-     '                      CH3CHO_a01 --> RRPH4205_a01 + CO_a01 + CH3O2_a01 + HO2_a01                    ', &
-     '                   HOOCH2CHO_a01 --> RRPH4206_a01 + CO_a01 + HCHO_a01 + OH_a01 + HO2_a01 ... etc.   ', &
-     '                    HOCH2CHO_a01 --> RRPH4207a_a01 + CO_a01 + HCHO_a01 + 2 HO2_a01                  ', &
-     '                    HOCH2CHO_a01 --> RRPH4207b_a01 + 0.6 CO_a01 + 0.2 GLYOX_a01 + 0.6 HCHO_a01 ... e', &
-     '                    HOCH2CHO_a01 --> RRPH4207c_a01 + CO_a01 + CH3OH_a01                             ', &
-     '                     HCOCO2H_a01 --> RRPH4208_a01 + CO_a01 + CO2_a01 + 2 HO2_a01                    ', &
-     '                       GLYOX_a01 --> RRPH4209_a01 + 2 CO_a01 + 2 HO2_a01                            ', &
-     '                    HOOCCOOH_a01 --> RRPH4210a_a01 + HCOOH_a01 + CO2_a01                            ', &
-     '                    HOOCCOOH_a01 --> RRPH4210b_a01 + CO_a01 + CO2_a01 + H2O_a01                     ', &
-     '                   CHOCHOHOH_a01 --> RRPH4211_a01 + CO_a01 + HCOOH_a01 + 2 HO2_a01                  ', &
-     '                   HYPERACET_a01 --> RRPH4300_a01 + CH3CO3_a01 + HCHO_a01 + OH_a01                  ', &
-     '                    IC3H7OOH_a01 --> RRPH4301_a01 + CH3COCH3_a01 + OH_a01 + HO2_a01                 ', &
-     '                      ACETOL_a01 --> RRPH4302_a01 + 0.5 CO_a01 + 0.5 HOCH2CO3_a01 + HCHO_a01 ... etc', &
-     '                      MGLYOX_a01 --> RRPH4303_a01 + 2 CO_a01 + HCHO_a01 + OH_a01 + HO2_a01 ... etc. ', &
-     '                      FeOHpp_a01 --> RRPH11200_a01 + Fepp_a01 + OH_a01                              ', &
-     '                      FeOH2p_a01 --> RRPH11201_a01 + Fepp_a01 + OHm_a01 + OH_a01                    ', &
-     '                      FeSO4p_a01 --> RRPH11800_a01 + Fepp_a01 + SO4m_a01                            ', &
-     '                         Nap_a01 --> D1O_a01 + RRD05_a01                                            ' /)
+     '                        NO3m_a01 --> NO2_a01 + OHm_a01 + OH_a01                                     ', &
+     '                    HOCH2OOH_a01 --> HCOOH_a01 + HO2_a01 + OH_a01                                   ', &
+     '                      CH3OOH_a01 --> HCHO_a01 + HO2_a01 + OH_a01                                    ', &
+     '                     C2H5OOH_a01 --> CH3CHO_a01 + HO2_a01 + OH_a01                                  ', &
+     '                  HOOCH2CO2H_a01 --> CO2_a01 + HCHO_a01 + HO2_a01 + OH_a01                          ', &
+     '                  CH2OOHCO2m_a01 --> CHOHOOCO2m_a01 + OH_a01                                        ', &
+     '                     CH3CO3H_a01 --> CO2_a01 + CH3O2_a01 + OH_a01                                   ', &
+     '                   HOCH2CO3H_a01 --> CO2_a01 + HCHO_a01 + HO2_a01 + OH_a01                          ', &
+     '                      CH3CHO_a01 --> CO_a01 + CH3O2_a01 + HO2_a01                                   ', &
+     '                   HOOCH2CHO_a01 --> CO_a01 + HCHO_a01 + HO2_a01 + OH_a01                           ', &
+     '                    HOCH2CHO_a01 --> CO_a01 + HCHO_a01 + 2 HO2_a01                                  ', &
+     '                    HOCH2CHO_a01 --> 0.6 CO_a01 + 0.2 GLYOX_a01 + 0.2 HOCH2CHO_a01 + 0.6 HCHO_a01 ..', &
+     '                    HOCH2CHO_a01 --> CO_a01 + CH3OH_a01                                             ', &
+     '                     HCOCO2H_a01 --> CO_a01 + CO2_a01 + 2 HO2_a01                                   ', &
+     '                       GLYOX_a01 --> 2 CO_a01 + 2 HO2_a01                                           ', &
+     '                    HOOCCOOH_a01 --> CO2_a01 + HCOOH_a01                                            ', &
+     '                    HOOCCOOH_a01 --> CO_a01 + CO2_a01 + H2O_a01                                     ', &
+     '                   CHOCHOHOH_a01 --> CO_a01 + HCOOH_a01 + 2 HO2_a01                                 ', &
+     '                   HYPERACET_a01 --> CH3CO3_a01 + HCHO_a01 + OH_a01                                 ', &
+     '                    IC3H7OOH_a01 --> CH3COCH3_a01 + HO2_a01 + OH_a01                                ', &
+     '                      ACETOL_a01 --> 0.5 CO_a01 + 0.5 HOCH2CO3_a01 + 0.5 CH3O2_a01 + HCHO_a01 ... et', &
+     '                      MGLYOX_a01 --> 2 CO_a01 + HCHO_a01 + HO2_a01 + OH_a01                         ', &
+     '                      FeOHpp_a01 --> Fepp_a01 + OH_a01                                              ', &
+     '                      FeOH2p_a01 --> Fepp_a01 + OHm_a01 + OH_a01                                    ', &
+     '                      FeSO4p_a01 --> Fepp_a01 + SO4m_a01                                            ', &
+     '                         Nap_a01 --> D1O_a01                                                        ' /)
   CHARACTER(LEN=100), PARAMETER, DIMENSION(3326) :: EQN_NAMES = (/&
     EQN_NAMES_0, EQN_NAMES_1, EQN_NAMES_2, EQN_NAMES_3, EQN_NAMES_4, &
     EQN_NAMES_5, EQN_NAMES_6, EQN_NAMES_7, EQN_NAMES_8, EQN_NAMES_9, &
