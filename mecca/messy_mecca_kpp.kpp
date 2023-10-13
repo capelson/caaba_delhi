@@ -105,4 +105,4 @@ Pls; {plus  (positive charge as pseudo-atom for charge balance)}
 #WRITE_OPT
 
 // fix HONO, NO, NO2
-#SETFIX HONO, NO, NO2
+#SETFIX NO, NO2

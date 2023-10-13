@@ -1,16 +1,16 @@
 {created automatically by xmecca, DO NOT EDIT!}
-#SETFIX "O2; N2;"
+#SETFIX "O2; N2; NO; NO2;"
 {fixed species from setfixlist in inifile}
 {SETFIX of liquid H2O_a* is done in mecca.spc via xmecca}
 #INLINE F90_GLOBAL
   ! MECCA info from xmecca:
   CHARACTER(LEN=*), PUBLIC, PARAMETER :: &
-    timestamp            = 'xmecca was run on 2023-09-18 at 14:53:05 by user taras on machine taras', &
-    inifile              = 'example.ini', &
-    gas_spc_file         = '-rw-rw-r-- 1 taras taras 91611 Aug 10 10:42 gas.spc', &
-    aqueous_spc_file     = '-rw-rw-r-- 1 taras taras 40714 Mar 24 11:20 aqueous.spc', &
-    gas_eqn_file         = '-rw-rw-r-- 1 taras taras 327509 Mar 24 11:20 gas.eqn', &
-    aqueous_eqn_file     = '-rw-rw-r-- 1 taras taras 201633 Mar 24 11:20 aqueous.eqn', &
+    timestamp            = 'xmecca was run on 2023-10-13 at 11:17:03 by user taras on machine taras', &
+    inifile              = 'delhi.ini', &
+    gas_spc_file         = '-rw-rw-r-- 1 taras taras 91611 Oct 11 14:47 gas.spc', &
+    aqueous_spc_file     = '-rw-rw-r-- 1 taras taras 40714 Oct 11 14:47 aqueous.spc', &
+    gas_eqn_file         = '-rw-rw-r-- 1 taras taras 327509 Oct 11 14:47 gas.eqn', &
+    aqueous_eqn_file     = '-rw-rw-r-- 1 taras taras 201633 Oct 11 14:47 aqueous.eqn', &
     gas_spc_file_sum     = '45130    90', &
     aqueous_spc_file_sum = '07476    40', &
     gas_eqn_file_sum     = '01860   320', &

@@ -1,5 +1,5 @@
 {created automatically by xmecca, DO NOT EDIT!}
-{xmecca was run on 2023-09-18 at 14:53:05 by user taras on machine taras}
+{xmecca was run on 2023-10-13 at 11:17:03 by user taras on machine taras}
 {***** START: gas-phase species from gas.spc *****}
 {Time-stamp: <2023-03-15 20:15:54 sander>}
 

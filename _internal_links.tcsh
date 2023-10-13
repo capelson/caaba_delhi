@@ -2,7 +2,7 @@
 # created automatically by _update_internal_links.tcsh, DO NOT EDIT!
 set internal_links = ( \
 caaba.nml \
-caabaplot \
+caabaplot_old \
 input/multirun/txt2nc.py \
 input/traject/txt2nc.py \
 manual/chem.sty \

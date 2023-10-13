@@ -427,51 +427,51 @@ CONTAINS
     ! ------------------------------------------------------------------------
     SELECT CASE (APN)
     CASE (1)
-!For Leicester:
-
-     xaer(1)     = 1.
-     ! CASE(1) can be used for either chamber or volcano aerosol:
-!      SELECT CASE (TRIM(aqueous_scenario))
-!      CASE ('LAB') ! chamber aerosol:
-     radius(1)   = 0.15E-6 !2.0E-7
-     lwc(1)      = 1.2E-10 !1.2E-9
-!     csalt(1)    = 6.1 * lwc(1) * N_A / 1.E3 ! mol/L -> mcl/cm3(air)
-     !c0_FeOHp(1) = 0.073 * csalt(1)
-     !c0_FeCl2p(1) = 0.073 * csalt(1) Commented by soni
-     !c0_NH4p(1)  = 1.62E11 !0.
-     c0_HCO3m(1) = 0.
-     c0_NO3m(1)  = 1.2E10 !0.
-     c0_Clm(1)   = 3.4E9 !0.877 * csalt(1)
-     c0_Brm(1)   = 0 !0.05 * csalt(1)
-     c0_Im(1)    = 0.
-     c0_IO3m(1)  = 0.
-     c0_SO4mm(1) = 7.4E9 !0.
-     c0_HSO4m(1) = 0 !0.
-     c0_NH4p(1)  = c0_NO3m(1) + c0_Clm(1) + 2.*c0_SO4mm(1) + c0_HSO4m(1)
-     exchng(1)   = 1. / (7.*OneDay) ! exchange with fresh aerosol [1/s]
+!!For Leicester:
+!
+!      xaer(1)     = 1.
+!      ! CASE(1) can be used for either chamber or volcano aerosol:
+!!      SELECT CASE (TRIM(aqueous_scenario))
+!!      CASE ('LAB') ! chamber aerosol:
+!      radius(1)   = 0.15E-6 !2.0E-7
+!      lwc(1)      = 1.2E-10 !1.2E-9
+!!     csalt(1)    = 6.1 * lwc(1) * N_A / 1.E3 ! mol/L -> mcl/cm3(air)
+!      !c0_FeOHp(1) = 0.073 * csalt(1)
+!      !c0_FeCl2p(1) = 0.073 * csalt(1) Commented by soni
+!      !c0_NH4p(1)  = 1.62E11 !0.
+!      c0_HCO3m(1) = 0.
+!      c0_NO3m(1)  = 1.2E10 !0.
+!      c0_Clm(1)   = 3.4E9 !0.877 * csalt(1)
+!      c0_Brm(1)   = 0 !0.05 * csalt(1)
+!      c0_Im(1)    = 0.
+!      c0_IO3m(1)  = 0.
+!      c0_SO4mm(1) = 7.4E9 !0.
+!      c0_HSO4m(1) = 0 !0.
+!      c0_NH4p(1)  = c0_NO3m(1) + c0_Clm(1) + 2.*c0_SO4mm(1) + c0_HSO4m(1)
+!      exchng(1)   = 1. / (7.*OneDay) ! exchange with fresh aerosol [1/s]
 !
 
 !!For Delhi:            
-!       xaer(1)     = 1.
-!       ! CASE(1) can be used for either chamber or volcano aerosol:
-! !      SELECT CASE (TRIM(aqueous_scenario))
-! !      CASE ('LAB') ! chamber aerosol:
-!       radius(1)   = 0.11E-6 !2.0E-7
-!       lwc(1)      = 22.77E-12 !1.2E-9
-! !     csalt(1)    = 6.1 * lwc(1) * N_A / 1.E3 ! mol/L -> mcl/cm3(air)
-!       !c0_FeOHp(1) = 0.073 * csalt(1)
-!       !c0_FeCl2p(1) = 0.073 * csalt(1) Commented by soni
-!       !c0_NH4p(1)  = 1.62E11 !0.
-!       c0_HCO3m(1) = 0.
-!       c0_NO3m(1)  = 3.59E10 !0.
-!       c0_Clm(1)   = 1.01E11 !0.877 * csalt(1)
-!       c0_Brm(1)   = 0 !0.05 * csalt(1)
-!       c0_Im(1)    = 0.
-!       c0_IO3m(1)  = 0.
-!       c0_SO4mm(1) = 2.45E10 !0.
-!       c0_HSO4m(1) = 0.43E10 !0.
-!       c0_NH4p(1)  = c0_NO3m(1) + c0_Clm(1) + 2.*c0_SO4mm(1) + c0_HSO4m(1)
-!       exchng(1)   = 1. / (7.*OneDay) ! exchange with fresh aerosol [1/s]
+      xaer(1)     = 1.
+      ! CASE(1) can be used for either chamber or volcano aerosol:
+!      SELECT CASE (TRIM(aqueous_scenario))
+!      CASE ('LAB') ! chamber aerosol:
+      radius(1)   = 0.11E-6 !2.0E-7
+      lwc(1)      = 22.77E-12 !1.2E-9
+!     csalt(1)    = 6.1 * lwc(1) * N_A / 1.E3 ! mol/L -> mcl/cm3(air)
+      !c0_FeOHp(1) = 0.073 * csalt(1)
+      !c0_FeCl2p(1) = 0.073 * csalt(1) Commented by soni
+      !c0_NH4p(1)  = 1.62E11 !0.
+      c0_HCO3m(1) = 0.
+      c0_NO3m(1)  = 3.59E10 !0.
+      c0_Clm(1)   = 1.01E11 !0.877 * csalt(1)
+      c0_Brm(1)   = 0 !0.05 * csalt(1)
+      c0_Im(1)    = 0.
+      c0_IO3m(1)  = 0.
+      c0_SO4mm(1) = 2.45E10 !0.
+      c0_HSO4m(1) = 0.43E10 !0.
+      c0_NH4p(1)  = c0_NO3m(1) + c0_Clm(1) + 2.*c0_SO4mm(1) + c0_HSO4m(1)
+      exchng(1)   = 1. / (7.*OneDay) ! exchange with fresh aerosol [1/s]
 !       CASE ('VOLCANO') ! volcano aerosol (values from N. Bobrowski, pers. comm.):
 !         radius(1)   = 1.4E-6
 !         numberconc  = 2E6 ! [m-3]

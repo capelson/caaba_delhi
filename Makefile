@@ -228,15 +228,17 @@ ifeq ($(COMPILER),gfortran)
   ###   -std=legacy, -fimplicit-none, -finit-local-zero, -fall-intrinsics,
   ###   -ffpe-trap=invalid,zero,overflow,underflow,denormal
   ifeq ($(BITS),64)
-    NETCDF_INCLUDE = -I/home/taras/Fortran_Compiler/Library/include
-    NETCDF_LIB     = -L/home/taras/Fortran_Compiler/Library/lib -lnetcdff -lnetcdf
+    #NETCDF_INCLUDE = -I/home/taras/Fortran_Compiler/Library/include
+    #NETCDF_LIB     = -L/home/taras/Fortran_Compiler/Library/lib -lnetcdff -lnetcdf
     #NETCDF_INCLUDE = -I/soft/netcdf_64/v3.6.2_gf_64/include
     #NETCDF_LIB     = -L/soft/netcdf_64/v3.6.2_gf_64/lib -lnetcdf
-    #NETCDF_INCLUDE = -I/usr/include
-    #NETCDF_LIB     = -L/usr/lib/x86_64-linux-gnu -lnetcdf -lnetcdff
+    NETCDF_INCLUDE = -I/usr/include
+    NETCDF_LIB     = -L/usr/lib/x86_64-linux-gnu -lnetcdf -lnetcdff
   else
-    NETCDF_INCLUDE = -I/home/taras/Fortran_Compiler/Library/include
-    NETCDF_LIB     = -L/home/taras/Fortran_Compiler/Library/lib -lnetcdff -lnetcdf
+    NETCDF_INCLUDE = -I/usr/include
+    NETCDF_LIB     = -L/usr/lib/x86_64-linux-gnu -lnetcdf -lnetcdff
+    #NETCDF_INCLUDE = -I/home/taras/Fortran_Compiler/Library/include
+    #NETCDF_LIB     = -L/home/taras/Fortran_Compiler/Library/lib -lnetcdff -lnetcdf
   endif
 # gfortran on gaia:
   ifeq ($(HOST),gaia)
@@ -280,15 +282,14 @@ endif
 ### NETCDF_INCLUDE: path to netcdf include files
 ### NETCDF_LIB:     path to netcdf library and library name
 
-#F90            =
-#F90FLAGS       =
-#NETCDF_INCLUDE =
-#NETCDF_LIB     =
+F90            = gfortran
+F90FLAGS       = -cpp -g -O0 -Wall -ffree-line-length-none -fno-range-check -fbacktrace -fbounds-check -fdump-core -fimplicit-none -fall-intrinsics -fallow-invalid-boz -Wno-unused-variable -frecursive -Wno-unused-dummy-argument -Wno-conversion
+NETCDF_INCLUDE = -I/usr/include
+NETCDF_LIB     = -L/usr/lib/x86_64-linux-gnu -lnetcdf -lnetcdff
 
-#ifeq ($(HOST),soni)
-#  NETCDF_INCLUDE = -I/usr/include                                          
-#  NETCDF_LIB     = -L/usr/lib -lnetcdff -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -lnetcdf -lnetcdf
-#endif
+
+#NETCDF_INCLUDE = -I/home/taras/Fortran_Compiler/Library/include
+#NETCDF_LIB     = -L/home/taras/Fortran_Compiler/Library/lib -lnetcdff -lnetcdf
 
 
 ##############################################################################

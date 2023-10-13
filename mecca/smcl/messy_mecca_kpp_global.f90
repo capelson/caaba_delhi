@@ -13,7 +13,7 @@
 !        R. Sander, Max-Planck Institute for Chemistry, Mainz, Germany
 ! 
 ! File                 : messy_mecca_kpp_Global.f90
-! Time                 : Mon Sep 18 14:53:23 2023
+! Time                 : Fri Oct 13 11:17:21 2023
 ! Working directory    : /home/taras/Work/EMAC/caaba/mecca
 ! Equation file        : messy_mecca_kpp.kpp
 ! Output root filename : messy_mecca_kpp
@@ -40,7 +40,7 @@ MODULE messy_mecca_kpp_Global
   REAL(kind=dp) :: FIX(NFIX)
 ! VAR, FIX are chunks of array C
       EQUIVALENCE( C(1),VAR(1) )
-      EQUIVALENCE( C(1130),FIX(1) )
+      EQUIVALENCE( C(1129),FIX(1) )
 ! RCONST - Rate constants (global)
   REAL(kind=dp) :: RCONST(NREACT)
 ! TIME - Current integration time
@@ -70,12 +70,12 @@ MODULE messy_mecca_kpp_Global
 
   ! MECCA info from xmecca:
   CHARACTER(LEN=*), PUBLIC, PARAMETER :: &
-    timestamp            = 'xmecca was run on 2023-09-18 at 14:53:05 by user taras on machine taras', &
-    inifile              = 'example.ini', &
-    gas_spc_file         = '-rw-rw-r-- 1 taras taras 91611 Aug 10 10:42 gas.spc', &
-    aqueous_spc_file     = '-rw-rw-r-- 1 taras taras 40714 Mar 24 11:20 aqueous.spc', &
-    gas_eqn_file         = '-rw-rw-r-- 1 taras taras 327509 Mar 24 11:20 gas.eqn', &
-    aqueous_eqn_file     = '-rw-rw-r-- 1 taras taras 201633 Mar 24 11:20 aqueous.eqn', &
+    timestamp            = 'xmecca was run on 2023-10-13 at 11:17:03 by user taras on machine taras', &
+    inifile              = 'delhi.ini', &
+    gas_spc_file         = '-rw-rw-r-- 1 taras taras 91611 Oct 11 14:47 gas.spc', &
+    aqueous_spc_file     = '-rw-rw-r-- 1 taras taras 40714 Oct 11 14:47 aqueous.spc', &
+    gas_eqn_file         = '-rw-rw-r-- 1 taras taras 327509 Oct 11 14:47 gas.eqn', &
+    aqueous_eqn_file     = '-rw-rw-r-- 1 taras taras 201633 Oct 11 14:47 aqueous.eqn', &
     gas_spc_file_sum     = '45130    90', &
     aqueous_spc_file_sum = '07476    40', &
     gas_eqn_file_sum     = '01860   320', &
@@ -741,10 +741,10 @@ MODULE messy_mecca_kpp_Global
 
   ! KPP info from xmecca (via integr.kpp):
   CHARACTER(LEN=*), PUBLIC, PARAMETER :: &
-    mecca_spc_file     = '-rw-rw-r-- 1 taras taras 140287 Sep 18 14:53 mecca.spc', &
-    mecca_eqn_file     = '-rw-rw-r-- 1 taras taras 537801 Sep 18 14:53 mecca.eqn', &
-    mecca_spc_file_sum = '51901   137', &
-    mecca_eqn_file_sum = '31141   526', &
+    mecca_spc_file     = '-rw-rw-r-- 1 taras taras 140287 Oct 13 11:17 mecca.spc', &
+    mecca_eqn_file     = '-rw-rw-r-- 1 taras taras 537808 Oct 13 11:17 mecca.eqn', &
+    mecca_spc_file_sum = '52384   137', &
+    mecca_eqn_file_sum = '11030   526', &
     kppoption          = 'k', &
     KPP_HOME           = '/home/taras/Work/EMAC/caaba/mecca/kpp', &
     KPP_version        = '2.2.3_rs3', &

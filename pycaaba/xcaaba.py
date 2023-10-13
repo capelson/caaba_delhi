@@ -373,10 +373,10 @@ def save_model_output(inifile):
     if (outputdir):
         print('\nCreating zip file of caaba model code. Please wait...')
         os.mkdir(outputdir)
-        os.system(f'gmake zip > {TMPFILE}')
-        with open(TMPFILE, 'r') as f:
-            print(f.read(), file=LOGFILE) # add to logfile
-        shutil.move(f'{os.path.basename(CAABADIR)}.zip', outputdir)
+        # os.system(f'gmake zip > {TMPFILE}')
+        # with open(TMPFILE, 'r') as f:
+        #     print(f.read(), file=LOGFILE) # add to logfile
+        # shutil.move(f'{os.path.basename(CAABADIR)}.zip', outputdir)
         os.system(f'cp -p *.nc *.dat pycaaba/_*.py {outputdir}')
         print(f'Model code and output have been saved to {outputdir}:')
         for thefile in sorted(os.listdir(outputdir)):
