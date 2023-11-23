@@ -1,17 +1,18 @@
 from netCDF4 import Dataset
 import os
 import time
-from utils import *
+from utils import pass_param_to_ini_file, parse_nml, get_month_by_ord_day
 WORKDIR = os.getcwd()
 
 params = {}
-params['temp'] = os.getenv['TEMP']
-params['press'] = os.getenv['PRESS']
-params['relhum'] = os.getenv['RH']
-params['start_day'] = os.getenv['DAY']
-params['level'] = os.getenv['LEVEL']
-params['lat'] = os.getenv['LAT']
-params['lon'] = os.getenv['LON']
+params['temp'] = os.getenv('TEMP')
+params['press'] = os.getenv('PRESS')
+params['relhum'] = os.getenv('RH')
+params['start_day'] = os.getenv('DAY')
+params['level'] = os.getenv('LEVEL')
+params['lat'] = os.getenv('LAT')
+params['lon'] = os.getenv('LON')
+params['species_file'] = os.getenv('SPEC_FILE')
 
 levels_by_1km =  {7: 1,
  13: 2,
@@ -42,42 +43,43 @@ def run_caaba(input_params, levels_vs_kms=levels_by_1km):
     temp = input_params['temp']
     press = input_params['press']
     relhum = input_params['relhum']
+    species_file = input_params['species_file']
 
 
-    if levels_vs_kms[level] > 1:
+    if levels_vs_kms[int(level)] > 1:
 
         parse_nml(
             WORKDIR+"/templates/caaba_delhi_teplate.nml",
             WORKDIR+"/nml/caaba_delhi.nml",
-            species_file="input/delhi_init_spec_default.nc",
-            model_start_day=start_day,
+            species_file=species_file,
+            model_start_day=float(start_day),
             runtime_str="5 days",
             time_step="5 minutes",
-            press=press,
-            temp=temp,
-            relhum=relhum,
+            press=float(press),
+            temp=float(temp),
+            relhum=float(relhum),
             zmbl=1000,
-            lat=lat,
-            lon=lon
+            lat=float(lat),
+            lon=float(lon)
         )
     else:
         parse_nml(
             WORKDIR+"/templates/caaba_delhi_teplate.nml",
             WORKDIR+"/nml/caaba_delhi.nml",
-            species_file="input/delhi_init_spec_default.nc",
-            model_start_day=start_day, 
+            species_file=species_file,
+            model_start_day=float(start_day), 
             runtime_str="5 days",
             time_step="5 minutes",
             press=101000,
             temp=292.03,
             relhum=0.670,
             zmbl=1000,
-            lat=lat,
-            lon=lon
+            lat=float(lat),
+            lon=float(lon)
         )
 
 
-    dir_name = "LAT_{}_LON_{}_{}_{}km".format(lat, lon, get_month_by_ord_day(start_day), levels_vs_kms[level])
+    dir_name = "LAT_{}_LON_{}_{}_{}km".format(lat, lon, get_month_by_ord_day(float(start_day)), levels_vs_kms[int(level)])
     print(dir_name)
     params = {
     'meccainifile':'delhi',
@@ -91,7 +93,7 @@ def run_caaba(input_params, levels_vs_kms=levels_by_1km):
     pass_param_to_ini_file(template_path=WORKDIR+"/templates/ini_template.ini",
                       output_file=WORKDIR+"/ini/caaba_delhi.ini", **params)
     
-    #os.system("./xcaaba caaba_delhi.ini")
+    os.system("./xcaaba caaba_delhi.ini")
 
 if __name__ == '__main__':
     run_caaba(params)
